@@ -27,8 +27,21 @@ public class PlayerHealth : MonoBehaviour
         {
             if (!playerMovement.IsInvincible())
             {
-                health--;
-                UpdateUI();
+                TakeDamage();
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Hole"))
+        {
+            if (!playerMovement.IsInvincible())
+            {
+                playerMovement.canMove = false;
+                TakeDamage();
+
+                GetComponent<PlayerFall>().FallIntoHole(new Vector3(other.transform.position.x, other.transform.position.y - 5, other.transform.position.z));
             }
         }
     }
@@ -39,8 +52,9 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("You died.");
     }
 
-    private void UpdateUI()
+    private void TakeDamage()
     {
+        health--;
         Debug.Log("Health: " +  health);
         // UI hearts logic.
     }

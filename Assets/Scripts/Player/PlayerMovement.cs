@@ -12,8 +12,10 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private float moveSpeed = 10.0f;
     [SerializeField] private float rotationSpeed = 10.0f;
 
+    public bool canMove = true;
+
     [Header("Rolling")]
-    [SerializeField] private float rollSpeed = 15.0f;
+    [SerializeField] private float rollSpeed = 20.0f;
     [SerializeField] private float rollDuration = 0.5f;
     [SerializeField] private float rollCooldown = 1.0f;
 
@@ -54,7 +56,7 @@ public class PlayerMovement: MonoBehaviour
 
         direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f)
+        if (direction.magnitude >= 0.1f && canMove)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);

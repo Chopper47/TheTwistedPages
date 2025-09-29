@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7693986618646262900}
   - component: {fileID: 3453095076266913385}
   - component: {fileID: 9067992413242925696}
+  - component: {fileID: 4438479720399491394}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -75,9 +76,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotationSpeed: 10
-  rollSpeed: 10
-  rollDuration: 0.5
-  rollCooldown: 1
+  canMove: 1
+  rollSpeed: 20
+  rollDuration: 0.25
+  rollCooldown: 0.25
 --- !u!114 &9067992413242925696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +94,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   health: 0
+--- !u!114 &4438479720399491394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310322255597981864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b408f151befbb4b9f9616d5be1d958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallSpeed: 5
+  respawnDelay: 1.5
 --- !u!1 &4469517319034047108
 GameObject:
   m_ObjectHideFlags: 0
