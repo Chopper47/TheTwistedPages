@@ -18,7 +18,6 @@ public class ChaseAgent : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerMovement movement = other.GetComponent<PlayerMovement>();
-        Debug.Log(other.name);
         if(movement)
         {
             target = other.transform;
@@ -40,6 +39,11 @@ public class ChaseAgent : MonoBehaviour
         return Vector3.Distance(transform.position, target.position);
     }
 
+    public Vector3 TargetPosition()
+    {
+        return target.position;
+    }
+
     public void Stay()
     {
         agent.SetDestination(transform.position);
@@ -48,5 +52,12 @@ public class ChaseAgent : MonoBehaviour
     public void Chase()
     {
         agent.SetDestination(target.transform.position);
+        agent.isStopped = false;
+    }
+
+    public void StopChase()
+    {
+        Stay();
+        agent.isStopped = true;
     }
 }
