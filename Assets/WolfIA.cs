@@ -1,13 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class WolfIA : MonoBehaviour
+public class WolfIA : CollisionRefresh 
 {
     [SerializeField] float timeForLaunch = .8f;
     [SerializeField] float launchDistance = 5f;
     [SerializeField] float launchForce = 2f;
+    [SerializeField] float launchCD = 1.5f;
     
-    bool launch;
+    bool launch = false;
+    bool canLaunch = true;
     bool checkLaunchDistance = false;
 
     Vector3 startingPos;
@@ -27,9 +29,7 @@ public class WolfIA : MonoBehaviour
         { 
             if(Vector3.Distance(startingPos, transform.position) >= launchDistance)
             {
-                rb.linearVelocity = Vector3.zero;
-                checkLaunchDistance = false;
-                SetLaunch(false);
+                StopLaunch();
             }
         }
     }
@@ -40,8 +40,14 @@ public class WolfIA : MonoBehaviour
 
         if(launch) 
         {
+            canLaunch = false;
             StartCoroutine(WaitForLaunch());
         }
+    }
+
+    public bool CanLaunch()
+    {
+        return canLaunch;
     }
 
     public bool IsLaunching()
@@ -63,4 +69,52 @@ public class WolfIA : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Cooldown for the launch
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator TimeForReset()
+    {
+        yield return new WaitForSeconds(launchCD);
+        canLaunch = true;
+    }
+
+    /// <summary>
+    /// Reset function for the launch
+    /// </summary>
+    public void StopLaunch()
+    {
+        rb.linearVelocity = Vector3.zero;
+        checkLaunchDistance = false;
+        SetLaunch(false);
+        StartCoroutine(TimeForReset());
+    }
+
+
+    /// <summary>
+    /// Calls the method for reset if it colides with the player
+    /// </summary>
+    public override void OnPlayerHit()
+    {
+        if(launch)
+        {
+            StopLaunch();
+        }
+    }
+
+    /// <summary>
+    /// Calls the method for reset if it colides with a wall
+    /// </summary>
+    public override void OnWallHit()
+    {
+        if(launch)
+        {
+            StopLaunch();
+        }
+    }
+
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+    }
 }
