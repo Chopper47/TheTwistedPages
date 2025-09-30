@@ -6,12 +6,11 @@ public class ChaseAgent : MonoBehaviour
 {
     public float speed = 1f;
     Transform target;
-    NavMeshAgent agent;
+    [SerializeField] NavMeshAgent agent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
     }
 

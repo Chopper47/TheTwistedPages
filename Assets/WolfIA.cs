@@ -15,12 +15,11 @@ public class WolfIA : CollisionRefresh
     Vector3 startingPos;
 
     Rigidbody rb;
-    ChaseAgent chase;
+    [SerializeField] ChaseAgent chase;
 
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
-        chase = GetComponent<ChaseAgent>();
     }
 
     public void Update()
