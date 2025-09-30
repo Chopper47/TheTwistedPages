@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WolfAI : CollisionRefresh 
+public class Wolf : CollisionRefresh 
 {
     [SerializeField] float timeForLaunch = .8f;
     [SerializeField] float launchDistance = 5f;

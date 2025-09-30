@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ConditionCanLaunch : ICondition
 {
-    [SerializeField] WolfAI wolf;
+    [SerializeField] Wolf wolf;
 
     /// <summary>
     /// Returns the value of the bool variable CanLaunch from wolf

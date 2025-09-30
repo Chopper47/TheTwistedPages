@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("scene_02_IA");
+            SceneManager.LoadScene("scene_02");
         }
     }
 }

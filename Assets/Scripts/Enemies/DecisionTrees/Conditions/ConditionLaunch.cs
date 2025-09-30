@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ConditionLaunch : ICondition
 {
-    [SerializeField] WolfAI wolf;
+    [SerializeField] Wolf wolf;
 
     public override bool Check()
     {

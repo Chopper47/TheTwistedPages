@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5159360025072866342}
   - component: {fileID: 1453113457885640121}
   - component: {fileID: 6891786897550096832}
+  - component: {fileID: 33599584124549960}
   m_Layer: 7
   m_Name: Spikes
   m_TagString: Trap
@@ -125,3 +126,16 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0.418}
   m_TimeToStationary: 0.5
+--- !u!114 &33599584124549960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929122168279413296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e52269da9b1154f83457619bf29358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
