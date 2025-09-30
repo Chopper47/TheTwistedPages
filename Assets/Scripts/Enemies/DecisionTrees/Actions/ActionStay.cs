@@ -5,7 +5,7 @@ public class ActionStay : IAction
     [SerializeField]ChaseAgent enemy;
     public override void Act()
     {
-        Debug.Log("stay");
+        Debug.Log("stay " + " - " + gameObject.name);
         enemy.Stay();
     }
 }

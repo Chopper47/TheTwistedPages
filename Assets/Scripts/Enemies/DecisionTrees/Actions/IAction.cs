@@ -4,7 +4,7 @@ public class IAction : MonoBehaviour
 {
     public virtual void Act()
     {
-        Debug.Log("null");
+        Debug.Log("null " + " - " + gameObject.name);
         return;
     }
 }
