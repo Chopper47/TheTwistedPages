@@ -115,6 +115,10 @@ public class WolfIA : CollisionRefresh
 
     public override void OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
+        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+
+        Debug.Log(collision.gameObject.name + " | " + player);
+
+        if(player != null ) { OnPlayerHit(); }
     }
 }
