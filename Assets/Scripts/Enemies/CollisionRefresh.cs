@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class CollisionRefresh : MonoBehaviour
 {
+    
+    /// <summary>
+    /// Collision method for every melee enemy
+    /// </summary>
+    /// <param name="collision"></param>
     public virtual void OnCollisionEnter(Collision collision)
     {
         PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();

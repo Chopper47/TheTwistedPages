@@ -3,7 +3,11 @@ using UnityEngine;
 public class ActionLaunch : IAction
 {
     [SerializeField] ChaseAgent enemy;
-    [SerializeField] WolfIA wolf;
+    [SerializeField] WolfAI wolf;
+
+    /// <summary>
+    /// Checks if wolf is currently lauching, if its not launching stops chasing and calls the Lunch method from wolf
+    /// </summary>
     public override void Act()
     {
         if(!wolf.IsLaunching())

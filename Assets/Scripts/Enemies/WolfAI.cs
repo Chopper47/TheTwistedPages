@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WolfIA : CollisionRefresh 
+public class WolfAI : CollisionRefresh 
 {
     [SerializeField] float timeForLaunch = .8f;
     [SerializeField] float launchDistance = 5f;
@@ -17,11 +17,17 @@ public class WolfIA : CollisionRefresh
     Rigidbody rb;
     [SerializeField] ChaseAgent chase;
 
+    /// <summary>
+    /// Called at the start for getting the Rigidbody component
+    /// </summary>
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
+    /// <summary>
+    /// In the update it checks if the distance it has done while doing launching, when it has stops doing the launch
+    /// </summary>
     public void Update()
     {
         if (checkLaunchDistance) 
