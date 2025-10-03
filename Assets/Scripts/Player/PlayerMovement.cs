@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -24,6 +25,30 @@ public class PlayerMovement: MonoBehaviour
     private bool isInvincible = false;
     private float rollTimer;
 
+    [Header("Input System")]
+    public InputActionAsset inputActions;
+
+    private InputAction moveAction;
+    private InputAction rollAction;
+
+    private Vector2 moveAmount;
+
+    private void OnEnable()
+    {
+        inputActions.FindActionMap("Player").Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.FindActionMap("Player").Disable();
+    }
+
+    private void Awake()
+    {
+        moveAction = InputSystem.actions.FindAction("Move");
+        rollAction = InputSystem.actions.FindAction("Roll");
+    }
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -38,7 +63,7 @@ public class PlayerMovement: MonoBehaviour
         {
             Move();
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canRoll)
+            if (rollAction.triggered && canRoll)
             {
                 StartCoroutine(Roll());
             }
@@ -51,16 +76,15 @@ public class PlayerMovement: MonoBehaviour
 
     private void Move()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        moveAmount = moveAction.ReadValue<Vector2>();
 
-        direction = new Vector3(horizontal, 0f, vertical).normalized;
+        direction = new Vector3(moveAmount.x, 0f, moveAmount.y).normalized;
 
         if (direction.magnitude >= 0.1f && canMove)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-            
+
             controller.Move(direction * moveSpeed * Time.deltaTime);
         }
     }
