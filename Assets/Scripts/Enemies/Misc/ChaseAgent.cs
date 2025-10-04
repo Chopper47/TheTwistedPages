@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -5,7 +6,7 @@ using UnityEngine.AI;
 public class ChaseAgent : MonoBehaviour
 {
     public float speed = 1f;
-    Transform target;
+    [SerializeField] Transform target;
     [SerializeField] NavMeshAgent agent;
 
     /// <summary>
@@ -85,5 +86,10 @@ public class ChaseAgent : MonoBehaviour
     {
         Stay();
         agent.isStopped = true;
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
     }
 }
