@@ -25,6 +25,8 @@ public class PlayerMovement: MonoBehaviour
     private bool isInvincible = false;
     private float rollTimer;
 
+    private Vector3 rollDirection;
+
     [Header("Input System")]
     public InputActionAsset inputActions;
 
@@ -45,8 +47,8 @@ public class PlayerMovement: MonoBehaviour
 
     private void Awake()
     {
-        moveAction = InputSystem.actions.FindAction("Move");
-        rollAction = InputSystem.actions.FindAction("Roll");
+        moveAction = inputActions.FindActionMap("Player").FindAction("Move");
+        rollAction = inputActions.FindActionMap("Player").FindAction("Roll");
     }
 
     private void Start()
@@ -59,6 +61,11 @@ public class PlayerMovement: MonoBehaviour
     
     private void Update()
     {
+        if (!controller.enabled)
+        {
+            return;
+        }
+
         if (!isRolling)
         {
             Move();
@@ -70,7 +77,7 @@ public class PlayerMovement: MonoBehaviour
         }
         else
         {
-            controller.Move(transform.forward * rollSpeed * Time.deltaTime);
+            controller.Move(rollDirection * rollSpeed * Time.deltaTime);
         }
     }
 
@@ -94,6 +101,20 @@ public class PlayerMovement: MonoBehaviour
         isRolling = true;
         canRoll = false;
         isInvincible = true;
+
+        moveAmount = moveAction.ReadValue<Vector2>();
+        Vector3 inputDirection = new Vector3(moveAmount.x, 0f, moveAmount.y).normalized;
+
+        if (inputDirection.sqrMagnitude > 0.01f)
+        {
+            rollDirection = inputDirection;
+        }
+        else
+        {
+            rollDirection = transform.forward;
+        }
+
+        transform.rotation = Quaternion.LookRotation(rollDirection);
 
         rollTimer = 0f;
 

@@ -1,24 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
-    [SerializeField] private int health;
+    [SerializeField] private int currentHealth;
 
     private PlayerMovement playerMovement;
+
+    public GameObject[] lives;
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        health = maxHealth;
-    }
-
-    private void Update()
-    {
-        if (health <= 0)
-        {
-            Die();
-        }
+        currentHealth = maxHealth;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,7 +22,8 @@ public class PlayerHealth : MonoBehaviour
         {
             if (!playerMovement.IsInvincible())
             {
-                TakeDamage();
+                Trap trap = other.GetComponent<Trap>();
+                TakeDamage(trap.GetDamage());
             }
         }
     }
@@ -39,7 +35,8 @@ public class PlayerHealth : MonoBehaviour
             if (!playerMovement.IsInvincible())
             {
                 playerMovement.canMove = false;
-                TakeDamage();
+                Trap trap = other.GetComponent<Trap>();
+                TakeDamage(trap.GetDamage());
 
                 GetComponent<PlayerFall>().FallIntoHole(new Vector3(other.transform.position.x, other.transform.position.y - 5, other.transform.position.z));
             }
@@ -52,10 +49,47 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("You died.");
     }
 
-    private void TakeDamage()
+    private void TakeDamage(int damage)
     {
-        health--;
-        Debug.Log("Health: " +  health);
-        // UI hearts logic.
+        currentHealth -= damage;
+        Debug.Log("Health: " +  currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+
+        UpdateUI();
+    }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        Debug.Log("Health: " + currentHealth);
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        for (int i = 0; i < lives.Length; i++)
+        {
+            Image lifeImage = lives[i].GetComponent<Image>();
+
+            if (currentHealth > i)
+            {
+                lifeImage.color = Color.white;
+            }
+
+            else
+            {
+                lifeImage.color = Color.black;
+            }
+        }
     }
 }
