@@ -3,8 +3,13 @@ using UnityEngine;
 public class DecisionTreeAgent : MonoBehaviour
 {
     [SerializeField] DecisionTreeNode node;
-    
-    // Update is called once per frame
+
+    IAction action;
+
+    /// <summary>
+    /// Update, if there's no node asigned ignores the rest, if there is sets the action to the Decide() method return value
+    /// from variable node, if the action isnt null it calls the Act method
+    /// </summary>
     void Update()
     {
         if(!node)
@@ -12,7 +17,7 @@ public class DecisionTreeAgent : MonoBehaviour
             return;
         }
 
-        IAction action = node.Decide();
+        action = node.Decide();
 
         if (action != null) 
         {

@@ -7,6 +7,11 @@ public class BinaryDecision : DecisionTreeNode
 
     [SerializeField] DecisionTreeNode falseNode, trueNode;
     
+    /// <summary>
+    /// Checks first if condition exists, if it does based on the value from the Check() method of the condition decides 
+    /// which node to call.
+    /// </summary>
+    /// <returns></returns>
     public override IAction Decide()
     {
         if(condition == null)
