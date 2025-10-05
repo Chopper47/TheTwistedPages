@@ -90,6 +90,7 @@ public class Wolf : CollisionRefresh
     public void StopLaunch()
     {
         rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         checkLaunchDistance = false;
         SetLaunch(false);
         StartCoroutine(TimeForReset());

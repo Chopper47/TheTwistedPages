@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("You died.");
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         Debug.Log("Health: " +  currentHealth);
