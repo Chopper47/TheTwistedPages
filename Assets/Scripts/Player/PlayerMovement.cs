@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.UI;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement: MonoBehaviour
@@ -11,11 +14,18 @@ public class PlayerMovement: MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 10.0f;
+    [SerializeField] private float bulletTimeSpeed = 15.0f;
     [SerializeField] private float rotationSpeed = 10.0f;
 
+    [SerializeField] private float slowTimeDuration = 1.2f;
+
     public bool canMove = true;
+    public bool canBullet = true;
 
     [Header("Rolling")]
+    
+    [SerializeField] PerfectDodgeTrigger dodgeTrigger;
+
     [SerializeField] private float rollSpeed = 20.0f;
     [SerializeField] private float rollDuration = 0.5f;
     [SerializeField] private float rollCooldown = 1.0f;
@@ -34,6 +44,10 @@ public class PlayerMovement: MonoBehaviour
     private InputAction rollAction;
 
     private Vector2 moveAmount;
+
+    [Header("Prototype Reference")]
+
+    [SerializeField] Image slowTimer;
 
     private void OnEnable()
     {
@@ -61,6 +75,7 @@ public class PlayerMovement: MonoBehaviour
     
     private void Update()
     {
+
         if (!controller.enabled)
         {
             return;
@@ -72,12 +87,19 @@ public class PlayerMovement: MonoBehaviour
 
             if (rollAction.triggered && canRoll)
             {
+                if (dodgeTrigger.CanDodge() && canBullet)
+                {
+                    canBullet = false;
+                    TimeManager.SlowTime();
+                    StartCoroutine(Timer());
+                    StartCoroutine(WaitForNormalTime());
+                }
                 StartCoroutine(Roll());
             }
         }
         else
         {
-            controller.Move(rollDirection * rollSpeed * Time.deltaTime);
+            controller.Move(rollDirection * rollSpeed * Time.unscaledDeltaTime);
         }
     }
 
@@ -90,9 +112,9 @@ public class PlayerMovement: MonoBehaviour
         if (direction.magnitude >= 0.1f && canMove)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, Time.unscaledDeltaTime * rotationSpeed);
 
-            controller.Move(direction * moveSpeed * Time.deltaTime);
+            controller.Move(direction * moveSpeed * Time.unscaledDeltaTime);
         }
     }
 
@@ -120,7 +142,7 @@ public class PlayerMovement: MonoBehaviour
 
         while (rollTimer < rollDuration)
         {
-            rollTimer += Time.deltaTime;
+            rollTimer += Time.unscaledDeltaTime;
             yield return null;
         }
 
@@ -134,5 +156,29 @@ public class PlayerMovement: MonoBehaviour
     public bool IsInvincible()
     {
         return isInvincible;
+    }
+
+    public IEnumerator WaitForNormalTime()
+    {
+        yield return new WaitForSecondsRealtime(slowTimeDuration);
+
+        TimeManager.ReturnTime();
+        canBullet = true;
+    }
+
+    public IEnumerator Timer()
+    {
+        float time = 0f;
+        slowTimer.fillAmount = 1f;
+
+        while (time < slowTimeDuration)
+        {
+            slowTimer.fillAmount = Mathf.Lerp(1f,0f, time/slowTimeDuration);
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        slowTimer.fillAmount = 0f;
+        yield return null;
     }
 }

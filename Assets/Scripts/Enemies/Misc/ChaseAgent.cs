@@ -10,12 +10,14 @@ public class ChaseAgent : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
 
     Rigidbody rb;
+    EnemyHealth enemyHealth;
     /// <summary>
     /// Sets the speed of the enemy in the NavMesh
     /// </summary>
     void Start()
     {
         agent.speed = speed;
+        enemyHealth = GetComponent<EnemyHealth>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -69,6 +71,7 @@ public class ChaseAgent : MonoBehaviour
     /// </summary>
     public void Stay()
     {
+        enemyHealth.StayState();
         agent.SetDestination(transform.position);
     }
 
@@ -77,6 +80,7 @@ public class ChaseAgent : MonoBehaviour
     /// </summary>
     public void Chase()
     {
+        enemyHealth.ChaseState();
         rb.linearVelocity = Vector3.zero;
         agent.SetDestination(target.transform.position);
         agent.isStopped = false;

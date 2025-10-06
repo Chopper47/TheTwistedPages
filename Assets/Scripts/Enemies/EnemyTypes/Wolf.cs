@@ -15,6 +15,7 @@ public class Wolf : CollisionRefresh
     Vector3 startingPos;
 
     Rigidbody rb;
+    EnemyHealth enemyHealth;
     [SerializeField] ChaseAgent chase;
 
     /// <summary>
@@ -23,6 +24,7 @@ public class Wolf : CollisionRefresh
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     /// <summary>
@@ -45,6 +47,7 @@ public class Wolf : CollisionRefresh
 
         if(launch) 
         {
+            enemyHealth.AttackState();
             canLaunch = false;
             StartCoroutine(WaitForLaunch());
         }
