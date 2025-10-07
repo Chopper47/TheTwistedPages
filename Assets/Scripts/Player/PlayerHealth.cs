@@ -36,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 playerMovement.canMove = false;
                 Trap trap = other.GetComponent<Trap>();
+                
                 TakeDamage(trap.GetDamage());
 
                 GetComponent<PlayerFall>().FallIntoHole(new Vector3(other.transform.position.x, other.transform.position.y - 5, other.transform.position.z));
