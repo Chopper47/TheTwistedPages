@@ -19,7 +19,7 @@ public class PlayerMovement: MonoBehaviour
 
     [SerializeField] private float slowTimeDuration = 1.2f;
 
-    public bool canMove = true;
+    public static bool canMove = true;
     public bool canBullet = true;
 
     [Header("Rolling")]
@@ -32,7 +32,7 @@ public class PlayerMovement: MonoBehaviour
 
     private bool isRolling = false;
     private bool canRoll = true;
-    private bool isInvincible = false;
+    static bool isInvincible = false;
     private float rollTimer;
 
     private Vector3 rollDirection;
@@ -153,7 +153,7 @@ public class PlayerMovement: MonoBehaviour
         canRoll = true;
     }
 
-    public bool IsInvincible()
+    public static bool IsInvincible()
     {
         return isInvincible;
     }

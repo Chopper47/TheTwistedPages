@@ -19,7 +19,7 @@ public class EnemyHitbox : MonoBehaviour
     {
         PlayerHealth player = other.GetComponent<PlayerHealth>();
 
-        if(player != null ) 
+        if(player != null && !PlayerMovement.IsInvincible()) 
         {
             player.TakeDamage(dmg);
         }

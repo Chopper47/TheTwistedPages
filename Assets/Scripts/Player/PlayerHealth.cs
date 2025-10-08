@@ -6,13 +6,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
 
-    private PlayerMovement playerMovement;
-
     public GameObject[] lives;
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
         currentHealth = maxHealth;
     }
 
@@ -20,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.CompareTag("Trap"))
         {
-            if (!playerMovement.IsInvincible())
+            if (!PlayerMovement.IsInvincible())
             {
                 Trap trap = other.GetComponent<Trap>();
                 TakeDamage(trap.GetDamage());
@@ -32,9 +29,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.CompareTag("Hole"))
         {
-            if (!playerMovement.IsInvincible())
+            if (!PlayerMovement.IsInvincible())
             {
-                playerMovement.canMove = false;
+                PlayerMovement.canMove = false;
                 Trap trap = other.GetComponent<Trap>();
                 
                 TakeDamage(trap.GetDamage());

@@ -6,13 +6,11 @@ public class PlayerFall : MonoBehaviour
     [SerializeField] private float fallSpeed = 5.0f;
     [SerializeField] private float respawnDelay = 1.5f;
 
-    private PlayerMovement playerMovement;
     private CharacterController controller;
     private Vector3 respawnPosition;
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -25,7 +23,7 @@ public class PlayerFall : MonoBehaviour
 
     private IEnumerator Fall()
     {
-        playerMovement.canMove = false;
+        PlayerMovement.canMove = false;
         controller.enabled = false;
 
         float targetY = transform.position.y - 3.0f;
@@ -40,6 +38,6 @@ public class PlayerFall : MonoBehaviour
         transform.position = respawnPosition;
 
         controller.enabled = true;
-        playerMovement.canMove = true;
+        PlayerMovement.canMove = true;
     }
 }
