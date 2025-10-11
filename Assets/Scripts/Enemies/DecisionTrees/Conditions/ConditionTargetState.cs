@@ -4,6 +4,14 @@ public class ConditionTargetState : ICondition
 {
     [SerializeField] ChaseAgent enemy;
 
+    private void Awake()
+    {
+        if (!enemy)
+        {
+            enemy = transform.root.GetComponent<ChaseAgent>();
+        }
+    }
+
     /// <summary>
     /// Method that call TargetExist method from chaseAgent
     /// </summary>
