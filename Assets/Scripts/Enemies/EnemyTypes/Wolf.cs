@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Wolf : CollisionRefresh 
 {
+    [Header("Launch variables")]
     [SerializeField] float timeForLaunch = .8f;
     [SerializeField] float launchDistance = 5f;
     [SerializeField] float launchForce = 2f;
@@ -12,7 +13,18 @@ public class Wolf : CollisionRefresh
     bool canLaunch = true;
     bool checkLaunchDistance = false;
 
-    Vector3 startingPos;
+    [Header("Stepback variables")]
+    [SerializeField] float timeForStepback = 0f;
+    [SerializeField] float stepbackDistance = 3.5f;
+    [SerializeField] float stepbackForce = 2f;
+
+    bool stepback = false;
+    bool canStepback = false;
+    bool checkStepbackDistance = false;
+
+    Vector3 launchStartingPos;
+    Vector3 stepbackStartingPos;
+    Vector3 launchDir;
 
     Rigidbody rb;
     EnemyHealth enemyHealth;
@@ -34,9 +46,17 @@ public class Wolf : CollisionRefresh
     {
         if (checkLaunchDistance) 
         { 
-            if(Vector3.Distance(startingPos, transform.position) >= launchDistance)
+            if(Vector3.Distance(launchStartingPos, transform.position) >= launchDistance)
             {
                 StopLaunch();
+            }
+        }
+
+        if(checkStepbackDistance) 
+        { 
+            if(Vector3.Distance(stepbackStartingPos, transform.position) >=  stepbackDistance)
+            {
+                StopStepback();
             }
         }
     }
@@ -53,6 +73,17 @@ public class Wolf : CollisionRefresh
         }
     }
 
+    public void SetStepback(bool isStepback)
+    {
+        stepback = isStepback;
+
+        if(stepback)
+        {
+            enemyHealth.ChaseState();
+            canStepback = false;
+            StartCoroutine(WaitForStepback());
+        }
+    }
     public bool CanLaunch()
     {
         return canLaunch;
@@ -63,17 +94,35 @@ public class Wolf : CollisionRefresh
         return launch;
     }
 
+    public bool IsSteppingBack()
+    {
+        return stepback;
+    }
+
+    IEnumerator WaitForStepback()
+    {
+        yield return new WaitForSeconds(timeForStepback);
+
+        Vector3 sbDir = launchDir * -1;
+
+        stepbackStartingPos = transform.position;
+
+        checkStepbackDistance = true;
+
+        rb.AddForce(sbDir * stepbackForce);
+    }
+
     IEnumerator WaitForLaunch()
     {
         yield return new WaitForSeconds(timeForLaunch);
 
-        Vector3 dir = chase.TargetPosition() - transform.position;
+        launchDir = (chase.TargetPosition() - transform.position).normalized;
 
-        startingPos = transform.position;
+        launchStartingPos = transform.position;
         
         checkLaunchDistance = true;
 
-        rb.AddForce(dir * launchForce);
+        rb.AddForce(launchDir * launchForce);
 
     }
 
@@ -99,6 +148,14 @@ public class Wolf : CollisionRefresh
         StartCoroutine(TimeForReset());
     }
 
+    public void StopStepback()
+    {
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        checkStepbackDistance = false;
+        stepback = false;
+        canStepback = true;
+    }
 
     /// <summary>
     /// Calls the method for reset if it colides with the player
@@ -108,6 +165,11 @@ public class Wolf : CollisionRefresh
         if(launch)
         {
             StopLaunch();
+        }
+
+        if (stepback)
+        {
+            StopStepback();
         }
     }
 
@@ -119,6 +181,11 @@ public class Wolf : CollisionRefresh
         if(launch)
         {
             StopLaunch();
+        }
+
+        if(stepback) 
+        {
+            StopStepback();
         }
     }
 
