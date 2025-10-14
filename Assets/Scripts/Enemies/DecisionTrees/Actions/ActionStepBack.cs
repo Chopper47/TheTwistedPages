@@ -14,7 +14,11 @@ public class ActionStepBack : IAction
 
     public override void Act()
     {
-        Debug.Log("SteppingBack");
-        wolf.SetStepback(true);
+
+        if(!wolf.CanStepback())
+        {
+            Debug.Log("SteppingBack");
+            wolf.SetStepback(true);
+        }
     }
 }

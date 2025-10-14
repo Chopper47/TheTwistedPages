@@ -15,11 +15,13 @@ public class Wolf : CollisionRefresh
 
     [Header("Stepback variables")]
     [SerializeField] float timeForStepback = 0f;
+    //Distance of the stepback, never too similar to launchDistance
     [SerializeField] float stepbackDistance = 3.5f;
     [SerializeField] float stepbackForce = 2f;
+    [SerializeField] float stepbackCD = 3.5f;
 
     bool stepback = false;
-    bool canStepback = false;
+    bool canStepback = true;
     bool checkStepbackDistance = false;
 
     Vector3 launchStartingPos;
@@ -89,6 +91,11 @@ public class Wolf : CollisionRefresh
         return canLaunch;
     }
 
+    public bool CanStepback()
+    { 
+        return stepback; 
+    }
+
     public bool IsLaunching()
     {
         return launch;
@@ -130,10 +137,16 @@ public class Wolf : CollisionRefresh
     /// Cooldown for the launch
     /// </summary>
     /// <returns></returns>
-    IEnumerator TimeForReset()
+    IEnumerator TimeForLaunchReset()
     {
         yield return new WaitForSeconds(launchCD);
         canLaunch = true;
+    }
+
+    IEnumerator TimeForStepbackReset()
+    {
+        yield return new WaitForSeconds(stepbackCD);
+        canStepback = true;
     }
 
     /// <summary>
@@ -145,7 +158,7 @@ public class Wolf : CollisionRefresh
         rb.angularVelocity = Vector3.zero;
         checkLaunchDistance = false;
         SetLaunch(false);
-        StartCoroutine(TimeForReset());
+        StartCoroutine(TimeForLaunchReset());
     }
 
     public void StopStepback()
@@ -154,7 +167,7 @@ public class Wolf : CollisionRefresh
         rb.angularVelocity = Vector3.zero;
         checkStepbackDistance = false;
         stepback = false;
-        canStepback = true;
+        StartCoroutine(TimeForStepbackReset());
     }
 
     /// <summary>
@@ -196,5 +209,10 @@ public class Wolf : CollisionRefresh
         Debug.Log(collision.gameObject.name + " | " + player);
 
         if(player != null ) { OnPlayerHit(); }
+
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            OnWallHit();
+        }
     }
 }
