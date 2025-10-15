@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int currentHealth;
+    public int maxHealth;
+    public int currentHealth;
 
     public GameObject[] lives;
 

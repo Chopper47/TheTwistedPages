@@ -21,7 +21,7 @@ public class HealthObject : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange && interactAction.triggered)
+        if (playerInRange && interactAction.triggered && playerHealth.currentHealth != playerHealth.maxHealth)
         {
             playerHealth.Heal(healAmount);
             Destroy(gameObject);

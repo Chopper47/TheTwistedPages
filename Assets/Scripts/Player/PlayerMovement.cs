@@ -118,7 +118,7 @@ public class PlayerMovement: MonoBehaviour
         }
     }
 
-    private IEnumerator Roll()
+    public IEnumerator Roll()
     {
         isRolling = true;
         canRoll = false;

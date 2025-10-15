@@ -205,10 +205,14 @@ public class Wolf : CollisionRefresh
     public override void OnCollisionEnter(Collision collision)
     {
         PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
 
         Debug.Log(collision.gameObject.name + " | " + player);
 
-        if(player != null ) { OnPlayerHit(); }
+        if(player != null) 
+        {
+            OnPlayerHit();
+        }
 
         if (collision.gameObject.CompareTag("Wall"))
         {
