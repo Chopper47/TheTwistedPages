@@ -1,30 +1,18 @@
 using UnityEngine;
 
-enum State
-{
-    Stay,
-    Chase,
-    Attack
-}
-
 public class EnemyState : MonoBehaviour
 {
+    enum State
+    {
+        Stay,
+        Chase,
+        Attack
+    }
+
+
     public static EnemyState Instance;
 
     State state = State.Stay;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void AttackState()
     {

@@ -30,6 +30,7 @@ public class Wolf : CollisionRefresh
 
     Rigidbody rb;
     EnemyHealth enemyHealth;
+    EnemyState states;
     [SerializeField] ChaseAgent chase;
 
     /// <summary>
@@ -39,6 +40,7 @@ public class Wolf : CollisionRefresh
     {
         rb = GetComponent<Rigidbody>();
         enemyHealth = GetComponent<EnemyHealth>();
+        states = GetComponent<EnemyState>();
     }
 
     /// <summary>
@@ -69,7 +71,7 @@ public class Wolf : CollisionRefresh
 
         if(launch) 
         {
-            EnemyState.Instance.AttackState();
+            states.AttackState();
             canLaunch = false;
             StartCoroutine(WaitForLaunch());
         }
@@ -81,7 +83,7 @@ public class Wolf : CollisionRefresh
 
         if(stepback)
         {
-            EnemyState.Instance.ChaseState();
+            states.ChaseState();
             canStepback = false;
             StartCoroutine(WaitForStepback());
         }
