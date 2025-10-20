@@ -77,16 +77,19 @@ public class PlayerHealth : MonoBehaviour
     {
         for (int i = 0; i < lives.Length; i++)
         {
-            Image lifeImage = lives[i].GetComponent<Image>();
-
-            if (currentHealth > i)
+            if (lives[i] != null)
             {
-                lifeImage.color = Color.white;
-            }
+                Image lifeImage = lives[i].GetComponent<Image>();
 
-            else
-            {
-                lifeImage.color = Color.black;
+                if (currentHealth > i)
+                {
+                    lifeImage.color = Color.white;
+                }
+
+                else
+                {
+                    lifeImage.color = Color.black;
+                }
             }
         }
     }

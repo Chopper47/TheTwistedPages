@@ -12,7 +12,7 @@ public class EnemyHitbox : MonoBehaviour
 
     public int ShowEnemyState()
     {
-        return enemyHp.CurrentState();
+        return EnemyState.Instance.CurrentState();
     }
 
     public void OnTriggerEnter(Collider other)

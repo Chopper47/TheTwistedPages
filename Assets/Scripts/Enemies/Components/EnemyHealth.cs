@@ -6,45 +6,13 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private int health;
 
-    enum State{
-        stay,
-        chase,
-        attack
-    }
-
-    State state = State.stay;
+    private RoomController roomController;
 
     private void Start()
     {
         health = maxHealth;
-    }
 
-    public void AttackState()
-    {
-        state = State.attack;
-    }
-
-    public void StayState()
-    {
-        state = State.stay;
-    }
-
-    public void ChaseState()
-    {
-        state = State.chase;
-    }
-
-    public int CurrentState()
-    {
-        return ((int)state);
-    }
-
-    private void Update()
-    {
-        if (health <= 0)
-        {
-            Die();
-        }
+        roomController = GetComponentInParent<RoomController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,10 +27,20 @@ public class EnemyHealth : MonoBehaviour
     private void TakeDamage(int damage)
     {
         health -= damage;
+
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
     private void Die()
     {
+        if (roomController != null)
+        {
+            roomController.OnEnemyDied();
+        }
+
         Destroy(gameObject);
     }
 }

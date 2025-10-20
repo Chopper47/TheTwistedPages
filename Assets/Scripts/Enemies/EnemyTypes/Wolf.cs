@@ -69,7 +69,7 @@ public class Wolf : CollisionRefresh
 
         if(launch) 
         {
-            enemyHealth.AttackState();
+            EnemyState.Instance.AttackState();
             canLaunch = false;
             StartCoroutine(WaitForLaunch());
         }
@@ -81,7 +81,7 @@ public class Wolf : CollisionRefresh
 
         if(stepback)
         {
-            enemyHealth.ChaseState();
+            EnemyState.Instance.ChaseState();
             canStepback = false;
             StartCoroutine(WaitForStepback());
         }

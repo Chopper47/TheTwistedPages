@@ -70,7 +70,7 @@ public class ChaseAgent : MonoBehaviour
     /// </summary>
     public void Stay()
     {
-        enemyHealth.StayState();
+        EnemyState.Instance.StayState();
         agent.SetDestination(transform.position);
     }
 
@@ -79,7 +79,7 @@ public class ChaseAgent : MonoBehaviour
     /// </summary>
     public void Chase()
     {
-        enemyHealth.ChaseState();
+        EnemyState.Instance.ChaseState();
         rb.linearVelocity = Vector3.zero;
         agent.SetDestination(target.transform.position);
         agent.isStopped = false;
