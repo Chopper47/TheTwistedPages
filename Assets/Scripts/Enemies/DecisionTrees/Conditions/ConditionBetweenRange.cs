@@ -1,7 +1,7 @@
 using UnityEditor.Timeline;
 using UnityEngine;
 
-public class ConditionBetweenRange : ICondition
+public class ConditionWolfBetweenRange : ICondition
 {
     [SerializeField] float minRange = 1.5f;
     [SerializeField] float maxRange = 3.5f;

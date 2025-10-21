@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class Wolf : CollisionRefresh 
 {
+    [Header("Condition variables")]
+
+    [SerializeField] float minStepbackDistance = 0.5f;
+    [SerializeField] float maxStepbackDistance = 3.5f;
+    [SerializeField] float launchRange = 4f;
+
     [Header("Launch variables")]
     [SerializeField] float timeForLaunch = .8f;
     [SerializeField] float launchDistance = 5f;
@@ -188,6 +194,21 @@ public class Wolf : CollisionRefresh
         }
     }
 
+    public float MinDistanceStepback()
+    {
+        return minStepbackDistance;
+    }
+
+    public float MaxDistanceStepback()
+    {
+        return maxStepbackDistance;
+    }
+
+
+    public float LaunchRange()
+    {
+        return launchRange;
+    }
     /// <summary>
     /// Calls the method for reset if it colides with a wall
     /// </summary>

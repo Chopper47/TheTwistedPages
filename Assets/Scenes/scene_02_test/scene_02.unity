@@ -2506,6 +2506,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1611472541855525549, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: condition
+      value: 
+      objectReference: {fileID: 5591467889978001095}
     - target: {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: m_Name
       value: Wolf
@@ -2514,15 +2518,88 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5043301861707261942, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: condition
+      value: 
+      objectReference: {fileID: 5591467889978001096}
     - target: {fileID: 8737206857049744820, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1535823982}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9065106144639563364, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+    - {fileID: 3942811371925693974, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3966548103920100686, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5591467889978001096}
+    - targetCorrespondingSourceObject: {fileID: 2779056030033718415, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5591467889978001095}
   m_SourcePrefab: {fileID: 100100000, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+--- !u!114 &5591467889978001091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8737206857049744820, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5591467889978001090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a3db15c2f23974ba5444f93fa591a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5591467889978001092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3344937382672473425, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5591467889978001090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce6dcc93c8813b49a59e1e46921ab9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5591467889978001093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2779056030033718415, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5591467889978001090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5591467889978001094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3966548103920100686, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5591467889978001090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5591467889978001095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5591467889978001093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 662bf2b317b03b545b72e8875ba03309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chase: {fileID: 5591467889978001091}
+  wolf: {fileID: 5591467889978001092}
+--- !u!114 &5591467889978001096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5591467889978001094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dded0db9a34f344eb05b208c6a87ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wolf: {fileID: 5591467889978001092}
+  enemy: {fileID: 5591467889978001091}
+  variation: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
