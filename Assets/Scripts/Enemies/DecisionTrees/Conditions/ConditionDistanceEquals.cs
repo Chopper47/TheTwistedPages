@@ -6,9 +6,12 @@ public class ConditionDistanceEquals : ICondition
     [SerializeField] float distance = 4f;
     [SerializeField] float variation = 0.1f;
 
-    public void Start()
+    public void Awake()
     {
-        enemy = transform.root.GetComponent<ChaseAgent>();
+        if(!enemy)
+        {
+            enemy = transform.root.GetComponent<ChaseAgent>();
+        }
     }
     /// <summary>
     /// Method for checking distance from the agent to its target
@@ -16,6 +19,6 @@ public class ConditionDistanceEquals : ICondition
     /// <returns>True if agent distance from the target is less than float value</returns>
     public override bool Check()
     {
-        return enemy.DistanceFromTarget() > distance - variation && enemy.DistanceFromTarget() < distance + variation;
+        return enemy.DistanceFromTarget() > distance - variation && enemy.DistanceFromTarget() < distance + variation;  
     }
 }

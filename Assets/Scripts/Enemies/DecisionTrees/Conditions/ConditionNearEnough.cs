@@ -5,9 +5,12 @@ public class ConditionNearEnough : ICondition
     [SerializeField] ChaseAgent enemy;
     [SerializeField] float distance = 4f;
 
-    public void Start()
+    public void Awake()
     {
-        enemy = transform.root.GetComponent<ChaseAgent>();
+        if (enemy != null)
+        {
+            enemy = transform.root.GetComponent<ChaseAgent>();
+        }
     }
     /// <summary>
     /// Method for checking distance from the agent to its target
