@@ -179,6 +179,13 @@ public class LevelGenerator : MonoBehaviour
         GameObject roomObject = Instantiate(room.roomPreset.roomPrefab, worldPosition, Quaternion.identity, transform);
         roomObject.name = $"room_{room.gridPosition.x}_{room.gridPosition.y}_{room.roomType}";
         room.roomPrefab = roomObject;
+
+        RoomController roomController = roomObject.GetComponent<RoomController>();
+        if (roomController != null)
+        {
+            roomController.roomInstance = room;
+            roomController.roomPreset = room.roomPreset;
+        }
     }
 
     /// <summary>

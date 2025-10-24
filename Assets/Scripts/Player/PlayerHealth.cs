@@ -23,10 +23,7 @@ public class PlayerHealth : MonoBehaviour
                 TakeDamage(trap.GetDamage());
             }
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
         if (other.CompareTag("Hole"))
         {
             if (!PlayerMovement.IsInvincible())
