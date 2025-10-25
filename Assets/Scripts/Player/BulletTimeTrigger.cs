@@ -1,17 +1,18 @@
 using UnityEngine;
 
-public class PerfectDodgeTrigger : MonoBehaviour
+public class BulletTimeTrigger : MonoBehaviour
 {
-    bool canDodge = false;
+    private bool canDodge = false;
+
     private void OnTriggerEnter(Collider other)
     {
         EnemyHitbox enemyHb = other.GetComponent<EnemyHitbox>();
 
-        if(enemyHb != null )
+        if(enemyHb != null)
         {
             if(enemyHb.ShowEnemyState() == 2)
             {
-                canDodge=true;
+                canDodge = true;
             }
         }
     }
@@ -40,5 +41,7 @@ public class PerfectDodgeTrigger : MonoBehaviour
     }
 
     public bool CanDodge()
-    { return canDodge; }
+    { 
+        return canDodge; 
+    }
 }

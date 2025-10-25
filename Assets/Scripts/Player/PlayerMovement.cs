@@ -13,19 +13,12 @@ public class PlayerMovement: MonoBehaviour
     private Vector3 direction;
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 10.0f;
-    [SerializeField] private float bulletTimeSpeed = 15.0f;
+    [SerializeField] private float baseMoveSpeed = 10.0f;
     [SerializeField] private float rotationSpeed = 10.0f;
 
-    [SerializeField] private float slowTimeDuration = 1.2f;
-
     public static bool canMove = true;
-    public bool canBullet = true;
 
     [Header("Rolling")]
-    
-    [SerializeField] PerfectDodgeTrigger dodgeTrigger;
-
     [SerializeField] private float rollSpeed = 20.0f;
     [SerializeField] private float rollDuration = 0.5f;
     [SerializeField] private float rollCooldown = 1.0f;
@@ -37,6 +30,14 @@ public class PlayerMovement: MonoBehaviour
 
     private Vector3 rollDirection;
 
+    [Header("Bullet Time")]
+    [SerializeField] private BulletTimeTrigger bulletTimeTrigger;
+
+    [SerializeField] private float bulletTimeSpeed = 15.0f;
+    [SerializeField] private float bulletTimeDuration = 1.2f;
+
+    public bool canTriggerBulletTime = true;
+
     [Header("Input System")]
     public InputActionAsset inputActions;
 
@@ -45,9 +46,8 @@ public class PlayerMovement: MonoBehaviour
 
     private Vector2 moveAmount;
 
-    [Header("Prototype Reference")]
-
-    [SerializeField] Image slowTimer;
+    [Header("UI")]
+    [SerializeField] private Image bulletTimeTimer;
 
     private void OnEnable()
     {
@@ -87,11 +87,11 @@ public class PlayerMovement: MonoBehaviour
 
             if (rollAction.triggered && canRoll)
             {
-                if (dodgeTrigger.CanDodge() && canBullet)
+                if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime)
                 {
-                    canBullet = false;
+                    canTriggerBulletTime = false;
                     TimeManager.SlowTime();
-                    StartCoroutine(Timer());
+                    StartCoroutine(UpdateBulletTimeUI());
                     StartCoroutine(WaitForNormalTime());
                 }
                 StartCoroutine(Roll());
@@ -114,7 +114,7 @@ public class PlayerMovement: MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, Time.unscaledDeltaTime * rotationSpeed);
 
-            controller.Move(direction * moveSpeed * Time.unscaledDeltaTime);
+            controller.Move(direction * baseMoveSpeed * Time.unscaledDeltaTime);
         }
     }
 
@@ -160,25 +160,25 @@ public class PlayerMovement: MonoBehaviour
 
     public IEnumerator WaitForNormalTime()
     {
-        yield return new WaitForSecondsRealtime(slowTimeDuration);
+        yield return new WaitForSecondsRealtime(bulletTimeDuration);
 
         TimeManager.ReturnTime();
-        canBullet = true;
+        canTriggerBulletTime = true;
     }
 
-    public IEnumerator Timer()
+    public IEnumerator UpdateBulletTimeUI()
     {
         float time = 0f;
-        slowTimer.fillAmount = 1f;
+        bulletTimeTimer.fillAmount = 1.0f;
 
-        while (time < slowTimeDuration)
+        while (time < bulletTimeDuration)
         {
-            slowTimer.fillAmount = Mathf.Lerp(1f,0f, time/slowTimeDuration);
+            bulletTimeTimer.fillAmount = Mathf.Lerp(1.0f, 0f, time/bulletTimeDuration);
             time += Time.unscaledDeltaTime;
             yield return null;
         }
 
-        slowTimer.fillAmount = 0f;
+        bulletTimeTimer.fillAmount = 0f;
         yield return null;
     }
 }

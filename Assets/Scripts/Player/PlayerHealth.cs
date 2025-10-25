@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
 
-        UpdateUI();
+        UpdateHealthUI();
     }
 
     public void Heal(int amount)
@@ -67,10 +67,10 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = maxHealth;
         }
 
-        UpdateUI();
+        UpdateHealthUI();
     }
 
-    private void UpdateUI()
+    private void UpdateHealthUI()
     {
         for (int i = 0; i < lives.Length; i++)
         {
