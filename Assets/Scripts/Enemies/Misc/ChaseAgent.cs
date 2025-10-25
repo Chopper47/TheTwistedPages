@@ -12,19 +12,15 @@ public class ChaseAgent : MonoBehaviour
     EnemyHealth enemyHealth;
     EnemyState states;
 
-    private void Awake()
-    {
-        if(target == null)
-        {
-           target = FindFirstObjectByType<PlayerMovement>().transform;
-        }
-    }
-
     /// <summary>
     /// Sets the speed of the enemy in the NavMesh
     /// </summary>
     void Start()
     {
+        if (target == null)
+        {
+            target = FindFirstObjectByType<PlayerMovement>().transform;
+        }
         agent.speed = speed;
         enemyHealth = GetComponent<EnemyHealth>();
         states = GetComponent<EnemyState>();
