@@ -11,6 +11,15 @@ public class ChaseAgent : MonoBehaviour
     Rigidbody rb;
     EnemyHealth enemyHealth;
     EnemyState states;
+
+    private void Awake()
+    {
+        if(target == null)
+        {
+           target = FindFirstObjectByType<PlayerMovement>().transform;
+        }
+    }
+
     /// <summary>
     /// Sets the speed of the enemy in the NavMesh
     /// </summary>
