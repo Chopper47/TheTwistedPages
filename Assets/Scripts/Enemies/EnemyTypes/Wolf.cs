@@ -8,6 +8,7 @@ public class Wolf : CollisionRefresh
     [SerializeField] float minStepbackDistance = 0.5f;
     [SerializeField] float maxStepbackDistance = 3.5f;
     [SerializeField] float launchRange = 4f;
+    [SerializeField] int consecutiveStepback = 0;
 
     [Header("Launch variables")]
     [SerializeField] float timeForLaunch = .8f;
@@ -25,7 +26,10 @@ public class Wolf : CollisionRefresh
     [SerializeField] float stepbackDistance = 3.5f;
     [SerializeField] float stepbackForce = 2f;
     [SerializeField] float stepbackCD = 3.5f;
-
+    [SerializeField] float stepbackTimeConsecutive = 0.75f;
+    [SerializeField] int maxConsecutive = 2;
+    bool checkConsecutiveStepback = false;
+    Coroutine checkCoroutine;
     bool stepback = false;
     bool canStepback = true;
     bool checkStepbackDistance = false;
@@ -77,6 +81,14 @@ public class Wolf : CollisionRefresh
 
         if(launch) 
         {
+            if(checkConsecutiveStepback)
+            {
+                Debug.Log("revenge");
+                StopCoroutine(checkCoroutine);
+                consecutiveStepback = 0;
+                checkConsecutiveStepback = false;
+            }
+
             states.AttackState();
             canLaunch = false;
             StartCoroutine(WaitForLaunch());
@@ -118,13 +130,32 @@ public class Wolf : CollisionRefresh
     {
         yield return new WaitForSeconds(timeForStepback);
 
-        Vector3 sbDir = launchDir * -1;
+        Vector3 sbDir = (transform.position - chase.TargetPosition()).normalized;
 
         stepbackStartingPos = transform.position;
 
         checkStepbackDistance = true;
 
         rb.AddForce(sbDir * stepbackForce);
+
+        if(!checkConsecutiveStepback)
+        {
+            checkConsecutiveStepback = true;
+            checkCoroutine = StartCoroutine(StopCheckStepback());
+        }
+        else
+        {
+            consecutiveStepback++;
+            StopCoroutine(checkCoroutine);
+            checkCoroutine = StartCoroutine(StopCheckStepback());
+        }
+    }
+
+    IEnumerator StopCheckStepback()
+    {
+        yield return new WaitForSeconds(stepbackTimeConsecutive);
+        consecutiveStepback = 0;
+        checkConsecutiveStepback = false;
     }
 
     IEnumerator WaitForLaunch()
@@ -138,6 +169,8 @@ public class Wolf : CollisionRefresh
         checkLaunchDistance = true;
 
         rb.AddForce(launchDir * launchForce);
+
+        consecutiveStepback = 0;
 
     }
 
@@ -178,22 +211,6 @@ public class Wolf : CollisionRefresh
         StartCoroutine(TimeForStepbackReset());
     }
 
-    /// <summary>
-    /// Calls the method for reset if it colides with the player
-    /// </summary>
-    public override void OnPlayerHit()
-    {
-        if(launch)
-        {
-            StopLaunch();
-        }
-
-        if (stepback)
-        {
-            StopStepback();
-        }
-    }
-
     public float MinDistanceStepback()
     {
         return minStepbackDistance;
@@ -208,6 +225,11 @@ public class Wolf : CollisionRefresh
     public float LaunchRange()
     {
         return launchRange;
+    }
+
+    public bool ConsectiveLimit()
+    {
+        return consecutiveStepback == maxConsecutive;
     }
     /// <summary>
     /// Calls the method for reset if it colides with a wall
@@ -225,19 +247,32 @@ public class Wolf : CollisionRefresh
         }
     }
 
-    public override void OnCollisionEnter(Collision collision)
+
+    /// <summary>
+    /// Calls the method for reset if it colides with the player
+    /// </summary>
+    public override void OnPlayerHit()
     {
-        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        if (launch)
+        {
+            StopLaunch();
+        }
 
-        Debug.Log(collision.gameObject.name + " | " + player);
+        if (stepback)
+        {
+            StopStepback();
+        }
+    }
+    public override void OnTriggerEnter(Collider other)
+    {
+        PlayerHealth player = other.GetComponent<PlayerHealth>();
 
-        if(player != null) 
+        if (player != null)
         {
             OnPlayerHit();
         }
 
-        if (collision.gameObject.CompareTag("Wall"))
+        if (other.CompareTag("Wall"))
         {
             OnWallHit();
         }

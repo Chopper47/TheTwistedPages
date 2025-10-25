@@ -87,13 +87,13 @@ public class PlayerMovement: MonoBehaviour
 
             if (rollAction.triggered && canRoll)
             {
-                if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime)
-                {
-                    canTriggerBulletTime = false;
-                    TimeManager.SlowTime();
-                    StartCoroutine(UpdateBulletTimeUI());
-                    StartCoroutine(WaitForNormalTime());
-                }
+                //if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime)
+                //{
+                //    canTriggerBulletTime = false;
+                //    TimeManager.SlowTime();
+                //    StartCoroutine(UpdateBulletTimeUI());
+                //    StartCoroutine(WaitForNormalTime());
+                //}
                 StartCoroutine(Roll());
             }
         }
