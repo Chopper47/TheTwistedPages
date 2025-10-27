@@ -6,10 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Room")]
 public class RoomPreset : ScriptableObject
 {
+    [Header("Room Settings")]
     public GameObject roomPrefab;
     public bool canBeStart;
     public bool canBeShop;
     public bool canBeHealth;
     public bool canBeBoss;
     public int difficultyRating;
+
+    [Header("Enemy Waves")]
+    public GameObject[] enemyPrefabs;
+    public int enemyCount = 3;
 }

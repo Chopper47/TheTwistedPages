@@ -38,6 +38,8 @@ public class RoomTransition : MonoBehaviour
 
         // Activate the new room.
         nextRoomController.ActivateRoom();
+
+        CameraController.Instance.MoveToRoom(nextRoomController);
     }
 
     /// <summary>

@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private int health;
 
-    private RoomController roomController;
+    public RoomController roomController;
 
     private void Start()
     {

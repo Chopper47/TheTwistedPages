@@ -35,8 +35,12 @@ public class RoomController : MonoBehaviour
 
         isActive = true;
 
-        EnemyHealth[] enemies = GetComponentsInChildren<EnemyHealth>();
-        enemiesRemaining = enemies.Length;
+        if (roomPreset.enemyPrefabs != null && roomPreset.enemyPrefabs.Length > 0)
+        {
+            SpawnEnemies();
+        }
+
+        enemiesRemaining = GetComponentsInChildren<EnemyHealth>().Length;
 
         if (enemiesRemaining > 0)
         {
@@ -49,6 +53,26 @@ public class RoomController : MonoBehaviour
         {
             OpenDoors();
             isCleared = true;
+        }
+    }
+
+    private void SpawnEnemies()
+    {
+        int enemiesToSpawn = Mathf.Min(roomPreset.enemyCount, enemySpawnPoints.Length);
+
+        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+            Transform spawnPoint = enemySpawnPoints[i];
+            GameObject enemyPrefab = roomPreset.enemyPrefabs[Random.Range(0, roomPreset.enemyPrefabs.Length)];
+
+            GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity, transform);
+
+            // Optionally set up callbacks
+            EnemyHealth enemyHealth = enemyInstance.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.roomController = this;
+            }
         }
     }
 
