@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private float invincibilityDuration = 0.5f;
 
+    public GameObject gameOverMenu;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -45,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Destroy(gameObject);
         Debug.Log("You died.");
+        gameOverMenu.SetActive(true);
     }
 
     public void TakeDamage(int damage)

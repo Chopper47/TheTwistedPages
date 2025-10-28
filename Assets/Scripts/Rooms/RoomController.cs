@@ -15,6 +15,8 @@ public class RoomController : MonoBehaviour
     private bool isCleared = false;
     private bool isActive = false;
 
+    public GameObject gameWonMenu;
+
     private void Awake()
     {
         foreach (DoorController door in GetComponentsInChildren<DoorController>())
@@ -25,6 +27,8 @@ public class RoomController : MonoBehaviour
                 doors.Add(door);
             }
         }
+
+        gameWonMenu = GameObject.FindGameObjectWithTag("Game Won Menu");
     }
 
     public void ActivateRoom()
@@ -111,5 +115,6 @@ public class RoomController : MonoBehaviour
     private void OnBossRoomCleared()
     {
         Debug.Log("Congratulations!");
+        gameWonMenu.SetActive(true);
     }
 }

@@ -61,4 +61,14 @@ public class GameManager : MonoBehaviour
 
         playerMovement.enabled = true;
     }
+
+    public void ResetButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
 }
