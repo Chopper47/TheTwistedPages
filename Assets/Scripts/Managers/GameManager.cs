@@ -25,11 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            playerMovement = player.GetComponent<PlayerMovement>();
-        }
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
     }
 
     private void Update()
