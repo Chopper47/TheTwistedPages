@@ -27,7 +27,7 @@ public class DoorController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            roomTransition.TryMoveToAdjacentRoom(parentRoom, roomTransition.GetOppositeDirection(direction));
+            roomTransition.TryMoveToAdjacentRoom(parentRoom, direction);
         }
     }
 

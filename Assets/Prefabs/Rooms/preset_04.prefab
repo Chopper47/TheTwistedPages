@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &31537442426708743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2473139018592046510}
+  m_Layer: 0
+  m_Name: RespawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2473139018592046510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31537442426708743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9, y: 0, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 896116664157374819}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &135050488189853132
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +420,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 35ecf72b42c949a4badbad662ddab359, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -733,6 +764,7 @@ Transform:
   - {fileID: 4877134210680657390}
   - {fileID: 7188873414410756029}
   - {fileID: 3477624954217840253}
+  - {fileID: 2473139018592046510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3000620932245614972
@@ -747,7 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95aa5b17af307e42add081d30922114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomPreset: {fileID: 0}
+  roomPreset: {fileID: 11400000, guid: 116a0fecb00d83e4585ae0bcbbe67cc4, type: 2}
   roomInstance:
     gridPosition: {x: 0, y: 0}
     roomType: 0
@@ -756,14 +788,15 @@ MonoBehaviour:
     visited: 0
     cleared: 0
   doors:
-  - {fileID: 6670991963366564529}
-  - {fileID: 8111379159528100938}
   - {fileID: 7097708134073015122}
+  - {fileID: 8111379159528100938}
+  - {fileID: 6670991963366564529}
   - {fileID: 973554014355393697}
   enemySpawnPoints:
   - {fileID: 2542748782400503362}
   - {fileID: 2801128702437404879}
   - {fileID: 7576185979914313905}
+  respawnPoint: {fileID: 2473139018592046510}
 --- !u!1 &2260938249046474377
 GameObject:
   m_ObjectHideFlags: 0
@@ -4375,7 +4408,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7328462506107462414, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: direction
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -7328462506107462414, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: parentRoom
@@ -4435,7 +4468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5273396550404519545, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: m_Name
-      value: Door_East
+      value: Door_West
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4530,7 +4563,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7328462506107462414, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: direction
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -7328462506107462414, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: parentRoom
@@ -4590,7 +4623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5273396550404519545, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: m_Name
-      value: Door_West
+      value: Door_East
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4813,7 +4846,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7328462506107462414, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: direction
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7328462506107462414, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: parentRoom
@@ -4873,7 +4906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5273396550404519545, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: m_Name
-      value: Door_South
+      value: Door_North
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4906,7 +4939,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7328462506107462414, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: direction
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7328462506107462414, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: parentRoom
@@ -4966,7 +4999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5273396550404519545, guid: e90d65594ebb99945bb297feaea8916b, type: 3}
       propertyPath: m_Name
-      value: Door_North
+      value: Door_South
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

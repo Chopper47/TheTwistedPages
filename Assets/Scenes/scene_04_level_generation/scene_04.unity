@@ -576,9 +576,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridDimensions: {x: 9, y: 9}
-  roomWorldSize: {x: 51, y: 0, z: 31}
-  maxRooms: 16
+  roomWorldSize: {x: 61, y: 0, z: 41}
+  maxRooms: 8
   roomPresets:
+  - {fileID: 11400000, guid: 4a2c4b8e89c56d940a1617814e2b3066, type: 2}
+  - {fileID: 11400000, guid: 0fec2b014fcf8b749bc6dcebbf4d855a, type: 2}
+  - {fileID: 11400000, guid: 36410ee021326c04681dd8753a003ccd, type: 2}
+  - {fileID: 11400000, guid: 116a0fecb00d83e4585ae0bcbbe67cc4, type: 2}
   - {fileID: 11400000, guid: b5fdb85f7e216a44ebdbf44db390bb9e, type: 2}
   - {fileID: 11400000, guid: b3617c8afab64a74bb86534f2f837546, type: 2}
 --- !u!4 &1478725031
@@ -692,8 +696,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1050509249}
-  - {fileID: 1109569719}
   - {fileID: 1028421180687233494}
   - {fileID: 291058399}
   - {fileID: 1478725031}
   - {fileID: 772789027}
+  - {fileID: 1109569719}

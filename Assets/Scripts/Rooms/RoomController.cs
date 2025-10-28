@@ -7,7 +7,8 @@ public class RoomController : MonoBehaviour
     public RoomPreset roomPreset;
     public RoomInstance roomInstance;
     public List<DoorController> doors = new List<DoorController>();
-    public Transform[] enemySpawnPoints;
+    public Transform[] enemySpawnPoints; 
+    public Transform respawnPoint;
 
     [Header("Flags")]
     private int enemiesRemaining = 0;
@@ -28,6 +29,9 @@ public class RoomController : MonoBehaviour
 
     public void ActivateRoom()
     {
+        PlayerFall player = FindFirstObjectByType<PlayerFall>();
+        player.SetRoomRespawn(respawnPoint);
+
         if (isActive || isCleared)
         {
             return;
@@ -35,7 +39,7 @@ public class RoomController : MonoBehaviour
 
         isActive = true;
 
-        if (roomPreset.enemyPrefabs != null && roomPreset.enemyPrefabs.Length > 0)
+        if (roomInstance.roomType != RoomType.Start && roomPreset.enemyPrefabs != null && roomPreset.enemyPrefabs.Length > 0)
         {
             SpawnEnemies();
         }
@@ -67,7 +71,6 @@ public class RoomController : MonoBehaviour
 
             GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity, transform);
 
-            // Optionally set up callbacks
             EnemyHealth enemyHealth = enemyInstance.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
@@ -89,6 +92,11 @@ public class RoomController : MonoBehaviour
         {
             isCleared = true;
             OpenDoors();
+
+            if (roomInstance != null && roomInstance.roomType == RoomType.Boss)
+            {
+                OnBossRoomCleared();
+            }
         }
     }
 
@@ -98,5 +106,10 @@ public class RoomController : MonoBehaviour
         {
             door.OpenDoor();
         }
+    }
+
+    private void OnBossRoomCleared()
+    {
+        Debug.Log("Congratulations!");
     }
 }

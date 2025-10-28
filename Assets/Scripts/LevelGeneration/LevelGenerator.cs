@@ -70,6 +70,46 @@ public class LevelGenerator : MonoBehaviour
         {
             InstantiateRoom(room);
         }
+
+        foreach (RoomInstance room in generatedRooms.Values)
+        {
+            if (room.roomPrefab == null)
+            {
+                continue;
+            }
+
+            RoomController roomController = room.roomPrefab.GetComponent<RoomController>();
+            if (roomController == null)
+            {
+                continue;
+            }
+
+            foreach (DoorController door in roomController.doors)
+            {
+                Vector2Int neighbourPosition = room.gridPosition;
+
+                switch (door.direction)
+                {
+                    case DoorDirection.North:
+                        neighbourPosition += Vector2Int.up;
+                        break;
+                    case DoorDirection.South:
+                        neighbourPosition += Vector2Int.down;
+                        break;
+                    case DoorDirection.East:
+                        neighbourPosition += Vector2Int.right;
+                        break;
+                    case DoorDirection.West:
+                        neighbourPosition += Vector2Int.left;
+                        break;
+                }
+
+                if (!generatedRooms.ContainsKey(neighbourPosition))
+                {
+                    door.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     /// <summary>

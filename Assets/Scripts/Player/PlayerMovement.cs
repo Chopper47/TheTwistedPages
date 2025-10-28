@@ -25,7 +25,7 @@ public class PlayerMovement: MonoBehaviour
 
     private bool isRolling = false;
     private bool canRoll = true;
-    static bool isInvincible = false;
+    public static bool isInvincible = false;
     private float rollTimer;
 
     private Vector3 rollDirection;
@@ -71,6 +71,8 @@ public class PlayerMovement: MonoBehaviour
 
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
+
+        canMove = true;
     }
     
     private void Update()

@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3ed2519819b6a4290fbe501e559018, type: 3}
   m_Name: room_04
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 5329231925343020543, guid: 14907787e13853e48a35b6bcd28a3ee2, type: 3}
-  canBeStart: 1
-  canBeShop: 1
+  roomPrefab: {fileID: 2206884966169654323, guid: 195b718273caae340a2c8e4489f01975, type: 3}
+  canBeStart: 0
+  canBeShop: 0
   canBeHealth: 1
-  canBeBoss: 1
+  canBeBoss: 0
   difficultyRating: 1
+  enemyPrefabs:
+  - {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  enemyCount: 1

@@ -32,7 +32,7 @@ public class RoomTransition : MonoBehaviour
         RoomController nextRoomController = nextRoom.roomPrefab.GetComponent<RoomController>();
 
         // Teleport player to the opposite door in the next room.
-        TeleportPlayerToOppositeDoor(nextRoomController, GetOppositeDirection(direction));
+        TeleportPlayerToOppositeDoor(nextRoomController, direction);
 
         Debug.Log($"Teleporting player from {currentInstance.gridPosition} through its {direction} door to {nextRoom.gridPosition}");
 

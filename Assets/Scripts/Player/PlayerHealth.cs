@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
 
     public GameObject[] lives;
+
+    [SerializeField] private float invincibilityDuration = 0.5f;
 
     private void Start()
     {
@@ -33,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
                 
                 TakeDamage(trap.GetDamage());
 
-                GetComponent<PlayerFall>().FallIntoHole(new Vector3(other.transform.position.x, other.transform.position.y - 5, other.transform.position.z));
+                GetComponent<PlayerFall>().FallIntoHole();
             }
         }
     }
@@ -55,6 +58,14 @@ public class PlayerHealth : MonoBehaviour
         }
 
         UpdateHealthUI();
+        StartCoroutine(TemporaryInvincibility());
+    }
+
+    private IEnumerator TemporaryInvincibility()
+    {
+        PlayerMovement.isInvincible = true;
+        yield return new WaitForSeconds(invincibilityDuration);
+        PlayerMovement.isInvincible = false;
     }
 
     public void Heal(int amount)
