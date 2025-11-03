@@ -4,7 +4,6 @@ using UnityEngine;
 public class Wolf : CollisionRefresh 
 {
     [Header("Condition variables")]
-
     [SerializeField] float minStepbackDistance = 0.5f;
     [SerializeField] float maxStepbackDistance = 3.5f;
     [SerializeField] float launchRange = 4f;

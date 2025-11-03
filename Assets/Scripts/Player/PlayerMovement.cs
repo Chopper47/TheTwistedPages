@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement: MonoBehaviour
@@ -33,7 +31,7 @@ public class PlayerMovement: MonoBehaviour
     [Header("Bullet Time")]
     [SerializeField] private BulletTimeTrigger bulletTimeTrigger;
 
-    [SerializeField] private float bulletTimeSpeed = 15.0f;
+    [SerializeField] private float bulletTimeSpeed;             // 15.0f
     [SerializeField] private float bulletTimeDuration = 1.2f;
 
     public bool canTriggerBulletTime = true;

@@ -4,9 +4,9 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
-    [SerializeField] private int health;
+    private int health;
 
-    public RoomController roomController;
+    [HideInInspector] public RoomController roomController;
 
     private void Start()
     {

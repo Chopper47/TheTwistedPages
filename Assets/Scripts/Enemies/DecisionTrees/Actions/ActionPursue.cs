@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ActionGetCloser : IAction
+public class ActionPursue : IAction
 {
     [SerializeField] ChaseAgent enemy;
 
