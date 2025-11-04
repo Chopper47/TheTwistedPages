@@ -47,6 +47,10 @@ public class PlayerMovement: MonoBehaviour
     [Header("UI")]
     [SerializeField] private Image bulletTimeTimer;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
+
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -115,6 +119,12 @@ public class PlayerMovement: MonoBehaviour
             controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, targetRotation, Time.unscaledDeltaTime * rotationSpeed);
 
             controller.Move(direction * baseMoveSpeed * Time.unscaledDeltaTime);
+            animator.SetBool("isRunning", true);
+
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
     }
 
@@ -126,6 +136,7 @@ public class PlayerMovement: MonoBehaviour
 
         moveAmount = moveAction.ReadValue<Vector2>();
         Vector3 inputDirection = new Vector3(moveAmount.x, 0f, moveAmount.y).normalized;
+        animator.SetBool("isRolling", true);
 
         if (inputDirection.sqrMagnitude > 0.01f)
         {
@@ -148,6 +159,7 @@ public class PlayerMovement: MonoBehaviour
 
         isRolling = false;
         isInvincible = false;
+        animator.SetBool("isRolling", false);
 
         yield return new WaitForSeconds(rollCooldown);
         canRoll = true;
