@@ -21,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
         {
             Trap trap = other.GetComponent<Trap>();
             TakeDamage(trap.GetDamage());
+            trap.AfterActivation();
         }
     }
 

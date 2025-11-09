@@ -26,6 +26,8 @@ public class PlayerHealth : MonoBehaviour
             {
                 Trap trap = other.GetComponent<Trap>();
                 TakeDamage(trap.GetDamage());
+                trap.AfterActivation();
+
             }
         }
 

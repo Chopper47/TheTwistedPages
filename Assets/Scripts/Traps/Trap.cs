@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
@@ -7,5 +9,10 @@ public class Trap : MonoBehaviour
     public int GetDamage()
     {
         return damage;
+    }
+
+    public virtual void AfterActivation()
+    {
+        
     }
 }
