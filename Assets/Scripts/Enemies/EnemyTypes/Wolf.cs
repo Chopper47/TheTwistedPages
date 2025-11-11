@@ -274,6 +274,7 @@ public class Wolf : CollisionRefresh
         if (other.CompareTag("Wall"))
         {
             OnWallHit();
+            Debug.Log("hit");
         }
     }
 }

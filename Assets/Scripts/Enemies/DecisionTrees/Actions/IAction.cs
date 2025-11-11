@@ -7,6 +7,7 @@ public class IAction : MonoBehaviour
     /// </summary>
     public virtual void Act()
     {
+        Debug.Log("null - " + gameObject.name);
         return;
     }
 }
