@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: rollDuration
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 9067992413242925696, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: maxHealth
+      value: 10000000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -350,8 +354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061072d566563844c8cc6d717a71408c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  pauseMenu: {fileID: 0}
 --- !u!114 &1109569721
 MonoBehaviour:
   m_ObjectHideFlags: 0
