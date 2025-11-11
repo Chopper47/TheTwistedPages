@@ -16,11 +16,13 @@ public class DoorController : MonoBehaviour
 
     private Collider doorCollider;
     private RoomTransition roomTransition;
+    public MusicManager music;
 
     private void Awake()
     {
         doorCollider = GetComponent<Collider>();
         roomTransition = FindFirstObjectByType<RoomTransition>();
+        music = GameObject.FindFirstObjectByType<MusicManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,6 +36,7 @@ public class DoorController : MonoBehaviour
     public void OpenDoor()
     {
         doorCollider.isTrigger = true;
+        music.SwitchStageSynced(0);
     }
 
     public void CloseDoor()

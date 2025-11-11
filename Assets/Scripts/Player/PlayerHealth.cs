@@ -12,10 +12,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float invincibilityDuration = 0.5f;
 
     public GameObject gameOverMenu;
-
+    private MusicManager music;
     private void Start()
     {
         currentHealth = maxHealth;
+        music = GameObject.FindFirstObjectByType<MusicManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
         Destroy(gameObject);
         Debug.Log("You died.");
         gameOverMenu.SetActive(true);
+        music.SwitchToNewSongNoSave(2);
     }
 
     public void TakeDamage(int damage)

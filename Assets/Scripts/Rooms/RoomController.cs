@@ -14,7 +14,8 @@ public class RoomController : MonoBehaviour
     private int enemiesRemaining = 0;
     private bool isCleared = false;
     private bool isActive = false;
-
+    private MusicManager musicManager;
+    private int musicIndex=1;
     public GameObject gameWonMenu;
 
     private void Awake()
@@ -29,13 +30,14 @@ public class RoomController : MonoBehaviour
         }
 
         gameWonMenu = GameObject.FindGameObjectWithTag("Game Won Menu");
+        musicManager = GameObject.FindFirstObjectByType<MusicManager>();
     }
 
     public void ActivateRoom()
     {
         PlayerFall player = FindFirstObjectByType<PlayerFall>();
         player.SetRoomRespawn(respawnPoint);
-
+        
         if (isActive || isCleared)
         {
             return;
@@ -55,12 +57,18 @@ public class RoomController : MonoBehaviour
             foreach (DoorController door in doors)
             {
                 door.CloseDoor();
+                if (musicIndex==1)
+                {
+                    musicManager.SwitchStageSynced(musicIndex);
+                    musicIndex = 0;
+                }
             }
         }
         else
         {
             OpenDoors();
             isCleared = true;
+            
         }
     }
 
