@@ -57,11 +57,11 @@ public class RoomController : MonoBehaviour
             foreach (DoorController door in doors)
             {
                 door.CloseDoor();
-                if (musicIndex==1)
-                {
-                    musicManager.SwitchStageSynced(musicIndex);
-                    musicIndex = 0;
-                }
+                //if (musicIndex==1)
+                //{
+                //    musicManager.SwitchStageSynced(musicIndex);
+                //    musicIndex = 0;
+                //}
             }
         }
         else
