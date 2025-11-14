@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 447525233}
   - component: {fileID: 447525234}
   - component: {fileID: 447525235}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wallF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -928,7 +928,7 @@ GameObject:
   - component: {fileID: 497407893}
   - component: {fileID: 497407894}
   - component: {fileID: 497407895}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wallR
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1235,7 +1235,7 @@ GameObject:
   - component: {fileID: 786568588}
   - component: {fileID: 786568589}
   - component: {fileID: 786568590}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wallB
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2287,7 +2287,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 310322255597981864, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1821161597}
   m_SourcePrefab: {fileID: 100100000, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
 --- !u!4 &1535823982 stripped
 Transform:
@@ -2305,7 +2308,7 @@ GameObject:
   - component: {fileID: 1564932175}
   - component: {fileID: 1564932176}
   - component: {fileID: 1564932177}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wallL
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2518,6 +2521,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1821161592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 310322255597981864, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+  m_PrefabInstance: {fileID: 1535823981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1821161597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821161592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63705e262cf0cb943ad478d6b39b91dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenThrows: 20
+  percentageOfThrow: 30
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  throwForce: 45
+  axe: {fileID: 5681774981070429426, guid: a4127f41ae3f6c246a075f1805e43040, type: 3}
 --- !u!1 &1973386910
 GameObject:
   m_ObjectHideFlags: 0
