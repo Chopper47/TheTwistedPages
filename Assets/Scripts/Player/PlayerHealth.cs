@@ -50,8 +50,13 @@ public class PlayerHealth : MonoBehaviour
     {
         Destroy(gameObject);
         Debug.Log("You died.");
-        gameOverMenu.SetActive(true);
-        music.SwitchToNewSongNoSave(2);
+        
+        if (gameOverMenu)
+        {
+            gameOverMenu.SetActive(true);
+        }
+
+        //music.SwitchToNewSongNoSave(2);
     }
 
     public void TakeDamage(int damage)

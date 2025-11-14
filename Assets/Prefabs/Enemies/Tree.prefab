@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd8a26a762af784fbc933967923fdca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  tree: {fileID: 0}
 --- !u!1 &1221432855404039401
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ab771720a55dd4c9a2e056fa68fb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  tree: {fileID: 0}
 --- !u!1 &2397972467026553541
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +582,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594c21212b880ad47963d0c067a6344c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appleGrenadePrefab: {fileID: 8997155561679911745, guid: 1e148d64adde45d40aa6448d3539d4a9, type: 3}
+  appleSpawnPoint: {fileID: 3184585358675095578}
+  totalApples: 3
+  appleThrowForce: 7
+  appleAttackCooldown: 2
+  slamRadius: 4
+  slamDamage: 25
+  slamDelay: 1
 --- !u!114 &959067046221541381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,3 +790,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46692d0a5db7c494686d9459d46eff06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}

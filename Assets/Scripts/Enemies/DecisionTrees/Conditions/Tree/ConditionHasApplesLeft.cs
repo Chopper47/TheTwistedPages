@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class ConditionHasApplesLeft : ICondition
+public class ConditionHasApples : ICondition
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Tree tree;
+
+    private void Awake()
     {
-        
+        if (!tree)
+        {
+            tree = transform.root.GetComponent<Tree>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool Check()
     {
-        
+        return tree.HasApplesLeft();
     }
 }
