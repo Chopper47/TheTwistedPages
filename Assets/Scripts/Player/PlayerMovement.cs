@@ -138,6 +138,9 @@ public class PlayerMovement: MonoBehaviour
         Vector3 inputDirection = new Vector3(moveAmount.x, 0f, moveAmount.y).normalized;
         animator.SetBool("isRolling", true);
 
+        CameraShake.Shake(0.1f, 0.1f, inputDirection);
+        CameraShake.DoDashZoom(-0.5f, 0.5f);
+
         if (inputDirection.sqrMagnitude > 0.01f)
         {
             rollDirection = inputDirection;

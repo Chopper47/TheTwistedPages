@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
             if (!PlayerMovement.IsInvincible())
             {
                 Trap trap = other.GetComponent<Trap>();
+                CameraShake.Shake(0.5f,0.5f);
                 TakeDamage(trap.GetDamage());
                 trap.AfterActivation();
 

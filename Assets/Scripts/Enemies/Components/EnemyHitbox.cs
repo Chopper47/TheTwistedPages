@@ -23,6 +23,7 @@ public class EnemyHitbox : MonoBehaviour
 
         if(player != null && !PlayerMovement.IsInvincible()) 
         {
+            CameraShake.Shake(0.5f, 0.5f);
             player.TakeDamage(dmg);
         }
     }
