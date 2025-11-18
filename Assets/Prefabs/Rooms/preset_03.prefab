@@ -3126,6 +3126,7 @@ GameObject:
   - component: {fileID: 7715387363191872595}
   - component: {fileID: 9021814916898025088}
   - component: {fileID: 8652651190533315455}
+  - component: {fileID: 3965388312138350091}
   m_Layer: 0
   m_Name: room_base
   m_TagString: Untagged
@@ -3233,6 +3234,28 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: d86082745ed7d684c8045012d9dd0cca, type: 2}
   m_BuildHeightMesh: 0
+--- !u!64 &3965388312138350091
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079919446236692018}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -462981019419857548, guid: ba3c77e23d806cc48a3110b654acce2e, type: 3}
 --- !u!1 &7146670129897308821
 GameObject:
   m_ObjectHideFlags: 0

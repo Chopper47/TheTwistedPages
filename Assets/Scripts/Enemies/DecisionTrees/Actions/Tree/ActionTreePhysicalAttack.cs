@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ActionTreePhysicalAttack : IAction
 {
-    private ChaseAgent chaseAgent;
-    private Tree tree;
+    [SerializeField] private ChaseAgent chaseAgent;
+    [SerializeField] private Tree tree;
 
     private void Awake()
     {

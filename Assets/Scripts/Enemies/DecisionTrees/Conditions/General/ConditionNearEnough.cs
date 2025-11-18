@@ -7,7 +7,7 @@ public class ConditionNearEnough : ICondition
 
     public void Awake()
     {
-        if (enemy != null)
+        if (enemy == null)
         {
             enemy = transform.root.GetComponent<ChaseAgent>();
         }

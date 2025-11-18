@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ConditionHasApples : ICondition
 {
-    private Tree tree;
+    [SerializeField] private Tree tree;
 
     private void Awake()
     {
