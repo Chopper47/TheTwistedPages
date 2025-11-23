@@ -104,6 +104,7 @@ public class RoomController : MonoBehaviour
         {
             isCleared = true;
             OpenDoors();
+            if (CurrencyManager.instance) CurrencyManager.instance.AddSingleCoin();
 
             if (roomInstance != null && roomInstance.roomType == RoomType.Boss)
             {

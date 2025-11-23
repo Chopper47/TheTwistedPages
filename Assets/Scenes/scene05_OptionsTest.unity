@@ -3470,6 +3470,8 @@ GameObject:
   - component: {fileID: 1231581144}
   - component: {fileID: 1231581143}
   - component: {fileID: 1231581145}
+  - component: {fileID: 1231581146}
+  - component: {fileID: 1231581147}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3523,6 +3525,41 @@ MonoBehaviour:
   graphicsMenu: {fileID: 1019020612}
   controllerMenu: {fileID: 1355795394}
   keyboardMenu: {fileID: 882540888}
+--- !u!114 &1231581146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231581142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e87b6e76e41414797d048580ef7dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentUpgradeStats: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
+  healthUpgradeLv: 0
+  speedUpgradeLv: 0
+  bulletTimeUpgradeLv: 0
+  pushPowerUpgradeLv: 0
+  costToUpgradeHealth: 5
+  costToUpgradeSpeed: 5
+  costToUpgradeBulletTime: 5
+  costToUpgradePushPower: 5
+  currencyManager: {fileID: 0}
+--- !u!114 &1231581147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231581142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635adede7c67fdf449db4be38a58f455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCurrencyAmount: 0
 --- !u!1 &1265506627
 GameObject:
   m_ObjectHideFlags: 0
