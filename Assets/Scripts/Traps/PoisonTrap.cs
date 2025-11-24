@@ -4,18 +4,17 @@ using UnityEngine;
 public class PoisonTrap : Trap
 {
     public GameObject poisonCloud;
-    public override void AfterActivation()
-    {
 
+    protected override void AfterActivation()
+    {
         poisonCloud.SetActive(true);
         StartCoroutine(DestroyCountdown());
     }
 
-    IEnumerator DestroyCountdown()
+    private IEnumerator DestroyCountdown()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(5f);
-
-        Destroy(this.transform.parent.gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

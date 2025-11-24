@@ -1,18 +1,65 @@
-using System;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    [SerializeField] private int damage;
+    [Header("Damage Settings")]
+    [SerializeField] protected int damage = 1;
+    [SerializeField] protected bool damageOnEnter = true;
+    [SerializeField] protected bool damageOverTime = false;
+    [SerializeField] protected float damageRate = 1.0f;
 
-    public int GetDamage()
+    protected float damageTimer = 0f;
+
+    protected virtual void AfterActivation() 
     {
-        return damage;
+
     }
 
-    public virtual void AfterActivation()
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        
+        if (damageOnEnter)
+        {
+            TryApplyDamage(other);
+        }
+
+        AfterActivation();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!damageOverTime)
+        {
+            return;
+        }
+
+        damageTimer += Time.deltaTime;
+
+        if (damageTimer >= damageRate)
+        {
+            TryApplyDamage(other);
+            damageTimer = 0f;
+        }
+    }
+
+    private void TryApplyDamage(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealth player = other.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                player.TakeDamage(damage);
+            }
+        }
+
+        else if (other.CompareTag("Enemy"))
+        {
+            EnemyHealth enemy = other.GetComponent<EnemyHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+        }
     }
 }

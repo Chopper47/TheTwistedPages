@@ -1,28 +1,16 @@
 using UnityEngine;
 
-public class Axe : MonoBehaviour
+public class Axe : Trap
 {
-    [SerializeField] int damage = 1;
-    Vector3 dir;
+    private Vector3 direction;
 
     private void Update()
     {
-        transform.Translate(dir * Time.deltaTime);
+        transform.Translate(direction * Time.deltaTime);
     }
 
-    public void SetDir(Vector3 newDir)
+    public void SetDir(Vector3 newDirection)
     {
-        dir = newDir;
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-
-        if(playerHealth != null )
-        {
-            playerHealth.TakeDamage(damage);
-        }
+        direction = newDirection;
     }
 }

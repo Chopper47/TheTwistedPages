@@ -15,17 +15,7 @@ public class EnemyHealth : MonoBehaviour
         roomController = GetComponentInParent<RoomController>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Trap") || other.CompareTag("Hole"))
-        {
-            Trap trap = other.GetComponent<Trap>();
-            TakeDamage(trap.GetDamage());
-            trap.AfterActivation();
-        }
-    }
-
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
 

@@ -1,27 +1,29 @@
 using UnityEngine;
 
-public class HiveTrap : MonoBehaviour
+public class HiveTrap : Trap
 {
     [SerializeField] private GameObject beeSwarmPrefab;
-    [SerializeField] private float swarmDuration = 4f;
+    [SerializeField] private float swarmDuration = 5.0f;
 
     private bool triggered = false;
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
+
         if (triggered)
         {
             return;
         }
 
-        if (other.CompareTag("Player"))
-        {
-            GameObject swarm = Instantiate(beeSwarmPrefab, transform.position, Quaternion.identity);
+        GameObject swarm = Instantiate(beeSwarmPrefab, transform.position, Quaternion.identity);
 
-            BeeSwarm beeSwarm = swarm.GetComponent<BeeSwarm>();
-            beeSwarm.Initialize(other.transform, swarmDuration);
+        BeeSwarm beeSwarm = swarm.GetComponent<BeeSwarm>();
+        beeSwarm.Initialize(other.transform, swarmDuration);
 
-            triggered = true;
-        }
+        triggered = true;
     }
 }

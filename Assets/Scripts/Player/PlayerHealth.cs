@@ -16,35 +16,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        music = GameObject.FindFirstObjectByType<MusicManager>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Trap"))
-        {
-            if (!PlayerMovement.IsInvincible())
-            {
-                Trap trap = other.GetComponent<Trap>();
-                CameraShake.Shake(0.5f,0.5f);
-                TakeDamage(trap.GetDamage());
-                trap.AfterActivation();
-
-            }
-        }
-
-        if (other.CompareTag("Hole"))
-        {
-            if (!PlayerMovement.IsInvincible())
-            {
-                PlayerMovement.canMove = false;
-                Trap trap = other.GetComponent<Trap>();
-                
-                TakeDamage(trap.GetDamage());
-
-                GetComponent<PlayerFall>().FallIntoHole();
-            }
-        }
+        music = FindFirstObjectByType<MusicManager>();
     }
 
     private void Die()
