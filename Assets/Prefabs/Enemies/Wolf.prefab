@@ -384,12 +384,20 @@ MonoBehaviour:
   consecutiveStepback: 0
   timeForLaunch: 0.35
   launchDistance: 6.5
-  launchForce: 900
+  launchForce: 1800
   launchCD: 1
+  launchSpeed: 36
+  launchAccelerateTime: 0.025
+  launchConstantTime: 0.219
+  launchDecelerateTime: 0.1
   timeForStepback: 0.2
   stepbackDistance: 6
   stepbackForce: 900
   stepbackCD: 3.5
+  stepbackSpeed: 36
+  stepbackAccelerateTime: 0.092
+  stepbackConstantTime: 0.231
+  stepbackDecelerateTime: 0.021
   stepbackTimeConsecutive: 0.75
   maxConsecutive: 2
   chase: {fileID: 8737206857049744820}

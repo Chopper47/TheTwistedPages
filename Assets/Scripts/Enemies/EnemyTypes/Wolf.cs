@@ -17,9 +17,9 @@ public class Wolf : CollisionRefresh
     [SerializeField] float launchCD = 1.5f;
     //Acceleration and deceleration values
     [SerializeField] float launchSpeed = 36;
-    [SerializeField] float accelerateTime = .125f;
-    [SerializeField] float constantTime = .258f;
-    [SerializeField] float decelerateTime = .05f;
+    [SerializeField] float launchAccelerateTime = .125f;
+    [SerializeField] float launchConstantTime = .258f;
+    [SerializeField] float launchDecelerateTime = .05f;
     bool launch = false;
     bool canLaunch = true;
     bool checkLaunchDistance = false;
@@ -30,6 +30,12 @@ public class Wolf : CollisionRefresh
     [SerializeField] float stepbackDistance = 3.5f;
     [SerializeField] float stepbackForce = 2f;
     [SerializeField] float stepbackCD = 3.5f;
+
+    [SerializeField] float stepbackSpeed = 36;
+    [SerializeField] float stepbackAccelerateTime = .125f;
+    [SerializeField] float stepbackConstantTime = .258f;
+    [SerializeField] float stepbackDecelerateTime = .05f;
+
     [SerializeField] float stepbackTimeConsecutive = 0.75f;
     [SerializeField] int maxConsecutive = 2;
     bool checkConsecutiveStepback = false;
@@ -141,9 +147,39 @@ public class Wolf : CollisionRefresh
 
         checkStepbackDistance = true;
 
-        rb.AddForce(sbDir * stepbackForce);
+        Debug.LogWarning("Accelerate");
 
-        if(!checkConsecutiveStepback)
+        float time = 0;                                                                                   //Acceleration
+
+        while (time < stepbackAccelerateTime)
+        {
+            rb.linearVelocity = Vector3.Lerp(Vector3.zero, sbDir * stepbackSpeed, time / stepbackAccelerateTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        Debug.LogWarning("Constant");
+        time = 0;
+
+        while (time < stepbackConstantTime)                                                                       //Time in constant speed
+        {
+            rb.linearVelocity = sbDir * stepbackSpeed;
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        Debug.LogWarning("Decelerate");
+        time = 0;
+        Vector3 startSpeed = rb.linearVelocity;
+        while (time < stepbackDecelerateTime)                                                                       //Deceleration
+        {
+            rb.linearVelocity = Vector3.Lerp(startSpeed, Vector3.zero, time / stepbackDecelerateTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        //rb.AddForce(sbDir * stepbackForce);
+
+        if (!checkConsecutiveStepback)
         {
             checkConsecutiveStepback = true;
             checkCoroutine = StartCoroutine(StopCheckStepback());
@@ -177,9 +213,9 @@ public class Wolf : CollisionRefresh
 
         float time = 0;                                                                                   //Acceleration
 
-        while (time < accelerateTime)
+        while (time < launchAccelerateTime)
         {
-            rb.linearVelocity = Vector3.Lerp(Vector3.zero, launchDir * launchSpeed, time / accelerateTime);
+            rb.linearVelocity = Vector3.Lerp(Vector3.zero, launchDir * launchSpeed, time / launchAccelerateTime);
             time += Time.deltaTime;
             yield return null;
         }
@@ -187,7 +223,7 @@ public class Wolf : CollisionRefresh
         Debug.LogWarning("Constant");
         time = 0;
 
-        while (time < constantTime)                                                                       //Time in constant speed
+        while (time < launchConstantTime)                                                                       //Time in constant speed
         {
             rb.linearVelocity = launchDir * launchSpeed;
             time += Time.deltaTime;
@@ -197,9 +233,9 @@ public class Wolf : CollisionRefresh
         Debug.LogWarning("Decelerate");
         time = 0;
         Vector3 startSpeed = rb.linearVelocity;
-        while (time < decelerateTime)                                                                       //Deceleration
+        while (time < launchDecelerateTime)                                                                       //Deceleration
         {
-            rb.linearVelocity = Vector3.Lerp(startSpeed, Vector3.zero, time / decelerateTime);
+            rb.linearVelocity = Vector3.Lerp(startSpeed, Vector3.zero, time / launchDecelerateTime);
             time += Time.deltaTime;
             yield return null;
         }
