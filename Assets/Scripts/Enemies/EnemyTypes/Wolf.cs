@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Wolf : CollisionRefresh 
 {
@@ -14,7 +15,11 @@ public class Wolf : CollisionRefresh
     [SerializeField] float launchDistance = 5f;
     [SerializeField] float launchForce = 2f;
     [SerializeField] float launchCD = 1.5f;
-    
+    //Acceleration and deceleration values
+    [SerializeField] float launchSpeed = 36;
+    [SerializeField] float accelerateTime = .125f;
+    [SerializeField] float constantTime = .258f;
+    [SerializeField] float decelerateTime = .05f;
     bool launch = false;
     bool canLaunch = true;
     bool checkLaunchDistance = false;
@@ -61,6 +66,7 @@ public class Wolf : CollisionRefresh
         { 
             if(Vector3.Distance(launchStartingPos, transform.position) >= launchDistance)
             {
+                //UnityEngine.Debug.Log(rb.linearVelocity.magnitude);
                 StopLaunch();
             }
         }
@@ -82,7 +88,7 @@ public class Wolf : CollisionRefresh
         {
             if(checkConsecutiveStepback)
             {
-                Debug.Log("revenge");
+                //UnityEngine.Debug.Log("revenge");
                 StopCoroutine(checkCoroutine);
                 consecutiveStepback = 0;
                 checkConsecutiveStepback = false;
@@ -167,11 +173,44 @@ public class Wolf : CollisionRefresh
         
         checkLaunchDistance = true;
 
-        rb.AddForce(launchDir * launchForce);
+        Debug.LogWarning("Accelerate");
+
+        float time = 0;                                                                                   //Acceleration
+
+        while (time < accelerateTime)
+        {
+            rb.linearVelocity = Vector3.Lerp(Vector3.zero, launchDir * launchSpeed, time / accelerateTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        Debug.LogWarning("Constant");
+        time = 0;
+
+        while (time < constantTime)                                                                       //Time in constant speed
+        {
+            rb.linearVelocity = launchDir * launchSpeed;
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        Debug.LogWarning("Decelerate");
+        time = 0;
+        Vector3 startSpeed = rb.linearVelocity;
+        while (time < decelerateTime)                                                                       //Deceleration
+        {
+            rb.linearVelocity = Vector3.Lerp(startSpeed, Vector3.zero, time / decelerateTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        Debug.LogWarning("Stop launch");
+        //rb.AddForce(launchDir * launchForce);
 
         consecutiveStepback = 0;
 
     }
+
 
     /// <summary>
     /// Cooldown for the launch
@@ -194,9 +233,9 @@ public class Wolf : CollisionRefresh
     /// </summary>
     public void StopLaunch()
     {
+        checkLaunchDistance = false;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        checkLaunchDistance = false;
         SetLaunch(false);
         StartCoroutine(TimeForLaunchReset());
     }
@@ -274,7 +313,7 @@ public class Wolf : CollisionRefresh
         if (other.CompareTag("Wall"))
         {
             OnWallHit();
-            Debug.Log("hit");
+            UnityEngine.Debug.Log("hit");
         }
     }
 }
