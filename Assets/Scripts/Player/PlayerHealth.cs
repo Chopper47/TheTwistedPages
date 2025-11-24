@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
     public GameObject gameOverMenu;
     private MusicManager music;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -34,6 +35,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (PlayerMovement.IsInvincible())
+        {
+            return;
+        }
+
         currentHealth -= damage;
         Debug.Log("Health: " +  currentHealth);
 
