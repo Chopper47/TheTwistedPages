@@ -1,7 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;   // or TMP
+using TMPro;
+using System.Collections.Generic;
 
 public class OptionsMenu : MonoBehaviour
 {
+    public TMP_Dropdown resolutionDropdown;
+    Resolution[] resolutions;
+
     [Header("Sound Menu")]
     public GameObject soundMenu;
 
@@ -13,6 +19,31 @@ public class OptionsMenu : MonoBehaviour
 
     [Header("Keyboard Menu")]
     public GameObject keyboardMenu;
+
+    private void Start()
+    {
+        resolutions = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
+
+        int currentResolutionIndex = 0;
+        List<string> options = new List<string>();
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
+
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
+        }
+
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
     public void OpenSound()
     {
         CloseAllOptionMenus();
@@ -40,5 +71,33 @@ public class OptionsMenu : MonoBehaviour
         graphicsMenu.SetActive(false);
         controllerMenu.SetActive(false);
         keyboardMenu.SetActive(false);
+    }
+    public void SetResolution(int resolutionIndex)
+    {
+        Debug.Log("Setting resolution" + resolutionIndex);
+        Resolution res = resolutions[resolutionIndex];
+        Screen.SetResolution(res.width, res.height, Screen.fullScreenMode);
+    }
+
+    public void SetScreenDisplayMode(int mode)
+    {
+        switch (mode)
+        {
+            case 0:
+                Screen.fullScreenMode = FullScreenMode.Windowed;
+                Debug.Log("windowed");
+                break;
+            case 1:
+                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                Debug.Log("borderless");
+
+                break;
+            case 2:
+                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                Debug.Log("full screen");
+
+                break;
+
+        }
     }
 }
