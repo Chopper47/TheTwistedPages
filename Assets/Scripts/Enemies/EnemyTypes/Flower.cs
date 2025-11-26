@@ -1,13 +1,16 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Flower : MonoBehaviour
 {
     [Header("Burrow variables")]
     [SerializeField] private float maxBurrowedTime = 7f;
+    [SerializeField] private float burrowedUnderVariation = .5f;
     [SerializeField] private int comeoutChance = 10;
-    private bool passedMaxTime = false;
-    private Coroutine timer;
+    private bool checkTime = false;
+    private bool maxTimePassed;
+    private float timer = 0f;
 
     [Header("Non burrow variables")]
     [SerializeField] private GameObject projectile;
@@ -15,7 +18,8 @@ public class Flower : MonoBehaviour
     [SerializeField] private float burrowRange = 2f;
     [SerializeField] private float shootRange = 7f;
     [SerializeField] private int burrowChance = 10;
-
+    private bool onShootingCooldown = false
+        ;
     private bool burrowed = false;
     [Header("References")]
     [SerializeField] ChaseAgent chase;
@@ -28,7 +32,15 @@ public class Flower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(checkTime)
+        {
+            timer += Time.deltaTime;
+
+            if(timer > maxBurrowedTime)
+            {
+                maxTimePassed = true;
+            }
+        }
     }
 
     public bool IsBurrowed()
@@ -44,19 +56,18 @@ public class Flower : MonoBehaviour
 
         if(burrowed)
         {
-            StartCoroutine(BurrowTimer());
+            checkTime = true;
+        }
+        else
+        {
+            checkTime = false;
+            maxTimePassed = false;
         }
     }
     
-    IEnumerator BurrowTimer()
-    {
-        yield return new WaitForSeconds(maxBurrowedTime);
-
-        passedMaxTime = true;
-    }
     public bool TimePassed()
     {
-        return passedMaxTime;
+        return maxTimePassed;
     }
     public bool ChanceBurrow()
     {
@@ -80,18 +91,28 @@ public class Flower : MonoBehaviour
         return false;
     }
 
-    public float ShootRange()
+    public bool InShootRange()
     {
-        return shootRange;
+        return chase.DistanceFromTarget() <= shootRange;
     }
 
-    public float BurrowRange()
+    public bool PlayerTooClose()
     {
-        return burrowRange;
+        return (chase.DistanceFromTarget() <= burrowRange);
     }
 
     public void Shoot()
     {
-        Debug.Log("Shoot");
+        if (!onShootingCooldown)
+        {
+            onShootingCooldown = true;
+            GameObject gO = Instantiate(projectile,transform.position, Quaternion.identity, null);
+            gO.GetComponent<FlowerProjectile>().SetDirection(chase.TargetPosition() - transform.position);
+        }
+    }
+
+    public bool IsUnderPlayer()
+    {
+        return Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(chase.TargetPosition().x, 0f, chase.TargetPosition().z)) <= burrowedUnderVariation ;
     }
 }

@@ -1,3 +1,4 @@
+using System.Data.Common;
 using UnityEngine;
 
 public class ActionBurrow : IAction
@@ -13,6 +14,7 @@ public class ActionBurrow : IAction
     }
     public override void Act()
     {
+        Debug.Log("Burrow - " + transform.parent.name);
         flower.SetBurrow(true);
     }
 }

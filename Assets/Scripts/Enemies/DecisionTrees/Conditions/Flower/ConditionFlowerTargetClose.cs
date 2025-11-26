@@ -5,6 +5,6 @@ public class ConditionFlowerTargetClose : ICondition
     [SerializeField] Flower flower;
     public override bool Check()
     {
-        return true;
+        return flower.PlayerTooClose();
     }
 }

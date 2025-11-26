@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class ConditionFlowerInRange : MonoBehaviour
+public class ConditionFlowerInRange : ICondition
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] Flower flower;
 
-    // Update is called once per frame
-    void Update()
+    public override bool Check()
     {
-        
+        return flower.InShootRange();
     }
 }
