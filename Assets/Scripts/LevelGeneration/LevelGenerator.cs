@@ -149,22 +149,70 @@ public class LevelGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Finds the room that's farthest from the given position.
+    /// Returns the room that is farthest from the origin using BFS (measured in number of room-to-room steps).
     /// </summary>
     /// <param name="origin">The position to measure distance from.</param>
     /// <returns>The grid position of the farthest room.</returns>
     private Vector2Int GetFarthestRoom(Vector2Int origin)
     {
-        Vector2Int farthest = origin;
-        int maxDistance = -1;
+        // Dictionary storing visited rooms and their distance in steps from the origin.
+        Dictionary<Vector2Int, int> distances = new Dictionary<Vector2Int, int>();
 
-        foreach (RoomInstance room in generatedRooms.Values)
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+
+        // Initialize BFS with the origin room.
+        queue.Enqueue(origin);
+        distances.Add(origin, 0);
+
+        // Cardinal directions used to explore the grid neighbours.
+        Vector2Int[] directions = new Vector2Int[] {
+            Vector2Int.up, 
+            Vector2Int.down, 
+            Vector2Int.left, 
+            Vector2Int.right
+        };
+
+        while (queue.Count > 0)
         {
-            int distance = Mathf.Abs(room.gridPosition.x - origin.x) + Mathf.Abs(room.gridPosition.y - origin.y);
+            // Get the next room to process.
+            Vector2Int current = queue.Dequeue();
+
+            // Read its stored BFS distance.
+            int currentDistance = distances[current];
+
+            // Check all four neighbours.
+            for (int i = 0; i < directions.Length; i++)
+            {
+                Vector2Int neighbour = current + directions[i];
+
+                // The neighbour must exist in the generated level.
+                if (!generatedRooms.ContainsKey(neighbour))
+                {
+                    continue;
+                }
+
+                // Only process if this neighbor has not been visited yet.
+                if (!distances.ContainsKey(neighbour))
+                {
+                    int newDistance = currentDistance + 1;
+                    distances.Add(neighbour, newDistance);
+                    queue.Enqueue(neighbour);
+                }
+            }
+        }
+
+        // Find the room with the highest BFS distance.
+        int maxDistance = -1;
+        Vector2Int farthest = origin;
+
+        foreach (Vector2Int position in distances.Keys)
+        {
+            int distance = distances[position];
+
             if (distance > maxDistance)
             {
                 maxDistance = distance;
-                farthest = room.gridPosition;
+                farthest = position;
             }
         }
 

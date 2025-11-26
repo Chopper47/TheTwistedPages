@@ -86,7 +86,10 @@ public class ChaseAgent : MonoBehaviour
     public void Chase()
     {
         states.ChaseState();
-        rb.linearVelocity = Vector3.zero;
+        if(rb)
+        {
+            rb.linearVelocity = Vector3.zero;
+        }
         agent.SetDestination(target.transform.position);
         agent.isStopped = false;
     }
