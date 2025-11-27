@@ -64,6 +64,7 @@ public class Flower : MonoBehaviour
         if(burrowed)
         {
             checkTime = true;
+            timer = 0f;
         }
         else
         {

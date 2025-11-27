@@ -499,8 +499,8 @@ MonoBehaviour:
   timeForComeoutChance: 0.25
   projectile: {fileID: 7638091070474078909, guid: 697def7e610052a4d9cb73b1fc4ce72c, type: 3}
   shootCD: 1.5
-  burrowRange: 2
-  shootRange: 7
+  burrowRange: 3.1
+  shootRange: 14
   burrowChance: 10
   timeForBurrowChance: 0.25
   chase: {fileID: 148950137}
@@ -516,9 +516,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a3db15c2f23974ba5444f93fa591a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 0.25
   target: {fileID: 0}
   agent: {fileID: 148950138}
+  usingNavMesh: 0
+  followPath: 1
+  pointTimeInterval: 0.1
 --- !u!195 &148950138
 NavMeshAgent:
   m_ObjectHideFlags: 0

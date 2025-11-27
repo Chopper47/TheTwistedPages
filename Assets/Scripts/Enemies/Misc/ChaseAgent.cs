@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,6 +7,15 @@ public class ChaseAgent : MonoBehaviour
     public float speed = 1f;
     [SerializeField] Transform target;
     [SerializeField] NavMeshAgent agent;
+
+    [SerializeField] bool usingNavMesh = true;
+
+    [Header("Follow Path variables (Only if not using nav mesh)")]
+    [SerializeField] bool followPath = false;
+    [SerializeField] float pointTimeInterval = 0.2f;
+    bool chase = false;
+    bool following = true; 
+    Vector3 chaseDir;
 
     Rigidbody rb;
     EnemyHealth enemyHealth;
@@ -24,6 +34,11 @@ public class ChaseAgent : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
         states = GetComponent<EnemyState>();
         rb = GetComponent<Rigidbody>();
+
+        if(!usingNavMesh)
+        {
+            chaseDir = new Vector3(target.position.x - transform.position.x, 0, target.position.z - transform.position.z).normalized;
+        }
     }
 
     /// <summary>
@@ -36,6 +51,60 @@ public class ChaseAgent : MonoBehaviour
         if(movement)
         {
             target = other.transform;
+        }
+    }
+
+    private void Update()
+    {
+        if(!usingNavMesh && target != null && chase)
+        {
+            if(!followPath)
+            {
+                transform.Translate(chaseDir * speed * Time.deltaTime);
+                UpdateChaseDirection();
+            }
+            else
+            {
+                if (following)
+                {
+                    Debug.Log("followpath");
+                    following = false;
+                    FollowPath(pointTimeInterval);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Updates the direction in which the enemy follows the player
+    /// </summary>
+    public void UpdateChaseDirection()
+    {
+        chaseDir = new Vector3(target.position.x - transform.position.x, 0, target.position.z - transform.position.z).normalized;
+    }
+
+    public void FollowPath(float timeToPoint)
+    {
+        StartCoroutine(GetToPoint(timeToPoint));
+    }
+    IEnumerator GetToPoint(float maxTime)
+    {
+        if (chase)
+        {
+            float timer = 0f;
+            Vector3 startingPos = transform.position;
+            Vector3 endingPos = target.position;
+            while (timer < maxTime)
+            {
+                transform.position = Vector3.Lerp(startingPos, endingPos, timer/maxTime);
+                timer += Time.deltaTime * speed;
+                yield return null;
+            }
+            StartCoroutine(GetToPoint(maxTime));
+        }
+        else
+        {
+            yield return null;
         }
     }
 
@@ -76,8 +145,17 @@ public class ChaseAgent : MonoBehaviour
     /// </summary>
     public void Stay()
     {
-        states.StayState();
-        agent.SetDestination(transform.position);
+        chase = false;
+        if (followPath)
+        {
+            following = true;
+        }
+
+        if (usingNavMesh)
+        {
+            states.StayState();
+            agent.SetDestination(transform.position);
+        }
     }
 
     /// <summary>
@@ -90,8 +168,13 @@ public class ChaseAgent : MonoBehaviour
         {
             rb.linearVelocity = Vector3.zero;
         }
-        agent.SetDestination(target.transform.position);
-        agent.isStopped = false;
+        chase = true;
+
+        if(usingNavMesh)
+        {
+            agent.SetDestination(target.transform.position);
+            agent.isStopped = false;
+        }
     }
 
     /// <summary>
@@ -100,7 +183,12 @@ public class ChaseAgent : MonoBehaviour
     public void StopChase()
     {
         Stay();
-        agent.isStopped = true;
+        chase = false;
+
+        if(usingNavMesh)
+        {
+           agent.isStopped = true;
+        }
     }
 
     public void SetTarget(Transform newTarget)
