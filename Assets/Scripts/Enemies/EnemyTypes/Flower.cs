@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Flower : MonoBehaviour
@@ -17,10 +16,12 @@ public class Flower : MonoBehaviour
     [Header("Non burrow variables")]
     [SerializeField] private GameObject projectile;
     [SerializeField] private float shootCD = 1.5f;
-    [SerializeField] private float burrowRange = 2f;
     [SerializeField] private float shootRange = 7f;
+    [SerializeField] private float burrowRange = 2f;
+    [SerializeField] private float burrowCD = 3f;
     [SerializeField] private int burrowChance = 10;
     [SerializeField] private float timeForBurrowChance = .25f;
+    private bool canBurrow = true;
     private bool onShootingCooldown = false;
     private bool burrowCheck = false;
 
@@ -28,20 +29,15 @@ public class Flower : MonoBehaviour
     private bool burrowed = false;
     [Header("References")]
     [SerializeField] ChaseAgent chase;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if(checkTime)
+        if (checkTime)
         {
             timer += Time.deltaTime;
 
-            if(timer > maxBurrowedTime)
+            if (timer > maxBurrowedTime)
             {
                 maxTimePassed = true;
             }
@@ -53,26 +49,52 @@ public class Flower : MonoBehaviour
         return burrowed;
     }
 
+    IEnumerator BurrowCD()
+    {
+        yield return new WaitForSeconds(burrowCD);
+
+        canBurrow = true;
+    }
+
+
+    //burrowed - true persigue
+    //burrowed - false dispara
+
     public void SetBurrow(bool newBurrowed)
     {
-        burrowCheck = false;
-        comeoutCheck = false;
-        chase.StopChase();
+        //Debug.LogWarning("Change burrowed to " + newBurrowed);
 
-        burrowed = newBurrowed;
 
-        if(burrowed)
-        {
-            checkTime = true;
-            timer = 0f;
-        }
-        else
-        {
-            checkTime = false;
-            maxTimePassed = false;
-        }
+        //if (newBurrowed==true && !burrowed)
+        //{
+        //    if(canBurrow)
+        //    {
+        //        canBurrow = false;
+        //        StartCoroutine(BurrowCD());
+        //    }
+        //}
+
+        //if (canBurrow)
+        //{
+            burrowCheck = false;
+            comeoutCheck = false;
+            chase.StopChase();
+
+            burrowed = newBurrowed;
+
+            if (burrowed)
+            {
+                checkTime = true;
+                timer = 0f;
+            }
+            else
+            {
+                checkTime = false;
+                maxTimePassed = false;
+            }
+        //}
     }
-    
+
     public bool TimePassed()
     {
         return maxTimePassed;
@@ -83,7 +105,7 @@ public class Flower : MonoBehaviour
     {
         int i = Random.Range(1, 101);
 
-        if(i <= burrowChance)
+        if (i <= burrowChance)
         {
             burrowCheck = true;
         }
@@ -99,7 +121,7 @@ public class Flower : MonoBehaviour
 
     IEnumerator TimerBurrow()
     {
-        yield return new WaitForSeconds(burrowChance);
+        yield return new WaitForSeconds(timeForBurrowChance);
 
         ChanceBurrow();
     }
@@ -160,7 +182,7 @@ public class Flower : MonoBehaviour
         if (!onShootingCooldown)
         {
             onShootingCooldown = true;
-            GameObject gO = Instantiate(projectile,transform.position, Quaternion.identity, null);
+            GameObject gO = Instantiate(projectile, transform.position, Quaternion.identity, null);
             gO.GetComponent<FlowerProjectile>().SetDirection(chase.TargetPosition() - transform.position);
             StartCoroutine(ShootCooldown());
 
@@ -175,6 +197,6 @@ public class Flower : MonoBehaviour
 
     public bool IsUnderPlayer()
     {
-        return Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(chase.TargetPosition().x, 0f, chase.TargetPosition().z)) <= burrowedUnderVariation ;
+        return Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(chase.TargetPosition().x, 0f, chase.TargetPosition().z)) <= burrowedUnderVariation;
     }
 }
