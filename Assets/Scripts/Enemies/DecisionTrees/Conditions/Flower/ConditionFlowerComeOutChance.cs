@@ -7,6 +7,10 @@ public class ConditionFlowerComeOutChance : ICondition
 
     public override bool Check()
     {
-        return flower.ChanceComeOut();
+        if(!flower.CurrentlyChecking())
+        {
+            flower.CallComeout();
+        }
+        return flower.ComeoutCheck();
     }
 }

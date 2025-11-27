@@ -6,6 +6,10 @@ public class ConditionFlowerBurrowChance : ICondition
 
     public override bool Check()
     {
-        return flower.ChanceBurrow();
+        if (!flower.CurrentlyChecking())
+        {
+            flower.CallBurrow();
+        }
+        return flower.BurrowCheck();
     }
 }

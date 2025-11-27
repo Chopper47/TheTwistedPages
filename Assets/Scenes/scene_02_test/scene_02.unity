@@ -236,7 +236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6929122168279413296, guid: c1bdc2e807ab9904790ca3e8ad3d6d73, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -496,11 +496,13 @@ MonoBehaviour:
   maxBurrowedTime: 7
   burrowedUnderVariation: 0.5
   comeoutChance: 10
-  projectile: {fileID: 0}
+  timeForComeoutChance: 0.25
+  projectile: {fileID: 7638091070474078909, guid: 697def7e610052a4d9cb73b1fc4ce72c, type: 3}
   shootCD: 1.5
   burrowRange: 2
   shootRange: 7
   burrowChance: 10
+  timeForBurrowChance: 0.25
   chase: {fileID: 148950137}
 --- !u!114 &148950137
 MonoBehaviour:
@@ -1625,7 +1627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6929122168279413296, guid: c1bdc2e807ab9904790ca3e8ad3d6d73, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2057,7 +2059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &940830443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3198,7 +3200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4383249665566145101, guid: 5674842fd9811224eb1056a851cc86ae, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3968,7 +3970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 239979371719294410, guid: 96a80a5e816bcac4b89866fb3bf0fe7e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6803478278093074636, guid: 96a80a5e816bcac4b89866fb3bf0fe7e, type: 3}
       propertyPath: m_IsTrigger
@@ -4073,7 +4075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4383249665566145101, guid: 5674842fd9811224eb1056a851cc86ae, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4131,6 +4133,10 @@ PrefabInstance:
     - target: {fileID: 8287305156183669737, guid: f9b2c47a6ae88f04696ee8aa2969f660, type: 3}
       propertyPath: m_Name
       value: Beehive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287305156183669737, guid: f9b2c47a6ae88f04696ee8aa2969f660, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4193,6 +4199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome
       objectReference: {fileID: 0}
+    - target: {fileID: 8545676993174904879, guid: 3bc241437c79bdd49862353919386aed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4209,6 +4219,10 @@ PrefabInstance:
     - target: {fileID: 3827740855843393074, guid: 16826ce1de86db947b2d28a056305a67, type: 3}
       propertyPath: m_Name
       value: VineTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827740855843393074, guid: 16826ce1de86db947b2d28a056305a67, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7585447770799434477, guid: 16826ce1de86db947b2d28a056305a67, type: 3}
       propertyPath: m_LocalPosition.x

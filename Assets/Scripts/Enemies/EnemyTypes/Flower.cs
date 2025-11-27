@@ -8,6 +8,8 @@ public class Flower : MonoBehaviour
     [SerializeField] private float maxBurrowedTime = 7f;
     [SerializeField] private float burrowedUnderVariation = .5f;
     [SerializeField] private int comeoutChance = 10;
+    [SerializeField] private float timeForComeoutChance = .25f;
+    private bool comeoutCheck = false;
     private bool checkTime = false;
     private bool maxTimePassed;
     private float timer = 0f;
@@ -18,8 +20,11 @@ public class Flower : MonoBehaviour
     [SerializeField] private float burrowRange = 2f;
     [SerializeField] private float shootRange = 7f;
     [SerializeField] private int burrowChance = 10;
-    private bool onShootingCooldown = false
-        ;
+    [SerializeField] private float timeForBurrowChance = .25f;
+    private bool onShootingCooldown = false;
+    private bool burrowCheck = false;
+
+    private bool checking = false;
     private bool burrowed = false;
     [Header("References")]
     [SerializeField] ChaseAgent chase;
@@ -50,6 +55,8 @@ public class Flower : MonoBehaviour
 
     public void SetBurrow(bool newBurrowed)
     {
+        burrowCheck = false;
+        comeoutCheck = false;
         chase.StopChase();
 
         burrowed = newBurrowed;
@@ -69,26 +76,72 @@ public class Flower : MonoBehaviour
     {
         return maxTimePassed;
     }
-    public bool ChanceBurrow()
+
+    #region BurrowChance
+    public void ChanceBurrow()
     {
         int i = Random.Range(1, 101);
 
         if(i <= burrowChance)
         {
-            return true;
+            burrowCheck = true;
         }
-        return false;
+        burrowCheck = false;
+        checking = false;
     }
 
-    public bool ChanceComeOut()
+    public void CallBurrow()
+    {
+        checking = true;
+        StartCoroutine(TimerBurrow());
+    }
+
+    IEnumerator TimerBurrow()
+    {
+        yield return new WaitForSeconds(burrowChance);
+
+        ChanceBurrow();
+    }
+
+    public bool BurrowCheck()
+    { return burrowCheck; }
+
+    #endregion
+
+    #region ComeoutChance
+    public void CallComeout()
+    {
+        checking = true;
+        StartCoroutine(TimerComeout());
+    }
+
+    IEnumerator TimerComeout()
+    {
+        yield return new WaitForSeconds(timeForComeoutChance);
+
+        ChanceComeOut();
+    }
+
+    public void ChanceComeOut()
     {
         int i = Random.Range(1, 101);
 
         if (i <= comeoutChance)
         {
-            return true;
+            comeoutCheck = true;
         }
-        return false;
+        comeoutCheck = false;
+        checking = false;
+    }
+
+    public bool ComeoutCheck()
+    { return comeoutCheck; }
+
+    #endregion
+
+    public bool CurrentlyChecking()
+    {
+        return checking;
     }
 
     public bool InShootRange()
@@ -108,7 +161,15 @@ public class Flower : MonoBehaviour
             onShootingCooldown = true;
             GameObject gO = Instantiate(projectile,transform.position, Quaternion.identity, null);
             gO.GetComponent<FlowerProjectile>().SetDirection(chase.TargetPosition() - transform.position);
+            StartCoroutine(ShootCooldown());
+
         }
+    }
+
+    IEnumerator ShootCooldown()
+    {
+        yield return new WaitForSeconds(shootCD);
+        onShootingCooldown = false;
     }
 
     public bool IsUnderPlayer()
