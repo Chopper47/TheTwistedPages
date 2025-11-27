@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class LevelGenerator : MonoBehaviour
         Stack<Vector2Int> roomStack = new Stack<Vector2Int>();
 
         // Create starting room.
-        RoomPreset startingRoomPreset = GetRandomRoomPreset(RoomType.Start);
+        RoomPreset startingRoomPreset = GetRandomRoomPreset(RoomType.Start, startingPosition);
         RoomInstance startingRoom = new RoomInstance(startingPosition, RoomType.Start, startingRoomPreset);
         generatedRooms.Add(startingPosition, startingRoom);
         roomStack.Push(startingPosition);
@@ -44,7 +45,7 @@ public class LevelGenerator : MonoBehaviour
             if (unvisitedNeighbors.Count > 0)
             {
                 Vector2Int nextPosition = unvisitedNeighbors[Random.Range(0, unvisitedNeighbors.Count)];
-                RoomPreset nextRoomPreset = GetRandomRoomPreset(RoomType.Normal);
+                RoomPreset nextRoomPreset = GetRandomRoomPreset(RoomType.Normal, nextPosition);
                 RoomInstance nextRoom = new RoomInstance(nextPosition, RoomType.Normal, nextRoomPreset);
 
                 generatedRooms.Add(nextPosition, nextRoom);
@@ -60,7 +61,7 @@ public class LevelGenerator : MonoBehaviour
         Vector2Int bossRoomPosition = GetFarthestRoom(startingPosition);
         RoomInstance bossRoom = generatedRooms[bossRoomPosition];
         bossRoom.roomType = RoomType.Boss;
-        bossRoom.roomPreset = GetRandomRoomPreset(RoomType.Boss);
+        bossRoom.roomPreset = GetRandomRoomPreset(RoomType.Boss, bossRoomPosition);
 
         // Assign the Health and Shop rooms.
         AssignSpecialRooms();
@@ -165,7 +166,8 @@ public class LevelGenerator : MonoBehaviour
         distances.Add(origin, 0);
 
         // Cardinal directions used to explore the grid neighbours.
-        Vector2Int[] directions = new Vector2Int[] {
+        Vector2Int[] directions = new Vector2Int[] 
+        {
             Vector2Int.up, 
             Vector2Int.down, 
             Vector2Int.left, 
@@ -239,7 +241,7 @@ public class LevelGenerator : MonoBehaviour
             // Shop room.
             RoomInstance shopRoom = normalRooms[Random.Range(0, normalRooms.Count)];
             shopRoom.roomType = RoomType.Shop;
-            shopRoom.roomPreset = GetRandomRoomPreset(RoomType.Shop);
+            shopRoom.roomPreset = GetRandomRoomPreset(RoomType.Shop, shopRoom.gridPosition);
 
             // Health room.
             RoomInstance healthRoom;
@@ -249,7 +251,7 @@ public class LevelGenerator : MonoBehaviour
             } while (healthRoom == shopRoom);
 
             healthRoom.roomType = RoomType.Health;
-            healthRoom.roomPreset = GetRandomRoomPreset(RoomType.Health);
+            healthRoom.roomPreset = GetRandomRoomPreset(RoomType.Health, healthRoom.gridPosition);
         }
     }
 
@@ -281,8 +283,9 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     /// <param name="roomType">The type of room to select a preset for (Start, Health, Shop, Boss or Normal).</param>
     /// <returns>A randomly selected preset that matches the given room type.</returns>
-    private RoomPreset GetRandomRoomPreset(RoomType roomType)
+    private RoomPreset GetRandomRoomPreset(RoomType roomType, Vector2Int position)
     {
+        // Collect all presets that match the requested room type.
         List<RoomPreset> validPresets = new List<RoomPreset>();
 
         foreach (RoomPreset preset in roomPresets)
@@ -311,9 +314,65 @@ public class LevelGenerator : MonoBehaviour
 
         if (validPresets.Count == 0)
         {
-            validPresets.Add(roomPresets[0]);       // Fallback in case no matching presets are found.
+            Debug.LogWarning($"No valid presets were found for type {roomType}.");
+            return roomPresets[Random.Range(0, roomPresets.Length)];            // Fallback in case no matching presets are found.
         }
 
-        return validPresets[Random.Range(0, validPresets.Count)];
+        //Collect presets used by neighbouring rooms.
+        Vector2Int[] directions = new Vector2Int[] 
+        {
+            Vector2Int.up,
+            Vector2Int.down,
+            Vector2Int.left,
+            Vector2Int.right
+        };
+
+        List<RoomPreset> neighbourPresets = new List<RoomPreset>();
+
+        for (int i = 0; i < directions.Length; i++)
+        {
+            Vector2Int neighbourPosition = position + directions[i];
+
+            // If a room already exists at this neighbour, save its preset.
+            if (generatedRooms.ContainsKey(neighbourPosition))
+            {
+                neighbourPresets.Add(generatedRooms[neighbourPosition].roomPreset);
+            }
+        }
+
+        // Filter out presets that match any neighbouring preset.
+        List<RoomPreset> filteredPresets = new List<RoomPreset>();
+
+        for (int i = 0; i < validPresets.Count; i++)
+        {
+            RoomPreset candidate = validPresets[i];
+            bool matchesNeighbour = false;
+
+            for (int j = 0; j < neighbourPresets.Count; j++)
+            {
+                if (candidate == neighbourPresets[j])
+                {
+                    matchesNeighbour = true;
+                    break;
+                }
+            }
+
+            // Keep only presets that are not equal to any neighbour.
+            if (!matchesNeighbour)
+            {
+                filteredPresets.Add(candidate);
+            }
+        }
+
+        // Fallback to all valid presets in case all presets were filtered out.
+        if (filteredPresets.Count == 0)
+        {
+            Debug.LogWarning("Filtered presets is empty.");
+            filteredPresets = validPresets;
+        }
+
+        // Return a random preset from the final list of filtered presets.
+        int randomIndex = Random.Range(0, filteredPresets.Count);
+        return filteredPresets[randomIndex];
     }
 }
