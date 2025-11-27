@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 19298762}
   - component: {fileID: 19298763}
+  - component: {fileID: 19298764}
   m_Layer: 0
   m_Name: No, is targetOnRange?
   m_TagString: Untagged
@@ -165,9 +166,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 0}
-  falseNode: {fileID: 0}
-  trueNode: {fileID: 0}
+  condition: {fileID: 19298764}
+  falseNode: {fileID: 720019556}
+  trueNode: {fileID: 877183311}
+--- !u!114 &19298764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19298761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e36ac1a8cbc35b47b0b83b8d454a85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flower: {fileID: 148950135}
 --- !u!1001 &30536634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -480,13 +494,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBurrowedTime: 7
+  burrowedUnderVariation: 0.5
   comeoutChance: 10
   projectile: {fileID: 0}
   shootCD: 1.5
   burrowRange: 2
   shootRange: 7
   burrowChance: 10
-  chase: {fileID: 0}
+  chase: {fileID: 148950137}
 --- !u!114 &148950137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,9 +528,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 60
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 10000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -669,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890bd134e875e7f43a8ce06bdcf2d4e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  node: {fileID: 0}
+  node: {fileID: 2057027412}
 --- !u!1 &194151001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,6 +1988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 877183310}
   - component: {fileID: 877183311}
+  - component: {fileID: 877183312}
   m_Layer: 0
   m_Name: Yes, is it too close?
   m_TagString: Untagged
@@ -2009,9 +2025,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 0}
-  falseNode: {fileID: 0}
-  trueNode: {fileID: 0}
+  condition: {fileID: 877183312}
+  falseNode: {fileID: 1048398974}
+  trueNode: {fileID: 1097538173}
+--- !u!114 &877183312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877183309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0e655e8ea34094294efa71a807a61e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flower: {fileID: 148950135}
 --- !u!1 &940830442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,6 +2318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1048398973}
   - component: {fileID: 1048398974}
+  - component: {fileID: 1048398975}
   m_Layer: 0
   m_Name: No, Random Chance
   m_TagString: Untagged
@@ -2325,9 +2355,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 0}
-  falseNode: {fileID: 0}
-  trueNode: {fileID: 0}
+  condition: {fileID: 1048398975}
+  falseNode: {fileID: 37682466}
+  trueNode: {fileID: 812692859}
+--- !u!114 &1048398975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048398972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878b398f40f228547bfde12077137b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flower: {fileID: 148950135}
 --- !u!1 &1048400221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,6 +2381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1048400222}
   - component: {fileID: 1048400223}
+  - component: {fileID: 1048400224}
   m_Layer: 0
   m_Name: No, Random chance
   m_TagString: Untagged
@@ -2374,9 +2418,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 0}
-  falseNode: {fileID: 0}
-  trueNode: {fileID: 0}
+  condition: {fileID: 1048400224}
+  falseNode: {fileID: 1288549155}
+  trueNode: {fileID: 1433193280}
+--- !u!114 &1048400224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048400221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79745d144c1c214a8359c55760f3ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flower: {fileID: 148950135}
 --- !u!1 &1067555040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,6 +2444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1067555041}
   - component: {fileID: 1067555042}
+  - component: {fileID: 1067555043}
   m_Layer: 0
   m_Name: No, is time burrowed exceeded
   m_TagString: Untagged
@@ -2423,9 +2481,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 0}
-  falseNode: {fileID: 0}
-  trueNode: {fileID: 0}
+  condition: {fileID: 1067555043}
+  falseNode: {fileID: 1048400223}
+  trueNode: {fileID: 212311917}
+--- !u!114 &1067555043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067555040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537e32ad047768f43863af001afaf94d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flower: {fileID: 148950135}
 --- !u!1 &1097538170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,6 +2928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1249326522}
   - component: {fileID: 1249326523}
+  - component: {fileID: 1249326524}
   m_Layer: 0
   m_Name: Yes, is under target?
   m_TagString: Untagged
@@ -2893,9 +2965,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 0}
+  condition: {fileID: 1249326524}
   falseNode: {fileID: 1067555042}
   trueNode: {fileID: 517236874}
+--- !u!114 &1249326524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249326521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b5febb7f504e342b25492e8b30839d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flower: {fileID: 148950135}
 --- !u!1 &1250403545
 GameObject:
   m_ObjectHideFlags: 0
@@ -3680,6 +3765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2057027411}
   - component: {fileID: 2057027412}
+  - component: {fileID: 2057027413}
   m_Layer: 0
   m_Name: IsBorrowed?
   m_TagString: Untagged
@@ -3716,9 +3802,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 0}
+  condition: {fileID: 2057027413}
   falseNode: {fileID: 19298763}
   trueNode: {fileID: 1249326523}
+--- !u!114 &2057027413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057027410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3b8171621f042478d59f17eaae5eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flower: {fileID: 148950135}
 --- !u!1 &2102814018
 GameObject:
   m_ObjectHideFlags: 0
