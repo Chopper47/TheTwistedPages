@@ -189,10 +189,16 @@ public class Flower : MonoBehaviour
         if (!onShootingCooldown)
         {
             onShootingCooldown = true;
-            GameObject gO = Instantiate(projectile, transform.position, Quaternion.identity, null);
-            gO.GetComponent<FlowerProjectile>().SetDirection(chase.TargetPosition() - transform.position);
-            StartCoroutine(ShootCooldown());
+            Vector3 straightDir = chase.TargetPosition() - transform.position;
 
+            GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+            GameObject leftBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+            GameObject rightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+
+            straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
+            leftBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(-30, Vector3.up) * straightDir);
+            rightBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(30, Vector3.up) * straightDir);
+            StartCoroutine(ShootCooldown());
         }
     }
 
