@@ -9,6 +9,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Vector3 roomWorldSize = new Vector3(20f, 0f, 20f);
     [SerializeField] private int maxRooms = 12;
     private Vector2Int startingPosition;
+    private Stack<Vector2Int> roomStack;
 
     [Header("Room Templates")]
     [SerializeField] private RoomPreset[] roomPresets;
@@ -29,7 +30,7 @@ public class LevelGenerator : MonoBehaviour
         generatedRooms.Clear();
 
         startingPosition = new Vector2Int(gridDimensions.x / 2, gridDimensions.y / 2);
-        Stack<Vector2Int> roomStack = new Stack<Vector2Int>();
+        roomStack = new Stack<Vector2Int>();
 
         // Create starting room.
         RoomPreset startingRoomPreset = GetRandomRoomPreset(RoomType.Start, startingPosition);
@@ -248,9 +249,9 @@ public class LevelGenerator : MonoBehaviour
         }
 
         // Shop room.
-        RoomInstance shopRoom = normalRooms[Random.Range(0, normalRooms.Count)];
-        shopRoom.roomType = RoomType.Shop;
-        shopRoom.roomPreset = GetRandomRoomPreset(RoomType.Shop, shopRoom.gridPosition);
+        //RoomInstance shopRoom = normalRooms[Random.Range(0, normalRooms.Count)];
+        //shopRoom.roomType = RoomType.Shop;
+        //shopRoom.roomPreset = GetRandomRoomPreset(RoomType.Shop, shopRoom.gridPosition);
 
         // Health room (cannot be generated at a distance less than three depthwise from the starting room).
         Dictionary<Vector2Int, int> distances = BFS(startingPosition);
@@ -259,10 +260,10 @@ public class LevelGenerator : MonoBehaviour
 
         foreach (RoomInstance room in normalRooms)
         {
-            if (room == shopRoom)
-            {
-                continue;
-            }
+            //if (room == shopRoom)
+            //{
+            //    continue;
+            //}
 
             if (distances.ContainsKey(room.gridPosition) && distances[room.gridPosition] >= 3)
             {
@@ -325,10 +326,10 @@ public class LevelGenerator : MonoBehaviour
             {
                 validPresets.Add(preset);
             }
-            else if (roomType == RoomType.Shop && preset.canBeShop)
-            {
-                validPresets.Add(preset);
-            }
+            //else if (roomType == RoomType.Shop && preset.canBeShop)
+            //{
+            //    validPresets.Add(preset);
+            //}
             else if (roomType == RoomType.Health && preset.canBeHealth)
             {
                 validPresets.Add(preset);
@@ -345,7 +346,7 @@ public class LevelGenerator : MonoBehaviour
             return roomPresets[Random.Range(0, roomPresets.Length)];            // Fallback in case no matching presets are found.
         }
 
-        //Collect presets used by neighbouring rooms.
+        // Collect presets used by neighbouring rooms.
         Vector2Int[] directions = new Vector2Int[] 
         {
             Vector2Int.up,
@@ -398,8 +399,39 @@ public class LevelGenerator : MonoBehaviour
             filteredPresets = validPresets;
         }
 
+        List<RoomPreset> difficultyFilteredPresets = new List<RoomPreset>();
+
+        if (roomStack != null && roomStack.Count >= 2)
+        {
+            Vector2Int[] stackArray = roomStack.ToArray();
+
+            Vector2Int last = stackArray[0];                // Top of the stack.
+            Vector2Int secondToLast = stackArray[1];        // Second from the top.
+
+            int lastDifficulty = generatedRooms[last].roomPreset.difficultyRating;
+            int secondDifficulty = generatedRooms[secondToLast].roomPreset.difficultyRating;
+
+            if (lastDifficulty == secondDifficulty)
+            {
+                int forbidden = lastDifficulty;
+
+                foreach (RoomPreset candidate in filteredPresets)
+                {
+                    if (candidate.difficultyRating != forbidden)
+                    {
+                        difficultyFilteredPresets.Add(candidate);
+                    }
+                }
+            }
+        }
+
+        if (difficultyFilteredPresets.Count == 0)
+        {
+            difficultyFilteredPresets = filteredPresets;
+        }
+
         // Return a random preset from the final list of filtered presets.
-        int randomIndex = Random.Range(0, filteredPresets.Count);
-        return filteredPresets[randomIndex];
+        int randomIndex = Random.Range(0, difficultyFilteredPresets.Count);
+        return difficultyFilteredPresets[randomIndex];
     }
 }
