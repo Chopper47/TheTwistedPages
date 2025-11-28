@@ -8,6 +8,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Vector2Int gridDimensions = new Vector2Int(9, 9);
     [SerializeField] private Vector3 roomWorldSize = new Vector3(20f, 0f, 20f);
     [SerializeField] private int maxRooms = 12;
+    private Vector2Int startingPosition;
 
     [Header("Room Templates")]
     [SerializeField] private RoomPreset[] roomPresets;
@@ -27,7 +28,7 @@ public class LevelGenerator : MonoBehaviour
     {
         generatedRooms.Clear();
 
-        Vector2Int startingPosition = new Vector2Int(gridDimensions.x / 2, gridDimensions.y / 2);
+        startingPosition = new Vector2Int(gridDimensions.x / 2, gridDimensions.y / 2);
         Stack<Vector2Int> roomStack = new Stack<Vector2Int>();
 
         // Create starting room.
@@ -113,6 +114,58 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    private Dictionary<Vector2Int, int> BFS(Vector2Int origin)
+    {
+        // Dictionary storing visited rooms and their distance in steps from the origin.
+        Dictionary<Vector2Int, int> distances = new Dictionary<Vector2Int, int>();
+        
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+
+        // Initialize BFS with the origin room.
+        distances[origin] = 0;
+        queue.Enqueue(origin);
+
+        // Cardinal directions used to explore the grid neighbours.
+        Vector2Int[] directions = new Vector2Int[]
+        { 
+            Vector2Int.up, 
+            Vector2Int.down, 
+            Vector2Int.left, 
+            Vector2Int.right 
+        };
+
+        while (queue.Count > 0)
+        {
+            // Get the next room to process.
+            Vector2Int current = queue.Dequeue();
+
+            // Read its stored BFS distance.
+            int currentDistance = distances[current];
+
+            // Check all four neighbours.
+            for (int i = 0; i < directions.Length; i++)
+            {
+                Vector2Int neighbour = current + directions[i];
+
+                // The neighbour must exist in the generated level.
+                if (!generatedRooms.ContainsKey(neighbour))
+                {
+                    continue;
+                }
+
+                // The neighbour must not have been visited yet.
+                if (distances.ContainsKey(neighbour))
+                {
+                    continue;
+                }
+
+                distances[neighbour] = currentDistance + 1;
+                queue.Enqueue(neighbour);
+            }
+        }
+        return distances;
+    }
+
     /// <summary>
     /// Returns a list of all unvisited neighbours (grid positions) of a room.
     /// </summary>
@@ -156,54 +209,7 @@ public class LevelGenerator : MonoBehaviour
     /// <returns>The grid position of the farthest room.</returns>
     private Vector2Int GetFarthestRoom(Vector2Int origin)
     {
-        // Dictionary storing visited rooms and their distance in steps from the origin.
-        Dictionary<Vector2Int, int> distances = new Dictionary<Vector2Int, int>();
-
-        Queue<Vector2Int> queue = new Queue<Vector2Int>();
-
-        // Initialize BFS with the origin room.
-        queue.Enqueue(origin);
-        distances.Add(origin, 0);
-
-        // Cardinal directions used to explore the grid neighbours.
-        Vector2Int[] directions = new Vector2Int[] 
-        {
-            Vector2Int.up, 
-            Vector2Int.down, 
-            Vector2Int.left, 
-            Vector2Int.right
-        };
-
-        while (queue.Count > 0)
-        {
-            // Get the next room to process.
-            Vector2Int current = queue.Dequeue();
-
-            // Read its stored BFS distance.
-            int currentDistance = distances[current];
-
-            // Check all four neighbours.
-            for (int i = 0; i < directions.Length; i++)
-            {
-                Vector2Int neighbour = current + directions[i];
-
-                // The neighbour must exist in the generated level.
-                if (!generatedRooms.ContainsKey(neighbour))
-                {
-                    continue;
-                }
-
-                // Only process if this neighbor has not been visited yet.
-                if (!distances.ContainsKey(neighbour))
-                {
-                    int newDistance = currentDistance + 1;
-                    distances.Add(neighbour, newDistance);
-                    queue.Enqueue(neighbour);
-                }
-            }
-        }
-
-        // Find the room with the highest BFS distance.
+        Dictionary<Vector2Int, int> distances = BFS(origin);
         int maxDistance = -1;
         Vector2Int farthest = origin;
 
@@ -236,24 +242,45 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        if (normalRooms.Count > 2)
+        if (normalRooms.Count <= 2)
         {
-            // Shop room.
-            RoomInstance shopRoom = normalRooms[Random.Range(0, normalRooms.Count)];
-            shopRoom.roomType = RoomType.Shop;
-            shopRoom.roomPreset = GetRandomRoomPreset(RoomType.Shop, shopRoom.gridPosition);
-
-            // Health room.
-            RoomInstance healthRoom;
-            do
-            {
-                healthRoom = normalRooms[Random.Range(0, normalRooms.Count)];
-            } while (healthRoom == shopRoom);
-
-            healthRoom.roomType = RoomType.Health;
-            healthRoom.roomPreset = GetRandomRoomPreset(RoomType.Health, healthRoom.gridPosition);
+            return;
         }
+
+        // Shop room.
+        RoomInstance shopRoom = normalRooms[Random.Range(0, normalRooms.Count)];
+        shopRoom.roomType = RoomType.Shop;
+        shopRoom.roomPreset = GetRandomRoomPreset(RoomType.Shop, shopRoom.gridPosition);
+
+        // Health room (cannot be generated at a distance less than three depthwise from the starting room).
+        Dictionary<Vector2Int, int> distances = BFS(startingPosition);
+
+        List<RoomInstance> healthCandidates = new List<RoomInstance>();
+
+        foreach (RoomInstance room in normalRooms)
+        {
+            if (room == shopRoom)
+            {
+                continue;
+            }
+
+            if (distances.ContainsKey(room.gridPosition) && distances[room.gridPosition] >= 3)
+            {
+                healthCandidates.Add(room);
+            }
+        }
+
+        // Fallback in case there are not at least three depth levels in the generated grid.
+        if (healthCandidates.Count == 0)
+        {
+            healthCandidates.AddRange(normalRooms);
+        }
+
+        RoomInstance healthRoom = healthCandidates[Random.Range(0, healthCandidates.Count)];
+        healthRoom.roomType = RoomType.Health;
+        healthRoom.roomPreset = GetRandomRoomPreset(RoomType.Health, healthRoom.gridPosition);
     }
+
 
     /// <summary>
     /// Instantiates a room in the 3D world at its designed grid position.
