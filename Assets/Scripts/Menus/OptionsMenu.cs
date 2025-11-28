@@ -100,4 +100,8 @@ public class OptionsMenu : MonoBehaviour
 
         }
     }
+    public void ChangeVolumeSliderValue(float volume)
+    {
+        MusicManager.instance.SetVolumeOfStagers(volume);
+    }
 }

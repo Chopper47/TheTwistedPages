@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
@@ -10,9 +11,14 @@ public class MusicManager : MonoBehaviour
     [Header("Configuración")]
     public int currentStage = 0;
     public float fadeTime = 1f;
-
+    public float volume;
+    public static MusicManager instance;
     private Stack<int> stageHistory = new Stack<int>();
 
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         if (stages.Count == 0)
@@ -21,7 +27,7 @@ public class MusicManager : MonoBehaviour
             return;
         }
 
-        stages[currentStage].Play(0f);
+        instance.stages[currentStage].Play(0f, volume);
     }
 
     // --- CAMBIO SINCRONIZADO (misma canción, diferente variación) ---
@@ -93,13 +99,13 @@ public class MusicManager : MonoBehaviour
         {
             timer += Time.deltaTime;
             float t = timer / fadeTime;
-            from.SetVolume(Mathf.Lerp(1f, 0f, t));
-            to.SetVolume(Mathf.Lerp(0f, 1f, t));
+            from.SetVolume(Mathf.Lerp(1f * volume, 0f, t));
+            to.SetVolume(Mathf.Lerp(0f, 1f * volume, t));
             yield return null;
         }
         from.SetVolume(0f);
         from.Stop();
-        to.SetVolume(1f);
+        to.SetVolume(1f * volume);
     }
 
     private IEnumerator FadeOutIn(Stager from, Stager to)
@@ -110,23 +116,31 @@ public class MusicManager : MonoBehaviour
         {
             timer += Time.deltaTime;
             float t = timer / fadeTime;
-            from.SetVolume(Mathf.Lerp(1f, 0f, t));
+            from.SetVolume(Mathf.Lerp(1f * volume, 0f, t));
             yield return null;
         }
         from.Stop();
 
         // Fade in la nueva
-        to.Play(0f);
-        to.SetVolume(0f);
+        to.Play(0f, volume);
+        to.SetVolume(volume);
 
         timer = 0f;
         while (timer < fadeTime)
         {
             timer += Time.deltaTime;
             float t = timer / fadeTime;
-            to.SetVolume(Mathf.Lerp(0f, 1f, t));
+            to.SetVolume(Mathf.Lerp(0f, 1f * volume, t));
             yield return null;
         }
-        to.SetVolume(1f);
+        to.SetVolume(1f * volume);
+    }
+
+    public void SetVolumeOfStagers(float volume)
+    {
+        foreach(Stager stage in stages)
+        {
+            stage.SetVolume(volume);
+        }
     }
 }
