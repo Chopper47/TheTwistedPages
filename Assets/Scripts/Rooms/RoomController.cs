@@ -18,6 +18,11 @@ public class RoomController : MonoBehaviour
     private int musicIndex=1;
     public GameObject gameWonMenu;
 
+    [Header("Waves")]
+    private int totalWaves;
+    private int currentWave;
+    private bool wavesStarted = false;
+
     private void Awake()
     {
         foreach (DoorController door in GetComponentsInChildren<DoorController>())
@@ -45,9 +50,13 @@ public class RoomController : MonoBehaviour
 
         isActive = true;
 
+        totalWaves = roomPreset.difficultyRating;
+        currentWave = 0;
+        wavesStarted = true;
+
         if (roomInstance.roomType != RoomType.Start && roomPreset.enemyPrefabs != null && roomPreset.enemyPrefabs.Length > 0)
         {
-            SpawnEnemies();
+            StartNextWave();
         }
 
         enemiesRemaining = GetComponentsInChildren<EnemyHealth>().Length;
@@ -68,7 +77,27 @@ public class RoomController : MonoBehaviour
         {
             OpenDoors();
             isCleared = true;
-            
+        }
+    }
+
+    private void StartNextWave()
+    {
+        currentWave++;
+
+        if (currentWave == 1)
+        {
+            foreach (DoorController door in doors)
+            {
+                door.CloseDoor();
+            }
+        }
+
+        SpawnEnemies();
+        enemiesRemaining = GetComponentsInChildren<EnemyHealth>().Length;
+
+        if (enemiesRemaining == 0)
+        {
+            CompleteWave();
         }
     }
 
@@ -103,13 +132,34 @@ public class RoomController : MonoBehaviour
         if (enemiesRemaining <= 0)
         {
             isCleared = true;
-            OpenDoors();
-            if (CurrencyManager.instance) CurrencyManager.instance.AddSingleCoin();
+            CompleteWave();
 
             if (roomInstance != null && roomInstance.roomType == RoomType.Boss)
             {
                 OnBossRoomCleared();
             }
+        }
+    }
+
+    private void CompleteWave()
+    {
+        if (currentWave < totalWaves)
+        {
+            StartNextWave();
+            return;
+        }
+
+        isCleared = true;
+        OpenDoors();
+
+        if (CurrencyManager.instance)
+        {
+            CurrencyManager.instance.AddCurrency(roomPreset.difficultyRating);
+        }
+
+        if (roomInstance.roomType == RoomType.Boss)
+        {
+            OnBossRoomCleared();
         }
     }
 
