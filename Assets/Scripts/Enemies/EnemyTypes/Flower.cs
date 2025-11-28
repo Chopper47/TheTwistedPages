@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class Flower : MonoBehaviour
@@ -21,12 +22,13 @@ public class Flower : MonoBehaviour
     [SerializeField] private float burrowCD = 3f;
     [SerializeField] private int burrowChance = 10;
     [SerializeField] private float timeForBurrowChance = .25f;
-    private bool canBurrow = true;
+    private bool burrowOnCooldown = false;
     private bool onShootingCooldown = false;
     private bool burrowCheck = false;
 
     private bool checking = false;
     private bool burrowed = false;
+    private bool changeCooldown = false;
     [Header("References")]
     [SerializeField] ChaseAgent chase;
 
@@ -44,43 +46,47 @@ public class Flower : MonoBehaviour
         }
     }
 
+    public bool IsBurrowInCooldown()
+    {
+        return burrowOnCooldown;
+    }
+
     public bool IsBurrowed()
     {
         return burrowed;
+    }
+
+    public void StartBurrowCooldown()
+    {
+        burrowOnCooldown = true;
+        StartCoroutine(BurrowCD());
     }
 
     IEnumerator BurrowCD()
     {
         yield return new WaitForSeconds(burrowCD);
 
-        canBurrow = true;
+        burrowOnCooldown = false;
     }
 
-
-    //burrowed - true persigue
-    //burrowed - false dispara
+    IEnumerator ChangeCooldown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        changeCooldown = false;
+    }
 
     public void SetBurrow(bool newBurrowed)
     {
-        //Debug.LogWarning("Change burrowed to " + newBurrowed);
-
-
-        //if (newBurrowed==true && !burrowed)
-        //{
-        //    if(canBurrow)
-        //    {
-        //        canBurrow = false;
-        //        StartCoroutine(BurrowCD());
-        //    }
-        //}
-
-        //if (canBurrow)
-        //{
+        if(!changeCooldown)
+        {
+            changeCooldown = true;
+            Debug.LogWarning("Trying to set burrowed to " + newBurrowed);
             burrowCheck = false;
             comeoutCheck = false;
             chase.StopChase();
 
             burrowed = newBurrowed;
+            Debug.LogWarning("Actually set burrowed to " + burrowed);
 
             if (burrowed)
             {
@@ -92,7 +98,8 @@ public class Flower : MonoBehaviour
                 checkTime = false;
                 maxTimePassed = false;
             }
-        //}
+            StartCoroutine(ChangeCooldown());
+        }
     }
 
     public bool TimePassed()

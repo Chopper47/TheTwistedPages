@@ -14,7 +14,7 @@ public class ActionBurrow : IAction
     }
     public override void Act()
     {
-        Debug.Log("Burrow - " + transform.parent.name);
+        Debug.LogWarning("Burrow - " + transform.parent.parent.parent.name);
         flower.SetBurrow(true);
     }
 }

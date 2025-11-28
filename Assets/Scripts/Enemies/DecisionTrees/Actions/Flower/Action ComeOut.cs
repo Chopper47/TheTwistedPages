@@ -14,7 +14,7 @@ public class ActionComeOut : IAction
 
     public override void Act()
     {
-        Debug.Log("Come out  - "+transform.parent.name);
+        Debug.LogWarning("Come out  - "+transform.parent.name);
         flower.SetBurrow(false);
     }
 }
