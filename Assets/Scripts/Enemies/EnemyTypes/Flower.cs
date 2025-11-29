@@ -20,8 +20,12 @@ public class Flower : MonoBehaviour
     [SerializeField] private float shootRange = 7f;
     [SerializeField] private float burrowRange = 2f;
     [SerializeField] private float burrowCD = 3f;
-    [SerializeField] private int burrowChance = 10;
+    [SerializeField] private float timeForChaseStart = 1.5f;
     [SerializeField] private float timeForBurrowChance = .25f;
+    [SerializeField] private int burrowChance = 10;
+    [SerializeField] private int countForTripleShoot = 3;
+
+    private int shotCount = 0;
     private bool burrowOnCooldown = false;
     private bool onShootingCooldown = false;
     private bool burrowCheck = false;
@@ -92,11 +96,15 @@ public class Flower : MonoBehaviour
             {
                 checkTime = true;
                 timer = 0f;
+                //Cambio visual provisional
+                transform.position = new Vector3(transform.position.x,transform.position.y - 1f,transform.position.z);
             }
             else
             {
                 checkTime = false;
                 maxTimePassed = false;
+                //Cambio visual provisional
+                transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
             }
             StartCoroutine(ChangeCooldown());
         }
@@ -184,20 +192,35 @@ public class Flower : MonoBehaviour
         return (chase.DistanceFromTarget() <= burrowRange);
     }
 
+    #region ShootingMethods
     public void Shoot()
     {
         if (!onShootingCooldown)
         {
-            onShootingCooldown = true;
-            Vector3 straightDir = chase.TargetPosition() - transform.position;
+            shotCount++;
 
-            GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-            GameObject leftBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-            GameObject rightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+            if(shotCount == countForTripleShoot) 
+            { 
+                shotCount = 0;
+                onShootingCooldown = true;
+                Vector3 straightDir = chase.TargetPosition() - transform.position;
 
-            straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
-            leftBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(-30, Vector3.up) * straightDir);
-            rightBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(30, Vector3.up) * straightDir);
+                GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+                GameObject leftBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+                GameObject rightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+
+                straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
+                leftBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(-30, Vector3.up) * straightDir);
+                rightBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(30, Vector3.up) * straightDir);
+            }
+            else
+            {
+                onShootingCooldown = true;
+                Vector3 straightDir = chase.TargetPosition() - transform.position;
+
+                GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+                straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
+            }
             StartCoroutine(ShootCooldown());
         }
     }
@@ -207,9 +230,22 @@ public class Flower : MonoBehaviour
         yield return new WaitForSeconds(shootCD);
         onShootingCooldown = false;
     }
+    #endregion
 
     public bool IsUnderPlayer()
     {
         return Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(chase.TargetPosition().x, 0f, chase.TargetPosition().z)) <= burrowedUnderVariation;
+    }
+
+    public void StartChaseDelay()
+    {
+        chase.SetStartChase(false);
+        StartCoroutine(ChaseDelay());   
+    }
+
+    IEnumerator ChaseDelay()
+    {
+        yield return new WaitForSeconds(timeForChaseStart);
+        chase.SetStartChase(true);
     }
 }

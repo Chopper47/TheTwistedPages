@@ -14,6 +14,7 @@ public class ChaseAgent : MonoBehaviour
     [SerializeField] bool followPath = false;
     [SerializeField] float pointTimeInterval = 0.2f;
     bool chase = false;
+    bool startChase = false;
     bool following = true; 
     Vector3 chaseDir;
 
@@ -60,8 +61,11 @@ public class ChaseAgent : MonoBehaviour
         {
             if(!followPath)
             {
-                transform.Translate(chaseDir * speed * Time.deltaTime);
-                UpdateChaseDirection();
+                if(startChase)
+                {
+                    transform.Translate(chaseDir * speed * Time.deltaTime);
+                    UpdateChaseDirection();
+                }
             }
             else
             {
@@ -194,5 +198,10 @@ public class ChaseAgent : MonoBehaviour
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+    }
+
+    public void SetStartChase(bool newStartChase)
+    {
+        startChase = newStartChase;
     }
 }
