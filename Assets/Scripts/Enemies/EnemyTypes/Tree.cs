@@ -81,7 +81,7 @@ public class Tree : MonoBehaviour
         }
 
         appleAttacksLeft--;
-        Debug.Log($"Tree spawned {applesPerAttack} apples. Remaining apple attacks: {appleAttacksLeft}.");
+        //Debug.Log($"Tree spawned {applesPerAttack} apples. Remaining apple attacks: {appleAttacksLeft}.");
 
         yield return new WaitForSeconds(appleAttackCooldown);
 
@@ -90,7 +90,7 @@ public class Tree : MonoBehaviour
 
         if (appleAttacksLeft <= 0)
         {
-            Debug.Log("Tree ran out of apple attacks.");
+            //Debug.Log("Tree ran out of apple attacks.");
         }
     }
     #endregion

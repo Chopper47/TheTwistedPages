@@ -30,7 +30,7 @@ public class ActionLaunch : IAction
 
             //Starts preparing for launch
             wolf.SetLaunch(true);
-            Debug.Log("start launch " + " - " + gameObject.name);
+            //Debug.Log("start launch " + " - " + gameObject.name);
         }
     }
 }

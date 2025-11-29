@@ -17,7 +17,7 @@ public class ActionStepBack : IAction
 
         if(!wolf.CanStepback())
         {
-            Debug.Log("SteppingBack");
+            //Debug.Log("SteppingBack");
             wolf.SetStepback(true);
         }
     }

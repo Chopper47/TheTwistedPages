@@ -24,7 +24,7 @@ public class ActionTreeAppleAttack : IAction
         {
             chaseAgent.StopChase();
             tree.SetThrowing(true);
-            Debug.Log("Tree does apple attack: " + gameObject.name);
+            //Debug.Log("Tree does apple attack: " + gameObject.name);
         }
     }
 }

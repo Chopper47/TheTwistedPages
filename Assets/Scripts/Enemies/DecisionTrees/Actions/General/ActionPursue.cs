@@ -17,7 +17,7 @@ public class ActionPursue : IAction
     /// </summary>
     public override void Act()
     {
-        Debug.Log("chasing " + " - " + gameObject.name);
+        //Debug.Log("chasing " + " - " + gameObject.name);
         enemy.Chase();
     }
 }

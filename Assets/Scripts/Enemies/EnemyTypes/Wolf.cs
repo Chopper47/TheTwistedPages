@@ -147,7 +147,7 @@ public class Wolf : CollisionRefresh
 
         checkStepbackDistance = true;
 
-        Debug.LogWarning("Accelerate");
+        //Debug.LogWarning("Accelerate");
 
         float time = 0;                                                                                   //Acceleration
 
@@ -158,7 +158,7 @@ public class Wolf : CollisionRefresh
             yield return null;
         }
 
-        Debug.LogWarning("Constant");
+        //Debug.LogWarning("Constant");
         time = 0;
 
         while (time < stepbackConstantTime)                                                                       //Time in constant speed
@@ -168,7 +168,7 @@ public class Wolf : CollisionRefresh
             yield return null;
         }
 
-        Debug.LogWarning("Decelerate");
+        //Debug.LogWarning("Decelerate");
         time = 0;
         Vector3 startSpeed = rb.linearVelocity;
         while (time < stepbackDecelerateTime)                                                                       //Deceleration
@@ -209,7 +209,7 @@ public class Wolf : CollisionRefresh
         
         checkLaunchDistance = true;
 
-        Debug.LogWarning("Accelerate");
+        //Debug.LogWarning("Accelerate");
 
         float time = 0;                                                                                   //Acceleration
 
@@ -220,7 +220,7 @@ public class Wolf : CollisionRefresh
             yield return null;
         }
 
-        Debug.LogWarning("Constant");
+        //Debug.LogWarning("Constant");
         time = 0;
 
         while (time < launchConstantTime)                                                                       //Time in constant speed
@@ -230,7 +230,7 @@ public class Wolf : CollisionRefresh
             yield return null;
         }
 
-        Debug.LogWarning("Decelerate");
+        //Debug.LogWarning("Decelerate");
         time = 0;
         Vector3 startSpeed = rb.linearVelocity;
         while (time < launchDecelerateTime)                                                                       //Deceleration
@@ -240,7 +240,7 @@ public class Wolf : CollisionRefresh
             yield return null;
         }
 
-        Debug.LogWarning("Stop launch");
+        //Debug.LogWarning("Stop launch");
         //rb.AddForce(launchDir * launchForce);
 
         consecutiveStepback = 0;
@@ -349,7 +349,7 @@ public class Wolf : CollisionRefresh
         if (other.CompareTag("Wall"))
         {
             OnWallHit();
-            UnityEngine.Debug.Log("hit");
+            //UnityEngine.Debug.Log("hit");
         }
     }
 }

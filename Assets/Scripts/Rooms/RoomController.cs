@@ -59,8 +59,6 @@ public class RoomController : MonoBehaviour
             StartNextWave();
         }
 
-        enemiesRemaining = GetComponentsInChildren<EnemyHealth>().Length;
-
         if (enemiesRemaining > 0)
         {
             foreach (DoorController door in doors)
@@ -84,16 +82,7 @@ public class RoomController : MonoBehaviour
     {
         currentWave++;
 
-        if (currentWave == 1)
-        {
-            foreach (DoorController door in doors)
-            {
-                door.CloseDoor();
-            }
-        }
-
         SpawnEnemies();
-        enemiesRemaining = GetComponentsInChildren<EnemyHealth>().Length;
 
         if (enemiesRemaining == 0)
         {
@@ -117,6 +106,8 @@ public class RoomController : MonoBehaviour
             {
                 enemyHealth.roomController = this;
             }
+
+            enemiesRemaining++;
         }
     }
 
@@ -131,7 +122,6 @@ public class RoomController : MonoBehaviour
 
         if (enemiesRemaining <= 0)
         {
-            isCleared = true;
             CompleteWave();
 
             if (roomInstance != null && roomInstance.roomType == RoomType.Boss)
