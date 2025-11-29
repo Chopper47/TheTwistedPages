@@ -97,18 +97,47 @@ public class Flower : MonoBehaviour
                 checkTime = true;
                 timer = 0f;
                 //Cambio visual provisional
-                transform.position = new Vector3(transform.position.x,transform.position.y - 1f,transform.position.z);
+                StartCoroutine(BurrowAnim(burrowed));
             }
             else
             {
                 checkTime = false;
                 maxTimePassed = false;
                 //Cambio visual provisional
-                transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+                StartCoroutine(BurrowAnim(burrowed));
             }
             StartCoroutine(ChangeCooldown());
         }
     }
+
+    IEnumerator BurrowAnim(bool isBurrowing)
+    {
+        if(isBurrowing)
+        {
+            float time = 0f;
+            Vector3 startingPos = transform.position;
+            Vector3 endingPos = startingPos - Vector3.up;
+            while (time < timeForChaseStart)
+            {
+                transform.position = Vector3.Lerp(startingPos, endingPos, time/timeForChaseStart);
+                time+=Time.deltaTime;
+                yield return null;
+            }
+        }
+        else
+        {
+            float time = 0f;
+            Vector3 startingPos = transform.position;
+            Vector3 endingPos = startingPos + Vector3.up;
+            while (time < timeForChaseStart)
+            {
+                transform.position = Vector3.Lerp(startingPos, endingPos, time / timeForChaseStart);
+                time += Time.deltaTime;
+                yield return null;
+            }
+        }
+    }
+
 
     public bool TimePassed()
     {
