@@ -21,7 +21,6 @@ public class RoomController : MonoBehaviour
     [Header("Waves")]
     private int totalWaves;
     private int currentWave;
-    private bool wavesStarted = false;
 
     private void Awake()
     {
@@ -52,7 +51,6 @@ public class RoomController : MonoBehaviour
 
         totalWaves = roomPreset.difficultyRating;
         currentWave = 0;
-        wavesStarted = true;
 
         if (roomInstance.roomType != RoomType.Start && roomPreset.enemyPrefabs != null && roomPreset.enemyPrefabs.Length > 0)
         {
