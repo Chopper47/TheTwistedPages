@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -411,26 +410,33 @@ public class LevelGenerator : MonoBehaviour
 
         List<RoomPreset> difficultyFilteredPresets = new List<RoomPreset>();
 
-        if (roomStack != null && roomStack.Count >= 2)
+        if (roomType == RoomType.Normal && roomStack.Count > 0)
         {
-            Vector2Int[] stackArray = roomStack.ToArray();
+            Vector2Int lastPos = roomStack.Peek();
+            int lastDifficulty = generatedRooms[lastPos].roomPreset.difficultyRating;
 
-            Vector2Int last = stackArray[0];                // Top of the stack.
-            Vector2Int secondToLast = stackArray[1];        // Second from the top.
+            // Count how many times this difficulty repeats in a row.
+            int streak = 1;
 
-            int lastDifficulty = generatedRooms[last].roomPreset.difficultyRating;
-            int secondDifficulty = generatedRooms[secondToLast].roomPreset.difficultyRating;
-
-            if (lastDifficulty == secondDifficulty)
+            if (roomStack.Count > 1)
             {
-                int forbidden = lastDifficulty;
+                Vector2Int[] stackArray = roomStack.ToArray();
+                Vector2Int previousPosition = stackArray[1];
+                int previousDifficulty = generatedRooms[previousPosition].roomPreset.difficultyRating;
 
+                if (previousDifficulty == lastDifficulty)
+                {
+                    streak++;
+                }
+            }
+
+            // If two consecutive difficulties are the same, forbid a third.
+            if (streak >= 2)
+            {
                 foreach (RoomPreset candidate in filteredPresets)
                 {
-                    if (candidate.difficultyRating != forbidden)
-                    {
+                    if (candidate.difficultyRating != lastDifficulty)
                         difficultyFilteredPresets.Add(candidate);
-                    }
                 }
             }
         }
