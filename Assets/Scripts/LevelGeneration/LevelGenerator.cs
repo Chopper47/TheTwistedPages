@@ -17,15 +17,12 @@ public class LevelGenerator : MonoBehaviour
     [Header("Room Locations")]
     public Dictionary<Vector2Int, RoomInstance> generatedRooms = new Dictionary<Vector2Int, RoomInstance>();
 
-    private void Start()
-    {
-        GenerateLevel();
-    }
+    [HideInInspector] public bool isLastFloor = false;
 
     /// <summary>
     /// Generates a connected set of rooms in the grid using the DFS algorithm.
     /// </summary>
-    private void GenerateLevel()
+    public void GenerateLevel()
     {
         generatedRooms.Clear();
 
@@ -59,11 +56,20 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        // Make the farthest room from the start the Boss room.
-        Vector2Int bossRoomPosition = GetFarthestRoom(startingPosition);
-        RoomInstance bossRoom = generatedRooms[bossRoomPosition];
-        bossRoom.roomType = RoomType.Boss;
-        bossRoom.roomPreset = GetRandomRoomPreset(RoomType.Boss, bossRoomPosition);
+        // Make the farthest room from the start the floor-ending room (Boss or FloorChange).
+        Vector2Int farthestRoomPosition = GetFarthestRoom(startingPosition);
+        RoomInstance farthestRoom = generatedRooms[farthestRoomPosition];
+
+        if (isLastFloor)
+        {
+            farthestRoom.roomType = RoomType.Boss;
+            farthestRoom.roomPreset = GetRandomRoomPreset(RoomType.Boss, farthestRoomPosition);
+        }
+        else
+        {
+            farthestRoom.roomType = RoomType.FloorChange;
+            farthestRoom.roomPreset = GetRandomRoomPreset(RoomType.FloorChange, farthestRoomPosition);
+        }
 
         // Assign the Health and Shop rooms.
         AssignSpecialRooms();
@@ -331,6 +337,10 @@ public class LevelGenerator : MonoBehaviour
             //    validPresets.Add(preset);
             //}
             else if (roomType == RoomType.Health && preset.canBeHealth)
+            {
+                validPresets.Add(preset);
+            }
+            else if (roomType == RoomType.FloorChange && preset.canBeFloorChange)
             {
                 validPresets.Add(preset);
             }

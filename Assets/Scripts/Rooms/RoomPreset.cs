@@ -11,6 +11,7 @@ public class RoomPreset : ScriptableObject
     public bool canBeStart;
     public bool canBeShop;
     public bool canBeHealth;
+    public bool canBeFloorChange;
     public bool canBeBoss;
     public int difficultyRating;
 
