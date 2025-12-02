@@ -75,7 +75,7 @@ public class Tree : MonoBehaviour
             Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * appleSpawnRadius;
             Vector3 spawnPosition = transform.position + offset;
 
-            spawnPosition.y = 1.0f;
+            spawnPosition.y = transform.position.y/2;
 
             Instantiate(appleGrenadePrefab, spawnPosition, Quaternion.identity);
         }
@@ -112,8 +112,13 @@ public class Tree : MonoBehaviour
     private IEnumerator PerformPhysicalAttack()
     {
         isSlamming = true;
-        enemyState.AttackState();
+
         chaseAgent.StopChase();
+        rigidBody.linearVelocity = Vector3.zero;
+        rigidBody.angularVelocity = Vector3.zero;
+        rigidBody.isKinematic = true;
+
+        enemyState.AttackState();
 
         yield return new WaitForSeconds(slamDelay);
 
