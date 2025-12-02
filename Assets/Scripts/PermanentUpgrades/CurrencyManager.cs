@@ -6,8 +6,11 @@ public class CurrencyManager : MonoBehaviour
     public static CurrencyManager instance;
 
     public int currentCurrencyAmount = 0;
-    
 
+    private void Awake()
+    {
+        instance = this;
+    }
     public void AddSingleCoin()
     {
         currentCurrencyAmount++;

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -68,22 +69,22 @@ public class Wolf : CollisionRefresh
     /// </summary>
     public void Update()
     {
-        if (checkLaunchDistance) 
-        { 
-            if(Vector3.Distance(launchStartingPos, transform.position) >= launchDistance)
-            {
-                //UnityEngine.Debug.Log(rb.linearVelocity.magnitude);
-                StopLaunch();
-            }
-        }
+        //if (checkLaunchDistance) 
+        //{ 
+        //    if(Vector3.Distance(launchStartingPos, transform.position) >= launchDistance)
+        //    {
+        //        //UnityEngine.Debug.Log(rb.linearVelocity.magnitude);
+        //        StopLaunch();
+        //    }
+        //}
 
-        if(checkStepbackDistance) 
-        { 
-            if(Vector3.Distance(stepbackStartingPos, transform.position) >=  stepbackDistance)
-            {
-                StopStepback();
-            }
-        }
+        //if(checkStepbackDistance) 
+        //{ 
+        //    if(Vector3.Distance(stepbackStartingPos, transform.position) >=  stepbackDistance)
+        //    {
+        //        StopStepback();
+        //    }
+        //}
     }
 
     public void SetLaunch(bool launching)
@@ -141,9 +142,22 @@ public class Wolf : CollisionRefresh
     {
         yield return new WaitForSeconds(timeForStepback);
 
+        transform.LookAt(new Vector3(chase.TargetPosition().x,transform.position.y, chase.TargetPosition().z));
+
         Vector3 sbDir = (transform.position - chase.TargetPosition()).normalized;
 
         stepbackStartingPos = transform.position;
+
+        Vector3 stepbackEndingPos;
+
+        if (Physics.Raycast(transform.position ,sbDir, out RaycastHit hit, stepbackDistance+ 0.5f, 8))
+        {
+            stepbackEndingPos = transform.position + sbDir * (Vector3.Distance(transform.position, hit.point) - 0.5f);
+        }
+        else
+        {
+            stepbackEndingPos = transform.position + sbDir * stepbackDistance;
+        }
 
         checkStepbackDistance = true;
 
@@ -153,32 +167,34 @@ public class Wolf : CollisionRefresh
 
         while (time < stepbackAccelerateTime)
         {
-            rb.linearVelocity = Vector3.Lerp(Vector3.zero, sbDir * stepbackSpeed, time / stepbackAccelerateTime);
+            transform.position = Vector3.Lerp(stepbackStartingPos, stepbackStartingPos + sbDir * 0.3f, time/stepbackAccelerateTime);
             time += Time.deltaTime;
             yield return null;
         }
 
         //Debug.LogWarning("Constant");
         time = 0;
-
+        Vector3 currentPos = transform.position;
         while (time < stepbackConstantTime)                                                                       //Time in constant speed
         {
-            rb.linearVelocity = sbDir * stepbackSpeed;
+            transform.position = Vector3.Lerp(currentPos, currentPos + sbDir * 5.4f, time/stepbackConstantTime);
             time += Time.deltaTime;
             yield return null;
         }
 
         //Debug.LogWarning("Decelerate");
         time = 0;
-        Vector3 startSpeed = rb.linearVelocity;
+        currentPos = transform.position;
+
         while (time < stepbackDecelerateTime)                                                                       //Deceleration
         {
-            rb.linearVelocity = Vector3.Lerp(startSpeed, Vector3.zero, time / stepbackDecelerateTime);
+            transform.position = Vector3.Lerp(currentPos, stepbackEndingPos, time/stepbackDecelerateTime);
             time += Time.deltaTime;
             yield return null;
         }
         //rb.AddForce(sbDir * stepbackForce);
 
+        StopStepback();
         if (!checkConsecutiveStepback)
         {
             checkConsecutiveStepback = true;
@@ -203,48 +219,51 @@ public class Wolf : CollisionRefresh
     {
         yield return new WaitForSeconds(timeForLaunch);
 
+        transform.LookAt(new Vector3(chase.TargetPosition().x, transform.position.y, chase.TargetPosition().z));
+
         launchDir = (chase.TargetPosition() - transform.position).normalized;
 
         launchStartingPos = transform.position;
         
+        Vector3 launchEndingPos = transform.position + launchDir * launchDistance;
+
         checkLaunchDistance = true;
 
-        //Debug.LogWarning("Accelerate");
 
         float time = 0;                                                                                   //Acceleration
 
         while (time < launchAccelerateTime)
         {
-            rb.linearVelocity = Vector3.Lerp(Vector3.zero, launchDir * launchSpeed, time / launchAccelerateTime);
+            transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * 0.475f, time/launchAccelerateTime);
             time += Time.deltaTime;
             yield return null;
         }
 
-        //Debug.LogWarning("Constant");
+        Vector3 currentPos = transform.position;
         time = 0;
 
         while (time < launchConstantTime)                                                                       //Time in constant speed
         {
-            rb.linearVelocity = launchDir * launchSpeed;
+            transform.position = Vector3.Lerp(currentPos, currentPos + launchDir * 5.525f, time/launchConstantTime);
             time += Time.deltaTime;
             yield return null;
         }
 
-        //Debug.LogWarning("Decelerate");
         time = 0;
-        Vector3 startSpeed = rb.linearVelocity;
+        currentPos = transform.position;
+
         while (time < launchDecelerateTime)                                                                       //Deceleration
         {
-            rb.linearVelocity = Vector3.Lerp(startSpeed, Vector3.zero, time / launchDecelerateTime);
+            transform.position = Vector3.Lerp(currentPos, launchEndingPos, time/launchDecelerateTime);
             time += Time.deltaTime;
             yield return null;
         }
 
-        //Debug.LogWarning("Stop launch");
-        //rb.AddForce(launchDir * launchForce);
+        Debug.LogWarning(Vector3.Distance(launchStartingPos, transform.position));
 
         consecutiveStepback = 0;
 
+        StopLaunch();
     }
 
 
