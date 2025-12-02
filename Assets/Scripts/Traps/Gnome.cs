@@ -37,7 +37,7 @@ public class Gnome : MonoBehaviour
 
     private void Update()
     {
-        if (roomController.isCleared == true) 
+        if (roomController.isCleared == true && spline.IsPlaying) 
         { 
             RoomCleared(); 
         }
@@ -48,7 +48,7 @@ public class Gnome : MonoBehaviour
         if (spline != null) 
         { 
             spline.Pause();
-            Debug.Log("Spline paused.");
+            CurrencyManager.instance.AddSingleCoin();
         }
     }
 

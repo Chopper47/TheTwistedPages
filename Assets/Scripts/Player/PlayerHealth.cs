@@ -14,6 +14,11 @@ public class PlayerHealth : MonoBehaviour
     public GameObject gameOverMenu;
     private MusicManager music;
 
+    [Header("Life Sprites")]
+    public Sprite fullLife;
+    public Sprite halfLife;
+    public Sprite emptyLife;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -78,19 +83,21 @@ public class PlayerHealth : MonoBehaviour
     {
         for (int i = 0; i < lives.Length; i++)
         {
-            if (lives[i] != null)
+            Image lifeImage = lives[i].GetComponent<Image>();
+
+            int heartHealth = currentHealth - (i * 2);
+
+            if (heartHealth >= 2)
             {
-                Image lifeImage = lives[i].GetComponent<Image>();
-
-                if (currentHealth > i)
-                {
-                    lifeImage.color = Color.white;
-                }
-
-                else
-                {
-                    lifeImage.color = Color.black;
-                }
+                lifeImage.sprite = fullLife;
+            }
+            else if (heartHealth == 1)
+            {
+                lifeImage.sprite = halfLife;
+            }
+            else
+            {
+                lifeImage.sprite = emptyLife;
             }
         }
     }
