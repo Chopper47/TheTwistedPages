@@ -14,16 +14,18 @@ public class Wolf : CollisionRefresh
     [Header("Launch variables")]
     [SerializeField] float timeForLaunch = .8f;
     [SerializeField] float launchDistance = 5f;
-    [SerializeField] float launchForce = 2f;
     [SerializeField] float launchCD = 1.5f;
     //Acceleration and deceleration values
-    [SerializeField] float launchSpeed = 36;
+
     [SerializeField] float launchAccelerateTime = .125f;
+    [SerializeField] float launchAcceleratePercentage = .1f;
+    
     [SerializeField] float launchConstantTime = .258f;
+    [SerializeField] float launchConstantPercentage = .85f;
+
     [SerializeField] float launchDecelerateTime = .05f;
     bool launch = false;
     bool canLaunch = true;
-    bool checkLaunchDistance = false;
 
     [Header("Stepback variables")]
     [SerializeField] float timeForStepback = 0f;
@@ -32,9 +34,12 @@ public class Wolf : CollisionRefresh
     [SerializeField] float stepbackForce = 2f;
     [SerializeField] float stepbackCD = 3.5f;
 
-    [SerializeField] float stepbackSpeed = 36;
     [SerializeField] float stepbackAccelerateTime = .125f;
+    [SerializeField] float stepbackAcceleratePercentage = .1f;
+
     [SerializeField] float stepbackConstantTime = .258f;
+    [SerializeField] float stepbackConstantPercentage = .85f;
+    
     [SerializeField] float stepbackDecelerateTime = .05f;
 
     [SerializeField] float stepbackTimeConsecutive = 0.75f;
@@ -43,11 +48,15 @@ public class Wolf : CollisionRefresh
     Coroutine checkCoroutine;
     bool stepback = false;
     bool canStepback = true;
-    bool checkStepbackDistance = false;
 
     Vector3 launchStartingPos;
     Vector3 stepbackStartingPos;
     Vector3 launchDir;
+
+    [Header("General Variables")]
+
+    [SerializeField] float raycastOffset = 0.7f;
+    [SerializeField] LayerMask mask;
 
     Rigidbody rb;
     EnemyHealth enemyHealth;
@@ -150,16 +159,14 @@ public class Wolf : CollisionRefresh
 
         Vector3 stepbackEndingPos;
 
-        if (Physics.Raycast(transform.position ,sbDir, out RaycastHit hit, stepbackDistance+ 0.5f, 8))
+        if (Physics.Raycast(transform.position ,sbDir, out RaycastHit hit, stepbackDistance + raycastOffset, mask))
         {
-            stepbackEndingPos = transform.position + sbDir * (Vector3.Distance(transform.position, hit.point) - 0.5f);
+            stepbackEndingPos = transform.position + sbDir * (Vector3.Distance(transform.position, hit.point) - raycastOffset);
         }
         else
         {
             stepbackEndingPos = transform.position + sbDir * stepbackDistance;
         }
-
-        checkStepbackDistance = true;
 
         //Debug.LogWarning("Accelerate");
 
@@ -167,7 +174,7 @@ public class Wolf : CollisionRefresh
 
         while (time < stepbackAccelerateTime)
         {
-            transform.position = Vector3.Lerp(stepbackStartingPos, stepbackStartingPos + sbDir * 0.3f, time/stepbackAccelerateTime);
+            transform.position = Vector3.Lerp(stepbackStartingPos, stepbackStartingPos + sbDir * Vector3.Distance(stepbackStartingPos, stepbackEndingPos) * stepbackAcceleratePercentage, time/stepbackAccelerateTime);
             time += Time.deltaTime;
             yield return null;
         }
@@ -177,7 +184,7 @@ public class Wolf : CollisionRefresh
         Vector3 currentPos = transform.position;
         while (time < stepbackConstantTime)                                                                       //Time in constant speed
         {
-            transform.position = Vector3.Lerp(currentPos, currentPos + sbDir * 5.4f, time/stepbackConstantTime);
+            transform.position = Vector3.Lerp(currentPos, currentPos + sbDir * Vector3.Distance(stepbackStartingPos, stepbackEndingPos) * stepbackConstantPercentage, time/stepbackConstantTime);
             time += Time.deltaTime;
             yield return null;
         }
@@ -224,17 +231,23 @@ public class Wolf : CollisionRefresh
         launchDir = (chase.TargetPosition() - transform.position).normalized;
 
         launchStartingPos = transform.position;
-        
-        Vector3 launchEndingPos = transform.position + launchDir * launchDistance;
 
-        checkLaunchDistance = true;
+        Vector3 launchEndingPos;
 
+        if (Physics.Raycast(transform.position, launchDir, out RaycastHit hit, launchDistance + raycastOffset, mask))
+        {
+            launchEndingPos = transform.position + launchDir * (Vector3.Distance(transform.position, hit.point) - raycastOffset);
+        }
+        else
+        {
+            launchEndingPos = transform.position + launchDir * launchDistance;
+        }
 
         float time = 0;                                                                                   //Acceleration
 
         while (time < launchAccelerateTime)
         {
-            transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * 0.475f, time/launchAccelerateTime);
+            transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchAcceleratePercentage , time/launchAccelerateTime);
             time += Time.deltaTime;
             yield return null;
         }
@@ -244,7 +257,7 @@ public class Wolf : CollisionRefresh
 
         while (time < launchConstantTime)                                                                       //Time in constant speed
         {
-            transform.position = Vector3.Lerp(currentPos, currentPos + launchDir * 5.525f, time/launchConstantTime);
+            transform.position = Vector3.Lerp(currentPos, currentPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchConstantPercentage, time/launchConstantTime);
             time += Time.deltaTime;
             yield return null;
         }
@@ -258,8 +271,6 @@ public class Wolf : CollisionRefresh
             time += Time.deltaTime;
             yield return null;
         }
-
-        Debug.LogWarning(Vector3.Distance(launchStartingPos, transform.position));
 
         consecutiveStepback = 0;
 
@@ -288,7 +299,6 @@ public class Wolf : CollisionRefresh
     /// </summary>
     public void StopLaunch()
     {
-        checkLaunchDistance = false;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         SetLaunch(false);
@@ -299,7 +309,6 @@ public class Wolf : CollisionRefresh
     {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        checkStepbackDistance = false;
         stepback = false;
         StartCoroutine(TimeForStepbackReset());
     }
