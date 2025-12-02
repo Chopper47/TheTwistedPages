@@ -14,13 +14,17 @@ public class RoomController : MonoBehaviour
     private int enemiesRemaining = 0;
     private bool isCleared = false;
     private bool isActive = false;
-    private MusicManager musicManager;
-    private int musicIndex=1;
     public GameObject gameWonMenu;
+    private bool treeSpawnedThisWave = false;
+    private int treeIndex = 1;
 
     [Header("Waves")]
     private int totalWaves;
     private int currentWave;
+
+    [Header("Music")]
+    private MusicManager musicManager;
+    private int musicIndex = 1;
 
     private void Awake()
     {
@@ -80,6 +84,8 @@ public class RoomController : MonoBehaviour
     {
         currentWave++;
 
+        treeSpawnedThisWave = false;
+
         SpawnEnemies();
 
         if (enemiesRemaining == 0)
@@ -95,7 +101,26 @@ public class RoomController : MonoBehaviour
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             Transform spawnPoint = enemySpawnPoints[i];
-            GameObject enemyPrefab = roomPreset.enemyPrefabs[Random.Range(0, roomPreset.enemyPrefabs.Length)];
+
+            List<GameObject> enemyCandidates = new List<GameObject>(roomPreset.enemyPrefabs);
+
+            // If the tree already spawned this wave, it is removed from the list.
+            if (treeSpawnedThisWave && treeIndex < enemyCandidates.Count)
+            {
+                enemyCandidates.RemoveAt(treeIndex);
+            }
+
+            if (enemyCandidates.Count == 0)
+            {
+                enemyCandidates.Add(roomPreset.enemyPrefabs[0]);
+            }
+
+            GameObject enemyPrefab = enemyCandidates[Random.Range(0, enemyCandidates.Count)];
+
+            if (enemyPrefab == roomPreset.enemyPrefabs[treeIndex])
+            {
+                treeSpawnedThisWave = true;
+            }
 
             GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity, transform);
 
