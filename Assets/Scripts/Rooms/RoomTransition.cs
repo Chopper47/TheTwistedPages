@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// Handles player movement between connected rooms.
@@ -11,8 +12,10 @@ public class RoomTransition : MonoBehaviour
     /// <summary>
     /// Moves the player to the room in the given direction if possible.
     /// </summary>
-    public void TryMoveToAdjacentRoom(RoomController currentRoom, DoorDirection direction)
+    public IEnumerator TryMoveToAdjacentRoom(RoomController currentRoom, DoorDirection direction)
     {
+        yield return RoomTransitionFade.Instance.FadeOut();
+
         RoomInstance currentInstance = currentRoom.roomInstance;
         
         Vector2Int targetPosition = currentInstance.gridPosition + DirectionToOffset(direction);
@@ -26,7 +29,7 @@ public class RoomTransition : MonoBehaviour
         else
         {
             Debug.Log($"No room found to the {direction} of {currentInstance.gridPosition}");
-            return;
+            yield break;
         }
 
         RoomController nextRoomController = nextRoom.roomPrefab.GetComponent<RoomController>();
@@ -40,6 +43,8 @@ public class RoomTransition : MonoBehaviour
         nextRoomController.ActivateRoom();
 
         CameraController.Instance.MoveToRoom(nextRoomController);
+
+        yield return RoomTransitionFade.Instance.FadeIn();
     }
 
     /// <summary>
