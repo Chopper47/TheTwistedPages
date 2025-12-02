@@ -55,7 +55,9 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator TemporaryInvincibility()
     {
         PlayerMovement.isInvincible = true;
+
         yield return new WaitForSeconds(invincibilityDuration);
+
         PlayerMovement.isInvincible = false;
     }
 

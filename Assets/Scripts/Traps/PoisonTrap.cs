@@ -14,7 +14,9 @@ public class PoisonTrap : Trap
     private IEnumerator DestroyCountdown()
     {
         GetComponent<MeshRenderer>().enabled = false;
-        yield return new WaitForSeconds(5f);
+
+        yield return new WaitForSeconds(5.0f);
+
         Destroy(transform.parent.gameObject);
     }
 }

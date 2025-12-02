@@ -3,19 +3,21 @@ using UnityEngine.Splines;
 
 public class Gnome : MonoBehaviour
 {
-    [SerializeField] float speed;
+    [SerializeField] private float speed;
 
-    SplineAnimate spline;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    private SplineAnimate spline;
+
+    private RoomController roomController;
+
+    private void Awake()
     {
         spline = GetComponent<SplineAnimate>();
 
-        if(spline != null )
+        if (spline != null)
         {
             spline.MaxSpeed = speed;
 
-            if(spline.Container == null)
+            if (spline.Container == null)
             {
                 Debug.LogWarning("Path missing");
             }
@@ -24,6 +26,8 @@ public class Gnome : MonoBehaviour
         {
             Debug.LogWarning("Spline Animate component missing");
         }
+
+        roomController = GetComponentInParent<RoomController>();
     }
 
     private void Start()
@@ -31,27 +35,36 @@ public class Gnome : MonoBehaviour
         StartMoving();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(Input.GetKey(KeyCode.J)) { RoomCleared(); }
+        if (roomController.isCleared == true) 
+        { 
+            RoomCleared(); 
+        }
     }
 
-    void RoomCleared()
+    private void RoomCleared()
     {
-        if(spline != null) { spline.Pause(); }
+        if (spline != null) 
+        { 
+            spline.Pause();
+            Debug.Log("Spline paused.");
+        }
     }
 
-    void StartMoving()
+    private void StartMoving()
     {
-        if (spline != null) { spline.Play(); }
+        if (spline != null) 
+        { 
+            spline.Play(); 
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         EnemyHitbox enemy = other.gameObject.GetComponent<EnemyHitbox>();
 
-        if(enemy)
+        if (enemy)
         {
             Destroy(gameObject);
         }

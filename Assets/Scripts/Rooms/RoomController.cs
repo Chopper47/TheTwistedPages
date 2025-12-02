@@ -12,7 +12,7 @@ public class RoomController : MonoBehaviour
 
     [Header("Flags")]
     private int enemiesRemaining = 0;
-    private bool isCleared = false;
+    public bool isCleared = false;
     private bool isActive = false;
     public GameObject gameWonMenu;
     private bool treeSpawnedThisWave = false;

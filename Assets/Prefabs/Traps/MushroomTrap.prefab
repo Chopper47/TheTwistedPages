@@ -138,7 +138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb9f276a81346442961f57fd9c5cf5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 1
+  damageOnEnter: 0
+  damageOverTime: 1
+  damageRate: 1
   poisonCloud: {fileID: 8561128994674286074}
 --- !u!1 &8157026569886213114
 GameObject:
@@ -295,3 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  damageOnEnter: 1
+  damageOverTime: 0
+  damageRate: 1
