@@ -161,10 +161,12 @@ public class Wolf : CollisionRefresh
 
         if (Physics.Raycast(transform.position ,sbDir, out RaycastHit hit, stepbackDistance + raycastOffset, mask))
         {
+            Debug.LogWarning("Found wall in stepback");
             stepbackEndingPos = transform.position + sbDir * (Vector3.Distance(transform.position, hit.point) - raycastOffset);
         }
         else
         {
+            Debug.LogWarning("Not found wall in stepback");
             stepbackEndingPos = transform.position + sbDir * stepbackDistance;
         }
 
@@ -236,10 +238,12 @@ public class Wolf : CollisionRefresh
 
         if (Physics.Raycast(transform.position, launchDir, out RaycastHit hit, launchDistance + raycastOffset, mask))
         {
+            Debug.LogWarning("Found wall in launch");
             launchEndingPos = transform.position + launchDir * (Vector3.Distance(transform.position, hit.point) - raycastOffset);
         }
         else
         {
+            Debug.LogWarning("Not found wall in launch");
             launchEndingPos = transform.position + launchDir * launchDistance;
         }
 
