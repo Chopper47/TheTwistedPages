@@ -84,13 +84,11 @@ public class Flower : MonoBehaviour
         if(!changeCooldown)
         {
             changeCooldown = true;
-            Debug.LogWarning("Trying to set burrowed to " + newBurrowed);
             burrowCheck = false;
             comeoutCheck = false;
             chase.StopChase();
 
             burrowed = newBurrowed;
-            Debug.LogWarning("Actually set burrowed to " + burrowed);
 
             if (burrowed)
             {
@@ -233,6 +231,7 @@ public class Flower : MonoBehaviour
                 shotCount = 0;
                 onShootingCooldown = true;
                 Vector3 straightDir = chase.TargetPosition() - transform.position;
+                straightDir.y = 0f;
 
                 GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
                 GameObject leftBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
