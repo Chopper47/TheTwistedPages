@@ -132,7 +132,8 @@ public class ChaseAgent : MonoBehaviour
     /// <returns>Returns the distance between the player and the enemy in a float</returns>
     public float DistanceFromTarget()
     {
-        return Vector3.Distance(transform.position, target.position);
+        if(target != null) return Vector3.Distance(transform.position, target.position);
+        return -99f;
     }
 
     /// <summary>
@@ -141,7 +142,8 @@ public class ChaseAgent : MonoBehaviour
     /// <returns>Returns the position of the player</returns>
     public Vector3 TargetPosition()
     {
-        return target.position;
+        if(target != null) return target.position;
+        return transform.position;
     }
 
     /// <summary>
