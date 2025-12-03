@@ -116,7 +116,8 @@ public class Tree : MonoBehaviour
         chaseAgent.StopChase();
         rigidBody.linearVelocity = Vector3.zero;
         rigidBody.angularVelocity = Vector3.zero;
-        rigidBody.isKinematic = true;
+
+        yield return null;
 
         enemyState.AttackState();
 
