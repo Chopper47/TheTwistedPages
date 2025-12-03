@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RoomController : MonoBehaviour
@@ -14,13 +16,14 @@ public class RoomController : MonoBehaviour
     private int enemiesRemaining = 0;
     public bool isCleared = false;
     private bool isActive = false;
-    public GameObject gameWonMenu;
+    private GameObject gameWonMenu;
     private bool treeSpawnedThisWave = false;
     private int treeIndex = 1;
 
     [Header("Waves")]
     private int totalWaves;
     private int currentWave;
+    private TextMeshProUGUI nextWaveText;
 
     [Header("Music")]
     private MusicManager musicManager;
@@ -37,8 +40,20 @@ public class RoomController : MonoBehaviour
             }
         }
 
-        gameWonMenu = GameObject.FindGameObjectWithTag("Game Won Menu");
-        musicManager = GameObject.FindFirstObjectByType<MusicManager>();
+        musicManager = FindFirstObjectByType<MusicManager>();
+
+        gameWonMenu = UIManager.Instance.gameWonMenu;
+        nextWaveText = UIManager.Instance.nextWaveText;
+
+        if (gameWonMenu != null)
+        {
+            gameWonMenu.SetActive(false);
+        }
+
+        if (nextWaveText != null)
+        {
+            nextWaveText.gameObject.SetActive(false);
+        }
     }
 
     public void ActivateRoom()
@@ -58,7 +73,7 @@ public class RoomController : MonoBehaviour
 
         if (roomInstance.roomType != RoomType.Start && roomPreset.enemyPrefabs != null && roomPreset.enemyPrefabs.Length > 0)
         {
-            StartNextWave();
+            StartCoroutine(StartNextWave());
         }
 
         if (enemiesRemaining > 0)
@@ -80,9 +95,21 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    private void StartNextWave()
+    private IEnumerator StartNextWave()
     {
         currentWave++;
+
+        if (currentWave > 1)
+        {
+            if (nextWaveText != null)
+            {
+                nextWaveText.gameObject.SetActive(true);
+
+                yield return new WaitForSeconds(2.0f);
+
+                nextWaveText.gameObject.SetActive(false);
+            }
+        }
 
         treeSpawnedThisWave = false;
 
@@ -158,7 +185,7 @@ public class RoomController : MonoBehaviour
     {
         if (currentWave < totalWaves)
         {
-            StartNextWave();
+            StartCoroutine(StartNextWave());
             return;
         }
 
