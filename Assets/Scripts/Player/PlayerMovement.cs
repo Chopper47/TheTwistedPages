@@ -50,7 +50,6 @@ public class PlayerMovement: MonoBehaviour
     [Header("Animation")]
     [SerializeField] private Animator animator;
 
-
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -120,7 +119,6 @@ public class PlayerMovement: MonoBehaviour
 
             controller.Move(direction * baseMoveSpeed * Time.unscaledDeltaTime);
             animator.SetBool("isRunning", true);
-
         }
         else
         {

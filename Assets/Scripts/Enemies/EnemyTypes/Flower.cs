@@ -4,40 +4,42 @@ using UnityEngine;
 
 public class Flower : MonoBehaviour
 {
-    [Header("Burrow variables")]
-    [SerializeField] private float maxBurrowedTime = 7f;
-    [SerializeField] private float burrowedUnderVariation = .5f;
+    [Header("Shooting")]
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private float shootCD = 1.5f;
+    [SerializeField] private float shootRange = 7.0f;
+    [SerializeField] private float burrowRange = 2.0f;
+    [SerializeField] private float burrowCooldown = 3.0f;
+    [SerializeField] private float timeForChaseStart = 1.5f;
+    [SerializeField] private float timeForBurrowChance = 0.25f;
+    [SerializeField] private int burrowChance = 10;
+    [SerializeField] private int countForTripleShoot = 3;
+
+    private int shotCount = 0;
+    private bool onShootingCooldown = false;
+    private bool changeCooldown = false;
+
+    [Header("Burrowing")]
+    [SerializeField] private float maxBurrowedTime = 7.0f;
+    [SerializeField] private float burrowedUnderVariation = 0.5f;
     [SerializeField] private int comeoutChance = 10;
-    [SerializeField] private float timeForComeoutChance = .25f;
+    [SerializeField] private float timeForComeoutChance = 0.25f;
+
     private bool comeoutCheck = false;
     private bool checkTime = false;
     private bool maxTimePassed;
     private float timer = 0f;
 
-    [Header("Non burrow variables")]
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private float shootCD = 1.5f;
-    [SerializeField] private float shootRange = 7f;
-    [SerializeField] private float burrowRange = 2f;
-    [SerializeField] private float burrowCD = 3f;
-    [SerializeField] private float timeForChaseStart = 1.5f;
-    [SerializeField] private float timeForBurrowChance = .25f;
-    [SerializeField] private int burrowChance = 10;
-    [SerializeField] private int countForTripleShoot = 3;
-
-    private int shotCount = 0;
     private bool burrowOnCooldown = false;
-    private bool onShootingCooldown = false;
     private bool burrowCheck = false;
-
-    private bool checking = false;
     private bool burrowed = false;
-    private bool changeCooldown = false;
-    [Header("References")]
-    [SerializeField] ChaseAgent chase;
+    private bool checkingChance = false;
 
-    // Update is called once per frame
-    void Update()
+    [Header("References")]
+    [SerializeField] private ChaseAgent chase;
+    [SerializeField] private Animator animator;
+
+    private void Update()
     {
         if (checkTime)
         {
@@ -63,17 +65,16 @@ public class Flower : MonoBehaviour
     public void StartBurrowCooldown()
     {
         burrowOnCooldown = true;
-        StartCoroutine(BurrowCD());
+        StartCoroutine(BurrowCooldown());
     }
 
-    IEnumerator BurrowCD()
+    private IEnumerator BurrowCooldown()
     {
-        yield return new WaitForSeconds(burrowCD);
-
+        yield return new WaitForSeconds(burrowCooldown);
         burrowOnCooldown = false;
     }
 
-    IEnumerator ChangeCooldown()
+    private IEnumerator ChangeCooldown()
     {
         yield return new WaitForSeconds(0.5f);
         changeCooldown = false;
@@ -81,7 +82,7 @@ public class Flower : MonoBehaviour
 
     public void SetBurrow(bool newBurrowed)
     {
-        if(!changeCooldown)
+        if (!changeCooldown)
         {
             changeCooldown = true;
             burrowCheck = false;
@@ -108,9 +109,9 @@ public class Flower : MonoBehaviour
         }
     }
 
-    IEnumerator BurrowAnim(bool isBurrowing)
+    private IEnumerator BurrowAnim(bool isBurrowing)
     {
-        if(isBurrowing)
+        if (isBurrowing)
         {
             float time = 0f;
             Vector3 startingPos = transform.position;
@@ -136,7 +137,6 @@ public class Flower : MonoBehaviour
         }
     }
 
-
     public bool TimePassed()
     {
         return maxTimePassed;
@@ -152,12 +152,12 @@ public class Flower : MonoBehaviour
             burrowCheck = true;
         }
         burrowCheck = false;
-        checking = false;
+        checkingChance = false;
     }
 
     public void CallBurrow()
     {
-        checking = true;
+        checkingChance = true;
         StartCoroutine(TimerBurrow());
     }
 
@@ -169,18 +169,20 @@ public class Flower : MonoBehaviour
     }
 
     public bool BurrowCheck()
-    { return burrowCheck; }
+    { 
+        return burrowCheck; 
+    }
 
     #endregion
 
     #region ComeoutChance
     public void CallComeout()
     {
-        checking = true;
+        checkingChance = true;
         StartCoroutine(TimerComeout());
     }
 
-    IEnumerator TimerComeout()
+    private IEnumerator TimerComeout()
     {
         yield return new WaitForSeconds(timeForComeoutChance);
 
@@ -196,17 +198,19 @@ public class Flower : MonoBehaviour
             comeoutCheck = true;
         }
         comeoutCheck = false;
-        checking = false;
+        checkingChance = false;
     }
 
     public bool ComeoutCheck()
-    { return comeoutCheck; }
+    { 
+        return comeoutCheck; 
+    }
 
     #endregion
 
     public bool CurrentlyChecking()
     {
-        return checking;
+        return checkingChance;
     }
 
     public bool InShootRange()
@@ -225,8 +229,9 @@ public class Flower : MonoBehaviour
         if (!onShootingCooldown)
         {
             shotCount++;
+            animator.SetBool("isShooting", true);
 
-            if(shotCount == countForTripleShoot) 
+            if (shotCount == countForTripleShoot) 
             { 
                 shotCount = 0;
                 onShootingCooldown = true;
@@ -253,9 +258,11 @@ public class Flower : MonoBehaviour
         }
     }
 
-    IEnumerator ShootCooldown()
+    private IEnumerator ShootCooldown()
     {
-        yield return new WaitForSeconds(shootCD);
+        yield return new WaitForSeconds(shootCD-0.25f);
+        animator.SetBool("isShooting", false);
+        yield return new WaitForSeconds(0.25f);
         onShootingCooldown = false;
     }
     #endregion
@@ -271,7 +278,7 @@ public class Flower : MonoBehaviour
         StartCoroutine(ChaseDelay());   
     }
 
-    IEnumerator ChaseDelay()
+    private IEnumerator ChaseDelay()
     {
         yield return new WaitForSeconds(timeForChaseStart);
         chase.SetStartChase(true);
