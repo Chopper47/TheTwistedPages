@@ -46,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         currentHealth -= damage;
+        CameraShake.Shake(0.2f, 0.2f);
         Debug.Log("Health: " +  currentHealth);
 
         if (currentHealth <= 0)
