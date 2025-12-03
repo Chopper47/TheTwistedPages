@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FloorManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class FloorManager : MonoBehaviour
     [Header("Floors")]
     public int totalFloors = 3;
     private int currentFloor = 1;
+    private bool isFirstFloor = true;
 
     [Header("References")]
     private LevelGenerator levelGenerator;
@@ -81,20 +83,31 @@ public class FloorManager : MonoBehaviour
         PlayerMovement.canMove = false;
         controller.enabled = false;
 
-        yield return new WaitForSeconds(0.25f);
+        if (!isFirstFloor)
+        {
+            yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut());
+        }
+        else
+        {
+            Color c = RoomTransitionFade.Instance.GetComponentInChildren<Image>().color;
+            c.a = 1;
+            RoomTransitionFade.Instance.GetComponentInChildren<Image>().color = c;
+        }
 
         foreach (Transform child in levelGenerator.transform)
         {
             Destroy(child.gameObject);
         }
 
-        yield return new WaitForSeconds(0.25f);
+        yield return null;
 
         GenerateCurrentFloor();
 
-        yield return new WaitForSeconds(0.25f);
-
         MovePlayerToStartRoom();
+
+        yield return StartCoroutine(RoomTransitionFade.Instance.FadeIn());
+
+        isFirstFloor = false;
 
         yield return new WaitForSeconds(0.25f);
 
