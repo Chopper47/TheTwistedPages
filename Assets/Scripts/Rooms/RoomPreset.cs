@@ -15,6 +15,11 @@ public class RoomPreset : ScriptableObject
     public bool canBeBoss;
     public int difficultyRating;
 
+    [Header("Camera")]
+    public bool allowVerticalCameraFollow;
+    public float minFollowZ;
+    public float maxFollowZ;
+
     [Header("Enemy Waves")]
     public GameObject[] enemyPrefabs;
     public int enemyCount = 3;

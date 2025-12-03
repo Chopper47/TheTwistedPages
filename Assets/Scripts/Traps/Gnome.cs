@@ -62,11 +62,22 @@ public class Gnome : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        EnemyHitbox enemy = other.gameObject.GetComponent<EnemyHitbox>();
-
-        if (enemy)
+        if (other.GetComponent<EnemyHitbox>())
         {
             Destroy(gameObject);
+            return;
+        }
+
+        if (other.GetComponent<FlowerProjectile>())
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (other.GetComponent<AppleGrenade>())
+        {
+            Destroy(gameObject);
+            return;
         }
     }
 }
