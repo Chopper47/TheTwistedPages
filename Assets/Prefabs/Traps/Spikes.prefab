@@ -109,8 +109,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.8906014, y: 2.890602, z: 0.890602}
-  m_Center: {x: 0, y: 0.000000119209275, z: 0.41831303}
+  m_Size: {x: 2.8906014, y: 2.890602, z: 2.8906014}
+  m_Center: {x: 0, y: 0.00000011920929, z: -0.58168674}
 --- !u!208 &6891786897550096832
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -140,6 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  damageOnEnter: 1
+  damageOverTime: 0
+  damageRate: 1
 --- !u!1001 &4318596839492959565
 PrefabInstance:
   m_ObjectHideFlags: 0
