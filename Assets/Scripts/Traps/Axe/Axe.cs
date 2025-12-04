@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class Axe : Trap
 {
-    private Vector3 direction;
+    private Vector3 direction = Vector3.zero;
+
+    private void Awake()
+    {
+        transform.Rotate(Vector3.up, -90f);
+    }
 
     private void Update()
     {
@@ -13,4 +18,5 @@ public class Axe : Trap
     {
         direction = newDirection;
     }
+
 }
