@@ -11,6 +11,7 @@ public class Flower : MonoBehaviour
     [SerializeField] private float burrowRange = 2.0f;
     [SerializeField] private float burrowCooldown = 3.0f;
     [SerializeField] private float timeForChaseStart = 1.5f;
+    [SerializeField] private float timeForShootingStart = 1.5f;
     [SerializeField] private float timeForBurrowChance = 0.25f;
     [SerializeField] private float shootingAnimationDelay = 0.1f;
     [SerializeField] private int burrowChance = 10;
@@ -34,6 +35,7 @@ public class Flower : MonoBehaviour
     private bool burrowOnCooldown = false;
     private bool burrowCheck = false;
     private bool burrowed = false;
+    private bool burrowAnimation = false;
     private bool checkingChance = false;
 
     [Header("References")]
@@ -112,29 +114,36 @@ public class Flower : MonoBehaviour
 
     private IEnumerator BurrowAnim(bool isBurrowing)
     {
+        burrowAnimation = true;
         if (isBurrowing)
         {
+            animator.SetBool("isBurrowing", true);
             float time = 0f;
             Vector3 startingPos = transform.position;
-            Vector3 endingPos = startingPos - Vector3.up;
+            Vector3 endingPos = startingPos - Vector3.up * 1.2f;
             while (time < timeForChaseStart)
             {
                 transform.position = Vector3.Lerp(startingPos, endingPos, time/timeForChaseStart);
                 time+=Time.deltaTime;
                 yield return null;
             }
+            burrowAnimation = false;
+            animator.SetBool("isBurrowing", false);
         }
         else
         {
+            animator.SetBool("isComingOut", true);
             float time = 0f;
             Vector3 startingPos = transform.position;
-            Vector3 endingPos = startingPos + Vector3.up;
-            while (time < timeForChaseStart)
+            Vector3 endingPos = startingPos + Vector3.up * 1.2f;
+            while (time < timeForShootingStart)
             {
-                transform.position = Vector3.Lerp(startingPos, endingPos, time / timeForChaseStart);
+                transform.position = Vector3.Lerp(startingPos, endingPos, time / timeForShootingStart);
                 time += Time.deltaTime;
                 yield return null;
             }
+            burrowAnimation = false;
+            animator.SetBool("isComingOut", false);
         }
     }
 
@@ -227,7 +236,7 @@ public class Flower : MonoBehaviour
     #region ShootingMethods
     public void StartShoot()
     {
-        if (!onShootingCooldown)
+        if (!onShootingCooldown && !burrowAnimation)
         {
             animator.SetBool("isShooting", true);
 

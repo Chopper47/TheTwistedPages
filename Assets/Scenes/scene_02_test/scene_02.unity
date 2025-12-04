@@ -584,6 +584,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1bdc2e807ab9904790ca3e8ad3d6d73, type: 3}
+--- !u!114 &263733631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6321270840931164276, guid: e2e492d6b86709f4a89c8dd26714417e, type: 3}
+  m_PrefabInstance: {fileID: 2614727710129200509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &272600584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,7 +2517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3097333912218629697, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 3097333912218629697, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3318,13 +3329,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2678029577852680332, guid: e2e492d6b86709f4a89c8dd26714417e, type: 3}
+      propertyPath: node
+      value: 
+      objectReference: {fileID: 263733631}
     - target: {fileID: 6072474287374480773, guid: e2e492d6b86709f4a89c8dd26714417e, type: 3}
       propertyPath: m_Name
       value: Flower
       objectReference: {fileID: 0}
     - target: {fileID: 6072474287374480773, guid: e2e492d6b86709f4a89c8dd26714417e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3556,7 +3571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3344937382672473425, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: mask.m_Bits
@@ -3631,6 +3646,10 @@ PrefabInstance:
     - target: {fileID: 2769909738796488192, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_Name
       value: Gnome
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769909738796488192, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8160117325452997489, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_Target

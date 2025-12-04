@@ -63,8 +63,9 @@ public class ChaseAgent : MonoBehaviour
             {
                 if(startChase)
                 {
-                    transform.Translate(chaseDir * speed * Time.deltaTime);
+                    transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
                     UpdateChaseDirection();
+                    transform.Translate(chaseDir * speed * Time.deltaTime, Space.World);
                 }
             }
             else
@@ -210,5 +211,12 @@ public class ChaseAgent : MonoBehaviour
     public void SetStartChase(bool newStartChase)
     {
         startChase = newStartChase;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        
+        Gizmos.DrawLine(transform.position, transform.position + chaseDir * 2f);
     }
 }
