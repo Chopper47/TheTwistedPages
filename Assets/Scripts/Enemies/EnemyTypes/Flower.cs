@@ -42,6 +42,10 @@ public class Flower : MonoBehaviour
     [SerializeField] private ChaseAgent chase;
     [SerializeField] private Animator animator;
 
+    [Header("Particle references")]
+    [SerializeField] private Transform groundParticlePosition;
+    [SerializeField] private ParticleSystem groundParticle;
+
     private void Update()
     {
         if (checkTime)
@@ -124,11 +128,14 @@ public class Flower : MonoBehaviour
             while (time < timeForChaseStart)
             {
                 transform.position = Vector3.Lerp(startingPos, endingPos, time/timeForChaseStart);
+                groundParticle.transform.localPosition = Vector3.Lerp(Vector3.zero, Vector3.up * 1.2f, time/timeForChaseStart);
                 time+=Time.deltaTime;
                 yield return null;
             }
             burrowAnimation = false;
+            groundParticle.transform.localPosition = Vector3.up * 1.2f;
             animator.SetBool("isBurrowing", false);
+            groundParticle.Play();
         }
         else
         {
@@ -139,11 +146,14 @@ public class Flower : MonoBehaviour
             while (time < timeForShootingStart)
             {
                 transform.position = Vector3.Lerp(startingPos, endingPos, time / timeForShootingStart);
+                groundParticle.transform.localPosition = Vector3.Lerp(Vector3.up * 1.2f, Vector3.zero, time/timeForChaseStart);
                 time += Time.deltaTime;
                 yield return null;
             }
+            groundParticle.transform.localPosition = Vector3.zero;
             burrowAnimation = false;
             animator.SetBool("isComingOut", false);
+            groundParticle.Stop();
         }
     }
 
