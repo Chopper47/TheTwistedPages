@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
         transform.position = staticCameraPosition;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (currentRoom == null || player == null)
         {
