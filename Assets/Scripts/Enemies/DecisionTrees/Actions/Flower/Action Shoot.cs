@@ -13,6 +13,6 @@ public class ActionShoot : IAction
     }
     public override void Act()
     {
-        flower.Shoot();
+        flower.StartShoot();
     }
 }

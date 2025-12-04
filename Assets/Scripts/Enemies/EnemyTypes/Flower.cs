@@ -12,6 +12,7 @@ public class Flower : MonoBehaviour
     [SerializeField] private float burrowCooldown = 3.0f;
     [SerializeField] private float timeForChaseStart = 1.5f;
     [SerializeField] private float timeForBurrowChance = 0.25f;
+    [SerializeField] private float shootingAnimationDelay = 0.1f;
     [SerializeField] private int burrowChance = 10;
     [SerializeField] private int countForTripleShoot = 3;
 
@@ -224,45 +225,50 @@ public class Flower : MonoBehaviour
     }
 
     #region ShootingMethods
-    public void Shoot()
+    public void StartShoot()
     {
         if (!onShootingCooldown)
         {
-            shotCount++;
             animator.SetBool("isShooting", true);
 
-            if (shotCount == countForTripleShoot) 
-            { 
-                shotCount = 0;
-                onShootingCooldown = true;
-                Vector3 straightDir = chase.TargetPosition() - transform.position;
-                straightDir.y = 0f;
-
-                GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-                GameObject leftBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-                GameObject rightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-
-                straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
-                leftBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(-30, Vector3.up) * straightDir);
-                rightBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(30, Vector3.up) * straightDir);
-            }
-            else
-            {
-                onShootingCooldown = true;
-                Vector3 straightDir = chase.TargetPosition() - transform.position;
-
-                GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-                straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
-            }
-            StartCoroutine(ShootCooldown());
+            onShootingCooldown = true;
+            StartCoroutine(Shoot());
         }
+    }
+
+    private IEnumerator Shoot()
+    {
+        yield return new WaitForSeconds(shootingAnimationDelay);
+        shotCount++;
+
+        Vector3 straightDir = chase.TargetPosition() - transform.position;
+
+        if (shotCount == countForTripleShoot)
+        {
+            shotCount = 0;
+            straightDir.y = 0f;
+
+            GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+            GameObject leftBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+            GameObject rightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+
+            straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
+            leftBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(-30, Vector3.up) * straightDir);
+            rightBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(30, Vector3.up) * straightDir);
+        }
+        else
+        {
+
+            GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+            straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
+        }
+        StartCoroutine(ShootCooldown());
     }
 
     private IEnumerator ShootCooldown()
     {
-        yield return new WaitForSeconds(shootCD-0.25f);
+        yield return new WaitForSeconds(shootCD - shootingAnimationDelay);
         animator.SetBool("isShooting", false);
-        yield return new WaitForSeconds(0.25f);
         onShootingCooldown = false;
     }
     #endregion

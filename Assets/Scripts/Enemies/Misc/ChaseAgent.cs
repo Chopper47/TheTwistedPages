@@ -197,6 +197,11 @@ public class ChaseAgent : MonoBehaviour
         }
     }
 
+    public void LookAtTarget()
+    {
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+    }
+
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
