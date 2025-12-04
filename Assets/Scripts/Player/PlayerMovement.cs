@@ -78,11 +78,12 @@ public class PlayerMovement: MonoBehaviour
     
     private void Update()
     {
-
         if (!controller.enabled)
         {
             return;
         }
+
+        controller.transform.position = new Vector3(controller.transform.position.x, 0f, controller.transform.position.z);
 
         if (!isRolling)
         {
