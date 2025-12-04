@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 3453095076266913385}
   - component: {fileID: 9067992413242925696}
   - component: {fileID: 4438479720399491394}
+  - component: {fileID: 4650675374947077546}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -231,7 +232,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  invincibilityDuration: 0.5
+  invincibilityDuration: 1
   gameOverMenu: {fileID: 0}
   fullLife: {fileID: 21300000, guid: 7e259fa96919ede4ca6aafd9e5be4785, type: 3}
   halfLife: {fileID: 21300000, guid: 2eddffdfae5a183468d21e86526af376, type: 3}
@@ -250,6 +251,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSpeed: 5
   respawnDelay: 1.5
+--- !u!114 &4650675374947077546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310322255597981864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63705e262cf0cb943ad478d6b39b91dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenThrows: 20
+  percentageOfThrow: 30
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  throwForce: 40
+  axe: {fileID: 5681774981070429426, guid: a4127f41ae3f6c246a075f1805e43040, type: 3}
 --- !u!1 &445750346850030286
 GameObject:
   m_ObjectHideFlags: 0

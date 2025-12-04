@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3010305128956201849}
   - component: {fileID: 2386158676881233099}
   m_Layer: 7
-  m_Name: _Axe_
+  m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5681774981070429426}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2432090755550338912, guid: a62242e1f197e36429d36f9581ab06d0, type: 3}
 --- !u!23 &8082469372982286322
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a5d107aae2ab384c97975f52cc8d5af, type: 2}
+  - {fileID: 2100000, guid: fd7f81ebcde170644bc0822790d24d1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,8 +107,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5, y: 1, z: 0.8}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &2386158676881233099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  damageOnEnter: 1
+  damageOverTime: 0
+  damageRate: 1
