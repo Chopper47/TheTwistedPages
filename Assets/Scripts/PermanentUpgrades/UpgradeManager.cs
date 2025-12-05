@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 
@@ -18,6 +19,13 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private int costToUpgradeSpeed;
     [SerializeField] private int costToUpgradeBulletTime;
     [SerializeField] private int costToUpgradePushPower;
+
+
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private TextMeshProUGUI speedText;
+    [SerializeField] private TextMeshProUGUI bulletTimeText;
+
 
     [SerializeField] private CurrencyManager currencyManager;
     private void Awake()
@@ -44,7 +52,7 @@ public class UpgradeManager : MonoBehaviour
             healthUpgradeLv++;
             UpdateScriptableObjectStats();
             currencyManager.RemoveCurrency(costToUpgradeHealth);
-
+            hpText.text = "Level: " + healthUpgradeLv;
         }
     }
     public void UpgradeSpeed()
@@ -54,6 +62,7 @@ public class UpgradeManager : MonoBehaviour
             speedUpgradeLv++;
             UpdateScriptableObjectStats();
             currencyManager.RemoveCurrency(costToUpgradeSpeed);
+            speedText.text = "Level: " + speedUpgradeLv;
 
         }
 
@@ -65,6 +74,8 @@ public class UpgradeManager : MonoBehaviour
             bulletTimeUpgradeLv++;
             UpdateScriptableObjectStats();
             currencyManager.RemoveCurrency(costToUpgradeBulletTime);
+            bulletTimeText.text = "Level: " + bulletTimeUpgradeLv;
+
         }
 
     }

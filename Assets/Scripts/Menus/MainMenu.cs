@@ -12,6 +12,9 @@ public class MainMenu : MonoBehaviour
     [Header("Credits Menu")]
     public GameObject creditsMenu;
 
+    [Header("Upgrades Menu")]
+    public GameObject upgradesMenu;
+
     public void StartGame()
     {
         SceneManager.LoadScene("alpha");
@@ -28,7 +31,20 @@ public class MainMenu : MonoBehaviour
         mainMenu.SetActive(false);
         creditsMenu.SetActive(true);
     }
+    public void UpgradessMenu()
+    {
+        mainMenu.SetActive(false);
+        upgradesMenu.SetActive(true);
+    }
 
+    public void ReturnToMainMenu()
+    {
+        creditsMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        upgradesMenu.SetActive(false);
+        mainMenu.SetActive(true);
+
+    }
     public void ExitGame()
     {
         Application.Quit();
