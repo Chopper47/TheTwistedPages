@@ -16,6 +16,9 @@ public class VineTrap : Trap
     public Vector3 rotationOnWall = new Vector3(0, 0, 0);
     public Vector3 rotationOnFloor = new Vector3(90, 0, 0);
 
+    [Header("SFX")]
+    [SerializeField] private AudioManager AM;
+    public AudioSource Main;
     private void Start()
     {
         transform.position = wallA.position;
@@ -49,8 +52,10 @@ public class VineTrap : Trap
 
     private IEnumerator MoveToTarget(Transform target)
     {
+        AM.Play("Vines", Main);
         while (Vector3.Distance(transform.position, target.position) > 0.05f)
         {
+            
             transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             yield return null;
         }

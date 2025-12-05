@@ -63,6 +63,10 @@ public class Wolf : CollisionRefresh
     EnemyState states;
     [SerializeField] ChaseAgent chase;
 
+
+    [Header("SFX")]
+    [SerializeField] private AudioManager AM;
+    public AudioSource Main;
     /// <summary>
     /// Called at the start for getting the Rigidbody component
     /// </summary>
@@ -71,6 +75,9 @@ public class Wolf : CollisionRefresh
         rb = GetComponent<Rigidbody>();
         enemyHealth = GetComponent<EnemyHealth>();
         states = GetComponent<EnemyState>();
+        Main=GetComponent<AudioSource>();
+        AM=FindFirstObjectByType<AudioManager>();
+        StartCoroutine(Panting());
     }
 
     /// <summary>
@@ -248,7 +255,8 @@ public class Wolf : CollisionRefresh
         }
 
         float time = 0;                                                                                   //Acceleration
-
+        StopCoroutine(Panting());
+        AM.Play("Growl", Main);
         while (time < launchAccelerateTime)
         {
             transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchAcceleratePercentage , time/launchAccelerateTime);
@@ -307,6 +315,7 @@ public class Wolf : CollisionRefresh
         rb.angularVelocity = Vector3.zero;
         SetLaunch(false);
         StartCoroutine(TimeForLaunchReset());
+        StartCoroutine(Panting());
     }
 
     public void StopStepback()
@@ -382,6 +391,15 @@ public class Wolf : CollisionRefresh
         {
             OnWallHit();
             //UnityEngine.Debug.Log("hit");
+        }
+    }
+
+    private IEnumerator Panting()
+    {
+        while(true) 
+        {
+            AM.Play("Pant", Main);
+            yield return new WaitForSeconds(5f);
         }
     }
 }

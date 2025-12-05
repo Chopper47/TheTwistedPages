@@ -55,14 +55,14 @@ public class AudioManager : MonoBehaviour
 
         // Se selecciona un clip aleatorio del array y se genera un pitch aleatorio.
         AudioClip clip = data.clips[Random.Range(0, data.clips.Length)];
-        float pitch = Random.Range(data.pitchRange.x, data.pitchRange.y);
+        //float pitch = Random.Range(data.pitchRange.x, data.pitchRange.y);
 
         if (source == null)
         {
             source = defaultSource;
         }
 
-        source.pitch = pitch;
+       // source.pitch = pitch;
         source.PlayOneShot(clip, data.volume);
     }
 

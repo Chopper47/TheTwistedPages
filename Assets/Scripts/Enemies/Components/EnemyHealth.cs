@@ -7,12 +7,17 @@ public class EnemyHealth : MonoBehaviour
     private int health;
 
     [HideInInspector] public RoomController roomController;
-
+    [SerializeField] private AudioManager AM;
+    public AudioSource Main;
+    public string identity;
+    
     private void Start()
     {
         health = maxHealth;
 
         roomController = GetComponentInParent<RoomController>();
+        Main=GetComponent<AudioSource>();
+        AM=FindFirstObjectByType<AudioManager>();
     }
 
     public void TakeDamage(int damage)
@@ -22,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            AM.Play(identity, null);
         }
     }
 

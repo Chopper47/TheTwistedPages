@@ -11,5 +11,6 @@ public class AudioData
     public string name; 
     public AudioClip[] clips;
     public float volume = 1.0f;
-    public Vector2 pitchRange = new Vector2(0.75f, 1.25f);
+    //public Vector2 pitchRange = new Vector2(0.75f, 1.25f);
+    public Vector2 pitchRange = new Vector2(1f, 1f);
 }

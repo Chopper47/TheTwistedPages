@@ -13,6 +13,8 @@ public class PlayerHealth : MonoBehaviour
 
     public GameObject gameOverMenu;
     private MusicManager music;
+    [SerializeField]private AudioSource Main;
+    [SerializeField] private AudioManager AM;
 
     [Header("Life Sprites")]
     public Sprite fullLife;
@@ -53,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
-
+        AM.Play("Hurt", Main);
         UpdateHealthUI();
         StartCoroutine(TemporaryInvincibility());
     }

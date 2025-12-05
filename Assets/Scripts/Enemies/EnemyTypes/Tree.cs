@@ -26,6 +26,10 @@ public class Tree : MonoBehaviour
     [SerializeField] private int slamDamage = 1;
     [SerializeField] private float slamDelay = 1.0f;
 
+
+    [Header("SFX")]
+    [SerializeField] private AudioManager AM;
+    public AudioSource Main;
     private void Awake()
     {
         appleAttacksLeft = totalAppleAttacks;
@@ -68,7 +72,7 @@ public class Tree : MonoBehaviour
         chaseAgent.StopChase();
 
         yield return new WaitForSeconds(0.5f);
-
+        AM.Play("Creak",Main);
         for (int i = 0; i < applesPerAttack; i++)
         {
             float angle = i * Mathf.PI * 2.0f / applesPerAttack;
@@ -112,7 +116,7 @@ public class Tree : MonoBehaviour
     private IEnumerator PerformPhysicalAttack()
     {
         isSlamming = true;
-
+        AM.Play("Crush", Main);
         chaseAgent.StopChase();
         rigidBody.linearVelocity = Vector3.zero;
         rigidBody.angularVelocity = Vector3.zero;
@@ -135,6 +139,7 @@ public class Tree : MonoBehaviour
         }
 
         enemyHealth.Die();
+        
     }
     #endregion
 }

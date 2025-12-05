@@ -46,6 +46,10 @@ public class Flower : MonoBehaviour
     [SerializeField] private Transform groundParticlePosition;
     [SerializeField] private ParticleSystem groundParticle;
 
+    [Header("SFX")]
+    [SerializeField] private AudioManager AM;
+    public AudioSource Main;
+
     private void Update()
     {
         if (checkTime)
@@ -259,6 +263,7 @@ public class Flower : MonoBehaviour
     {
         yield return new WaitForSeconds(shootingAnimationDelay);
         shotCount++;
+        AM.Play("Shoot", Main);
 
         Vector3 straightDir = chase.TargetPosition() - transform.position;
 

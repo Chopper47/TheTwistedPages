@@ -8,6 +8,8 @@ public class Gnome : MonoBehaviour
     private SplineAnimate spline;
 
     private RoomController roomController;
+    public AudioManager AM;
+    public AudioSource Main;
 
     private void Awake()
     {
@@ -56,7 +58,8 @@ public class Gnome : MonoBehaviour
     {
         if (spline != null) 
         { 
-            spline.Play(); 
+            spline.Play();
+            AM.Play("Laugh", Main);
         }
     }
 
@@ -64,18 +67,21 @@ public class Gnome : MonoBehaviour
     {
         if (other.GetComponent<EnemyHitbox>())
         {
+            AM.Play("Die", null);
             Destroy(gameObject);
             return;
         }
 
         if (other.GetComponent<FlowerProjectile>())
         {
+            AM.Play("Die", null);
             Destroy(gameObject);
             return;
         }
 
         if (other.GetComponent<AppleGrenade>())
         {
+            AM.Play("Die", null);
             Destroy(gameObject);
             return;
         }

@@ -50,6 +50,10 @@ public class PlayerMovement: MonoBehaviour
     [Header("Animation")]
     [SerializeField] private Animator animator;
 
+    [Header("SFX")]
+    [SerializeField] private AudioManager AM;
+    [SerializeField] private AudioSource Main;
+
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -72,7 +76,7 @@ public class PlayerMovement: MonoBehaviour
 
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
-
+        AM = FindFirstObjectByType<AudioManager>();
         canMove = true;
     }
     
@@ -132,6 +136,7 @@ public class PlayerMovement: MonoBehaviour
         isRolling = true;
         canRoll = false;
         isInvincible = true;
+        AM.Play("Dash", Main);
 
         moveAmount = moveAction.ReadValue<Vector2>();
         Vector3 inputDirection = new Vector3(moveAmount.x, 0f, moveAmount.y).normalized;
