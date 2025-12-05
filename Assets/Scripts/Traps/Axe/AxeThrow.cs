@@ -10,6 +10,8 @@ public class AxeThrow : MonoBehaviour
 
     [SerializeField] float throwForce = 40f;
     [SerializeField] GameObject axe;
+
+    private Vector3 sphere;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,17 +40,26 @@ public class AxeThrow : MonoBehaviour
 
     void Throw()
     {
-        Vector3 dir = new Vector3(Random.Range(-1,1),0, Random.Range(-1, 1));
+        Vector3 dir = new Vector3(Random.Range(-1f,1f),0, Random.Range(-1f, 1f));
 
         dir.Normalize();
         RaycastHit hit;
-        if(Physics.Raycast(transform.position,dir,out hit, 100f, layerMask))
+        if(Physics.Raycast(transform.position + Vector3.up*0.7f,dir,out hit, 100f, layerMask))
         {
+            sphere = hit.point;
             GameObject gO = Instantiate(axe, hit.point,Quaternion.identity,null);
 
             gO.GetComponent<Axe>().SetDir((transform.position - hit.point).normalized * throwForce);
 
             //gO.GetComponent<Rigidbody>().AddForce((transform.position - hit.point).normalized * throwForce);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(sphere != Vector3.zero)
+        {
+            Gizmos.DrawSphere(sphere,1f);
         }
     }
 }

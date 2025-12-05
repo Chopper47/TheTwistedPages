@@ -718,7 +718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3904976877836165599, guid: 7c8d665236018a647bf054e88d3f6e23, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2544,6 +2544,14 @@ PrefabInstance:
       propertyPath: slowTimer
       value: 
       objectReference: {fileID: 1229615577}
+    - target: {fileID: 4650675374947077546, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: percentageOfThrow
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650675374947077546, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: timeBetweenThrows
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7147170612720644584, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2567,10 +2575,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 310322255597981864, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1821161597}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
 --- !u!4 &1535823982 stripped
 Transform:
@@ -2939,30 +2944,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1821161592 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 310322255597981864, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-  m_PrefabInstance: {fileID: 1535823981}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1821161597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821161592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63705e262cf0cb943ad478d6b39b91dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBetweenThrows: 20
-  percentageOfThrow: 30
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  throwForce: 45
-  axe: {fileID: 5681774981070429426, guid: a4127f41ae3f6c246a075f1805e43040, type: 3}
 --- !u!1001 &1875084863
 PrefabInstance:
   m_ObjectHideFlags: 0

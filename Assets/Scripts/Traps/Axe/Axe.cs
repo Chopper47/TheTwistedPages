@@ -6,17 +6,17 @@ public class Axe : Trap
 
     private void Awake()
     {
-        transform.Rotate(Vector3.up, -90f);
+        transform.Rotate(Vector3.forward, -90f);
     }
 
     private void Update()
     {
-        transform.Translate(direction * Time.deltaTime);
+        transform.position += direction * Time.deltaTime;
     }
 
     public void SetDir(Vector3 newDirection)
     {
-        direction = newDirection;
+        direction = new Vector3(newDirection.x,0f, newDirection.z);
     }
 
 }
