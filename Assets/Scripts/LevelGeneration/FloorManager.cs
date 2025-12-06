@@ -69,9 +69,9 @@ public class FloorManager : MonoBehaviour
                 RoomController roomController = room.roomPrefab.GetComponent<RoomController>();
 
                 Vector3 position = room.roomPrefab.transform.position;
-                player.transform.position = position + Vector3.up * 1.5f;
+                player.transform.position = position;
 
-                CameraController.Instance.MoveToRoom(roomController);
+                CameraController.Instance.MoveToRoom(roomController, position);
 
                 return;
             }

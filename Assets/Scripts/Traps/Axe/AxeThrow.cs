@@ -4,7 +4,7 @@ using UnityEngine;
 public class AxeThrow : MonoBehaviour
 {
     [SerializeField] float timeBetweenThrows = 5f;
-    [SerializeField] int percentageOfThrow = 30;
+    [SerializeField] int throwChance = 30;
 
     [SerializeField] LayerMask layerMask;
 
@@ -12,13 +12,12 @@ public class AxeThrow : MonoBehaviour
     [SerializeField] GameObject axe;
 
     private Vector3 sphere;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         StartCoroutine(ThrowPossibility());
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -30,7 +29,7 @@ public class AxeThrow : MonoBehaviour
 
         int throwChance = Random.Range(1, 101);
 
-        if(throwChance <= percentageOfThrow) 
+        if(throwChance <= this.throwChance) 
         {
             Throw();
         }

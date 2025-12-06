@@ -73,6 +73,7 @@ public class PlayerMovement: MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        Debug.Log("Position at Start: " + transform.position);
 
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
@@ -86,8 +87,6 @@ public class PlayerMovement: MonoBehaviour
         {
             return;
         }
-
-        controller.transform.position = new Vector3(controller.transform.position.x, 0f, controller.transform.position.z);
 
         if (!isRolling)
         {

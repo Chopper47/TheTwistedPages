@@ -42,7 +42,9 @@ public class RoomTransition : MonoBehaviour
         // Activate the new room.
         nextRoomController.ActivateRoom();
 
-        CameraController.Instance.MoveToRoom(nextRoomController);
+        Vector3 finalPlayerPos = player.position;
+
+        CameraController.Instance.MoveToRoom(nextRoomController, finalPlayerPos);
 
         yield return RoomTransitionFade.Instance.FadeIn();
     }

@@ -47,16 +47,21 @@ public class CameraController : MonoBehaviour
     /// <summary>
     /// Teleports the camera to the center of a given room.
     /// </summary>
-    public void MoveToRoom(RoomController room)
+    public void MoveToRoom(RoomController room, Vector3 playerFinalPosition)
     {
         currentRoom = room;
 
         followVertical = room.roomPreset.allowVerticalCameraFollow;
 
-        minZ = room.roomPreset.minFollowZ;
-        maxZ = room.roomPreset.maxFollowZ;
+        Vector3 minPoint = room.transform.position + room.transform.rotation * new Vector3(0f, 0f, room.roomPreset.minFollowZ);
+        Vector3 maxPoint = room.transform.position + room.transform.rotation * new Vector3(0f, 0f, room.roomPreset.maxFollowZ);
 
-        staticCameraPosition = new Vector3(room.transform.position.x, transform.position.y, room.transform.position.z);
+        minZ = Mathf.Min(minPoint.z, maxPoint.z);
+        maxZ = Mathf.Max(minPoint.z, maxPoint.z);
+
+        float targetZ = Mathf.Clamp(playerFinalPosition.z, minZ, maxZ);
+
+        staticCameraPosition = new Vector3(room.transform.position.x, transform.position.y, targetZ);
 
         transform.position = staticCameraPosition;
     }
@@ -70,9 +75,7 @@ public class CameraController : MonoBehaviour
 
         if (followVertical)
         {
-            float targetZ = player.position.z;
-
-            targetZ = Mathf.Clamp(targetZ, minZ, maxZ);
+            float targetZ = Mathf.Clamp(player.position.z, minZ, maxZ);
 
             Vector3 targetPosition = new Vector3(staticCameraPosition.x, staticCameraPosition.y, targetZ);
 
