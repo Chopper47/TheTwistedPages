@@ -22,7 +22,7 @@ public class VineTrap : Trap
     private void Start()
     {
         transform.position = wallA.position;
-        transform.rotation = Quaternion.Euler(rotationOnWall);
+        transform.rotation = wallA.rotation * Quaternion.Euler(rotationOnWall);
 
         currentTarget = wallB;
         StartCoroutine(VineCycle());
@@ -34,10 +34,10 @@ public class VineTrap : Trap
         {
             yield return new WaitForSeconds(waitTime);
 
-            transform.rotation = Quaternion.Euler(rotationOnFloor);
+            transform.rotation = currentTarget.rotation * Quaternion.Euler(rotationOnFloor);
             yield return StartCoroutine(MoveToTarget(currentTarget));
 
-            transform.rotation = Quaternion.Euler(rotationOnWall);
+            transform.rotation = currentTarget.rotation * Quaternion.Euler(rotationOnWall);
 
             if (currentTarget == wallA)
             {
