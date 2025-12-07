@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 4380818768739681429}
   - component: {fileID: 1637342674456334513}
   - component: {fileID: 2629041663461912576}
+  - component: {fileID: 1389193436253471749}
   m_Layer: 8
   m_Name: room_collider
   m_TagString: Untagged
@@ -187,6 +188,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6831452625748499073, guid: 22fef9f93fcf0364b9126e8c20066206, type: 3}
+--- !u!54 &1389193436253471749
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446037289423177785}
+  serializedVersion: 5
+  m_Mass: 1e+9
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3379068683583452413
 GameObject:
   m_ObjectHideFlags: 0
