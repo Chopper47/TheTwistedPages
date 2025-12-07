@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7586116038264632811}
+  - component: {fileID: 7920004095976460779}
   m_Layer: 0
   m_Name: BearTrap
   m_TagString: Untagged
@@ -32,6 +33,22 @@ Transform:
   - {fileID: 8605130589112929475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &7920004095976460779
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375640608989106643}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.75, y: 1, z: 0.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &8133828378413361960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,7 +71,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9c9b05a65237754988504dff2820da5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.10820997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9c9b05a65237754988504dff2820da5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -62,7 +79,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9c9b05a65237754988504dff2820da5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.32156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9c9b05a65237754988504dff2820da5, type: 3}
       propertyPath: m_LocalRotation.w
