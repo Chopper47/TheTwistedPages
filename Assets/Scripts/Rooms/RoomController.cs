@@ -132,7 +132,7 @@ public class RoomController : MonoBehaviour
             List<GameObject> enemyCandidates = new List<GameObject>(roomPreset.enemyPrefabs);
 
             // If the tree already spawned this wave, it is removed from the list.
-            if (treeSpawnedThisWave && treeIndex < enemyCandidates.Count)
+            if (treeSpawnedThisWave && treeIndex >= 0 && treeIndex < enemyCandidates.Count)
             {
                 enemyCandidates.RemoveAt(treeIndex);
             }
@@ -144,7 +144,7 @@ public class RoomController : MonoBehaviour
 
             GameObject enemyPrefab = enemyCandidates[Random.Range(0, enemyCandidates.Count)];
 
-            if (enemyPrefab == roomPreset.enemyPrefabs[treeIndex])
+            if (treeIndex >= 0 && treeIndex < roomPreset.enemyPrefabs.Length && enemyPrefab == roomPreset.enemyPrefabs[treeIndex])
             {
                 treeSpawnedThisWave = true;
             }
