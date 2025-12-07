@@ -45,10 +45,16 @@ public class Flower : MonoBehaviour
     [Header("Particle references")]
     [SerializeField] private Transform groundParticlePosition;
     [SerializeField] private ParticleSystem groundParticle;
+    private CapsuleCollider hitbox;
 
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
     public AudioSource Main;
+
+    private void Awake()
+    {
+        hitbox = GetComponent<CapsuleCollider>();
+    }
 
     private void Update()
     {
@@ -126,39 +132,39 @@ public class Flower : MonoBehaviour
         if (isBurrowing)
         {
             animator.SetBool("isBurrowing", true);
-            float time = 0f;
-            Vector3 startingPos = transform.position;
-            Vector3 endingPos = startingPos - Vector3.up * 1.2f;
-            while (time < timeForChaseStart)
+            float timer = 0f;
+
+            while (timer < timeForChaseStart)
             {
-                transform.position = Vector3.Lerp(startingPos, endingPos, time/timeForChaseStart);
-                groundParticle.transform.localPosition = Vector3.Lerp(Vector3.zero, Vector3.up * 1.2f, time/timeForChaseStart);
-                time+=Time.deltaTime;
+                hitbox.center = Vector3.Lerp(new Vector3(0,0.75f,0), new Vector3(0,-1.1f,0), timer/timeForChaseStart);
+                timer += Time.deltaTime;
                 yield return null;
             }
             burrowAnimation = false;
-            groundParticle.transform.localPosition = Vector3.up * 1.2f;
+            //groundParticle.transform.localPosition = Vector3.up * 1.2f;
             animator.SetBool("isBurrowing", false);
             groundParticle.Play();
         }
         else
         {
             animator.SetBool("isComingOut", true);
-            float time = 0f;
-            Vector3 startingPos = transform.position;
-            Vector3 endingPos = startingPos + Vector3.up * 1.2f;
-            while (time < timeForShootingStart)
+
+            float timer = 0f;
+
+            while (timer < timeForChaseStart)
             {
-                transform.position = Vector3.Lerp(startingPos, endingPos, time / timeForShootingStart);
-                groundParticle.transform.localPosition = Vector3.Lerp(Vector3.up * 1.2f, Vector3.zero, time/timeForChaseStart);
-                time += Time.deltaTime;
+                hitbox.center = Vector3.Lerp(new Vector3(0, -1.1f, 0), new Vector3(0, 0.75f, 0), timer / timeForChaseStart);
+                timer += Time.deltaTime;
                 yield return null;
             }
-            groundParticle.transform.localPosition = Vector3.zero;
+
+            yield return new WaitForSeconds(timeForShootingStart);
+            //groundParticle.transform.localPosition = Vector3.zero;
             burrowAnimation = false;
             animator.SetBool("isComingOut", false);
             groundParticle.Stop();
         }
+        yield return null;
     }
 
     public bool TimePassed()
