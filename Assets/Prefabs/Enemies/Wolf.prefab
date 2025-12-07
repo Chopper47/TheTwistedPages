@@ -222,8 +222,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.957746, y: 1.23, z: -0.19963701}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8788505006723343793}
   - {fileID: 2186355953878908274}
@@ -341,6 +341,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   roomController: {fileID: 0}
+  AM: {fileID: 0}
+  Main: {fileID: 0}
+  identity: 
 --- !u!114 &-8020068631501727838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +409,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   chase: {fileID: 8737206857049744820}
+  AM: {fileID: 0}
+  Main: {fileID: 0}
 --- !u!54 &4891237328863847912
 Rigidbody:
   m_ObjectHideFlags: 0
