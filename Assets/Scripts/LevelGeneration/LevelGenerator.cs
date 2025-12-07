@@ -57,18 +57,37 @@ public class LevelGenerator : MonoBehaviour
 
         // Make the farthest room from the start the floor-ending room (Boss or FloorChange).
         Vector2Int farthestRoomPosition = GetFarthestRoom(startingPosition);
-        RoomInstance farthestRoom = generatedRooms[farthestRoomPosition];
+
+        Vector2Int finalRoomPosition = farthestRoomPosition + Vector2Int.up;
+
+        bool insideGrid = finalRoomPosition.x >= 0 && finalRoomPosition.x < gridDimensions.x && finalRoomPosition.y >= 0 && finalRoomPosition.y < gridDimensions.y;
+
+        bool isEmpty = !generatedRooms.ContainsKey(finalRoomPosition);
+
+        if (!insideGrid || !isEmpty)
+        {
+            Debug.LogWarning("Boss position invalid or occupied. Regenerating level...");
+            GenerateLevel();
+            return;
+        }
+
+        // Determine the special room type, whether it's a Boss or FloorChange room.
+        RoomType roomType;
 
         if (isLastFloor)
         {
-            farthestRoom.roomType = RoomType.Boss;
-            farthestRoom.roomPreset = GetRandomRoomPreset(RoomType.Boss, farthestRoomPosition);
+            roomType = RoomType.Boss;
         }
         else
         {
-            farthestRoom.roomType = RoomType.FloorChange;
-            farthestRoom.roomPreset = GetRandomRoomPreset(RoomType.FloorChange, farthestRoomPosition);
+            roomType = RoomType.FloorChange;
         }
+
+        // Select, create and add the room's preset.
+        RoomPreset finalRoomPreset = GetRandomRoomPreset(roomType, finalRoomPosition);
+
+        RoomInstance finalRoom = new RoomInstance(finalRoomPosition, roomType, finalRoomPreset);
+        generatedRooms.Add(finalRoomPosition, finalRoom);
 
         // Assign the Health and Shop rooms.
         AssignSpecialRooms();
@@ -343,7 +362,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 validPresets.Add(preset);
             }
-            else if (roomType == RoomType.Normal && !preset.canBeStart && !preset.canBeShop && !preset.canBeBoss && !preset.canBeHealth)
+            else if (roomType == RoomType.Normal && preset.canBeNormal)
             {
                 validPresets.Add(preset);
             }

@@ -13,6 +13,7 @@ public class RoomPreset : ScriptableObject
     public bool canBeHealth;
     public bool canBeFloorChange;
     public bool canBeBoss;
+    public bool canBeNormal;
     public int difficultyRating;
 
     [Header("Camera")]
