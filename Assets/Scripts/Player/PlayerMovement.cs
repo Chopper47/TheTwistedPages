@@ -135,7 +135,7 @@ public class PlayerMovement: MonoBehaviour
         isRolling = true;
         canRoll = false;
         isInvincible = true;
-        AM.Play("Dash", Main);
+        //AM.Play("Dash", Main);
 
         moveAmount = moveAction.ReadValue<Vector2>();
         Vector3 inputDirection = new Vector3(moveAmount.x, 0f, moveAmount.y).normalized;
