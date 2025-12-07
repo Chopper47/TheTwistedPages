@@ -6,6 +6,7 @@ public class EnemyHitbox : MonoBehaviour
     [SerializeField] EnemyState states;
     [SerializeField] int dmg;
 
+    private bool ignorePlayer = false;
     private void Awake()
     {
         if(enemyHp == null) { enemyHp = GetComponent<EnemyHealth>(); }
@@ -17,8 +18,14 @@ public class EnemyHitbox : MonoBehaviour
         return states.CurrentState();
     }
 
+    public void SetIgnore(bool newIgnorePlayer)
+    {
+        ignorePlayer = newIgnorePlayer;
+    }
+
     public void OnTriggerEnter(Collider other)
     {
+        if(ignorePlayer) { return; }
         PlayerHealth player = other.GetComponent<PlayerHealth>();
 
         if(player != null && !PlayerMovement.IsInvincible()) 

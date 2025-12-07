@@ -41,11 +41,11 @@ public class Flower : MonoBehaviour
     [Header("References")]
     [SerializeField] private ChaseAgent chase;
     [SerializeField] private Animator animator;
+    private EnemyHitbox enemyHb;
 
     [Header("Particle references")]
     [SerializeField] private Transform groundParticlePosition;
     [SerializeField] private ParticleSystem groundParticle;
-    private CapsuleCollider hitbox;
 
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
@@ -53,7 +53,7 @@ public class Flower : MonoBehaviour
 
     private void Awake()
     {
-        hitbox = GetComponent<CapsuleCollider>();
+        enemyHb = GetComponent<EnemyHitbox>();
     }
 
     private void Update()
@@ -136,12 +136,13 @@ public class Flower : MonoBehaviour
 
             while (timer < timeForChaseStart)
             {
-                hitbox.center = Vector3.Lerp(new Vector3(0,0.75f,0), new Vector3(0,-1.1f,0), timer/timeForChaseStart);
+                //hitbox.center = Vector3.Lerp(new Vector3(0,0.75f,0), new Vector3(0,-1.1f,0), timer/timeForChaseStart);
                 timer += Time.deltaTime;
                 yield return null;
             }
             burrowAnimation = false;
             //groundParticle.transform.localPosition = Vector3.up * 1.2f;
+            enemyHb.SetIgnore(true);
             animator.SetBool("isBurrowing", false);
             groundParticle.Play();
         }
@@ -151,14 +152,14 @@ public class Flower : MonoBehaviour
 
             float timer = 0f;
 
-            while (timer < timeForChaseStart)
+            while (timer < timeForShootingStart)
             {
-                hitbox.center = Vector3.Lerp(new Vector3(0, -1.1f, 0), new Vector3(0, 0.75f, 0), timer / timeForChaseStart);
+                //hitbox.center = Vector3.Lerp(new Vector3(0, -1.1f, 0), new Vector3(0, 0.75f, 0), timer / timeForChaseStart);
                 timer += Time.deltaTime;
                 yield return null;
             }
 
-            yield return new WaitForSeconds(timeForShootingStart);
+            enemyHb.SetIgnore(false);
             //groundParticle.transform.localPosition = Vector3.zero;
             burrowAnimation = false;
             animator.SetBool("isComingOut", false);

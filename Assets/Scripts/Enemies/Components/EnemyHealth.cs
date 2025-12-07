@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
         {
             Die();
-            AM.Play(identity, null);
+            //AM.Play(identity, null);
         }
     }
 
