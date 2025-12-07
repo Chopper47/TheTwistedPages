@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class HealthObject : MonoBehaviour
 {
-    [SerializeField] private int healAmount = 1;
+    [SerializeField] private int healAmount = 2;
 
     private bool playerInRange = false;
     private PlayerHealth playerHealth;
