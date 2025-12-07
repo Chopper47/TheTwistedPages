@@ -298,7 +298,9 @@ public class LevelGenerator : MonoBehaviour
         // Fallback in case there are not at least three depth levels in the generated grid.
         if (healthCandidates.Count == 0)
         {
-            healthCandidates.AddRange(normalRooms);
+            Debug.LogWarning("There are not at least three depth levels in the generated level. Regenerating level...");
+            GenerateLevel();
+            return;
         }
 
         RoomInstance healthRoom = healthCandidates[Random.Range(0, healthCandidates.Count)];
