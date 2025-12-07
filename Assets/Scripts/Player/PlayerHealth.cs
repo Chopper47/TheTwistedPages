@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
-        AM.Play("Hurt", Main);
+        //AM.Play("Hurt", Main);
         UpdateHealthUI();
         StartCoroutine(TemporaryInvincibility());
     }

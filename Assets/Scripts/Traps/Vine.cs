@@ -52,7 +52,7 @@ public class VineTrap : Trap
 
     private IEnumerator MoveToTarget(Transform target)
     {
-        AM.Play("Vines", Main);
+        //AM.Play("Vines", Main);
         while (Vector3.Distance(transform.position, target.position) > 0.05f)
         {
             
