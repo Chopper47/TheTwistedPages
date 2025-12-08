@@ -48,6 +48,11 @@ public class RoomTransition : MonoBehaviour
         // Activate the new room.
         nextRoomController.ActivateRoom();
 
+        if (ReferenceManager.Instance.minimapManager != null)
+        {
+            ReferenceManager.Instance.minimapManager.SetCurrentRoom(nextRoom.gridPosition);
+        }
+
         Vector3 finalPlayerPos = player.position;
 
         CameraController.Instance.MoveToRoom(nextRoomController, finalPlayerPos);
