@@ -42,7 +42,7 @@ public class UpgradeManager : MonoBehaviour
         currentUpgradeStats.health = healthUpgradeLv;
         currentUpgradeStats.speed = speedUpgradeLv;
         currentUpgradeStats.bulletTime = bulletTimeUpgradeLv;
-        currentUpgradeStats.pushPower = pushPowerUpgradeLv;
+        currentUpgradeStats.PushPower = pushPowerUpgradeLv;
     }
 
     public void UpgradeHealth()
@@ -52,7 +52,7 @@ public class UpgradeManager : MonoBehaviour
             healthUpgradeLv++;
             UpdateScriptableObjectStats();
             currencyManager.RemoveCurrency(costToUpgradeHealth);
-            if(hpText != null) hpText.text = "Level: " + healthUpgradeLv;
+            hpText.text = "Level: " + healthUpgradeLv;
         }
     }
     public void UpgradeSpeed()
@@ -62,7 +62,7 @@ public class UpgradeManager : MonoBehaviour
             speedUpgradeLv++;
             UpdateScriptableObjectStats();
             currencyManager.RemoveCurrency(costToUpgradeSpeed);
-            if (speedText != null) speedText.text = "Level: " + speedUpgradeLv;
+            speedText.text = "Level: " + speedUpgradeLv;
 
         }
 
@@ -74,7 +74,7 @@ public class UpgradeManager : MonoBehaviour
             bulletTimeUpgradeLv++;
             UpdateScriptableObjectStats();
             currencyManager.RemoveCurrency(costToUpgradeBulletTime);
-            if (bulletTimeText != null) bulletTimeText.text = "Level: " + bulletTimeUpgradeLv;
+            bulletTimeText.text = "Level: " + bulletTimeUpgradeLv;
 
         }
 
