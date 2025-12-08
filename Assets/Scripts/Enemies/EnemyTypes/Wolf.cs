@@ -29,7 +29,6 @@ public class Wolf : CollisionRefresh
     [SerializeField] float timeForStepback = 0f;
     //Distance of the stepback, never too similar to launchDistance
     [SerializeField] float stepbackDistance = 3.5f;
-    [SerializeField] float stepbackForce = 2f;
     [SerializeField] float stepbackCD = 3.5f;
 
     [SerializeField] float stepbackDuration = 0.5f;
@@ -234,7 +233,7 @@ public class Wolf : CollisionRefresh
 
         transform.LookAt(new Vector3(chase.TargetPosition().x, transform.position.y, chase.TargetPosition().z));
 
-        Vector3 sbDir = (new Vector3(chase.TargetPosition().x - transform.position.x, 0f, chase.TargetPosition().z - transform.position.z)).normalized;
+        Vector3 launchDir = (new Vector3(chase.TargetPosition().x - transform.position.x, 0f, chase.TargetPosition().z - transform.position.z)).normalized;
 
         launchStartingPos = transform.position;
 
