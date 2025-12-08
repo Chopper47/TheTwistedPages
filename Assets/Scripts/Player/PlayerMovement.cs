@@ -9,6 +9,8 @@ public class PlayerMovement: MonoBehaviour
     private CharacterController controller;
 
     private Vector3 direction;
+    [SerializeField] private UpgradeStats upgradeStatsScriptable;
+
 
     [Header("Movement")]
     [SerializeField] private float baseMoveSpeed = 10.0f;
@@ -72,6 +74,7 @@ public class PlayerMovement: MonoBehaviour
 
     private void Start()
     {
+        baseMoveSpeed += upgradeStatsScriptable.speed;
         controller = GetComponent<CharacterController>();
         Debug.Log("Position at Start: " + transform.position);
 

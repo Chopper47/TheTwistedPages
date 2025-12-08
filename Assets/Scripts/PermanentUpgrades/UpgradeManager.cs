@@ -47,7 +47,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void UpgradeHealth()
     {
-        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeHealth))
+        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeHealth) && healthUpgradeLv < 5)
         {
             healthUpgradeLv++;
             UpdateScriptableObjectStats();
@@ -57,7 +57,7 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradeSpeed()
     {
-        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeSpeed))
+        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeSpeed) && speedUpgradeLv < 5)
         {
             speedUpgradeLv++;
             UpdateScriptableObjectStats();
@@ -69,7 +69,7 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradeBulletTime()
     {
-        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeBulletTime))
+        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeBulletTime) && bulletTimeUpgradeLv < 5)
         {
             bulletTimeUpgradeLv++;
             UpdateScriptableObjectStats();

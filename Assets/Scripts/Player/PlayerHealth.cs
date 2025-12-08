@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject[] lives;
 
     [SerializeField] private float invincibilityDuration = 0.5f;
+    [SerializeField] private UpgradeStats upgradeStatsScriptable;
 
     private GameObject gameOverMenu;
 
@@ -25,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        maxHealth += upgradeStatsScriptable.health;
         currentHealth = maxHealth;
 
         AM = FindAnyObjectByType<AudioManager>();
