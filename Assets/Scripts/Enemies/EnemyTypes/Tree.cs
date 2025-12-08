@@ -25,7 +25,8 @@ public class Tree : MonoBehaviour
     [SerializeField] private float slamRadius = 4.0f;
     [SerializeField] private int slamDamage = 1;
     [SerializeField] private float slamDelay = 1.0f;
-
+    [SerializeField] private float slamRotationAngle = 90.0f;
+    [SerializeField] private float slamRotationSpeed = 3.0f;
 
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
@@ -126,6 +127,20 @@ public class Tree : MonoBehaviour
         yield return null;
 
         enemyState.AttackState();
+
+        Vector3 directionToPlayer = (ReferenceManager.Instance.player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+        Quaternion startRotation = transform.rotation;
+        Quaternion fallRotation = Quaternion.Euler(slamRotationAngle, 0f, 0f);
+        Quaternion targetRotation = lookRotation * fallRotation;
+
+        float timer = 0f;
+        while (timer < 1)
+        {
+            timer += Time.deltaTime * slamRotationSpeed;
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, timer);
+            yield return null;
+        }
 
         yield return new WaitForSeconds(slamDelay);
 

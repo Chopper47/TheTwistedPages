@@ -17,6 +17,13 @@ public class MinimapManager : MonoBehaviour
 
     public void InitializeMinimap(Dictionary<Vector2Int, RoomInstance> generatedRooms)
     {
+        foreach (Transform child in minimapContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        icons.Clear();
+
         rooms = generatedRooms;
 
         foreach (KeyValuePair<Vector2Int, RoomInstance> pair in generatedRooms)

@@ -84,7 +84,7 @@ public class RoomTransition : MonoBehaviour
         if (controller != null)
         {
             controller.enabled = false;
-            player.position = targetPosition - Vector3.up * 0.5f;
+            player.position = new Vector3(targetPosition.x, 0f, targetPosition.z);
             player.forward = -exitDoor.transform.forward;
             controller.enabled = true;
         }

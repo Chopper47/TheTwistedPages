@@ -23,6 +23,11 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     public void GenerateLevel()
     {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         generatedRooms.Clear();
 
         startingPosition = new Vector2Int(gridDimensions.x / 2, gridDimensions.y / 2);

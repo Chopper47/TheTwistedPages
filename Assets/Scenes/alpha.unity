@@ -1464,7 +1464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4595116479599289585, guid: b40fc65d90d127840bb2daa1f3a46cc3, type: 3}
       propertyPath: maxRooms
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4595116479599289585, guid: b40fc65d90d127840bb2daa1f3a46cc3, type: 3}
       propertyPath: m_Enabled
@@ -1778,6 +1778,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6149048189306693294, guid: 80ba112048123ae4eac1d0cd5fb07812, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6575319390150887800, guid: 80ba112048123ae4eac1d0cd5fb07812, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1817,14 +1821,6 @@ PrefabInstance:
     - target: {fileID: 6575319390150887800, guid: 80ba112048123ae4eac1d0cd5fb07812, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7317932402158224410, guid: 80ba112048123ae4eac1d0cd5fb07812, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 7317932402158224410, guid: 80ba112048123ae4eac1d0cd5fb07812, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2557,6 +2553,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: maxHealth
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: gameOverMenu
       value: 
       objectReference: {fileID: 1362583220}
@@ -2572,6 +2572,10 @@ PrefabInstance:
       propertyPath: 'lives.Array.data[2]'
       value: 
       objectReference: {fileID: 1692217609}
+    - target: {fileID: 8144846712389581049, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 58358ce9af7cb7b47b48698a85cd08c2, type: 2}
     - target: {fileID: 8650172336370932488, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

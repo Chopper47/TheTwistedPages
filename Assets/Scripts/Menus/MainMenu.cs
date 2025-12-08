@@ -15,6 +15,14 @@ public class MainMenu : MonoBehaviour
     [Header("Upgrades Menu")]
     public GameObject upgradesMenu;
 
+    private void Awake()
+    {
+        mainMenu.SetActive(true);
+        optionsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
+        upgradesMenu.SetActive(false);
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("alpha");
