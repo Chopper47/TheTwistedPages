@@ -34,8 +34,6 @@ public class RoomController : MonoBehaviour
     [Header("Music")]
     private MusicManager musicManager;
     private int musicIndex = 1;
-    
-   
 
     private void Awake()
     {
@@ -69,33 +67,34 @@ public class RoomController : MonoBehaviour
     {
         //PlayerFall player = FindFirstObjectByType<PlayerFall>();
         //player.SetRoomRespawn(respawnPoint);
-        gnome=GetComponentInChildren<Gnome>();
-
-
-        if (gnome != null)
-        {
-            gnome.Laugh();
-        }
-        vines.AddRange(GetComponentsInChildren<VineTrap>()); 
-        if (vines.Count > 0)
-        {
-            for (int i = 0; i < vines.Count; i++)
-            {
-                vines[i].Main.volume = 1f;
-            }
-        }
 
         if (isActive || isCleared)
         {
             return;
         }
 
+        isActive = true;
+        enemiesRemaining = 0;
+
+        gnome = GetComponentInChildren<Gnome>();
+        if (gnome != null)
+        {
+            gnome.Laugh();
+        }
+
+        vines.AddRange(GetComponentsInChildren<VineTrap>()); 
+        if (vines.Count > 0)
+        {
+            for (int i = 0; i < vines.Count; i++)
+            {
+                vines[i].Main.volume = 1.0f;
+            }
+        }
+
         if (minimapManager != null)
         {
             minimapManager.SetCurrentRoom(roomInstance.gridPosition);
         }
-
-        isActive = true;
 
         totalWaves = roomPreset.difficultyRating;
         currentWave = 0;
@@ -110,11 +109,12 @@ public class RoomController : MonoBehaviour
             foreach (DoorController door in doors)
             {
                 door.CloseDoor();
-                if (musicIndex==1)
-                {
-                    musicManager.SwitchStageSynced(musicIndex);
-                    musicIndex = 0;
-                }
+            }
+
+            if (musicIndex == 1)
+            {
+                musicManager.SwitchStageSynced(musicIndex);
+                musicIndex = 0;
             }
         }
         else
@@ -122,7 +122,6 @@ public class RoomController : MonoBehaviour
             OpenDoors();
             isCleared = true;
             musicManager.SwitchStageSynced(0);
-            Debug.Log("Salir");
         }
     }
 

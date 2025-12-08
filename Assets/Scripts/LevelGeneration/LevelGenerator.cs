@@ -18,10 +18,30 @@ public class LevelGenerator : MonoBehaviour
 
     [HideInInspector] public bool isLastFloor = false;
 
+    public void TryGenerateLevel()
+    {
+        int maxAttempts = 20;
+
+        for (int attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            if (GenerateLevel())
+            {
+                return;
+            }
+
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        Debug.LogError("Level generation failed after many attempts.");
+    }
+
     /// <summary>
     /// Generates a connected set of rooms in the grid using the DFS algorithm.
     /// </summary>
-    public void GenerateLevel()
+    public bool GenerateLevel()
     {
         foreach (Transform child in transform)
         {
@@ -72,8 +92,7 @@ public class LevelGenerator : MonoBehaviour
         if (!insideGrid || !isEmpty)
         {
             Debug.LogWarning("Boss position invalid or occupied. Regenerating level...");
-            GenerateLevel();
-            return;
+            return false;
         }
 
         // Determine the special room type, whether it's a Boss or FloorChange room.
@@ -95,7 +114,10 @@ public class LevelGenerator : MonoBehaviour
         generatedRooms.Add(finalRoomPosition, finalRoom);
 
         // Assign the Health and Shop rooms.
-        AssignSpecialRooms();
+        if (!AssignSpecialRooms())
+        {
+            return false;
+        }
 
         // Instantiate rooms in the 3D world.
         foreach (RoomInstance room in generatedRooms.Values)
@@ -160,6 +182,8 @@ public class LevelGenerator : MonoBehaviour
         {
             minimapManager.InitializeMinimap(generatedRooms);
         }
+
+        return true;
     }
 
     private Dictionary<Vector2Int, int> BFS(Vector2Int origin)
@@ -278,7 +302,7 @@ public class LevelGenerator : MonoBehaviour
     /// <summary>
     /// Randomly assigns one Shop room and one Health room from the normal rooms.
     /// </summary>
-    private void AssignSpecialRooms()
+    private bool AssignSpecialRooms()
     {
         List<RoomInstance> normalRooms = new List<RoomInstance>();
 
@@ -292,7 +316,7 @@ public class LevelGenerator : MonoBehaviour
 
         if (normalRooms.Count <= 2)
         {
-            return;
+            return true;
         }
 
         // Shop room.
@@ -322,13 +346,14 @@ public class LevelGenerator : MonoBehaviour
         if (healthCandidates.Count == 0)
         {
             Debug.LogWarning("There are not at least three depth levels in the generated level. Regenerating level...");
-            GenerateLevel();
-            return;
+            return false;
         }
 
         RoomInstance healthRoom = healthCandidates[Random.Range(0, healthCandidates.Count)];
         healthRoom.roomType = RoomType.Health;
         healthRoom.roomPreset = GetRandomRoomPreset(RoomType.Health, healthRoom.gridPosition);
+
+        return true;
     }
 
 

@@ -46,7 +46,7 @@ public class FloorManager : MonoBehaviour
 
         Debug.Log($"Generating floor {currentFloor}/{totalFloors}.");
 
-        levelGenerator.GenerateLevel();
+        levelGenerator.TryGenerateLevel();
     }
 
     public void GoToNextFloor()

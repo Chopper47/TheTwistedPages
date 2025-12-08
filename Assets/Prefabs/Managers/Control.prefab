@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7906093084524837954}
   - component: {fileID: 2919411878243080348}
   - component: {fileID: 5573690738016057954}
-  - component: {fileID: 2349617095381477479}
   - component: {fileID: 9142341837463809789}
   - component: {fileID: 1466915887811757056}
   - component: {fileID: 7203878240146051107}
@@ -66,7 +65,10 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   isPaused: 0
   pauseMenu: {fileID: 0}
+  currencyUI: {fileID: 0}
   optionsMenu: {fileID: 0}
+  AM: {fileID: 0}
+  Main: {fileID: 0}
 --- !u!114 &5573690738016057954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,19 +86,6 @@ MonoBehaviour:
   graphicsMenu: {fileID: 0}
   controllerMenu: {fileID: 0}
   keyboardMenu: {fileID: 0}
---- !u!114 &2349617095381477479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4886736564870195055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 635adede7c67fdf449db4be38a58f455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCurrencyAmount: 0
 --- !u!114 &9142341837463809789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,8 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9652d0835c39fd24d8947cde6224cd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelGenerator: {fileID: 0}
-  player: {fileID: 0}
 --- !u!114 &1466915887811757056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,8 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f848949847994354bb195886246e4b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   playerMovement: {fileID: 0}
   playerHealth: {fileID: 0}
+  levelGenerator: {fileID: 0}
   minimapManager: {fileID: 1466915887811757056}
   musicManager: {fileID: 0}
 --- !u!114 &8717961186259529469
