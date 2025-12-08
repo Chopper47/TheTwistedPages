@@ -16,14 +16,12 @@ public class Wolf : CollisionRefresh
     [SerializeField] float launchDistance = 5f;
     [SerializeField] float launchCD = 1.5f;
     //Acceleration and deceleration values
-
-    [SerializeField] float launchAccelerateTime = .125f;
+    [SerializeField] float launchDuration = .6f;
     [SerializeField] float launchAcceleratePercentage = .1f;
     
-    [SerializeField] float launchConstantTime = .258f;
     [SerializeField] float launchConstantPercentage = .85f;
 
-    [SerializeField] float launchDecelerateTime = .05f;
+    [SerializeField] float launchDeceleratePercentage = .05f;
     bool launch = false;
     bool canLaunch = true;
 
@@ -34,13 +32,12 @@ public class Wolf : CollisionRefresh
     [SerializeField] float stepbackForce = 2f;
     [SerializeField] float stepbackCD = 3.5f;
 
-    [SerializeField] float stepbackAccelerateTime = .125f;
+    [SerializeField] float stepbackDuration = 0.5f;
     [SerializeField] float stepbackAcceleratePercentage = .1f;
 
-    [SerializeField] float stepbackConstantTime = .258f;
     [SerializeField] float stepbackConstantPercentage = .85f;
     
-    [SerializeField] float stepbackDecelerateTime = .05f;
+    [SerializeField] float stepbackDeceleratePercentage = .05f;
 
     [SerializeField] float stepbackTimeConsecutive = 0.75f;
     [SerializeField] int maxConsecutive = 2;
@@ -109,6 +106,7 @@ public class Wolf : CollisionRefresh
 
         if(launch) 
         {
+            canLaunch = false;
             if(checkConsecutiveStepback)
             {
                 //UnityEngine.Debug.Log("revenge");
@@ -118,7 +116,6 @@ public class Wolf : CollisionRefresh
             }
 
             states.AttackState();
-            canLaunch = false;
             StartCoroutine(WaitForLaunch());
         }
     }
@@ -141,7 +138,7 @@ public class Wolf : CollisionRefresh
 
     public bool CanStepback()
     { 
-        return stepback; 
+        return canStepback; 
     }
 
     public bool IsLaunching()
@@ -181,9 +178,9 @@ public class Wolf : CollisionRefresh
 
         float time = 0;                                                                                   //Acceleration
 
-        while (time < stepbackAccelerateTime)
+        while (time < stepbackDuration * stepbackAcceleratePercentage)
         {
-            transform.position = Vector3.Lerp(stepbackStartingPos, stepbackStartingPos + sbDir * Vector3.Distance(stepbackStartingPos, stepbackEndingPos) * stepbackAcceleratePercentage, time/stepbackAccelerateTime);
+            transform.position = Vector3.Lerp(stepbackStartingPos, stepbackStartingPos + sbDir * Vector3.Distance(stepbackStartingPos, stepbackEndingPos) * stepbackAcceleratePercentage, time/ stepbackDuration * stepbackAcceleratePercentage);
             time += Time.deltaTime;
             yield return null;
         }
@@ -191,9 +188,9 @@ public class Wolf : CollisionRefresh
         //Debug.LogWarning("Constant");
         time = 0;
         Vector3 currentPos = transform.position;
-        while (time < stepbackConstantTime)                                                                       //Time in constant speed
+        while (time < stepbackDuration * stepbackConstantPercentage)                                                                       //Time in constant speed
         {
-            transform.position = Vector3.Lerp(currentPos, currentPos + sbDir * Vector3.Distance(stepbackStartingPos, stepbackEndingPos) * stepbackConstantPercentage, time/stepbackConstantTime);
+            transform.position = Vector3.Lerp(currentPos, currentPos + sbDir * Vector3.Distance(stepbackStartingPos, stepbackEndingPos) * stepbackConstantPercentage, time/ stepbackDuration * stepbackConstantPercentage);
             time += Time.deltaTime;
             yield return null;
         }
@@ -202,9 +199,9 @@ public class Wolf : CollisionRefresh
         time = 0;
         currentPos = transform.position;
 
-        while (time < stepbackDecelerateTime)                                                                       //Deceleration
+        while (time < stepbackDuration * stepbackDeceleratePercentage)                                                                       //Deceleration
         {
-            transform.position = Vector3.Lerp(currentPos, stepbackEndingPos, time/stepbackDecelerateTime);
+            transform.position = Vector3.Lerp(currentPos, stepbackEndingPos, time/ stepbackDuration * stepbackDeceleratePercentage);
             time += Time.deltaTime;
             yield return null;
         }
@@ -257,9 +254,9 @@ public class Wolf : CollisionRefresh
         float time = 0;                                                                                   //Acceleration
         StopCoroutine(Panting());
         AM.Play("Growl", Main);
-        while (time < launchAccelerateTime)
+        while (time < launchDuration * launchAcceleratePercentage)
         {
-            transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchAcceleratePercentage , time/launchAccelerateTime);
+            transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchAcceleratePercentage , time/ launchDuration * launchAcceleratePercentage);
             time += Time.deltaTime;
             yield return null;
         }
@@ -267,9 +264,9 @@ public class Wolf : CollisionRefresh
         Vector3 currentPos = transform.position;
         time = 0;
 
-        while (time < launchConstantTime)                                                                       //Time in constant speed
+        while (time < launchDuration * launchConstantPercentage)                                                                       //Time in constant speed
         {
-            transform.position = Vector3.Lerp(currentPos, currentPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchConstantPercentage, time/launchConstantTime);
+            transform.position = Vector3.Lerp(currentPos, currentPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchConstantPercentage, time/ launchDuration * launchConstantPercentage);
             time += Time.deltaTime;
             yield return null;
         }
@@ -277,9 +274,9 @@ public class Wolf : CollisionRefresh
         time = 0;
         currentPos = transform.position;
 
-        while (time < launchDecelerateTime)                                                                       //Deceleration
+        while (time < launchDuration * launchDeceleratePercentage)                                                                       //Deceleration
         {
-            transform.position = Vector3.Lerp(currentPos, launchEndingPos, time/launchDecelerateTime);
+            transform.position = Vector3.Lerp(currentPos, launchEndingPos, time/ launchDuration * launchDeceleratePercentage);
             time += Time.deltaTime;
             yield return null;
         }
