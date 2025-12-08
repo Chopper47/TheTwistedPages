@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7586116038264632811}
   - component: {fileID: 7920004095976460779}
   - component: {fileID: 7502791869187746219}
-  - component: {fileID: 6542090844630663665}
+  - component: {fileID: 4132282932665701656}
   m_Layer: 0
   m_Name: BearTrap
   m_TagString: Untagged
@@ -45,7 +45,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.18, y: 1, z: 0.18}
+  m_Extents: {x: 0.3, y: 1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -67,8 +67,9 @@ MonoBehaviour:
   damageOnEnter: 1
   damageOverTime: 0
   damageRate: 1
---- !u!65 &6542090844630663665
-BoxCollider:
+  destroyDelay: 1.5
+--- !u!136 &4132282932665701656
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -82,11 +83,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
+  serializedVersion: 2
+  m_Radius: 0.45
+  m_Height: 3
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8133828378413361960
 PrefabInstance:

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BearTrap : Trap
 {
+    [SerializeField] private float destroyDelay = 1.5f;
+
     protected override void AfterActivation()
     {
         StartCoroutine(DestroyCountdown());
@@ -10,7 +12,7 @@ public class BearTrap : Trap
 
     private IEnumerator DestroyCountdown()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(destroyDelay);
 
         Destroy(gameObject);
     }
