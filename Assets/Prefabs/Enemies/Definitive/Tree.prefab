@@ -87,10 +87,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 62
   m_CollisionDetection: 0
 --- !u!195 &3953412257303193511
 NavMeshAgent:
@@ -193,7 +193,9 @@ MonoBehaviour:
   appleAttackCooldown: 2
   slamRadius: 4
   slamDamage: 1
-  slamDelay: 1
+  slamDelay: 0.1
+  slamRotationAngle: 90
+  slamRotationSpeed: 1
   AM: {fileID: 0}
   Main: {fileID: 0}
 --- !u!1 &998641161482489720

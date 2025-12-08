@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Tree : MonoBehaviour
 {
@@ -119,26 +121,22 @@ public class Tree : MonoBehaviour
     private IEnumerator PerformPhysicalAttack()
     {
         isSlamming = true;
-        AM.Play("Crush", Main);
+        //AM.Play("Crush", Main);
         chaseAgent.StopChase();
         rigidBody.linearVelocity = Vector3.zero;
         rigidBody.angularVelocity = Vector3.zero;
 
-        yield return null;
-
         enemyState.AttackState();
 
-        Vector3 directionToPlayer = (ReferenceManager.Instance.player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-        Quaternion startRotation = transform.rotation;
-        Quaternion fallRotation = Quaternion.Euler(slamRotationAngle, 0f, 0f);
-        Quaternion targetRotation = lookRotation * fallRotation;
+        GetComponent<NavMeshAgent>().enabled = false;
+
+        transform.LookAt(new Vector3(chaseAgent.TargetPosition().x, transform.position.y, chaseAgent.TargetPosition().z));
 
         float timer = 0f;
         while (timer < 1)
         {
             timer += Time.deltaTime * slamRotationSpeed;
-            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, timer);
+            transform.Rotate(Vector3.right, slamRotationAngle*Time.deltaTime * slamRotationSpeed);
             yield return null;
         }
 

@@ -27,11 +27,11 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
 
+        AM = FindAnyObjectByType<AudioManager>();
+        Main = GetComponentInChildren<AudioSource>();
+
         gameOverMenu = UIManager.Instance.gameOverMenu;
         musicManager = ReferenceManager.Instance.musicManager;
-
-        AM = FindFirstObjectByType<AudioManager>();
-        Main = GetComponentInChildren<AudioSource>();
     }
 
     private void Die()
