@@ -111,7 +111,8 @@ GameObject:
   - component: {fileID: 1094622276861168188}
   - component: {fileID: 7208710851342241362}
   - component: {fileID: 7382405889405206034}
-  m_Layer: 7
+  - component: {fileID: 8174162743260364930}
+  m_Layer: 6
   m_Name: WallTrapTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,6 +171,33 @@ MonoBehaviour:
   damageOnEnter: 1
   damageOverTime: 0
   damageRate: 1
+--- !u!54 &8174162743260364930
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893056713767738428}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1001 &2803078297852887917
 PrefabInstance:
   m_ObjectHideFlags: 0

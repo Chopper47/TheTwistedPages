@@ -53,6 +53,7 @@ public class Wolf : CollisionRefresh
 
     [SerializeField] float raycastOffset = 0.7f;
     [SerializeField] LayerMask mask;
+    [SerializeField] LayerMask triggerMask;
 
     Rigidbody rb;
     EnemyHealth enemyHealth;
@@ -242,7 +243,15 @@ public class Wolf : CollisionRefresh
         if (Physics.Raycast(transform.position, launchDir, out RaycastHit hit, launchDistance + raycastOffset, mask))
         {
             //Debug.LogWarning("Found wall in launch");
-            launchEndingPos = transform.position + launchDir * (Vector3.Distance(transform.position, hit.point) - raycastOffset);
+
+            float raycastOffsetApplied = raycastOffset;
+
+            if(Physics.Raycast(transform.position, launchDir, out RaycastHit triggerHit, launchDistance + raycastOffset, triggerMask))
+            {
+                raycastOffsetApplied = 0f;
+            }
+
+            launchEndingPos = transform.position + launchDir * (Vector3.Distance(transform.position, hit.point) - raycastOffsetApplied);
         }
         else
         {

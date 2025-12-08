@@ -27,6 +27,29 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         maxHealth += upgradeStatsScriptable.health;
+
+        Debug.Log(upgradeStatsScriptable.health);
+
+        if(maxHealth <= 8)
+        {
+            int healthAmount = maxHealth / 2;
+
+            if(maxHealth%2 != 0 )
+            {
+                healthAmount++;
+            }
+
+            for (int i = 0; i < healthAmount; i++)
+            {
+                lives[i].SetActive(true);            
+            }
+
+            if(maxHealth % 2 != 0) 
+            { 
+                lives[healthAmount-1].GetComponent<Image>().sprite = halfLife;
+            }
+        }
+
         currentHealth = maxHealth;
 
         AM = FindAnyObjectByType<AudioManager>();
@@ -92,7 +115,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     private void UpdateHealthUI()
-    {
+    {   
         for (int i = 0; i < lives.Length; i++)
         {
             Image lifeImage = lives[i].GetComponent<Image>();
