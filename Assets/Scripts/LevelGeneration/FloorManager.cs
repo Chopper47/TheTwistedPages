@@ -12,6 +12,7 @@ public class FloorManager : MonoBehaviour
     private bool isFirstFloor = true;
 
     [Header("References")]
+    [SerializeField] GameObject alphaEndText;
     private LevelGenerator levelGenerator;
     private Transform player;
     private CharacterController controller;
@@ -53,6 +54,7 @@ public class FloorManager : MonoBehaviour
     {
         if (currentFloor >= totalFloors)
         {
+            alphaEndText.SetActive(true);
             return;
         }
 
