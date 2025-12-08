@@ -64,6 +64,10 @@ public class Gnome : MonoBehaviour
         }
     }
 
+    public void Laugh()
+    {
+        AM.Play("Laugh", Main);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<EnemyHitbox>())

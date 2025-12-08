@@ -28,6 +28,7 @@ public class VineTrap : Trap
         StartCoroutine(VineCycle());
         AM = FindFirstObjectByType<AudioManager>();
         Main = GetComponentInChildren<AudioSource>();
+        Main.volume = 0;
     }
 
     private IEnumerator VineCycle()

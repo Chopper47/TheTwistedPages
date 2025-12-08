@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
+    private Gnome gnome;
+   
+    private List<VineTrap> vines=new List<VineTrap>();
     [Header("Room components")]
     public RoomPreset roomPreset;
     public RoomInstance roomInstance;
@@ -31,6 +34,8 @@ public class RoomController : MonoBehaviour
     [Header("Music")]
     private MusicManager musicManager;
     private int musicIndex = 1;
+    
+   
 
     private void Awake()
     {
@@ -64,7 +69,22 @@ public class RoomController : MonoBehaviour
     {
         //PlayerFall player = FindFirstObjectByType<PlayerFall>();
         //player.SetRoomRespawn(respawnPoint);
-        
+        gnome=GetComponentInChildren<Gnome>();
+
+
+        if (gnome != null)
+        {
+            gnome.Laugh();
+        }
+        vines.AddRange(GetComponentsInChildren<VineTrap>()); 
+        if (vines.Count > 0)
+        {
+            for (int i = 0; i < vines.Count; i++)
+            {
+                vines[i].Main.volume = 1f;
+            }
+        }
+
         if (isActive || isCleared)
         {
             return;
@@ -219,6 +239,14 @@ public class RoomController : MonoBehaviour
         foreach (DoorController door in doors)
         {
             door.OpenDoor();
+        }
+        if (vines.Count > 0)
+        {
+            for (int i = 0; i < vines.Count; i++)
+            {
+                vines[i].Main.volume = 0f;
+            }
+            vines.Clear();
         }
     }
 
