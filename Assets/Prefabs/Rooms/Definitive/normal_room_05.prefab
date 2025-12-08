@@ -148,7 +148,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 6011e2e676d4d7947b1205d07e2a4459, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 69bf89fb5c2a05b47a6deaab34713c19, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &5816445436897936887
 GameObject:
@@ -1114,6 +1114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallTrap
       objectReference: {fileID: 0}
+    - target: {fileID: 1437944306182440678, guid: 906e3525e1ae56b41b4d37f9dee6b939, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7073064722091771585, guid: 906e3525e1ae56b41b4d37f9dee6b939, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.32
@@ -1175,6 +1179,10 @@ PrefabInstance:
     - target: {fileID: 1437944306182440678, guid: 906e3525e1ae56b41b4d37f9dee6b939, type: 3}
       propertyPath: m_Name
       value: WallTrap (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437944306182440678, guid: 906e3525e1ae56b41b4d37f9dee6b939, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7073064722091771585, guid: 906e3525e1ae56b41b4d37f9dee6b939, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1327,6 +1335,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2769909738796488192, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3005385244106275522, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: speed
       value: 2
@@ -1345,7 +1357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7136077
+      value: -0.82000005
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1353,11 +1365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.9736319
+      value: -5.28
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8327205
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1365,7 +1377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5536936
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1623,6 +1635,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes
       objectReference: {fileID: 0}
+    - target: {fileID: 6929122168279413296, guid: c1bdc2e807ab9904790ca3e8ad3d6d73, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1643,7 +1659,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.11
+      value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1651,11 +1667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.49
+      value: 6.96
       objectReference: {fileID: 0}
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9941016
       objectReference: {fileID: 0}
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1663,7 +1679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.10845316
       objectReference: {fileID: 0}
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1675,7 +1691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -12.452
       objectReference: {fileID: 0}
     - target: {fileID: 773282454587126368, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1684,6 +1700,10 @@ PrefabInstance:
     - target: {fileID: 8157026569886213114, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
       propertyPath: m_Name
       value: MushroomTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 8157026569886213114, guid: 2f6606445aced0e448a889fd703f06f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1706,6 +1726,10 @@ PrefabInstance:
     - target: {fileID: 6375640608989106643, guid: 5e05c5f6b2cee214a8ee9c96d3b877ec, type: 3}
       propertyPath: m_Name
       value: BearTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375640608989106643, guid: 5e05c5f6b2cee214a8ee9c96d3b877ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7586116038264632811, guid: 5e05c5f6b2cee214a8ee9c96d3b877ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1769,6 +1793,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gnome
       objectReference: {fileID: 0}
+    - target: {fileID: 2769909738796488192, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8160117325452997489, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_Target
       value: 
@@ -1791,7 +1819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.2264078
+      value: 2.226408
       objectReference: {fileID: 0}
     - target: {fileID: 8488558688111427487, guid: d3626b1d0d872c548b0184c04735439b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2037,6 +2065,10 @@ PrefabInstance:
     - target: {fileID: 6929122168279413296, guid: c1bdc2e807ab9904790ca3e8ad3d6d73, type: 3}
       propertyPath: m_Name
       value: Spikes (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929122168279413296, guid: c1bdc2e807ab9904790ca3e8ad3d6d73, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
