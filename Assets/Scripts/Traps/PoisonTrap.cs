@@ -4,6 +4,7 @@ using UnityEngine;
 public class PoisonTrap : Trap
 {
     public GameObject poisonCloud;
+    public GameObject model;
     public AudioManager AM;
     public AudioSource Main;
 
@@ -22,7 +23,7 @@ public class PoisonTrap : Trap
 
     private IEnumerator DestroyCountdown()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        model.SetActive(false);
 
         yield return new WaitForSeconds(5.0f);
 
