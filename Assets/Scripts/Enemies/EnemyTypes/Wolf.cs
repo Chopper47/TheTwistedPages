@@ -74,7 +74,7 @@ public class Wolf : CollisionRefresh
         states = GetComponent<EnemyState>();
         Main=GetComponent<AudioSource>();
         AM=FindFirstObjectByType<AudioManager>();
-        StartCoroutine(Panting());
+        //StartCoroutine(Panting());
     }
 
     /// <summary>
@@ -157,7 +157,7 @@ public class Wolf : CollisionRefresh
 
         transform.LookAt(new Vector3(chase.TargetPosition().x,transform.position.y, chase.TargetPosition().z));
 
-        Vector3 sbDir = (transform.position - chase.TargetPosition()).normalized;
+        Vector3 sbDir = (new Vector3(transform.position.x - chase.TargetPosition().x, transform.position.y, transform.position.z - chase.TargetPosition().z)).normalized;
 
         stepbackStartingPos = transform.position;
 
@@ -234,7 +234,7 @@ public class Wolf : CollisionRefresh
 
         transform.LookAt(new Vector3(chase.TargetPosition().x, transform.position.y, chase.TargetPosition().z));
 
-        launchDir = (chase.TargetPosition() - transform.position).normalized;
+        Vector3 sbDir = (new Vector3(transform.position.x - chase.TargetPosition().x, transform.position.y, transform.position.z - chase.TargetPosition().z)).normalized;
 
         launchStartingPos = transform.position;
 
@@ -242,18 +242,18 @@ public class Wolf : CollisionRefresh
 
         if (Physics.Raycast(transform.position, launchDir, out RaycastHit hit, launchDistance + raycastOffset, mask))
         {
-            Debug.LogWarning("Found wall in launch");
+            //Debug.LogWarning("Found wall in launch");
             launchEndingPos = transform.position + launchDir * (Vector3.Distance(transform.position, hit.point) - raycastOffset);
         }
         else
         {
-            Debug.LogWarning("Not found wall in launch");
+            //Debug.LogWarning("Not found wall in launch");
             launchEndingPos = transform.position + launchDir * launchDistance;
         }
 
         float time = 0;                                                                                   //Acceleration
-        StopCoroutine(Panting());
-        AM.Play("Growl", Main);
+        //StopCoroutine(Panting());
+        //AM.Play("Growl", Main);
         while (time < launchDuration * launchAcceleratePercentage)
         {
             transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchAcceleratePercentage , time/ launchDuration * launchAcceleratePercentage);
@@ -312,7 +312,7 @@ public class Wolf : CollisionRefresh
         rb.angularVelocity = Vector3.zero;
         SetLaunch(false);
         StartCoroutine(TimeForLaunchReset());
-        StartCoroutine(Panting());
+        //StartCoroutine(Panting());
     }
 
     public void StopStepback()

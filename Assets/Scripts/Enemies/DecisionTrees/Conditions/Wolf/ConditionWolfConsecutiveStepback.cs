@@ -14,6 +14,7 @@ public class ConditionWolfConsecutiveStepback : ICondition
 
     public override bool Check()
     {
+        Debug.LogWarning(wolf.ConsectiveLimit());
         return wolf.ConsectiveLimit();
     }
 }
