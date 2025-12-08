@@ -134,6 +134,18 @@ public class LevelGenerator : MonoBehaviour
                 if (!generatedRooms.ContainsKey(neighbourPosition))
                 {
                     door.gameObject.SetActive(false);
+                    continue;
+                }
+
+                RoomType neighbourType = generatedRooms[neighbourPosition].roomType;
+
+                if (neighbourType == RoomType.Boss || neighbourType == RoomType.FloorChange)
+                {
+                    if (!(door.direction == DoorDirection.North && neighbourPosition == room.gridPosition + Vector2Int.up))
+                    {
+                        door.gameObject.SetActive(false);
+                        continue;
+                    }
                 }
             }
         }

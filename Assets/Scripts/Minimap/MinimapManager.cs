@@ -44,7 +44,7 @@ public class MinimapManager : MonoBehaviour
             Vector2Int roomPosition = pair.Key;
             MinimapRoomIcon icon = pair.Value;
 
-            Vector2Int offset = new Vector2Int( roomPosition.x - currentRoom.x, roomPosition.y - currentRoom.y);
+            Vector2Int offset = new Vector2Int(roomPosition.x - currentRoom.x, roomPosition.y - currentRoom.y);
 
             icon.transform.localPosition = new Vector3(offset.x * cellSize, offset.y * cellSize, 0f);
 
