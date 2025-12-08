@@ -103,7 +103,7 @@ public class Wolf : CollisionRefresh
     public void SetLaunch(bool launching)
     {
         launch = launching;
-
+        Debug.Log("Launch set to " + launch);
         if(launch) 
         {
             canLaunch = false;
@@ -157,7 +157,7 @@ public class Wolf : CollisionRefresh
 
         transform.LookAt(new Vector3(chase.TargetPosition().x,transform.position.y, chase.TargetPosition().z));
 
-        Vector3 sbDir = (new Vector3(transform.position.x - chase.TargetPosition().x, transform.position.y, transform.position.z - chase.TargetPosition().z)).normalized;
+        Vector3 sbDir = (new Vector3(transform.position.x - chase.TargetPosition().x, 0f, transform.position.z - chase.TargetPosition().z)).normalized;
 
         stepbackStartingPos = transform.position;
 
@@ -234,7 +234,7 @@ public class Wolf : CollisionRefresh
 
         transform.LookAt(new Vector3(chase.TargetPosition().x, transform.position.y, chase.TargetPosition().z));
 
-        Vector3 sbDir = (new Vector3(transform.position.x - chase.TargetPosition().x, transform.position.y, transform.position.z - chase.TargetPosition().z)).normalized;
+        Vector3 sbDir = (new Vector3(chase.TargetPosition().x - transform.position.x, 0f, chase.TargetPosition().z - transform.position.z)).normalized;
 
         launchStartingPos = transform.position;
 
