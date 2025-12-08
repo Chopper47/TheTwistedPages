@@ -309,7 +309,7 @@ public class Wolf : CollisionRefresh
     {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        SetLaunch(false);
+        launch = false;
         StartCoroutine(TimeForLaunchReset());
         //StartCoroutine(Panting());
     }
