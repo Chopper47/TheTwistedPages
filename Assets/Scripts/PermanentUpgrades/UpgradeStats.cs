@@ -6,5 +6,5 @@ public class UpgradeStats : ScriptableObject
     public int health;
     public int speed;
     public int bulletTime;
-    public int PushPower;
+    public int pushPower;
 }

@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     [Header("Pause Menu")]
     public bool isPaused = false;
     public GameObject pauseMenu;
+    public GameObject currencyUI;
 
     [Header("Options Menu")]
     public GameObject optionsMenu;
@@ -43,6 +44,7 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
+        currencyUI.SetActive(isPaused);
 
         if (Time.timeScale == 0)
         {
