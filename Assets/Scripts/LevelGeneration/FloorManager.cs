@@ -83,6 +83,8 @@ public class FloorManager : MonoBehaviour
         PlayerMovement.canMove = false;
         controller.enabled = false;
 
+
+        Debug.Log("IS FIRST FLOOR: " + isFirstFloor);
         if (!isFirstFloor)
         {
             yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut());
@@ -104,9 +106,10 @@ public class FloorManager : MonoBehaviour
         GenerateCurrentFloor();
 
         MovePlayerToStartRoom();
-
+        Debug.Log("PREVIOUS TO FADE IN");
         yield return StartCoroutine(RoomTransitionFade.Instance.FadeIn());
 
+        Debug.Log("FADING IN");
         isFirstFloor = false;
 
         yield return new WaitForSeconds(0.25f);

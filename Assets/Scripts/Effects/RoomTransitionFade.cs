@@ -41,6 +41,9 @@ public class RoomTransitionFade : MonoBehaviour
         float timer = fadeDuration;
         Color colour = fadeImage.color;
 
+        Debug.Log(Instance); 
+        Debug.Log(fadeImage);
+
         while (timer > 0)
         {
             timer -= Time.deltaTime;
