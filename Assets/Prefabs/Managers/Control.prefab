@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8954658791619271962}
   - component: {fileID: 7906093084524837954}
-  - component: {fileID: 9142341837463809789}
   - component: {fileID: 2919411878243080348}
   - component: {fileID: 5573690738016057954}
   - component: {fileID: 2349617095381477479}
+  - component: {fileID: 9142341837463809789}
+  - component: {fileID: 1466915887811757056}
+  - component: {fileID: 7203878240146051107}
   - component: {fileID: 8717961186259529469}
   m_Layer: 0
   m_Name: Control
@@ -49,20 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061072d566563844c8cc6d717a71408c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9142341837463809789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4886736564870195055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9652d0835c39fd24d8947cde6224cd7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelGenerator: {fileID: 0}
-  player: {fileID: 0}
 --- !u!114 &2919411878243080348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +97,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCurrencyAmount: 0
+--- !u!114 &9142341837463809789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4886736564870195055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9652d0835c39fd24d8947cde6224cd7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelGenerator: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &1466915887811757056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4886736564870195055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1baab35996a09ce43a7d516b92c82b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimapContainer: {fileID: 0}
+  roomIconPrefab: {fileID: 2107058897396608980, guid: c5947779c5a41614b934512083880f0a, type: 3}
+  cellSize: 50
+--- !u!114 &7203878240146051107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4886736564870195055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f848949847994354bb195886246e4b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
+  playerHealth: {fileID: 0}
+  minimapManager: {fileID: 1466915887811757056}
+  musicManager: {fileID: 0}
 --- !u!114 &8717961186259529469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,3 +156,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextWaveText: {fileID: 0}
   gameWonMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}

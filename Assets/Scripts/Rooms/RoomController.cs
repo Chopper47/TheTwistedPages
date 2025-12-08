@@ -16,9 +16,12 @@ public class RoomController : MonoBehaviour
     private int enemiesRemaining = 0;
     public bool isCleared = false;
     private bool isActive = false;
-    private GameObject gameWonMenu;
     private bool treeSpawnedThisWave = false;
     private int treeIndex = 1;
+
+    [Header("References")]
+    private GameObject gameWonMenu;
+    private MinimapManager minimapManager;
 
     [Header("Waves")]
     private int totalWaves;
@@ -40,7 +43,8 @@ public class RoomController : MonoBehaviour
             }
         }
 
-        musicManager = FindFirstObjectByType<MusicManager>();
+        minimapManager = ReferenceManager.Instance.minimapManager;
+        musicManager = ReferenceManager.Instance.musicManager;
 
         gameWonMenu = UIManager.Instance.gameWonMenu;
         nextWaveText = UIManager.Instance.nextWaveText;
@@ -64,6 +68,11 @@ public class RoomController : MonoBehaviour
         if (isActive || isCleared)
         {
             return;
+        }
+
+        if (minimapManager != null)
+        {
+            minimapManager.SetCurrentRoom(roomInstance.gridPosition);
         }
 
         isActive = true;

@@ -137,6 +137,12 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
+
+        MinimapManager minimapManager = ReferenceManager.Instance.minimapManager;
+        if (minimapManager != null)
+        {
+            minimapManager.InitializeMinimap(generatedRooms);
+        }
     }
 
     private Dictionary<Vector2Int, int> BFS(Vector2Int origin)

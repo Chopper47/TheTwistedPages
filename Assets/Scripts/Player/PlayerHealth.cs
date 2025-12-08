@@ -11,20 +11,24 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private float invincibilityDuration = 0.5f;
 
-    public GameObject gameOverMenu;
-    private MusicManager music;
-    [SerializeField]private AudioSource Main;
-    [SerializeField] private AudioManager AM;
+    private GameObject gameOverMenu;
 
     [Header("Life Sprites")]
     public Sprite fullLife;
     public Sprite halfLife;
     public Sprite emptyLife;
+    
+    [Header("Music")]
+    private MusicManager musicManager;
+    [SerializeField] private AudioSource Main;
+    [SerializeField] private AudioManager AM;
 
     private void Start()
     {
         currentHealth = maxHealth;
-        music = FindFirstObjectByType<MusicManager>();
+
+        gameOverMenu = UIManager.Instance.gameOverMenu;
+        musicManager = ReferenceManager.Instance.musicManager;
     }
 
     private void Die()

@@ -6,8 +6,14 @@ using System.Collections;
 /// </summary>
 public class RoomTransition : MonoBehaviour
 {
-    public LevelGenerator levelGenerator;
-    public Transform player;
+    private LevelGenerator levelGenerator;
+    private Transform player;
+
+    private void Awake()
+    {
+        levelGenerator = ReferenceManager.Instance.levelGenerator;
+        player = ReferenceManager.Instance.player;
+    }
 
     /// <summary>
     /// Moves the player to the room in the given direction if possible.

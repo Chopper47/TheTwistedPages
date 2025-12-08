@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [Header("UI Elements")]
     public TextMeshProUGUI nextWaveText;
     public GameObject gameWonMenu;
+    public GameObject gameOverMenu;
 
     private void Awake()
     {
