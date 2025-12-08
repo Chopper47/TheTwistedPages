@@ -20,6 +20,10 @@ public class OptionsMenu : MonoBehaviour
     [Header("Keyboard Menu")]
     public GameObject keyboardMenu;
 
+    void Awake()
+    {
+        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+    }
     private void Start()
     {
         resolutions = Screen.resolutions;
@@ -33,8 +37,8 @@ public class OptionsMenu : MonoBehaviour
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.width &&
+                resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
