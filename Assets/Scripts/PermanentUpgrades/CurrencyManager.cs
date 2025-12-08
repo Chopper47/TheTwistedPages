@@ -15,9 +15,22 @@ public class CurrencyManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
+        DontDestroyOnLoad(gameObject);
+
+
         SceneManager.sceneLoaded += OnSceneLoaded;
 
+    }
+
+    private void Start()
+    {
+        UpdateUI();
     }
     public void AddSingleCoin()
     {
@@ -49,13 +62,18 @@ public class CurrencyManager : MonoBehaviour
         if (currencyUI == null || currencyText == null) StopCoroutine(ShowAndUpdateUI());
 
         currencyUI.SetActive(true);
-        currencyText.text = currentCurrencyAmount.ToString();
+        UpdateUI();
 
         yield return new WaitForSeconds(2f);
 
         currencyUI.SetActive(false);
     }
 
+
+    private void UpdateUI()
+    {
+        currencyText.text = currentCurrencyAmount.ToString();
+    }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         currencyUI = SearchCurrencyUI("CurrencyUI");

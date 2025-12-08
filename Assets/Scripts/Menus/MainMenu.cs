@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour
     [Header("Upgrades Menu")]
     public GameObject upgradesMenu;
 
+    [Header("Upgrades Menu")]
+    public GameObject controlsMenu;
     private void Awake()
     {
         mainMenu.SetActive(true);
@@ -45,11 +47,18 @@ public class MainMenu : MonoBehaviour
         upgradesMenu.SetActive(true);
     }
 
+    public void ControlsMenu()
+    {
+        mainMenu.SetActive(false);
+        controlsMenu.SetActive(true);
+    }
+
     public void ReturnToMainMenu()
     {
         creditsMenu.SetActive(false);
         optionsMenu.SetActive(false);
         upgradesMenu.SetActive(false);
+        controlsMenu.SetActive(false);
         mainMenu.SetActive(true);
 
     }
