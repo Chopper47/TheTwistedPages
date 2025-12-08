@@ -36,7 +36,7 @@ public class DoorController : MonoBehaviour
     public void OpenDoor()
     {
         doorCollider.isTrigger = true;
-        //MusicManager.instance.SwitchStageSynced(0);
+        MusicManager.instance.SwitchStageSynced(0);
     }
 
     public void CloseDoor()

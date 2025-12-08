@@ -37,6 +37,8 @@ public class Tree : MonoBehaviour
         enemyState = GetComponent<EnemyState>();
         chaseAgent = GetComponent<ChaseAgent>();
         enemyHealth = GetComponent<EnemyHealth>();
+        AM = FindFirstObjectByType<AudioManager>();
+        Main = GetComponentInChildren<AudioSource>();
     }
 
     #region Apple Attack
@@ -72,7 +74,7 @@ public class Tree : MonoBehaviour
         chaseAgent.StopChase();
 
         yield return new WaitForSeconds(0.5f);
-        //AM.Play("Creak",Main);
+        AM.Play("Creak",Main);
         for (int i = 0; i < applesPerAttack; i++)
         {
             float angle = i * Mathf.PI * 2.0f / applesPerAttack;
@@ -116,7 +118,7 @@ public class Tree : MonoBehaviour
     private IEnumerator PerformPhysicalAttack()
     {
         isSlamming = true;
-        //AM.Play("Crush", Main);
+        AM.Play("Crush", Main);
         chaseAgent.StopChase();
         rigidBody.linearVelocity = Vector3.zero;
         rigidBody.angularVelocity = Vector3.zero;

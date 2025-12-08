@@ -29,6 +29,9 @@ public class PlayerHealth : MonoBehaviour
 
         gameOverMenu = UIManager.Instance.gameOverMenu;
         musicManager = ReferenceManager.Instance.musicManager;
+
+        AM = FindFirstObjectByType<AudioManager>();
+        Main = GetComponentInChildren<AudioSource>();
     }
 
     private void Die()
@@ -41,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
             gameOverMenu.SetActive(true);
         }
 
-        //music.SwitchToNewSongNoSave(2);
+        musicManager.SwitchToNewSongNoSave(2);
     }
 
     public void TakeDamage(int damage)
@@ -59,7 +62,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
-        //AM.Play("Hurt", Main);
+        AM.Play("Hurt", Main);
         UpdateHealthUI();
         StartCoroutine(TemporaryInvincibility());
     }

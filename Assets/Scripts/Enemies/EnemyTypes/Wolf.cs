@@ -71,9 +71,9 @@ public class Wolf : CollisionRefresh
         rb = GetComponent<Rigidbody>();
         enemyHealth = GetComponent<EnemyHealth>();
         states = GetComponent<EnemyState>();
-        Main=GetComponent<AudioSource>();
+        Main=GetComponentInChildren<AudioSource>();
         AM=FindFirstObjectByType<AudioManager>();
-        //StartCoroutine(Panting());
+        StartCoroutine(Panting());
     }
 
     /// <summary>
@@ -251,8 +251,8 @@ public class Wolf : CollisionRefresh
         }
 
         float time = 0;                                                                                   //Acceleration
-        //StopCoroutine(Panting());
-        //AM.Play("Growl", Main);
+        StopCoroutine(Panting());
+        AM.Play("Growl", Main);
         while (time < launchDuration * launchAcceleratePercentage)
         {
             transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchAcceleratePercentage , time/ launchDuration * launchAcceleratePercentage);
@@ -311,7 +311,7 @@ public class Wolf : CollisionRefresh
         rb.angularVelocity = Vector3.zero;
         launch = false;
         StartCoroutine(TimeForLaunchReset());
-        //StartCoroutine(Panting());
+        StartCoroutine(Panting());
     }
 
     public void StopStepback()

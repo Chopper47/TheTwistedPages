@@ -30,6 +30,7 @@ public class Gnome : MonoBehaviour
         }
 
         roomController = GetComponentInParent<RoomController>();
+        AM=FindFirstObjectByType<AudioManager>();
     }
 
     private void Start()
@@ -67,21 +68,21 @@ public class Gnome : MonoBehaviour
     {
         if (other.GetComponent<EnemyHitbox>())
         {
-            //AM.Play("Die", null);
+            AM.Play("Die", null);
             Destroy(gameObject);
             return;
         }
 
         if (other.GetComponent<FlowerProjectile>())
         {
-            //AM.Play("Die", null);
+            AM.Play("Die", null);
             Destroy(gameObject);
             return;
         }
 
         if (other.GetComponent<AppleGrenade>())
         {
-            //AM.Play("Die", null);
+            AM.Play("Die", null);
             Destroy(gameObject);
             return;
         }

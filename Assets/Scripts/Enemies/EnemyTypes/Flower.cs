@@ -54,6 +54,8 @@ public class Flower : MonoBehaviour
     private void Awake()
     {
         enemyHb = GetComponent<EnemyHitbox>();
+        AM = FindFirstObjectByType<AudioManager>();
+        Main = GetComponentInChildren<AudioSource>();
     }
 
     private void Update()
@@ -270,7 +272,7 @@ public class Flower : MonoBehaviour
     {
         yield return new WaitForSeconds(shootingAnimationDelay);
         shotCount++;
-        //AM.Play("Shoot", Main);
+        AM.Play("Shoot", Main);
 
         Vector3 straightDir = chase.TargetPosition() - transform.position;
 

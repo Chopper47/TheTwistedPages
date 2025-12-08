@@ -15,6 +15,9 @@ public class PauseMenu : MonoBehaviour
     [Header("Options Menu")]
     public GameObject optionsMenu;
 
+    [Header("SFX")]
+    public AudioManager AM;
+    public AudioSource Main;
     private void Awake()
     {
         pauseAction = inputActions.FindActionMap("Player").FindAction("Pause");
@@ -23,6 +26,8 @@ public class PauseMenu : MonoBehaviour
         {
             pauseMenu.SetActive(false);
         }
+        AM = FindFirstObjectByType<AudioManager>();
+        Main = GetComponentInChildren<AudioSource>();
     }
 
     private void Update()
@@ -30,6 +35,7 @@ public class PauseMenu : MonoBehaviour
         if (pauseAction.triggered)
         {
             TogglePause();
+            
         }
     }
 
@@ -42,11 +48,13 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 1;
             PlayerMovement.canMove = true;
+            AM.Play("Unpause", Main);
         }
         else
         {
             Time.timeScale = 0;
             PlayerMovement.canMove = false;
+            AM.Play("Pause", Main);
         }
     }
 
