@@ -108,4 +108,8 @@ public class OptionsMenu : MonoBehaviour
     {
         MusicManager.instance.SetVolumeOfStagers(volume);
     }
+    public void ChangeAudioVolumeSliderValue(float volume)
+    {
+        AudioManager.Instance.defaultSource.volume = volume;
+    }
 }
