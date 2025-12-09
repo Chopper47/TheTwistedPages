@@ -1,9 +1,19 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Axe : Trap
 {
-    private Vector3 direction = Vector3.zero;
+    [SerializeField] private float showTime = 0.4f;
 
+    private Vector3 direction = Vector3.zero;
+    private Vector3 opositeWallPoint = Vector3.zero;
+    private Vector3 startingPoint = Vector3.zero;
+
+    private bool move = false;
+
+    [SerializeField] LayerMask wall;
+    [SerializeField] GameObject trajectory;
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
     public AudioSource Main;
@@ -18,12 +28,39 @@ public class Axe : Trap
 
     private void Update()
     {
-        transform.position += direction * Time.deltaTime;
+        if (move)
+        {
+            transform.position += direction * Time.deltaTime;
+        }
     }
 
     public void SetDir(Vector3 newDirection)
     {
-        direction = new Vector3(newDirection.x,0f, newDirection.z);
+        direction = new Vector3(newDirection.x, 0f, newDirection.z);
+
+        trajectory.transform.parent = null;
+
+        startingPoint = transform.position;
+
+        if (Physics.Raycast(transform.position - Vector3.up * 0.7f, direction, out RaycastHit hit, 100f, wall))
+        {
+            opositeWallPoint = hit.point;
+        }
+
+        Vector3 halfOffset = (opositeWallPoint - startingPoint) / 2;
+        trajectory.transform.position = transform.position + halfOffset;
+        trajectory.transform.LookAt(opositeWallPoint);
+        trajectory.transform.localScale = new Vector3(trajectory.transform.localScale.x, trajectory.transform.localScale.y, halfOffset.magnitude * 2);
+
+        StartCoroutine(StartMoving());
+    }
+
+    IEnumerator StartMoving()
+    {
+        yield return new WaitForSeconds(showTime);
+
+        Destroy(trajectory);
+        move = true;
     }
 
 }
