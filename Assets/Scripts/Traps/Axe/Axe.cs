@@ -13,6 +13,7 @@ public class Axe : Trap
     private bool move = false;
 
     [SerializeField] LayerMask wall;
+    [SerializeField] TrailRenderer trailRenderer;
     [SerializeField] GameObject trajectory;
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
@@ -50,17 +51,19 @@ public class Axe : Trap
         Vector3 halfOffset = (opositeWallPoint - startingPoint) / 2;
         trajectory.transform.position = transform.position + halfOffset;
         trajectory.transform.LookAt(opositeWallPoint);
-        trajectory.transform.localScale = new Vector3(trajectory.transform.localScale.x, trajectory.transform.localScale.y, halfOffset.magnitude * 2);
+        trajectory.transform.localScale = new Vector3(trajectory.transform.localScale.x, trajectory.transform.localScale.y, halfOffset.magnitude * 2.25f);
 
         StartCoroutine(StartMoving());
     }
 
     IEnumerator StartMoving()
     {
+        GetComponent<MeshRenderer>().enabled = false;
+        trailRenderer.enabled = false;
         yield return new WaitForSeconds(showTime);
-
+        GetComponent<MeshRenderer>().enabled = true;
+        trailRenderer.enabled = true;
         Destroy(trajectory);
         move = true;
     }
-
 }

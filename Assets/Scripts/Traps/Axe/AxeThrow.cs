@@ -53,12 +53,4 @@ public class AxeThrow : MonoBehaviour
             //gO.GetComponent<Rigidbody>().AddForce((transform.position - hit.point).normalized * throwForce);
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        if(sphere != Vector3.zero)
-        {
-            Gizmos.DrawSphere(sphere,1f);
-        }
-    }
 }
