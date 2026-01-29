@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
+using NUnit.Framework;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement: MonoBehaviour
@@ -35,8 +36,14 @@ public class PlayerMovement: MonoBehaviour
 
     [SerializeField] private float bulletTimeSpeed;             // 15.0f
     [SerializeField] private float bulletTimeDuration = 1.2f;
+    [SerializeField] private float angleAmplitude = 2f;
+    [SerializeField] private float frontAmplitude = 5f;
+    [SerializeField] private float coneAngle = 35f;
+
+    private GameObject toPush;
 
     public bool canTriggerBulletTime = true;
+    bool isInBulletTime = false;
 
     [Header("Input System")]
     public InputActionAsset inputActions;
@@ -98,13 +105,15 @@ public class PlayerMovement: MonoBehaviour
 
             if (rollAction.triggered && canRoll)
             {
-                //if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime)
-                //{
-                //    canTriggerBulletTime = false;
-                //    TimeManager.SlowTime();
-                //    StartCoroutine(UpdateBulletTimeUI());
-                //    StartCoroutine(WaitForNormalTime());
-                //}
+                if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime)
+                {
+                    canTriggerBulletTime = false;
+                    isInBulletTime = true;
+                    toPush = bulletTimeTrigger.FirstHarm();
+                    TimeManager.SlowTime();
+                    StartCoroutine(UpdateBulletTimeUI());
+                    StartCoroutine(WaitForNormalTime());
+                }
                 StartCoroutine(Roll());
             }
         }
@@ -113,7 +122,7 @@ public class PlayerMovement: MonoBehaviour
             controller.Move(rollDirection * rollSpeed * Time.unscaledDeltaTime);
         }
     }
-
+     
     private void Move()
     {
         moveAmount = moveAction.ReadValue<Vector2>();
@@ -171,7 +180,7 @@ public class PlayerMovement: MonoBehaviour
         isInvincible = false;
         animator.SetBool("isRolling", false);
 
-        yield return new WaitForSeconds(rollCooldown);
+        yield return new WaitForSecondsRealtime(rollCooldown);
         canRoll = true;
     }
 
@@ -186,6 +195,7 @@ public class PlayerMovement: MonoBehaviour
 
         TimeManager.ReturnTime();
         canTriggerBulletTime = true;
+        isInBulletTime = false;
     }
 
     public IEnumerator UpdateBulletTimeUI()
@@ -202,5 +212,55 @@ public class PlayerMovement: MonoBehaviour
 
         bulletTimeTimer.fillAmount = 0f;
         yield return null;
+    }
+
+    public bool CanPush(GameObject enemyChecking)
+    {
+        return isRolling && isInBulletTime && enemyChecking == toPush;
+    }
+
+    public Vector3 PushTarget()
+    {
+        Vector3 pushDir = (toPush.transform.position - transform.position).normalized * frontAmplitude;
+        Collider[] hits = Physics.OverlapSphere(toPush.transform.position, frontAmplitude);
+        GameObject nearestTrap = null;
+        foreach (Collider hit in hits)
+        {
+            if (hit.gameObject.CompareTag("Trap"))
+            {
+                if (nearestTrap == null)
+                {
+                    nearestTrap = hit.gameObject;
+                }
+                else
+                {
+                    if(Vector3.SignedAngle(pushDir,hit.gameObject.transform.position - toPush.transform.position,Vector3.up) <= coneAngle )
+
+                    {
+
+                    }
+                }
+            }
+        }
+
+        return nearestTrap.transform.position;
+    }
+    
+    void OnDrawGizmos()
+    {
+        if(isInBulletTime)
+        {
+            Vector3 pushDir = (toPush.transform.position - transform.position).normalized;
+
+            Vector3 rightAngle = Vector3.RotateTowards(pushDir, new Vector3(pushDir.z, pushDir.y, -pushDir.x), coneAngle,0f);
+            Vector3 leftAngle = Vector3.RotateTowards(pushDir, -new Vector3(pushDir.z, pushDir.y, -pushDir.x), coneAngle,0f);
+            //Vector3.SignedAngle(); usado para ver angulos entre vectores
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(toPush.transform.position +leftAngle * angleAmplitude + pushDir * frontAmplitude, toPush.transform.position + rightAngle*angleAmplitude + pushDir * frontAmplitude);
+            Gizmos.DrawLine(toPush.transform.position + rightAngle * angleAmplitude + pushDir * frontAmplitude, toPush.transform.position);
+            Gizmos.DrawLine(toPush.transform.position, toPush.transform.position + leftAngle * angleAmplitude + pushDir * frontAmplitude);
+
+        }
     }
 }

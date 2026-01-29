@@ -55,8 +55,8 @@ public class PlayerHealth : MonoBehaviour
         AM = FindAnyObjectByType<AudioManager>();
         Main = GetComponentInChildren<AudioSource>();
 
-        gameOverMenu = UIManager.Instance.gameOverMenu;
-        musicManager = ReferenceManager.Instance.musicManager;
+        //gameOverMenu = UIManager.Instance.gameOverMenu;
+        //musicManager = ReferenceManager.Instance.musicManager;
     }
 
     private void Die()

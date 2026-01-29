@@ -9,7 +9,6 @@ public class EnemyState : MonoBehaviour
         Attack
     }
 
-
     public static EnemyState Instance;
 
     State state = State.Stay;

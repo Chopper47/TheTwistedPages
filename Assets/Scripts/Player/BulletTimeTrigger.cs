@@ -4,6 +4,8 @@ public class BulletTimeTrigger : MonoBehaviour
 {
     private bool canDodge = false;
 
+    private GameObject harmOrigin;
+
     private void OnTriggerEnter(Collider other)
     {
         EnemyHitbox enemyHb = other.GetComponent<EnemyHitbox>();
@@ -12,6 +14,8 @@ public class BulletTimeTrigger : MonoBehaviour
         {
             if(enemyHb.ShowEnemyState() == 2)
             {
+                Debug.Log("close attack");
+                harmOrigin = enemyHb.gameObject;
                 canDodge = true;
             }
         }
@@ -25,6 +29,7 @@ public class BulletTimeTrigger : MonoBehaviour
         {
             if (enemyHb.ShowEnemyState() != 2 && canDodge)
             {
+                harmOrigin = null;
                 canDodge = false;
             }
         }
@@ -36,6 +41,7 @@ public class BulletTimeTrigger : MonoBehaviour
 
         if (enemyHb != null)
         {
+            harmOrigin = null;
             canDodge = false;
         }
     }
@@ -43,5 +49,10 @@ public class BulletTimeTrigger : MonoBehaviour
     public bool CanDodge()
     { 
         return canDodge; 
+    }
+
+    public GameObject FirstHarm()
+    {
+        return harmOrigin;
     }
 }

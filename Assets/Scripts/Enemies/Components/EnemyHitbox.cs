@@ -33,5 +33,12 @@ public class EnemyHitbox : MonoBehaviour
             CameraShake.Shake(0.5f, 0.5f);
             player.TakeDamage(dmg);
         }
+
+        PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
+
+        if(playerMovement != null && playerMovement.CanPush(this.gameObject))
+        {
+
+        }
     }
 }
