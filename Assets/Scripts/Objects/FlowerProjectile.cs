@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class FlowerProjectile : MonoBehaviour
 {
-    [SerializeField] float speed;
-    Vector3 direction = Vector3.zero;
-    
+    [SerializeField] private float speed;
+    [SerializeField] private int damage = 1;
 
-    // Update is called once per frame
-    void Update()
+    private Vector3 direction = Vector3.zero;
+
+    private bool wasDeflected = false;
+    
+    private void Update()
     {
         if (direction != Vector3.zero)
         {
@@ -20,10 +22,23 @@ public class FlowerProjectile : MonoBehaviour
         direction = newDir.normalized; 
     }
 
+    public void Deflect(Vector3 newDir)
+    {
+        wasDeflected = true;
+        SetDirection(newDir);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Wall"))
         {
+            Destroy(gameObject);
+        }
+
+        EnemyHealth enemy = other.GetComponent<EnemyHealth>();
+        if (wasDeflected && enemy)
+        {
+            enemy.TakeDamage(damage);
             Destroy(gameObject);
         }
     }
