@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,7 @@ public class PauseMenu : MonoBehaviour
     [Header("SFX")]
     public AudioManager AM;
     public AudioSource Main;
+
     private void Awake()
     {
         pauseAction = inputActions.FindActionMap("Player").FindAction("Pause");
@@ -36,7 +38,6 @@ public class PauseMenu : MonoBehaviour
         if (pauseAction.triggered)
         {
             TogglePause();
-            
         }
     }
 
@@ -50,7 +51,11 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 1;
             PlayerMovement.canMove = true;
+            optionsMenu.SetActive(false);
             AM.Play("Unpause", Main);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponent<MenuNavigator>().firstSelected);
         }
         else
         {

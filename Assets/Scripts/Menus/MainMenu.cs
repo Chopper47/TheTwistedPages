@@ -1,5 +1,6 @@
-using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,14 +16,18 @@ public class MainMenu : MonoBehaviour
     [Header("Upgrades Menu")]
     public GameObject upgradesMenu;
 
-    [Header("Upgrades Menu")]
+    [Header("Controls Menu")]
     public GameObject controlsMenu;
+
     private void Awake()
     {
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         creditsMenu.SetActive(false);
         upgradesMenu.SetActive(false);
+        controlsMenu.SetActive(false);
+
+        SelectFirst(mainMenu);
     }
 
     public void StartGame()
@@ -32,38 +37,54 @@ public class MainMenu : MonoBehaviour
 
     public void OptionsMenu()
     {
-        mainMenu.SetActive(false);
-        optionsMenu.SetActive(true);
+        SwitchMenu(mainMenu, optionsMenu);
     }
 
     public void CreditsMenu()
     {
-        mainMenu.SetActive(false);
-        creditsMenu.SetActive(true);
+        SwitchMenu(mainMenu, creditsMenu);
     }
+
     public void UpgradessMenu()
     {
-        mainMenu.SetActive(false);
-        upgradesMenu.SetActive(true);
+        SwitchMenu(mainMenu, upgradesMenu);
     }
 
     public void ControlsMenu()
     {
-        mainMenu.SetActive(false);
-        controlsMenu.SetActive(true);
+        SwitchMenu(mainMenu, controlsMenu);
     }
 
     public void ReturnToMainMenu()
     {
-        creditsMenu.SetActive(false);
         optionsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
         upgradesMenu.SetActive(false);
         controlsMenu.SetActive(false);
-        mainMenu.SetActive(true);
 
+        mainMenu.SetActive(true);
+        SelectFirst(mainMenu);
     }
+
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    private void SwitchMenu(GameObject from, GameObject to)
+    {
+        from.SetActive(false);
+        to.SetActive(true);
+        SelectFirst(to);
+    }
+
+    private void SelectFirst(GameObject menu)
+    {
+        MenuNavigator navigator = menu.GetComponent<MenuNavigator>();
+        if (navigator)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(navigator.firstSelected);
+        }
     }
 }

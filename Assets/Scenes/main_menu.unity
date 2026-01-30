@@ -5247,6 +5247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 810198042}
+  - component: {fileID: 810198043}
   m_Layer: 5
   m_Name: UpgradesMenu
   m_TagString: Untagged
@@ -5277,6 +5278,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &810198043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810198041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23bf9a2db14e03439731cd6cc481e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 752010816}
 --- !u!1 &827741069
 GameObject:
   m_ObjectHideFlags: 0
@@ -6066,6 +6080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963355055}
+  - component: {fileID: 963355056}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -6099,6 +6114,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &963355056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963355054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23bf9a2db14e03439731cd6cc481e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 1450456688}
 --- !u!1 &967476625
 GameObject:
   m_ObjectHideFlags: 0
@@ -9615,7 +9643,7 @@ GameObject:
   - component: {fileID: 1651344822}
   - component: {fileID: 1651344821}
   m_Layer: 5
-  m_Name: PlayButton (1)
+  m_Name: ControlsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9964,6 +9992,7 @@ GameObject:
   - component: {fileID: 1730611073}
   - component: {fileID: 1730611072}
   - component: {fileID: 1730611071}
+  - component: {fileID: 1730611074}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -10009,7 +10038,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
+  m_ChildAlignment: 4
   m_Spacing: 50
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -10056,6 +10085,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730611069}
   m_CullTransparentMesh: 1
+--- !u!114 &1730611074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730611069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23bf9a2db14e03439731cd6cc481e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 786419440}
 --- !u!1 &1736809756
 GameObject:
   m_ObjectHideFlags: 0
@@ -10409,6 +10451,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1779990481}
+  - component: {fileID: 1779990482}
   m_Layer: 5
   m_Name: ControlsMenu
   m_TagString: Untagged
@@ -10440,6 +10483,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1779990482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779990480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23bf9a2db14e03439731cd6cc481e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 2045606462}
 --- !u!1 &1782534569
 GameObject:
   m_ObjectHideFlags: 0
