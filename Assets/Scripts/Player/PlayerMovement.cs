@@ -23,6 +23,7 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private float rollSpeed = 20.0f;
     [SerializeField] private float rollDuration = 0.5f;
     [SerializeField] private float rollCooldown = 1.0f;
+    [SerializeField] private GameObject destructionCheck;
 
     private bool isRolling = false;
     private bool canRoll = true;
@@ -63,6 +64,8 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private AudioManager AM;
     [SerializeField] private AudioSource Main;
 
+
+    
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -105,6 +108,7 @@ public class PlayerMovement: MonoBehaviour
 
             if (rollAction.triggered && canRoll)
             {
+                
                 if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime)
                 {
                     canTriggerBulletTime = false;
@@ -114,6 +118,7 @@ public class PlayerMovement: MonoBehaviour
                     StartCoroutine(UpdateBulletTimeUI());
                     StartCoroutine(WaitForNormalTime());
                 }
+                
                 StartCoroutine(Roll());
             }
         }
@@ -149,6 +154,7 @@ public class PlayerMovement: MonoBehaviour
         canRoll = false;
         isInvincible = true;
         AM.Play("Dash", Main);
+        destructionCheck.SetActive(true);
 
         moveAmount = moveAction.ReadValue<Vector2>();
         Vector3 inputDirection = new Vector3(moveAmount.x, 0f, moveAmount.y).normalized;
@@ -179,6 +185,7 @@ public class PlayerMovement: MonoBehaviour
         isRolling = false;
         isInvincible = false;
         animator.SetBool("isRolling", false);
+        destructionCheck.SetActive(false);
 
         yield return new WaitForSecondsRealtime(rollCooldown);
         canRoll = true;
