@@ -40,6 +40,7 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private float angleAmplitude = 2f;
     [SerializeField] private float frontAmplitude = 5f;
     [SerializeField] private float coneAngle = 35f;
+    [SerializeField] private float maxPushDistance = 9f;
 
     private GameObject toPush;
 
@@ -228,7 +229,7 @@ public class PlayerMovement: MonoBehaviour
 
     public Vector3 PushTarget()
     {
-        Vector3 pushDir = (toPush.transform.position - transform.position).normalized * frontAmplitude;
+        Vector3 pushDir = new Vector3(toPush.transform.position.x - transform.position.x,0, toPush.transform.position.z - transform.position.z).normalized * frontAmplitude;
         Collider[] hits = Physics.OverlapSphere(toPush.transform.position, frontAmplitude);
         GameObject nearestTrap = null;
         foreach (Collider hit in hits)
@@ -237,20 +238,35 @@ public class PlayerMovement: MonoBehaviour
             {
                 if (nearestTrap == null)
                 {
-                    nearestTrap = hit.gameObject;
+                    if (Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) <= coneAngle)
+                    {
+                        nearestTrap = hit.gameObject;
+                    }
                 }
                 else
                 {
-                    if(Vector3.SignedAngle(pushDir,hit.gameObject.transform.position - toPush.transform.position,Vector3.up) <= coneAngle )
-
+                    if(Vector3.SignedAngle(pushDir,hit.gameObject.transform.position - toPush.transform.position,Vector3.up) <= coneAngle && Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) > -coneAngle)
                     {
-
+                        if(Vector3.Distance(toPush.transform.position, hit.gameObject.transform.position) <= maxPushDistance)
+                        {
+                            if (Vector3.Distance(toPush.transform.position, hit.gameObject.transform.position) < Vector3.Distance(toPush.transform.position, nearestTrap.transform.position))
+                            {
+                                nearestTrap = hit.gameObject;
+                            }
+                        }   
                     }
                 }
             }
         }
 
-        return nearestTrap.transform.position;
+        if (nearestTrap != null)
+        { 
+            return toPush.transform.position + (nearestTrap.transform.position - toPush.transform.position).normalized * maxPushDistance;
+        }
+        else
+        {
+            return toPush.transform.position + pushDir.normalized*maxPushDistance;
+        }
     }
     
     void OnDrawGizmos()

@@ -6,7 +6,8 @@ public class EnemyState : MonoBehaviour
     {
         Stay,
         Chase,
-        Attack
+        Attack,
+        Pushed
     }
 
     public static EnemyState Instance;
@@ -28,8 +29,18 @@ public class EnemyState : MonoBehaviour
         state = State.Chase;
     }
 
+    public void PushedState()
+    {
+        state = State.Pushed;
+    }
+
     public int CurrentState()
     {
         return (int)state;
+    }
+
+    public bool IsBeingPushed()
+    {
+        return state == State.Pushed;
     }
 }

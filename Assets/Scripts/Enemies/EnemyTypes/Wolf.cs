@@ -42,6 +42,7 @@ public class Wolf : CollisionRefresh
     [SerializeField] int maxConsecutive = 2;
     bool checkConsecutiveStepback = false;
     Coroutine checkCoroutine;
+    Coroutine launchCoroutine;
     bool stepback = false;
     bool canStepback = true;
 
@@ -116,7 +117,7 @@ public class Wolf : CollisionRefresh
             }
 
             states.AttackState();
-            StartCoroutine(WaitForLaunch());
+            launchCoroutine = StartCoroutine(WaitForLaunch());
         }
     }
 
@@ -264,6 +265,11 @@ public class Wolf : CollisionRefresh
         AM.Play("Growl", Main);
         while (time < launchDuration * launchAcceleratePercentage)
         {
+            if(states.IsBeingPushed())
+            {
+                StopLaunch();
+                StopCoroutine(launchCoroutine);
+            }
             transform.position = Vector3.Lerp(launchStartingPos, launchStartingPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchAcceleratePercentage , time/ launchDuration * launchAcceleratePercentage);
             time += Time.deltaTime;
             yield return null;
@@ -274,6 +280,11 @@ public class Wolf : CollisionRefresh
 
         while (time < launchDuration * launchConstantPercentage)                                                                       //Time in constant speed
         {
+            if (states.IsBeingPushed())
+            {
+                StopLaunch();
+                StopCoroutine(launchCoroutine);
+            }
             transform.position = Vector3.Lerp(currentPos, currentPos + launchDir * Vector3.Distance(launchStartingPos, launchEndingPos) * launchConstantPercentage, time/ launchDuration * launchConstantPercentage);
             time += Time.deltaTime;
             yield return null;
@@ -284,6 +295,11 @@ public class Wolf : CollisionRefresh
 
         while (time < launchDuration * launchDeceleratePercentage)                                                                       //Deceleration
         {
+            if (states.IsBeingPushed())
+            {
+                StopLaunch();
+                StopCoroutine(launchCoroutine);
+            }
             transform.position = Vector3.Lerp(currentPos, launchEndingPos, time/ launchDuration * launchDeceleratePercentage);
             time += Time.deltaTime;
             yield return null;
@@ -356,6 +372,11 @@ public class Wolf : CollisionRefresh
     /// </summary>
     public override void OnWallHit()
     {
+        if(states.IsBeingPushed())
+        {
+            states.StayState();
+        }
+
         if(launch)
         {
             StopLaunch();

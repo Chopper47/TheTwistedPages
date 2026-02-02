@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyHitbox : MonoBehaviour
@@ -5,6 +6,7 @@ public class EnemyHitbox : MonoBehaviour
     [SerializeField] EnemyHealth enemyHp;
     [SerializeField] EnemyState states;
     [SerializeField] int dmg;
+    [SerializeField] bool pushable = true;
 
     private bool ignorePlayer = false;
     private void Awake()
@@ -36,9 +38,33 @@ public class EnemyHitbox : MonoBehaviour
 
         PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
 
-        if(playerMovement != null && playerMovement.CanPush(this.gameObject))
+        if(playerMovement != null && playerMovement.CanPush(this.gameObject) && pushable)
         {
-
+            Pushed(playerMovement.PushTarget());
+            SetIgnore(true);
+            states.PushedState();
         }
+    }
+
+    public void Pushed(Vector3 trapPos)
+    {
+        StartCoroutine(LerpPosition(new Vector3(trapPos.x, transform.position.y, trapPos.z)));
+    }
+
+    IEnumerator LerpPosition(Vector3 position)
+    {
+        Vector3 startingPos = transform.position;
+        float time = 0f;
+
+        while (time < 1f)
+        {
+            transform.position = Vector3.Lerp(startingPos, position, time/1f);
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        SetIgnore(false);
+        states.StayState();
+        yield return null;
     }
 }
