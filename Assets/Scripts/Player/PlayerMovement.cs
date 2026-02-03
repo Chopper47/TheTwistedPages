@@ -238,7 +238,7 @@ public class PlayerMovement: MonoBehaviour
             {
                 if (nearestTrap == null)
                 {
-                    if (Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) <= coneAngle)
+                    if (Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) <= coneAngle && Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) > -coneAngle)
                     {
                         nearestTrap = hit.gameObject;
                     }
