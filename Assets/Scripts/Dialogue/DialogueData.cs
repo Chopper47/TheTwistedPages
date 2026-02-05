@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DialogueData", menuName = "ScriptableObjects/DialogueData")]
+[CreateAssetMenu(fileName = "DialogueData", menuName = "ScriptablecObjects/DialogueData")]
 public class DialogueData : ScriptableObject
 {
-    public string[] lines;
+    [TextArea] public string[] lines;
     public string characterName;
-    public float textSpeed;
+    public float textDelay;
 }
