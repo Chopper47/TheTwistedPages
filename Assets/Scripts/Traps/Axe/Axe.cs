@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Axe : Trap
@@ -11,6 +12,9 @@ public class Axe : Trap
     private Vector3 startingPoint = Vector3.zero;
 
     private bool move = false;
+    private bool grabbed = false;
+    private bool thrown = false;
+    private bool ignorePlayer = false;
 
     [SerializeField] LayerMask wall;
     [SerializeField] TrailRenderer trailRenderer;
@@ -56,6 +60,41 @@ public class Axe : Trap
         StartCoroutine(StartMoving());
     }
 
+    private void TryApplyDamage(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealth player = other.GetComponent<PlayerHealth>();
+            if (player != null && !PlayerMovement.IsInvincible() && !ignorePlayer && !thrown)
+            {
+                player.TakeDamage(damage);
+            }
+        }
+
+        else if (other.CompareTag("Enemy"))
+        {
+            EnemyHealth enemy = other.GetComponent<EnemyHealth>();
+            if (enemy != null && !grabbed)
+            {
+                enemy.TakeDamage(damage);
+            }
+            else if (enemy != null && grabbed && thrown)
+            {
+                enemy.TakeDamage(damage);
+            }
+        }
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (damageOnEnter)
+        {
+            TryApplyDamage(other);
+        }
+
+        AfterActivation();
+    }
+
     IEnumerator StartMoving()
     {
         GetComponent<MeshRenderer>().enabled = false;
@@ -65,5 +104,24 @@ public class Axe : Trap
         trailRenderer.enabled = true;
         Destroy(trajectory);
         move = true;
+    }
+
+    public void StopMoving()
+    {
+        trailRenderer.enabled = false;
+        move = false;
+        grabbed = true;
+    }
+
+    public void ActivateTrail()
+    {
+        trailRenderer.enabled = true;
+    }
+
+    public void NewDirection(Vector3 newDir)
+    {
+        move = true;
+        thrown = true;
+        direction = newDir;
     }
 }

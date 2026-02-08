@@ -1,8 +1,9 @@
-using System.Collections;
-using UnityEngine.InputSystem;
-using UnityEngine;
-using UnityEngine.UI;
 using NUnit.Framework;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using static UnityEditor.IMGUI.Controls.PrimitiveBoundsHandle;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement: MonoBehaviour
@@ -41,11 +42,17 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private float frontAmplitude = 5f;
     [SerializeField] private float coneAngle = 35f;
     [SerializeField] private float maxPushDistance = 9f;
-
+    [SerializeField] private float axeRotationSpeed = 1.0f;
+    [SerializeField] private float axeThrowSpeed = 15.0f;
+    [SerializeField] private Transform axeHold;
     private GameObject toPush;
 
     public bool canTriggerBulletTime = true;
-    bool isInBulletTime = false;
+    private Coroutine rotationCoroutine;
+    private Coroutine bulletTimeCoroutine;
+    private Coroutine btUICoroutine;
+    private bool isInBulletTime = false;
+    private bool axeHolding = false;
 
     [Header("Input System")]
     public InputActionAsset inputActions;
@@ -105,22 +112,49 @@ public class PlayerMovement: MonoBehaviour
 
         if (!isRolling)
         {
-            Move();
+            if(!axeHolding)
+            {
+                Move();
+            }
+            else
+            {
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    StopCoroutine(rotationCoroutine);
+                    StopCoroutine(btUICoroutine);
+                    StopCoroutine(bulletTimeCoroutine);
+                    EndBulletTime();
+                    bulletTimeTimer.fillAmount = 0f;
+                    ReleaseAxe();
+                }
+            }
 
             if (rollAction.triggered && canRoll)
             {
-                
+
                 if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime)
                 {
                     canTriggerBulletTime = false;
                     isInBulletTime = true;
                     toPush = bulletTimeTrigger.FirstHarm();
+                    Axe axe = toPush.GetComponent<Axe>();
+                    if (axe != null)
+                    {
+                        axeHolding = true;
+                        axe.StopMoving();
+                        toPush.transform.parent = axeHold;
+                        toPush.transform.localPosition = Vector3.zero;
+                        rotationCoroutine = StartCoroutine(AxeRotation());
+                    }
                     TimeManager.SlowTime();
-                    StartCoroutine(UpdateBulletTimeUI());
-                    StartCoroutine(WaitForNormalTime());
+                    btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
+                    bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
                 }
-                
-                StartCoroutine(Roll());
+
+                if (!axeHolding)
+                {
+                    StartCoroutine(Roll());
+                }
             }
         }
         else
@@ -128,7 +162,28 @@ public class PlayerMovement: MonoBehaviour
             controller.Move(rollDirection * rollSpeed * Time.unscaledDeltaTime);
         }
     }
-     
+    
+    public void ReleaseAxe()
+    {
+        toPush.transform.parent = null;
+        Vector3 newDir = new Vector3(toPush.transform.position.x - transform.position.x, 0, toPush.transform.position.z - transform.position.z).normalized;
+        toPush.GetComponent<Axe>().NewDirection(newDir * axeThrowSpeed);
+        toPush.GetComponent<Axe>().ActivateTrail();
+    }
+
+    private IEnumerator AxeRotation()
+    {
+        float timer = 0f;
+
+        while (timer < bulletTimeDuration)
+        {
+            transform.Rotate(Vector3.up, axeRotationSpeed);
+            timer += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        yield return null;
+    }
+
     private void Move()
     {
         moveAmount = moveAction.ReadValue<Vector2>();
@@ -201,7 +256,18 @@ public class PlayerMovement: MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(bulletTimeDuration);
 
+        if(toPush.GetComponent<Axe>())
+        {
+            ReleaseAxe();
+        }
+
+        EndBulletTime();
+    }
+
+    public void EndBulletTime()
+    {
         TimeManager.ReturnTime();
+        axeHolding = false;
         canTriggerBulletTime = true;
         isInBulletTime = false;
     }
