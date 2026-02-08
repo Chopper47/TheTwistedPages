@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class ConditionHasMoreThan3HP : ICondition
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private EnemyHealth enemyHealth;
+
+    private void Awake()
     {
-        
+        if (!enemyHealth)
+        {
+            enemyHealth = transform.root.GetComponent<EnemyHealth>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool Check()
     {
-        
+        return enemyHealth.health > 3;
     }
 }

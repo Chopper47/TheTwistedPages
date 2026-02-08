@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class ActionReceiveAxe : IAction
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Lumberjack lumberjack;
+
+    private void Awake()
     {
-        
+        if (!lumberjack)
+        {
+            lumberjack = transform.root.GetComponent<Lumberjack>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Act()
     {
-        
+        Debug.Log("Lumberjack: Receive Axe");
+        lumberjack.ReceiveAxe();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
-    private int health;
+    public int health;
 
     [HideInInspector] public RoomController roomController;
     [SerializeField] private AudioManager AM;

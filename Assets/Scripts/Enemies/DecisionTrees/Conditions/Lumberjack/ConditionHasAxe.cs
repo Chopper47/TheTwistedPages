@@ -1,16 +1,22 @@
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class ConditionHasAxe : ICondition
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Lumberjack lumberjack;
+
+    private void Awake()
     {
-        
+        if (!lumberjack)
+        {
+            lumberjack = transform.root.GetComponent<Lumberjack>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool Check()
     {
-        
+        bool result = lumberjack.hasAxe;
+        Debug.Log("ConditionHasAxe: " + result);
+        return result;
     }
 }

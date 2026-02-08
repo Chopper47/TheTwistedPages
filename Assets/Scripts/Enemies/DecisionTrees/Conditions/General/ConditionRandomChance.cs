@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class ConditionRandomChance : ICondition
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Range(0f, 1f)]
+    public float probability = 0.5f;
 
-    // Update is called once per frame
-    void Update()
+    public override bool Check()
     {
-        
+        return Random.value <= probability;
     }
 }
