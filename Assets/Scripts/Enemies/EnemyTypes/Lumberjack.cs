@@ -27,10 +27,17 @@ public class Lumberjack : MonoBehaviour
     [Header("Hitboxes")]
     [SerializeField] private GameObject aoeAHitbox;
     [SerializeField] private GameObject aoeBHitbox;
+    [SerializeField] private GameObject jumpAttackHitbox;
 
-    [Header("AOE B Settings")]
+    [Header("AOE Settings")]
     [SerializeField] private float aoeBMaxRadius = 8.0f;
     [SerializeField] private float aoeBExpandTime = 1.0f;
+
+    [Header("Jump Attack Settings")]
+    [SerializeField] private float jumpRiseHeight = 4.0f;
+    [SerializeField] private float jumpAirTime = 1.0f;
+    [SerializeField] private float jumpFallTime = 0.4f;
+    [SerializeField] private float jumpImpactRadius = 5.0f;
 
     private void Awake()
     {
@@ -187,7 +194,70 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator JumpAttack()
     {
         StartAttack();
-        yield return new WaitForSeconds(1.5f);
+
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.enabled = false;
+
+        rb.isKinematic = true;
+        rb.linearVelocity = Vector3.zero;
+
+        // Store the player's position at the moment the jump begins (the Boss will always land on this exact point).
+        Vector3 targetPosition = chaseAgent.TargetPosition();
+        targetPosition.y = transform.position.y;
+
+        Debug.Log("Jump Attack: jumping towards " + targetPosition);
+
+        // Boss "jumps" very high, off-screen, vertically.
+        float riseTime = 0.5f;                  // Duration of the upwards movement.
+        float timer = 0f;
+        Vector3 startPosition = transform.position;
+        Vector3 peakPosition = startPosition + Vector3.up * 25f;
+
+        while (timer < riseTime)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPosition, peakPosition, timer / riseTime);
+            yield return null;
+        }
+
+        // Horizontal movement towards target in a straight line.
+        float travelTime = 0.4f;
+        timer = 0f;
+        Vector3 travelStart = transform.position;
+        Vector3 travelEnd = new Vector3(targetPosition.x, travelStart.y, targetPosition.z);
+
+        while (timer < travelTime)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(travelStart, travelEnd, timer / travelTime);
+            yield return null;
+        }
+
+        // Boss "falls" straight down towards the target.
+        float fallTime = 0.35f;
+        timer = 0f;
+        Vector3 fallStart = transform.position;
+        Vector3 fallEnd = new Vector3(fallStart.x, startPosition.y, fallStart.z);
+
+        while (timer < fallTime)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(fallStart, fallEnd, timer / fallTime);
+            yield return null;
+        }
+
+        SphereCollider collider = jumpAttackHitbox.GetComponent<SphereCollider>();
+        collider.radius = jumpImpactRadius;
+
+        jumpAttackHitbox.transform.position = transform.position;
+        jumpAttackHitbox.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        jumpAttackHitbox.SetActive(false);
+
+        agent.enabled = true;
+
         EndAttack();
     }
     #endregion
@@ -256,6 +326,16 @@ public class Lumberjack : MonoBehaviour
             {
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(aoeBHitbox.transform.position, collider.radius);
+            }
+        }
+
+        if (jumpAttackHitbox)
+        {
+            SphereCollider collider = jumpAttackHitbox.GetComponent<SphereCollider>();
+            if (collider)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawWireSphere(jumpAttackHitbox.transform.position, jumpImpactRadius);
             }
         }
     }
