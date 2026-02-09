@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,10 +24,8 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private float closeRange = 4.0f;
     [SerializeField] private float midRange = 10.0f;
 
-    [Header("AOE Settings")]
-    [SerializeField] private float aoeRadius = 5.0f;
-    [SerializeField] private int aoeDamage = 1;
-    [SerializeField] private float aoeForwardOffset = 2.0f;
+    [Header("Hitboxes")]
+    [SerializeField] private GameObject aoeAHitbox;
 
     private void Awake()
     {
@@ -139,13 +137,9 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackA()
     {
         StartAttack();
-
-        yield return new WaitForSeconds(0.5f);
-
-        DoAOEDamage();
-
-        yield return new WaitForSeconds(0.5f);
-
+        EnableHitbox(aoeAHitbox);
+        yield return new WaitForSeconds(0.2f);
+        DisableHitbox(aoeAHitbox);
         EndAttack();
     }
 
@@ -194,31 +188,26 @@ public class Lumberjack : MonoBehaviour
         enemyState.StayState();
     }
 
-    private Vector3 GetAOEPosition()
+    public void EnableHitbox(GameObject hitbox)
     {
-        return transform.position + transform.forward * aoeForwardOffset;
+        hitbox.SetActive(true);
     }
 
-    private void DoAOEDamage()
+    public void DisableHitbox(GameObject hitbox)
     {
-        Collider[] hits = Physics.OverlapSphere(GetAOEPosition(), aoeRadius);
-
-        foreach (Collider hit in hits)
-        {
-            if (hit.CompareTag("Player"))
-            {
-                PlayerHealth player = hit.GetComponent<PlayerHealth>();
-                if (player != null)
-                {
-                    player.TakeDamage(aoeDamage);
-                }
-            }
-        }
+        hitbox.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(GetAOEPosition(), aoeRadius);
+        if (aoeAHitbox)
+        {
+            SphereCollider collider = aoeAHitbox.GetComponent<SphereCollider>();
+            if (collider)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(aoeAHitbox.transform.position, collider.radius);
+            }
+        }
     }
 }
