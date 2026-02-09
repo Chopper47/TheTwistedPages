@@ -26,6 +26,11 @@ public class Lumberjack : MonoBehaviour
 
     [Header("Hitboxes")]
     [SerializeField] private GameObject aoeAHitbox;
+    [SerializeField] private GameObject aoeBHitbox;
+
+    [Header("AOE B Settings")]
+    [SerializeField] private float aoeBMaxRadius = 8.0f;
+    [SerializeField] private float aoeBExpandTime = 1.0f;
 
     private void Awake()
     {
@@ -35,6 +40,7 @@ public class Lumberjack : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
     }
 
+    #region Distance Checks
     public bool TargetInCloseRange()
     {
         return chaseAgent.DistanceFromTarget() <= closeRange;
@@ -50,7 +56,9 @@ public class Lumberjack : MonoBehaviour
     {
         return chaseAgent.DistanceFromTarget() > midRange;
     }
+    #endregion
 
+    #region Axe States
     public void SetAxeReturningState(bool value)
     {
         axeReturning = value;
@@ -75,7 +83,9 @@ public class Lumberjack : MonoBehaviour
         axeReturning = false;
         axeOnGround = false;
     }
+    #endregion
 
+    #region Boss States
     public void Wait()
     {
         chaseAgent.StopChase();
@@ -96,7 +106,9 @@ public class Lumberjack : MonoBehaviour
     {
         chaseAgent.Chase();
     }
+    #endregion
 
+    #region Attacks
     public void DoSwipeAttack()
     {
         StartCoroutine(SwipeAttack());
@@ -126,7 +138,9 @@ public class Lumberjack : MonoBehaviour
     {
         StartCoroutine(JumpAttack());
     }
+    #endregion
 
+    #region Attack Coroutines
     private IEnumerator SwipeAttack()
     {
         StartAttack();
@@ -138,7 +152,7 @@ public class Lumberjack : MonoBehaviour
     {
         StartAttack();
         EnableHitbox(aoeAHitbox);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         DisableHitbox(aoeAHitbox);
         EndAttack();
     }
@@ -146,7 +160,9 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackB()
     {
         StartAttack();
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.6f);
+        StartCoroutine(ExpandAOEHitbox());
+        yield return new WaitForSeconds(0.4f);
         EndAttack();
     }
 
@@ -174,6 +190,7 @@ public class Lumberjack : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         EndAttack();
     }
+    #endregion
 
     private void StartAttack()
     {
@@ -198,6 +215,28 @@ public class Lumberjack : MonoBehaviour
         hitbox.SetActive(false);
     }
 
+    private IEnumerator ExpandAOEHitbox()
+    {
+        SphereCollider collider = aoeBHitbox.GetComponent<SphereCollider>();
+        collider.radius = 0f;
+
+        aoeBHitbox.SetActive(true);
+
+        float timer = 0f;
+
+        while (timer < aoeBExpandTime)
+        {
+            timer += Time.deltaTime;
+            float t = timer / aoeBExpandTime;
+
+            collider.radius = Mathf.Lerp(0f, aoeBMaxRadius, t);
+
+            yield return null;
+        }
+
+        aoeBHitbox.SetActive(false);
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (aoeAHitbox)
@@ -207,6 +246,16 @@ public class Lumberjack : MonoBehaviour
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(aoeAHitbox.transform.position, collider.radius);
+            }
+        }
+
+        if (aoeBHitbox)
+        {
+            SphereCollider collider = aoeBHitbox.GetComponent<SphereCollider>();
+            if (collider)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(aoeBHitbox.transform.position, collider.radius);
             }
         }
     }
