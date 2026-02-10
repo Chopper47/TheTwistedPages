@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FlowerProjectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private int damage = 1;
@@ -8,10 +8,16 @@ public class FlowerProjectile : MonoBehaviour
     private Vector3 direction = Vector3.zero;
 
     private bool wasDeflected = false;
-    
+    private float initialSize = 0.5f;
+
+    private void Start()
+    {
+        initialSize = GetComponent<SphereCollider>().radius;
+    }
+
     private void Update()
     {
-        if (direction != Vector3.zero)
+        if (direction != Vector3.zero && !wasDeflected)
         {
             transform.Translate(direction * speed * Time.deltaTime);
         }
@@ -22,10 +28,10 @@ public class FlowerProjectile : MonoBehaviour
         direction = newDir.normalized; 
     }
 
-    public void Deflect(Vector3 newDir)
+    public void Deflect()
     {
         wasDeflected = true;
-        SetDirection(newDir);
+        GetComponent<SphereCollider>().radius = initialSize;
     }
 
     private void OnTriggerEnter(Collider other)

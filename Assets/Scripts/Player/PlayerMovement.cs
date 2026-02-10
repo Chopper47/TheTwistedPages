@@ -146,6 +146,10 @@ public class PlayerMovement: MonoBehaviour
                         toPush.transform.localPosition = Vector3.zero;
                         rotationCoroutine = StartCoroutine(AxeRotation());
                     }
+                    if(toPush.GetComponent<Projectile>() != null)
+                    {
+                        toPush.GetComponent<SphereCollider>().radius *= 2f;
+                    }
                     TimeManager.SlowTime();
                     btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
                     bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
@@ -293,14 +297,15 @@ public class PlayerMovement: MonoBehaviour
         return isRolling && isInBulletTime && enemyChecking == toPush;
     }
 
-    public Vector3 PushTarget()
+    public Vector3 PushTarget(bool findTrap)
     {
         Vector3 pushDir = new Vector3(toPush.transform.position.x - transform.position.x,0, toPush.transform.position.z - transform.position.z).normalized * frontAmplitude;
         Collider[] hits = Physics.OverlapSphere(toPush.transform.position, frontAmplitude);
         GameObject nearestTrap = null;
+
         foreach (Collider hit in hits)
         {
-            if (hit.gameObject.CompareTag("Trap"))
+            if (findTrap ? hit.gameObject.CompareTag("Trap") : hit.gameObject.CompareTag("Enemy"))
             {
                 if (nearestTrap == null)
                 {
@@ -335,20 +340,20 @@ public class PlayerMovement: MonoBehaviour
         }
     }
     
-    void OnDrawGizmos()
-    {
-        if(isInBulletTime)
-        {
-            Vector3 pushDir = (toPush.transform.position - transform.position).normalized;
+    //void OnDrawGizmos()
+    //{
+    //    if(isInBulletTime)
+    //    {
+    //        Vector3 pushDir = (toPush.transform.position - transform.position).normalized;
 
-            Vector3 rightAngle = Vector3.RotateTowards(pushDir, new Vector3(pushDir.z, pushDir.y, -pushDir.x), coneAngle,0f);
-            Vector3 leftAngle = Vector3.RotateTowards(pushDir, -new Vector3(pushDir.z, pushDir.y, -pushDir.x), coneAngle,0f);
-            //Vector3.SignedAngle(); usado para ver angulos entre vectores
+    //        Vector3 rightAngle = Vector3.RotateTowards(pushDir, new Vector3(pushDir.z, pushDir.y, -pushDir.x), coneAngle,0f);
+    //        Vector3 leftAngle = Vector3.RotateTowards(pushDir, -new Vector3(pushDir.z, pushDir.y, -pushDir.x), coneAngle,0f);
+    //        //Vector3.SignedAngle(); usado para ver angulos entre vectores
 
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(toPush.transform.position +leftAngle * angleAmplitude + pushDir * frontAmplitude, toPush.transform.position + rightAngle*angleAmplitude + pushDir * frontAmplitude);
-            Gizmos.DrawLine(toPush.transform.position + rightAngle * angleAmplitude + pushDir * frontAmplitude, toPush.transform.position);
-            Gizmos.DrawLine(toPush.transform.position, toPush.transform.position + leftAngle * angleAmplitude + pushDir * frontAmplitude);
-        }
-    }
+    //        Gizmos.color = Color.yellow;
+    //        Gizmos.DrawLine(toPush.transform.position +leftAngle * angleAmplitude + pushDir * frontAmplitude, toPush.transform.position + rightAngle*angleAmplitude + pushDir * frontAmplitude);
+    //        Gizmos.DrawLine(toPush.transform.position + rightAngle * angleAmplitude + pushDir * frontAmplitude, toPush.transform.position);
+    //        Gizmos.DrawLine(toPush.transform.position, toPush.transform.position + leftAngle * angleAmplitude + pushDir * frontAmplitude);
+    //    }
+    //}
 }

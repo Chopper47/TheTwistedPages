@@ -77,7 +77,7 @@ public class Gnome : MonoBehaviour
             return;
         }
 
-        if (other.GetComponent<FlowerProjectile>())
+        if (other.GetComponent<Projectile>())
         {
             AM.Play("Die", null);
             Destroy(gameObject);

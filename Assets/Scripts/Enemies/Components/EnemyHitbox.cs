@@ -17,7 +17,14 @@ public class EnemyHitbox : MonoBehaviour
 
     public int ShowEnemyState()
     {
-        return states.CurrentState();
+        if(states == null)
+        {
+            return 2;                       //returns attack state
+        }
+        else
+        {
+            return states.CurrentState();
+        }
     }
 
     public void SetIgnore(bool newIgnorePlayer)
@@ -40,9 +47,23 @@ public class EnemyHitbox : MonoBehaviour
 
         if(playerMovement != null && playerMovement.CanPush(this.gameObject) && pushable)
         {
-            Pushed(playerMovement.PushTarget());
+            Projectile projectile = GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                Pushed(playerMovement.PushTarget(false));
+                projectile.Deflect();
+                
+            }
+            else
+            {
+                Pushed(playerMovement.PushTarget(true));
+            }
             SetIgnore(true);
-            states.PushedState();
+
+            if(states != null)
+            {
+                states.PushedState();
+            }
         }
     }
 
@@ -64,7 +85,10 @@ public class EnemyHitbox : MonoBehaviour
         }
 
         SetIgnore(false);
-        states.StayState();
+        if (states != null) 
+        {
+            states.StayState();
+        }
         yield return null;
     }
 }

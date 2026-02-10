@@ -285,15 +285,15 @@ public class Flower : MonoBehaviour
             GameObject leftBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
             GameObject rightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
 
-            straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
-            leftBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(-30, Vector3.up) * straightDir);
-            rightBullet.GetComponent<FlowerProjectile>().SetDirection(Quaternion.AngleAxis(30, Vector3.up) * straightDir);
+            straightBullet.GetComponent<Projectile>().SetDirection(straightDir);
+            leftBullet.GetComponent<Projectile>().SetDirection(Quaternion.AngleAxis(-30, Vector3.up) * straightDir);
+            rightBullet.GetComponent<Projectile>().SetDirection(Quaternion.AngleAxis(30, Vector3.up) * straightDir);
         }
         else
         {
 
             GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-            straightBullet.GetComponent<FlowerProjectile>().SetDirection(straightDir);
+            straightBullet.GetComponent<Projectile>().SetDirection(straightDir);
         }
         StartCoroutine(ShootCooldown());
     }
