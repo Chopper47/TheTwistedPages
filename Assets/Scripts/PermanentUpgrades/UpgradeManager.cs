@@ -31,10 +31,10 @@ public class UpgradeManager : MonoBehaviour
     private void Awake()
     {
         currencyManager = gameObject.GetComponent<CurrencyManager>();
+        UpdateScriptableObjectStats();
     }
     private void Start()
     {
-        UpdateScriptableObjectStats();
     }
 
     private void UpdateScriptableObjectStats()

@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class HubBedInteraction : MonoBehaviour
+public class HubStartGameInteractable : MonoBehaviour
 {
     private bool playerInRange = false;
     [SerializeField] private PlayerMovement player;
-
     private InputAction interactAction;
 
     private void Start()
@@ -22,6 +22,7 @@ public class HubBedInteraction : MonoBehaviour
         {
             Debug.Log("Interaction");
             StartCoroutine(Fade());
+
         }
     }
 
@@ -44,8 +45,14 @@ public class HubBedInteraction : MonoBehaviour
     IEnumerator Fade()
     {
         StartCoroutine(RoomTransitionFade.Instance.FadeOut());
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(RoomTransitionFade.Instance.FadeIn());
-
+        yield return new WaitForSeconds(0.5f);
+        StartGame();
     }
+
+    private void StartGame()
+    {
+        SceneManager.LoadScene("alpha");
+    }
+
+    
 }
