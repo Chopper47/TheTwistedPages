@@ -1,16 +1,30 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossAxe : MonoBehaviour
 {
     private bool playerGrabbed = false;
+    private bool thrown = false;
+    private bool arrived = false;
     private Coroutine moving;
-    [SerializeField] LayerMask WallMask;
+    private Transform originalParent;
+    private Transform ogTransform;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private LayerMask WallMask;
+
+    private void Awake()
+    {
+        originalParent = transform.parent;
+        ogTransform = transform;
+    }
 
     public bool MovedByPlayer() { return playerGrabbed; }
 
     public void StartThrowAttackA(Vector3 startingPos, Vector3 throwDirection, float timeOnAir)
     {
+        transform.parent = null;
+        thrown = true;
         moving = StartCoroutine(MoveInPlayerDirection(startingPos, throwDirection, timeOnAir));
     }
 
@@ -49,6 +63,34 @@ public class BossAxe : MonoBehaviour
             yield return null;
         }
 
+        thrown = false;
+        arrived = true;
         yield return null;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Lumberjack boss = other.GetComponent<Lumberjack>();
+
+        if (boss != null && arrived) 
+        {
+            transform.parent = originalParent;
+            transform.position = ogTransform.position;
+            transform.rotation = ogTransform.rotation;
+            transform.localScale = ogTransform.localScale;
+            boss.PickUpAxe();
+            arrived = false;
+            gameObject.SetActive(false);
+        }
+
+        if(thrown)
+        {
+            PlayerHealth player = other.GetComponent<PlayerHealth>();
+
+            if(player)
+            {
+                player.TakeDamage(damage);
+            }
+        }
     }
 }

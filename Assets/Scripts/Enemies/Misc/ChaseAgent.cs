@@ -184,6 +184,11 @@ public class ChaseAgent : MonoBehaviour
         }
     }
 
+    public void SetNewDestination(Vector3 newDestination)
+    {
+        agent.SetDestination(newDestination);
+    }
+
     /// <summary>
     /// Method for stopping the chase
     /// </summary>

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -49,6 +50,7 @@ public class Lumberjack : MonoBehaviour
         enemyState = GetComponent<EnemyState>();
         chaseAgent = GetComponent<ChaseAgent>();
         enemyHealth = GetComponent<EnemyHealth>();
+        bossAxe.gameObject.SetActive(false);
     }
 
     #region Distance Checks
@@ -110,7 +112,7 @@ public class Lumberjack : MonoBehaviour
     public void GetAxe()
     {
         chaseAgent.Chase();
-        GetComponent<NavMeshAgent>().SetDestination(axeGroundPosition);
+        chaseAgent.SetNewDestination(axeGroundPosition);
     }
 
     public void Pursue()
@@ -182,8 +184,11 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         hasAxe = false;
         yield return new WaitForSeconds(0.2f);
+        bossAxe.gameObject.SetActive(true);
         bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.1f, new Vector3(chaseAgent.TargetPosition().x - transform.position.x,0f, chaseAgent.TargetPosition().z - transform.position.z).normalized, axeOnAirTime);
         yield return new WaitForSeconds(axeOnAirTime);
+        axeOnGround = true;
+        axeGroundPosition = bossAxe.transform.position;
         EndAttack();
     }
 
