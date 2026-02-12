@@ -19,6 +19,13 @@ public class CameraController : MonoBehaviour
     private float minX;
     private float maxX;
 
+    [Header("Look Ahead Settings")]
+    public float lookAheadDistance = 2.0f;
+    public float lookAheadSmooth = 4.0f;
+
+    private Vector3 lastPlayerPosition;
+    private Vector3 lookAheadOffset;
+
     private void Awake()
     {
         if (Instance == null)
@@ -42,6 +49,8 @@ public class CameraController : MonoBehaviour
         {
             levelGenerator = FindFirstObjectByType<LevelGenerator>();
         }
+
+        lastPlayerPosition = player.position;
     }
 
     /// <summary>
@@ -61,6 +70,9 @@ public class CameraController : MonoBehaviour
         float targetX = Mathf.Clamp(playerFinalPosition.x, minX, maxX);
 
         transform.position = new Vector3(targetX, transform.position.y, targetZ);
+
+        lastPlayerPosition = playerFinalPosition;
+        lookAheadOffset = Vector3.zero;
     }
 
     private void Update()
@@ -70,10 +82,22 @@ public class CameraController : MonoBehaviour
             return;
         }
 
+        Vector3 playerDelta = player.position - lastPlayerPosition;
+        Vector3 targetLookAhead = Vector3.zero;
+
+        if (playerDelta.sqrMagnitude > 0.0001f)
+        {
+            Vector3 moveDir = playerDelta.normalized;
+            targetLookAhead = moveDir * lookAheadDistance;
+        }
+
+        lookAheadOffset = Vector3.Lerp(lookAheadOffset, targetLookAhead, lookAheadSmooth * Time.deltaTime);
+        lastPlayerPosition = player.position;
+
         float targetX = Mathf.Clamp(player.position.x, minX, maxX);
         float targetZ = Mathf.Clamp(player.position.z, minZ, maxZ);
 
-        Vector3 targetPosition = new Vector3(targetX, transform.position.y, targetZ);
+        Vector3 targetPosition = new Vector3(targetX, transform.position.y, targetZ) + lookAheadOffset;
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
     }
