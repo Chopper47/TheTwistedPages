@@ -103,10 +103,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1.1
   m_Speed: 3.5
-  m_Acceleration: 30
+  m_Acceleration: 12
   avoidancePriority: 15
-  m_AngularSpeed: 1000
-  m_StoppingDistance: 0
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  health: 0
   roomController: {fileID: 0}
   AM: {fileID: 0}
   Main: {fileID: 0}
@@ -694,6 +695,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30936ebb02309bd43a8035d52fbe848c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wanderRadius: 10
+  centerPoint: {fileID: 0}
+  minSpeed: 2
+  maxSpeed: 3.5
+  pauseChance: 0.15
+  minPauseTime: 1
+  maxPauseTime: 3
+  repathDelay: 2
 --- !u!1 &5848030577909080649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 6871944910178554106}
-  distance: 150
+  distance: 10
 --- !u!1 &8942500559746817564
 GameObject:
   m_ObjectHideFlags: 0
