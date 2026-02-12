@@ -13,11 +13,11 @@ public class CameraController : MonoBehaviour
     [Header("Camera Follow Settings")]
     public float followSpeed = 5.0f;
 
-    private Vector3 staticCameraPosition;
-    private bool followVertical = false;
-
     private float minZ;
     private float maxZ;
+
+    private float minX;
+    private float maxX;
 
     private void Awake()
     {
@@ -45,25 +45,22 @@ public class CameraController : MonoBehaviour
     }
 
     /// <summary>
-    /// Teleports the camera to the center of a given room.
+    /// Teleports the camera to follow the player inside the room bounds.
     /// </summary>
     public void MoveToRoom(RoomController room, Vector3 playerFinalPosition)
     {
         currentRoom = room;
 
-        followVertical = room.roomPreset.allowVerticalCameraFollow;
+        minZ = room.transform.position.z + room.roomPreset.minFollowZ;
+        maxZ = room.transform.position.z + room.roomPreset.maxFollowZ;
 
-        Vector3 minPoint = room.transform.position + room.transform.rotation * new Vector3(0f, 0f, room.roomPreset.minFollowZ);
-        Vector3 maxPoint = room.transform.position + room.transform.rotation * new Vector3(0f, 0f, room.roomPreset.maxFollowZ);
-
-        minZ = Mathf.Min(minPoint.z, maxPoint.z);
-        maxZ = Mathf.Max(minPoint.z, maxPoint.z);
+        minX = room.transform.position.x + room.roomPreset.minFollowX;
+        maxX = room.transform.position.x + room.roomPreset.maxFollowX;
 
         float targetZ = Mathf.Clamp(playerFinalPosition.z, minZ, maxZ);
+        float targetX = Mathf.Clamp(playerFinalPosition.x, minX, maxX);
 
-        staticCameraPosition = new Vector3(room.transform.position.x, transform.position.y, targetZ);
-
-        transform.position = staticCameraPosition;
+        transform.position = new Vector3(targetX, transform.position.y, targetZ);
     }
 
     private void Update()
@@ -73,17 +70,11 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        if (followVertical)
-        {
-            float targetZ = Mathf.Clamp(player.position.z, minZ, maxZ);
+        float targetX = Mathf.Clamp(player.position.x, minX, maxX);
+        float targetZ = Mathf.Clamp(player.position.z, minZ, maxZ);
 
-            Vector3 targetPosition = new Vector3(staticCameraPosition.x, staticCameraPosition.y, targetZ);
+        Vector3 targetPosition = new Vector3(targetX, transform.position.y, targetZ);
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
-        }
-        else
-        {
-            transform.position = Vector3.Lerp(transform.position, staticCameraPosition, followSpeed * Time.deltaTime);
-        }
+        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
     }
 }
