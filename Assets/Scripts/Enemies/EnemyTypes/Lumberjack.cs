@@ -9,6 +9,7 @@ public class Lumberjack : MonoBehaviour
     private EnemyState enemyState;
     private ChaseAgent chaseAgent;
     private EnemyHealth enemyHealth;
+    [SerializeField] BossAxe bossAxe;
 
     [Header("Axe State")]
     public bool hasAxe = true;
@@ -38,6 +39,9 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private float jumpAirTime = 1.0f;
     [SerializeField] private float jumpFallTime = 0.4f;
     [SerializeField] private float jumpImpactRadius = 5.0f;
+
+    [Header("Throw Attacks Settings")]
+    [SerializeField] private float axeOnAirTime = 1.5f;
 
     private void Awake()
     {
@@ -177,8 +181,9 @@ public class Lumberjack : MonoBehaviour
     {
         StartAttack();
         hasAxe = false;
-        yield return new WaitForSeconds(1.0f);
-        hasAxe = true;
+        yield return new WaitForSeconds(0.2f);
+        bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.1f, new Vector3(chaseAgent.TargetPosition().x - transform.position.x,0f, chaseAgent.TargetPosition().z - transform.position.z).normalized, axeOnAirTime);
+        yield return new WaitForSeconds(axeOnAirTime);
         EndAttack();
     }
 
