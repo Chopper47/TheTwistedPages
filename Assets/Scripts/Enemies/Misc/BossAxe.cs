@@ -10,6 +10,7 @@ public class BossAxe : MonoBehaviour
     private Coroutine moving;
     private Transform originalParent;
     private Transform ogTransform;
+    private Lumberjack lumberjack;
     [SerializeField] private int damage = 1;
     [SerializeField] private LayerMask WallMask;
 
@@ -19,13 +20,23 @@ public class BossAxe : MonoBehaviour
         ogTransform = transform;
     }
 
+    public void SetLumberjack(Lumberjack newLumberjack)
+    {
+        lumberjack = newLumberjack;
+    }
+
     public bool MovedByPlayer() { return playerGrabbed; }
 
     public void StartThrowAttackA(Vector3 startingPos, Vector3 throwDirection, float timeOnAir)
     {
         transform.parent = null;
         thrown = true;
-        moving = StartCoroutine(MoveInPlayerDirection(startingPos, throwDirection, timeOnAir));
+        moving = StartCoroutine(Move(startingPos, throwDirection, timeOnAir));
+    }
+
+    public void NewDirection(Vector3 startingPos, Vector3 throwDirection, float timeOnAir)
+    {
+        StartCoroutine(Move(startingPos, throwDirection, timeOnAir));
     }
 
     public void InterruptedThowAttack()
@@ -44,7 +55,12 @@ public class BossAxe : MonoBehaviour
         //calls animator and sets transition varaible
     }
 
-    IEnumerator MoveInPlayerDirection(Vector3 startingPos, Vector3 dir, float timeOnAir)
+    public bool IsAttacking()
+    {
+        return thrown && !playerGrabbed;
+    }
+
+    IEnumerator Move(Vector3 startingPos, Vector3 dir, float timeOnAir)
     {
         RaycastHit hit;
         Vector3 endPoint = Vector3.zero;
@@ -65,6 +81,7 @@ public class BossAxe : MonoBehaviour
 
         thrown = false;
         arrived = true;
+        lumberjack.CanGetAxe();
         yield return null;
     }
 
@@ -80,6 +97,7 @@ public class BossAxe : MonoBehaviour
             transform.localScale = ogTransform.localScale;
             boss.PickUpAxe();
             arrived = false;
+            if (playerGrabbed) { }
             gameObject.SetActive(false);
         }
 
@@ -87,7 +105,7 @@ public class BossAxe : MonoBehaviour
         {
             PlayerHealth player = other.GetComponent<PlayerHealth>();
 
-            if(player)
+            if(player != null && !PlayerMovement.IsInvincible() && !playerGrabbed)
             {
                 player.TakeDamage(damage);
             }

@@ -33,6 +33,17 @@ public class BulletTimeTrigger : MonoBehaviour
                 canDodge=true;
             }
         }
+
+        BossAxe bossAxe = other.GetComponent<BossAxe>();
+        if(bossAxe != null && bossAxe.IsAttacking())
+        {
+            axeGO = bossAxe.gameObject;
+            if(harmOrigin == null)
+            {
+                harmOrigin = axeGO;
+                canDodge=true;
+            }
+        }
     }
 
     public void OnTriggerStay(Collider other)
@@ -50,12 +61,23 @@ public class BulletTimeTrigger : MonoBehaviour
                 canDodge = false;
             }
         }
+
+        BossAxe bossAxe = other.GetComponent<BossAxe>();
+        if (bossAxe != null)
+        {
+            if (!bossAxe.IsAttacking() && bossAxe.gameObject == harmOrigin)
+            {
+                harmOrigin = null;
+                canDodge = false;
+            }
+        }
     }
 
     public void OnTriggerExit(Collider other)
     {
         EnemyHitbox enemyHb = other.GetComponent<EnemyHitbox>();
         Axe axe = other.GetComponent<Axe>();
+        BossAxe bossAxe = other.GetComponent<BossAxe>();
 
         if (enemyHb != null)
         {
@@ -75,10 +97,19 @@ public class BulletTimeTrigger : MonoBehaviour
             }
         }
 
-        if(axeGO == null &&  latestEnemy == null)
+        if (bossAxe != null)
         {
-            canDodge = false;
-            harmOrigin = null;
+            axeGO = null;
+            if (latestEnemy != null)
+            {
+                harmOrigin = latestEnemy;
+            }
+
+            if (axeGO == null && latestEnemy == null && bossAxe == null)
+            {
+                canDodge = false;
+                harmOrigin = null;
+            }
         }
     }
 

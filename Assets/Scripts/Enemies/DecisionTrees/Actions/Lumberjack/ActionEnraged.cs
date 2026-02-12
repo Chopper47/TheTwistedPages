@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ActionReceiveAxe : IAction
+public class ActionEnraged : IAction
 {
     [SerializeField] private Lumberjack lumberjack;
 
@@ -15,6 +15,6 @@ public class ActionReceiveAxe : IAction
     public override void Act()
     {
         Debug.Log("Lumberjack: Receive Axe");
-        lumberjack.ReceiveAxe();
+        lumberjack.Enraged();
     }
 }

@@ -14,7 +14,7 @@ public class Lumberjack : MonoBehaviour
 
     [Header("Axe State")]
     public bool hasAxe = true;
-    public bool axeReturning = false;
+    public bool recievedAxe = false;
     public bool axeOnGround = false;
     public Vector3 axeGroundPosition;
 
@@ -51,6 +51,7 @@ public class Lumberjack : MonoBehaviour
         chaseAgent = GetComponent<ChaseAgent>();
         enemyHealth = GetComponent<EnemyHealth>();
         bossAxe.gameObject.SetActive(false);
+        bossAxe.SetLumberjack(this);
     }
 
     #region Distance Checks
@@ -72,29 +73,17 @@ public class Lumberjack : MonoBehaviour
     #endregion
 
     #region Axe States
-    public void SetAxeReturningState(bool value)
-    {
-        axeReturning = value;
-        if (value)
-        {
-            axeOnGround = false;
-            hasAxe = false;
-        }
-    }
-
-    public void SetAxeOnGround(Vector3 position)
-    {
-        axeOnGround = true;
-        axeGroundPosition = position;
-        axeReturning = false;
-        hasAxe = false;
-    }
 
     public void PickUpAxe()
     {
         hasAxe = true;
-        axeReturning = false;
+        recievedAxe = false;
         axeOnGround = false;
+    }
+
+    public void RecieveAxe()
+    {
+        recievedAxe = true;
     }
     #endregion
 
@@ -104,9 +93,10 @@ public class Lumberjack : MonoBehaviour
         chaseAgent.StopChase();
     }
 
-    public void ReceiveAxe()
+    public void Enraged()
     {
-        PickUpAxe();
+        StartAttack();
+        Debug.Log("ENRaGEd");
     }
 
     public void GetAxe()
@@ -118,6 +108,13 @@ public class Lumberjack : MonoBehaviour
     public void Pursue()
     {
         chaseAgent.Chase();
+    }
+
+    public void CanGetAxe()
+    {
+        axeOnGround = true;
+        axeGroundPosition = bossAxe.transform.position;
+        EndAttack();
     }
     #endregion
 
@@ -186,10 +183,6 @@ public class Lumberjack : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
         bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.1f, new Vector3(chaseAgent.TargetPosition().x - transform.position.x,0f, chaseAgent.TargetPosition().z - transform.position.z).normalized, axeOnAirTime);
-        yield return new WaitForSeconds(axeOnAirTime);
-        axeOnGround = true;
-        axeGroundPosition = bossAxe.transform.position;
-        EndAttack();
     }
 
     private IEnumerator ThrowAttackB()

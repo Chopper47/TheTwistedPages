@@ -138,10 +138,18 @@ public class PlayerMovement: MonoBehaviour
                     isInBulletTime = true;
                     toPush = bulletTimeTrigger.FirstHarm();
                     Axe axe = toPush.GetComponent<Axe>();
-                    if (axe != null)
+                    BossAxe bossAxe = toPush.GetComponent<BossAxe>();
+                    if (axe != null || bossAxe != null)
                     {
                         axeHolding = true;
-                        axe.StopMoving();
+                        if (axe != null) 
+                        {
+                            axe.StopMoving();
+                        }
+                        else 
+                        { 
+                            bossAxe.InterruptedThowAttack(); 
+                        }
                         toPush.transform.parent = axeHold;
                         toPush.transform.localPosition = Vector3.zero;
                         rotationCoroutine = StartCoroutine(AxeRotation());
@@ -170,9 +178,18 @@ public class PlayerMovement: MonoBehaviour
     public void ReleaseAxe()
     {
         toPush.transform.parent = null;
+        Axe axe = toPush.GetComponent<Axe>();
+        BossAxe bossAxe = toPush.GetComponent<BossAxe>();
         Vector3 newDir = new Vector3(toPush.transform.position.x - transform.position.x, 0, toPush.transform.position.z - transform.position.z).normalized;
-        toPush.GetComponent<Axe>().NewDirection(newDir * axeThrowSpeed);
-        toPush.GetComponent<Axe>().ActivateTrail();
+        if(axe != null)
+        {
+            axe.NewDirection(newDir * axeThrowSpeed);
+            axe.ActivateTrail();
+        }
+        else
+        {
+            bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, newDir, 1.5f);
+        }
     }
 
     private IEnumerator AxeRotation()
@@ -260,7 +277,7 @@ public class PlayerMovement: MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(bulletTimeDuration);
 
-        if(toPush.GetComponent<Axe>())
+        if(toPush.GetComponent<Axe>() || toPush.GetComponent<BossAxe>())
         {
             ReleaseAxe();
         }
