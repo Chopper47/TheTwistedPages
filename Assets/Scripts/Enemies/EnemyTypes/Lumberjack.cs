@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,12 +29,18 @@ public class Lumberjack : MonoBehaviour
 
     [Header("Hitboxes")]
     [SerializeField] private GameObject aoeAHitbox;
-    [SerializeField] private GameObject aoeBHitbox;
     [SerializeField] private GameObject jumpAttackHitbox;
 
     [Header("AOE Settings")]
     [SerializeField] private float aoeBMaxRadius = 8.0f;
-    [SerializeField] private float aoeBExpandTime = 1.0f;
+    [SerializeField] private float aoeBExpandTime = 1.0f; 
+    [SerializeField] private Transform aoeBRoot;
+    [SerializeField] private SphereCollider aoeBSphereHitbox;
+
+    [SerializeField] private int sphereCount = 12;
+    [SerializeField] private float expandTime = 1.0f;
+
+    private List<SphereCollider> activeSpheres = new List<SphereCollider>();
 
     [Header("Jump Attack Settings")]
     [SerializeField] private float jumpRiseHeight = 4.0f;
@@ -290,24 +297,42 @@ public class Lumberjack : MonoBehaviour
 
     private IEnumerator ExpandAOEHitbox()
     {
-        SphereCollider collider = aoeBHitbox.GetComponent<SphereCollider>();
-        collider.radius = 0f;
-
-        aoeBHitbox.SetActive(true);
-
         float timer = 0f;
 
-        while (timer < aoeBExpandTime)
+        float sphereRadius = aoeBSphereHitbox.radius;
+        float maxRingRadius = (sphereCount * sphereRadius) / Mathf.PI;
+
+        for (int i = 0; i < sphereCount; i++)
+        {
+            SphereCollider newSphere = Instantiate(aoeBSphereHitbox, aoeBRoot);
+            newSphere.gameObject.SetActive(true);
+            activeSpheres.Add(newSphere);
+        }
+
+        while (timer < expandTime)
         {
             timer += Time.deltaTime;
-            float t = timer / aoeBExpandTime;
+            float t = timer / expandTime;
+            float currentRadius = Mathf.Lerp(0f, maxRingRadius, t);
 
-            collider.radius = Mathf.Lerp(0f, aoeBMaxRadius, t);
+            for (int i = 0; i < activeSpheres.Count; i++)
+            {
+                float angle = (Mathf.PI * 2f / sphereCount) * i;
+
+                Vector3 offset = new Vector3(Mathf.Cos(angle) * currentRadius, 0f, Mathf.Sin(angle) * currentRadius);
+
+                activeSpheres[i].transform.localPosition = offset;
+            }
 
             yield return null;
         }
 
-        aoeBHitbox.SetActive(false);
+        foreach (SphereCollider sphere in activeSpheres)
+        {
+            Destroy(sphere.gameObject);
+        }
+
+        activeSpheres.Clear();
     }
 
     private void OnDrawGizmosSelected()
@@ -322,13 +347,13 @@ public class Lumberjack : MonoBehaviour
             }
         }
 
-        if (aoeBHitbox)
+        if (aoeBSphereHitbox)
         {
-            SphereCollider collider = aoeBHitbox.GetComponent<SphereCollider>();
+            SphereCollider collider = aoeBSphereHitbox.GetComponent<SphereCollider>();
             if (collider)
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawWireSphere(aoeBHitbox.transform.position, collider.radius);
+                Gizmos.DrawWireSphere(aoeBSphereHitbox.transform.position, collider.radius);
             }
         }
 

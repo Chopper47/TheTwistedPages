@@ -768,6 +768,73 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1bdc2e807ab9904790ca3e8ad3d6d73, type: 3}
+--- !u!1 &251246708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 251246711}
+  - component: {fileID: 251246709}
+  - component: {fileID: 251246710}
+  m_Layer: 0
+  m_Name: AOE_B_Root (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!135 &251246709
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251246708}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &251246710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251246708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c029a36fb3fda42bc76ae25e6c24f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+--- !u!4 &251246711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251246708}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2011498532}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &272600584
 GameObject:
   m_ObjectHideFlags: 0
@@ -3692,6 +3759,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -159.25154
       objectReference: {fileID: 0}
+    - target: {fileID: 318581301832864342, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: m_Name
+      value: AOE_B_Root
+      objectReference: {fileID: 0}
+    - target: {fileID: 318581301832864342, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 420886813959238047, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 19.204514
@@ -4516,6 +4591,22 @@ PrefabInstance:
       propertyPath: bossAxe
       value: 
       objectReference: {fileID: 1117039676}
+    - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: aoeBRoot
+      value: 
+      objectReference: {fileID: 2011498532}
+    - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: aoeBRingRoot
+      value: 
+      objectReference: {fileID: 2011498532}
+    - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: aoeBSphereHitbox
+      value: 
+      objectReference: {fileID: 251246709}
+    - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: ringSphereTemplate
+      value: 
+      objectReference: {fileID: 251246709}
     - target: {fileID: 6519567760587709112, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -10.6031275
@@ -4542,7 +4633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588809794490680986, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: maxHealth
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6700670413964662937, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4744,7 +4835,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 7.763008
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6621812635003181129, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+    - {fileID: 4571772267220378187, guid: b584b32e08db8604786de258ed1073a5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5327002227996684137, guid: b584b32e08db8604786de258ed1073a5, type: 3}
@@ -4753,6 +4846,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852197556192723861, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1117039675}
+    - targetCorrespondingSourceObject: {fileID: 1781791569602703458, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 251246711}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6087193230659500017, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       insertIndex: -1
@@ -6124,6 +6220,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2011498532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1781791569602703458, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+  m_PrefabInstance: {fileID: 1646586757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2047938297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2588019561504235077, guid: 16826ce1de86db947b2d28a056305a67, type: 3}

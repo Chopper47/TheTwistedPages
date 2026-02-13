@@ -7,7 +7,8 @@ public class MinimapManager : MonoBehaviour
     [Header("References")]
     public RectTransform minimapContainer;
     public GameObject roomIconPrefab;
-    public float cellSize = 50.0f;
+    public float cellSizeX = 75.0f;
+    public float cellSizeY = 50.0f;
 
     private Dictionary<Vector2Int, MinimapRoomIcon> icons = new Dictionary<Vector2Int, MinimapRoomIcon>();
 
@@ -53,7 +54,7 @@ public class MinimapManager : MonoBehaviour
 
             Vector2Int offset = new Vector2Int(roomPosition.x - currentRoom.x, roomPosition.y - currentRoom.y);
 
-            icon.transform.localPosition = new Vector3(offset.x * cellSize, offset.y * cellSize, 0f);
+            icon.transform.localPosition = new Vector3(offset.x * cellSizeX, offset.y * cellSizeY, 0f);
 
             icon.SetVisited();
 
