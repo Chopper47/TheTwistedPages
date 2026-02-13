@@ -418,7 +418,7 @@ MonoBehaviour:
   midRange: 10
   aoeAHitbox: {fileID: 9207797116380492247}
   jumpAttackHitbox: {fileID: 446118833739598041}
-  aoeBMaxRadius: 8
+  aoeBMaxRadius: 4
   aoeBExpandTime: 1
   aoeBRoot: {fileID: 1781791569602703458}
   aoeBSphereHitbox: {fileID: 5041311295763000854}
@@ -6911,7 +6911,7 @@ GameObject:
   - component: {fileID: 5041311295763000854}
   - component: {fileID: 1122022184836488688}
   m_Layer: 0
-  m_Name: AOE_B_Root (1)
+  m_Name: Hitbox_AOE_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6927,7 +6927,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1781791569602703458}
@@ -6951,7 +6951,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.75
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1122022184836488688
 MonoBehaviour:

@@ -37,7 +37,6 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private Transform aoeBRoot;
     [SerializeField] private SphereCollider aoeBSphereHitbox;
 
-    [SerializeField] private int sphereCount = 12;
     [SerializeField] private float expandTime = 1.0f;
 
     private List<SphereCollider> activeSpheres = new List<SphereCollider>();
@@ -300,7 +299,9 @@ public class Lumberjack : MonoBehaviour
         float timer = 0f;
 
         float sphereRadius = aoeBSphereHitbox.radius;
-        float maxRingRadius = (sphereCount * sphereRadius) / Mathf.PI;
+        float maxRingRadius = aoeBMaxRadius;
+
+        int sphereCount = Mathf.CeilToInt((Mathf.PI * maxRingRadius) / sphereRadius);
 
         for (int i = 0; i < sphereCount; i++)
         {
