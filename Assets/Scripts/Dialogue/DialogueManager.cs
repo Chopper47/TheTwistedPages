@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI characterName;
     public Image dialoguePanel;
     public DialogueData currentDialogue;
-    
+    public UnityEvent onDialogueEnd;
 
     private int index;
     private bool active = false;
@@ -88,6 +89,14 @@ public class DialogueManager : MonoBehaviour
         {
             dialoguePanel.gameObject.SetActive(false);
             active = false;
+
+            var tempEvent = onDialogueEnd;
+            onDialogueEnd = new UnityEngine.Events.UnityEvent();
+
+            tempEvent?.Invoke();
+
         }
     }
+
+    
 }

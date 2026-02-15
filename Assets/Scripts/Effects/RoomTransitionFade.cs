@@ -7,7 +7,7 @@ public class RoomTransitionFade : MonoBehaviour
     public static RoomTransitionFade Instance;
 
     [SerializeField] private Image fadeImage;
-    [SerializeField] private float fadeDuration = 0.4f;
+    public float fadeDuration = 0.4f;
 
     private void Awake()
     {
