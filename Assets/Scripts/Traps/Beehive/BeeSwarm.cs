@@ -10,28 +10,58 @@ public class BeeSwarm : Trap
     [SerializeField] private float followSpeed = 6.0f;
     [SerializeField] private float hoverHeight = 1.5f;
 
+    private Vector3 velocity;
+    private ParticleSystem beeSwarm;
+    private bool isDying = false;
+
+    private void Awake()
+    {
+        beeSwarm = GetComponentInChildren<ParticleSystem>();
+    }
+
     private void Update()
     {
-        if (target == null)
+        if (isDying)
         {
-            Destroy(gameObject);
+            return;
+        }
+
+        if (!target)
+        {
+            StopSwarm();
             return;
         }
 
         timer += Time.deltaTime;
         if (timer >= duration)
         {
-            Destroy(gameObject);
+            StopSwarm();
             return;
         }
 
+        MoveSwarm();
+    }
+
+    private void MoveSwarm()
+    {
         Vector3 targetPosition = target.position + Vector3.up * hoverHeight;
-        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
+
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.2f, followSpeed);
+    }
+
+    private void StopSwarm()
+    {
+        isDying = true;
+
+        beeSwarm.Stop();
+
+        Destroy(gameObject, beeSwarm.main.startLifetime.constantMax);
     }
 
     public void Initialize(Transform target, float duration)
     {
         this.target = target;
         this.duration = duration;
+        timer = 0f;
     }
 }
