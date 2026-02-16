@@ -31,6 +31,7 @@ public class Lumberjack : MonoBehaviour
     [Header("Hitboxes")]
     [SerializeField] private GameObject aoeAHitbox;
     [SerializeField] private GameObject jumpAttackHitbox;
+    [SerializeField] private GameObject enragedHitbox;
 
     [Header("AOE Settings")]
     [SerializeField] private float aoeBMaxRadius = 8.0f;
@@ -301,6 +302,7 @@ public class Lumberjack : MonoBehaviour
             }
 
             maxTime = chargeSpeed * Vector3.Distance(startPoint, endPoint);
+            EnableHitbox(enragedHitbox);
             Debug.Log("Should charge in " + maxTime + " seconds");
             while (timer < maxTime)
             {
@@ -311,6 +313,7 @@ public class Lumberjack : MonoBehaviour
             Debug.Log("End charge");
 
             count++;
+            DisableHitbox(enragedHitbox);
             yield return new WaitForSeconds(timeBetweenCharges);
         }
         recievedAxe = false;

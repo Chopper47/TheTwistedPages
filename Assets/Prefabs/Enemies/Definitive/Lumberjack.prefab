@@ -136,6 +136,7 @@ Transform:
   - {fileID: 2023546472269138247}
   - {fileID: 1723968157348566355}
   - {fileID: 3802845488845546568}
+  - {fileID: 7629425687520519294}
   - {fileID: 1781791569602703458}
   - {fileID: 3148607705448019686}
   m_Father: {fileID: 0}
@@ -296,6 +297,7 @@ MonoBehaviour:
   midRange: 10
   aoeAHitbox: {fileID: 9207797116380492247}
   jumpAttackHitbox: {fileID: 446118833739598041}
+  enragedHitbox: {fileID: 499795731503791274}
   aoeBMaxRadius: 4
   aoeBExpandTime: 1
   aoeBRoot: {fileID: 1781791569602703458}
@@ -542,7 +544,7 @@ GameObject:
   - component: {fileID: 1781791569602703458}
   m_Layer: 0
   m_Name: AOE_B_Root
-  m_TagString: Untagged
+  m_TagString: BossHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -909,7 +911,7 @@ GameObject:
   - component: {fileID: 7694145052991208913}
   m_Layer: 0
   m_Name: Hitbox_JumpAttack
-  m_TagString: Untagged
+  m_TagString: BossHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1057,6 +1059,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5106920360480680929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &499795731503791274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7629425687520519294}
+  - component: {fileID: 8322229737831031411}
+  - component: {fileID: 2219183209868205484}
+  m_Layer: 0
+  m_Name: Hitbox_Enraged
+  m_TagString: BossHitbox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7629425687520519294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499795731503791274}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5327002227996684137}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8322229737831031411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499795731503791274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c029a36fb3fda42bc76ae25e6c24f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+--- !u!136 &2219183209868205484
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499795731503791274}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1 &620072914954852459
 GameObject:
   m_ObjectHideFlags: 0
@@ -6913,7 +6984,7 @@ GameObject:
   - component: {fileID: 1122022184836488688}
   m_Layer: 0
   m_Name: Hitbox_AOE_B
-  m_TagString: Untagged
+  m_TagString: BossHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8202,7 +8273,7 @@ GameObject:
   - component: {fileID: 3398533811809600119}
   m_Layer: 0
   m_Name: Hitbox_AOE_A
-  m_TagString: Untagged
+  m_TagString: BossHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
