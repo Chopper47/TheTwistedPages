@@ -32,6 +32,7 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private GameObject aoeAHitbox;
     [SerializeField] private GameObject jumpAttackHitbox;
     [SerializeField] private GameObject enragedHitbox;
+    [SerializeField] private GameObject swipeHitbox;
 
     [Header("AOE Settings")]
     [SerializeField] private float aoeBMaxRadius = 8.0f;
@@ -171,7 +172,10 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator SwipeAttack()
     {
         StartAttack();
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.1f);
+        EnableHitbox(swipeHitbox);
+        yield return new WaitForSeconds(0.5f);
+        DisableHitbox(swipeHitbox);
         EndAttack();
     }
 
