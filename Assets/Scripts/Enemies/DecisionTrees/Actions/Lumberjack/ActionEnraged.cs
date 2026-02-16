@@ -15,6 +15,6 @@ public class ActionEnraged : IAction
     public override void Act()
     {
         Debug.Log("Lumberjack: Receive Axe");
-        lumberjack.Enraged();
+        lumberjack.DoEnragedAttack();
     }
 }

@@ -105,7 +105,7 @@ public class BulletTimeTrigger : MonoBehaviour
                 harmOrigin = latestEnemy;
             }
 
-            if (axeGO == null && latestEnemy == null && bossAxe == null)
+            if (latestEnemy == null)
             {
                 canDodge = false;
                 harmOrigin = null;

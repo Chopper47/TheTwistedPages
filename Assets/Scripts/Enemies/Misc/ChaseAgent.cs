@@ -184,6 +184,15 @@ public class ChaseAgent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method for getting normalized direction between current gameobject and its target
+    /// </summary>
+    /// <returns>Normalized Vector</returns>
+    public Vector3 TargetDirection()
+    {
+        return new Vector3(target.transform.position.x - transform.position.x, 0f, target.transform.position.z - transform.position.z).normalized;
+    }
+
     public void SetNewDestination(Vector3 newDestination)
     {
         agent.SetDestination(newDestination);

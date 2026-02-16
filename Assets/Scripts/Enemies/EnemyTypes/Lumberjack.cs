@@ -8,6 +8,7 @@ public class Lumberjack : MonoBehaviour
 {
     [Header("References")]
     private Rigidbody rb;
+    private CapsuleCollider hb;
     private EnemyState enemyState;
     private ChaseAgent chaseAgent;
     private EnemyHealth enemyHealth;
@@ -50,9 +51,17 @@ public class Lumberjack : MonoBehaviour
     [Header("Throw Attacks Settings")]
     [SerializeField] private float axeOnAirTime = 1.5f;
 
+    [Header("Enraged Attack Settings")]
+
+    [SerializeField] private LayerMask wallMask;
+    [SerializeField] private int chargeAmount = 3;
+    [SerializeField] private float timeBetweenCharges = 0.5f;
+    [Tooltip("Equals to the time it takes to get to one in-game meter")][SerializeField] private float chargeSpeed = 1f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        hb = GetComponent<CapsuleCollider>();
         enemyState = GetComponent<EnemyState>();
         chaseAgent = GetComponent<ChaseAgent>();
         enemyHealth = GetComponent<EnemyHealth>();
@@ -83,13 +92,13 @@ public class Lumberjack : MonoBehaviour
     public void PickUpAxe()
     {
         hasAxe = true;
-        recievedAxe = false;
         axeOnGround = false;
     }
 
     public void RecieveAxe()
     {
         recievedAxe = true;
+        EndAttack();
     }
     #endregion
 
@@ -97,12 +106,6 @@ public class Lumberjack : MonoBehaviour
     public void Wait()
     {
         chaseAgent.StopChase();
-    }
-
-    public void Enraged()
-    {
-        StartAttack();
-        Debug.Log("ENRaGEd");
     }
 
     public void GetAxe()
@@ -125,6 +128,13 @@ public class Lumberjack : MonoBehaviour
     #endregion
 
     #region Attacks
+
+    public void DoEnragedAttack()
+    {
+        StartAttack();
+        StartCoroutine(EnragedCharge());
+    }
+
     public void DoSwipeAttack()
     {
         StartCoroutine(SwipeAttack());
@@ -188,7 +198,7 @@ public class Lumberjack : MonoBehaviour
         hasAxe = false;
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
-        bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.1f, new Vector3(chaseAgent.TargetPosition().x - transform.position.x,0f, chaseAgent.TargetPosition().z - transform.position.z).normalized, axeOnAirTime);
+        bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.5f, new Vector3(chaseAgent.TargetPosition().x - transform.position.x,0f, chaseAgent.TargetPosition().z - transform.position.z).normalized, axeOnAirTime);
     }
 
     private IEnumerator ThrowAttackB()
@@ -268,6 +278,44 @@ public class Lumberjack : MonoBehaviour
         agent.enabled = true;
 
         EndAttack();
+    }
+
+    private IEnumerator EnragedCharge()
+    {
+        int count = 0;
+        float timer;
+        float maxTime;
+        Vector3 dir, endPoint, startPoint;
+        endPoint = Vector3.zero;
+        Debug.Log("Enraged start");
+        while (count < chargeAmount)
+        {
+            Debug.Log("loop start");
+            timer = 0f;
+            dir = chaseAgent.TargetDirection();
+            startPoint = transform.position;
+            Debug.Log("raycast start");
+            if (Physics.Raycast(transform.position, dir, out RaycastHit hit, 100f, wallMask))
+            {
+                endPoint = hit.point - dir * hb.radius;
+            }
+
+            maxTime = chargeSpeed * Vector3.Distance(startPoint, endPoint);
+            Debug.Log("Should charge in " + maxTime + " seconds");
+            while (timer < maxTime)
+            {
+                transform.position = Vector3.Lerp(startPoint, endPoint, timer / maxTime);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            Debug.Log("End charge");
+
+            count++;
+            yield return new WaitForSeconds(timeBetweenCharges);
+        }
+        recievedAxe = false;
+        EndAttack();
+        yield return null;
     }
     #endregion
 
