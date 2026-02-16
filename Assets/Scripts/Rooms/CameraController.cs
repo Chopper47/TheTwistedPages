@@ -11,7 +11,8 @@ public class CameraController : MonoBehaviour
     private RoomController currentRoom;
 
     [Header("Camera Follow Settings")]
-    public float followSpeed = 5.0f;
+    public float followSmoothTime = 0.15f;
+    private Vector3 followVelocity = Vector3.zero;
 
     private float minZ;
     private float maxZ;
@@ -73,32 +74,59 @@ public class CameraController : MonoBehaviour
 
         lastPlayerPosition = playerFinalPosition;
         lookAheadOffset = Vector3.zero;
+        followVelocity = Vector3.zero;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (currentRoom == null || player == null)
         {
             return;
         }
 
+        UpdateLookAhead();
+        UpdateCameraFollow();
+    }
+
+    private void UpdateLookAhead()
+    {
         Vector3 playerDelta = player.position - lastPlayerPosition;
+
         Vector3 targetLookAhead = Vector3.zero;
 
         if (playerDelta.sqrMagnitude > 0.0001f)
         {
-            Vector3 moveDir = playerDelta.normalized;
-            targetLookAhead = moveDir * lookAheadDistance;
+            Vector3 moveDirection = playerDelta.normalized;
+
+            if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.z))
+            {
+                moveDirection = new Vector3(moveDirection.x, 0, 0);
+            }
+            else
+            {
+                moveDirection = new Vector3(0, 0, moveDirection.z);
+            }
+
+            targetLookAhead = moveDirection * lookAheadDistance;
         }
 
         lookAheadOffset = Vector3.Lerp(lookAheadOffset, targetLookAhead, lookAheadSmooth * Time.deltaTime);
-        lastPlayerPosition = player.position;
 
+        lastPlayerPosition = player.position;
+    }
+
+    private void UpdateCameraFollow()
+    {
         float targetX = Mathf.Clamp(player.position.x, minX, maxX);
         float targetZ = Mathf.Clamp(player.position.z, minZ, maxZ);
 
-        Vector3 targetPosition = new Vector3(targetX, transform.position.y, targetZ) + lookAheadOffset;
+        Vector3 targetPosition = new Vector3(targetX, transform.position.y, targetZ);
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
+        targetPosition += lookAheadOffset;
+
+        targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
+        targetPosition.z = Mathf.Clamp(targetPosition.z, minZ, maxZ);
+        
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref followVelocity, followSmoothTime);
     }
 }
