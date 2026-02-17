@@ -3,6 +3,7 @@ using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class BossAxe : MonoBehaviour
 {
@@ -60,11 +61,18 @@ public class BossAxe : MonoBehaviour
         thrown = true;
         canGet = false;
         followPath.Duration = timeOnAir;
-        var farpoint = followPath.Container.Spline.ToArray()[1];
-        farpoint.Position.z = distance;
+        SetFarthestPoint(distance);
         followPath.ElapsedTime = 0f;
         followPath.Play();
         StartCoroutine(WaitUntilCollision());
+    }
+
+    private void SetFarthestPoint(float distance)
+    {
+        var spline = followPath.Container.Spline;
+        var farpoint = spline[1];
+        farpoint.Position = new Vector3(farpoint.Position.x, farpoint.Position.y, distance);
+        followPath.Container.Spline[1] = farpoint;
     }
 
     public void NewDirection(Vector3 startingPos, Vector3 throwDirection, float timeOnAir)
