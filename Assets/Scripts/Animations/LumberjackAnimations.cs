@@ -92,4 +92,9 @@ public class LumberjackAnimations : MonoBehaviour
         animator.SetInteger("variation", 1);
         animator.SetBool("areaAttack", true);
     }
+
+    public void EndAreaAttack()
+    {
+        animator.SetBool("areaAttack", false);
+    }
 }

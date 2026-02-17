@@ -185,6 +185,7 @@ public class Lumberjack : MonoBehaviour
     #region Boss States
     public void Wait()
     {
+        animations.StopMoving();
         chaseAgent.StopChase();
     }
 
@@ -196,6 +197,7 @@ public class Lumberjack : MonoBehaviour
 
     public void Pursue()
     {
+        animations.Moving();
         chaseAgent.Chase();
     }
 
@@ -284,35 +286,43 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator SwipeAttack()
     {
         StartAttack();
+        animations.StartSwipeAttack();
         yield return new WaitForSeconds(0.1f);
         EnableHitbox(swipeHitbox);
         yield return new WaitForSeconds(0.5f);
         DisableHitbox(swipeHitbox);
+        animations.EndSwipeAttack();
         EndAttack();
     }
 
     private IEnumerator AOEAttackA()
     {
         StartAttack();
+        animations.StartAreaAttackA();
         EnableHitbox(aoeAHitbox);
         yield return new WaitForSeconds(0.5f);
         DisableHitbox(aoeAHitbox);
+        animations.EndAreaAttack();
         EndAttack();
     }
 
     private IEnumerator AOEAttackB()
     {
         StartAttack();
+        animations.StartAreaAttackB();
         yield return new WaitForSeconds(0.6f);
         StartCoroutine(ExpandAOEHitbox());
         yield return new WaitForSeconds(0.4f);
+        animations.EndAreaAttack();
         EndAttack();
     }
 
     private IEnumerator ThrowAttackA()
     {
         StartAttack();
+        animations.StartThrowAttackA();
         hasAxe = false;
+        transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
         bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.5f, new Vector3(chaseAgent.TargetPosition().x - transform.position.x,0f, chaseAgent.TargetPosition().z - transform.position.z).normalized, axeOnAirTime);
@@ -321,11 +331,14 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator ThrowAttackB()
     {
         StartAttack();
+        animations.StartThrowAttackB();
         hasAxe = false;
+        transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
         bossAxe.StartThrowAttackB(axeOnAirTime, chaseAgent.DistanceFromTarget());
         yield return new WaitForSeconds(axeOnAirTime);
+        animations.EndThrowAttack();
         EndAttack();
     }
 
@@ -347,6 +360,8 @@ public class Lumberjack : MonoBehaviour
         // Boss "jumps" very high, off-screen, vertically.
         float riseTime = 0.5f;                  // Duration of the upwards movement.
         float timer = 0f;
+        //anim
+        animations.Jumping();
         Vector3 startPosition = transform.position;
         Vector3 peakPosition = startPosition + Vector3.up * 25f;
 
@@ -356,7 +371,8 @@ public class Lumberjack : MonoBehaviour
             transform.position = Vector3.Lerp(startPosition, peakPosition, timer / riseTime);
             yield return null;
         }
-
+        //anim
+        animations.StopJumping();
         // Horizontal movement towards target in a straight line.
         float travelTime = 0.4f;
         timer = 0f;
@@ -370,6 +386,8 @@ public class Lumberjack : MonoBehaviour
             yield return null;
         }
 
+        //anim
+        animations.Falling();
         // Boss "falls" straight down towards the target.
         float fallTime = 0.35f;
         timer = 0f;
@@ -388,6 +406,9 @@ public class Lumberjack : MonoBehaviour
 
         jumpAttackHitbox.transform.position = transform.position;
         jumpAttackHitbox.SetActive(true);
+
+        //anim
+        animations.StopFalling();
 
         yield return new WaitForSeconds(0.5f);
 
