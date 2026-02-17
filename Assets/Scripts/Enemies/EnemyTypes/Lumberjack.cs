@@ -210,8 +210,10 @@ public class Lumberjack : MonoBehaviour
     {
         StartAttack();
         hasAxe = false;
-        yield return new WaitForSeconds(1.4f);
-        hasAxe = true;
+        yield return new WaitForSeconds(0.2f);
+        bossAxe.gameObject.SetActive(true);
+        bossAxe.StartThrowAttackB(axeOnAirTime, chaseAgent.DistanceFromTarget());
+        yield return new WaitForSeconds(axeOnAirTime);
         EndAttack();
     }
 

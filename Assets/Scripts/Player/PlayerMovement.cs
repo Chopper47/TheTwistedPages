@@ -148,7 +148,7 @@ public class PlayerMovement: MonoBehaviour
                         }
                         else 
                         { 
-                            bossAxe.InterruptedThowAttack(); 
+                            bossAxe.InterruptedThrowAttack(); 
                         }
                         toPush.transform.parent = axeHold;
                         toPush.transform.localPosition = Vector3.zero;

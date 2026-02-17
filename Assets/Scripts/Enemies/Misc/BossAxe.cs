@@ -2,6 +2,7 @@ using System.Collections;
 using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class BossAxe : MonoBehaviour
 {
@@ -13,13 +14,27 @@ public class BossAxe : MonoBehaviour
     private Transform originalParent;
     private Transform ogTransform;
     private Lumberjack lumberjack;
+    private SplineAnimate followPath;
     [SerializeField] private int damage = 1;
+    [SerializeField] private KnotLinkCollection farthestPoint;
     [SerializeField] private LayerMask WallMask;
 
     private void Awake()
     {
         originalParent = transform.parent;
         ogTransform = transform;
+        followPath = GetComponent<SplineAnimate>();
+    }
+
+    public void Update()
+    {
+        if(followPath.IsPlaying)
+        {
+            if(followPath.ElapsedTime>=0.9)
+            {
+                arrived = true;
+            }
+        }
     }
 
     public void SetLumberjack(Lumberjack newLumberjack)
@@ -38,15 +53,36 @@ public class BossAxe : MonoBehaviour
         StartCoroutine(WaitUntilCollision());
     }
 
-    public void NewDirection(Vector3 startingPos, Vector3 throwDirection, float timeOnAir)
+    public void StartThrowAttackB(float timeOnAir, float distance)
     {
-        StartCoroutine(Move(startingPos,new Vector3(lumberjack.transform.position.x - startingPos.x, 0f, lumberjack.transform.position.z - startingPos.z).normalized , timeOnAir));
-        //StartCoroutine(Move(startingPos, throwDirection, timeOnAir));
+        transform.parent = null;
+        arrived = false;
+        thrown = true;
+        canGet = false;
+        followPath.Duration = timeOnAir;
+        var farpoint = followPath.Container.Spline.ToArray()[1];
+        farpoint.Position.z = distance;
+        followPath.ElapsedTime = 0f;
+        followPath.Play();
+        StartCoroutine(WaitUntilCollision());
     }
 
-    public void InterruptedThowAttack()
+    public void NewDirection(Vector3 startingPos, Vector3 throwDirection, float timeOnAir)
     {
-        StopCoroutine(moving);
+        //StartCoroutine(Move(startingPos,new Vector3(lumberjack.transform.position.x - startingPos.x, 0f, lumberjack.transform.position.z - startingPos.z).normalized , timeOnAir));
+        StartCoroutine(Move(startingPos, throwDirection, timeOnAir));
+    }
+
+    public void InterruptedThrowAttack()
+    {
+        if (moving != null)
+        {
+            StopCoroutine(moving);
+        }
+        if(followPath.IsPlaying)
+        {
+            followPath.Pause();
+        }
         playerGrabbed = true;
     }
 
@@ -105,26 +141,11 @@ public class BossAxe : MonoBehaviour
         {
             if(arrived)
             {
-                transform.parent = originalParent;
-                transform.position = ogTransform.position;
-                transform.rotation = ogTransform.rotation;
-                transform.localScale = ogTransform.localScale;
-                boss.PickUpAxe();
-                arrived = false;
-                playerGrabbed = false;
-                gameObject.SetActive(false);
+               RecoveredFromBoss(boss);
             }
             else
             {
-                transform.parent = originalParent;
-                transform.position = ogTransform.position;
-                transform.rotation = ogTransform.rotation;
-                transform.localScale = ogTransform.localScale;
-                playerGrabbed = false;
-                boss.RecieveAxe();
-                StopCoroutine(moving);
-                boss.PickUpAxe();
-                gameObject.SetActive(false);
+                ThrownToBoss(boss);
             }
         }
 
@@ -137,5 +158,30 @@ public class BossAxe : MonoBehaviour
                 player.TakeDamage(damage);
             }
         }
+    }
+
+    public void RecoveredFromBoss(Lumberjack boss)
+    {
+        transform.parent = originalParent;
+        transform.position = ogTransform.position;
+        transform.rotation = ogTransform.rotation;
+        transform.localScale = ogTransform.localScale;
+        boss.PickUpAxe();
+        arrived = false;
+        playerGrabbed = false;
+        gameObject.SetActive(false);
+    }
+
+    public void ThrownToBoss(Lumberjack boss)
+    {
+        transform.parent = originalParent;
+        transform.position = ogTransform.position;
+        transform.rotation = ogTransform.rotation;
+        transform.localScale = ogTransform.localScale;
+        playerGrabbed = false;
+        boss.RecieveAxe();
+        StopCoroutine(moving);
+        boss.PickUpAxe();
+        gameObject.SetActive(false);
     }
 }
