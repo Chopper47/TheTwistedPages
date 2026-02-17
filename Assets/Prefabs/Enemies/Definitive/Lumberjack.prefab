@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 6738523587724051460}
   - component: {fileID: 6588809794490680986}
   - component: {fileID: 6496424540935143022}
+  - component: {fileID: 4240114165514247357}
   m_Layer: 0
   m_Name: Lumberjack
   m_TagString: Untagged
@@ -317,6 +318,19 @@ MonoBehaviour:
   chargeAmount: 3
   timeBetweenCharges: 0.5
   chargeSpeed: 0.1
+--- !u!114 &4240114165514247357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213119516036381737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec0869c3bfec784aac802d8d066ca6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 91314234103529520}
 --- !u!1 &226134891002600124
 GameObject:
   m_ObjectHideFlags: 0
