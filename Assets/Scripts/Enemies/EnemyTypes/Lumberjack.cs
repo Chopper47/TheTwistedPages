@@ -40,11 +40,9 @@ public class Lumberjack : MonoBehaviour
 
     [Header("AOE Settings")]
     [SerializeField] private float aoeBMaxRadius = 8.0f;
-    [SerializeField] private float aoeBExpandTime = 1.0f; 
+    [SerializeField] private float aoeBExpandTime = 1.0f;
     [SerializeField] private Transform aoeBRoot;
     [SerializeField] private SphereCollider aoeBSphereHitbox;
-
-    [SerializeField] private float expandTime = 1.0f;
 
     private List<SphereCollider> activeSpheres = new List<SphereCollider>();
 
@@ -58,7 +56,6 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private float axeOnAirTime = 1.5f;
 
     [Header("Enraged Attack Settings")]
-
     [SerializeField] private LayerMask wallMask;
     [SerializeField] private int chargeAmount = 3;
     [SerializeField] private float timeBetweenCharges = 0.5f;
@@ -72,6 +69,7 @@ public class Lumberjack : MonoBehaviour
         enemyState = GetComponent<EnemyState>();
         chaseAgent = GetComponent<ChaseAgent>();
         enemyHealth = GetComponent<EnemyHealth>();
+        animations = GetComponent<LumberjackAnimations>();
 
         bossAxe.gameObject.SetActive(false);
         bossAxe.SetLumberjack(this);
@@ -312,7 +310,7 @@ public class Lumberjack : MonoBehaviour
         animations.StartAreaAttackB();
         yield return new WaitForSeconds(0.6f);
         StartCoroutine(ExpandAOEHitbox());
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(aoeBExpandTime);
         animations.EndAreaAttack();
         EndAttack();
     }
@@ -505,10 +503,10 @@ public class Lumberjack : MonoBehaviour
             activeSpheres.Add(newSphere);
         }
 
-        while (timer < expandTime)
+        while (timer < aoeBExpandTime)
         {
             timer += Time.deltaTime;
-            float t = timer / expandTime;
+            float t = timer / aoeBExpandTime;
             float currentRadius = Mathf.Lerp(0f, maxRingRadius, t);
 
             for (int i = 0; i < activeSpheres.Count; i++)
