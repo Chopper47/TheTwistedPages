@@ -9,6 +9,7 @@ public class Lumberjack : MonoBehaviour
     [Header("References")]
     private Rigidbody rb;
     private CapsuleCollider hb;
+    private NavMeshAgent agent;
     private EnemyState enemyState;
     private ChaseAgent chaseAgent;
     private EnemyHealth enemyHealth;
@@ -24,6 +25,8 @@ public class Lumberjack : MonoBehaviour
     [Header("Boss State")]
     public bool isStunned = false;
     public bool isAttacking = false;
+
+    private Coroutine currentAction;
 
     [Header("Distances")]
     [SerializeField] private float closeRange = 4.0f;
@@ -65,12 +68,86 @@ public class Lumberjack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         hb = GetComponent<CapsuleCollider>();
+        agent = GetComponent<NavMeshAgent>();
         enemyState = GetComponent<EnemyState>();
         chaseAgent = GetComponent<ChaseAgent>();
         enemyHealth = GetComponent<EnemyHealth>();
+
         bossAxe.gameObject.SetActive(false);
         bossAxe.SetLumberjack(this);
     }
+
+    #region Stun
+    public void ApplyStun(float duration)
+    {
+        Debug.Log("Stunned.");
+
+        if (isStunned)
+        {
+            return;
+        }
+
+        if (currentAction != null)
+        {
+            StopCoroutine(currentAction);
+        }
+
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        isStunned = true;
+        isAttacking = false;
+
+        ForceStopAllAttacks();
+
+        chaseAgent.StopChase();
+
+        if (agent.enabled)
+        {
+            agent.isStopped = true;
+        }
+
+        enemyState.StayState();
+
+        yield return new WaitForSeconds(duration);
+
+        isStunned = false;
+
+        if (agent.enabled)
+        {
+            agent.isStopped = false;
+        }
+
+        enemyState.StayState();
+    }
+
+    private void ForceStopAllAttacks()
+    {
+        DisableHitbox(aoeAHitbox);
+        DisableHitbox(jumpAttackHitbox);
+        DisableHitbox(enragedHitbox);
+        DisableHitbox(swipeHitbox);
+
+        foreach (SphereCollider sphere in activeSpheres)
+        {
+            if (sphere)
+            {
+                Destroy(sphere.gameObject);
+            }
+        }
+
+        activeSpheres.Clear();
+
+        rb.isKinematic = false;
+
+        if (!agent.enabled)
+        {
+            agent.enabled = true;
+        }
+    }
+    #endregion
 
     #region Distance Checks
     public bool TargetInCloseRange()
@@ -131,41 +208,75 @@ public class Lumberjack : MonoBehaviour
     #endregion
 
     #region Attacks
-
     public void DoEnragedAttack()
     {
+        if (isStunned)
+        {
+            return;
+        }
+
         StartAttack();
-        StartCoroutine(EnragedCharge());
+        currentAction = StartCoroutine(EnragedCharge());
     }
 
     public void DoSwipeAttack()
     {
-        StartCoroutine(SwipeAttack());
+        if (isStunned)
+        {
+            return;
+        }
+
+        currentAction = StartCoroutine(SwipeAttack());
     }
 
     public void DoAOEAttackA()
     {
-        StartCoroutine(AOEAttackA());
+        if (isStunned)
+        {
+            return;
+        }
+
+        currentAction = StartCoroutine(AOEAttackA());
     }
 
     public void DoAOEAttackB()
     {
-        StartCoroutine(AOEAttackB());
+        if (isStunned)
+        {
+            return;
+        }
+
+        currentAction = StartCoroutine(AOEAttackB());
     }
 
     public void DoThrowAttackA()
     {
-        StartCoroutine(ThrowAttackA());
+        if (isStunned)
+        {
+            return;
+        }
+
+        currentAction = StartCoroutine(ThrowAttackA());
     }
 
     public void DoThrowAttackB()
     {
-        StartCoroutine(ThrowAttackB());
+        if (isStunned)
+        {
+            return;
+        }
+
+        currentAction = StartCoroutine(ThrowAttackB());
     }
 
     public void DoJumpAttack()
     {
-        StartCoroutine(JumpAttack());
+        if (isStunned)
+        {
+            return;
+        }
+
+        currentAction = StartCoroutine(JumpAttack());
     }
     #endregion
 
@@ -222,7 +333,6 @@ public class Lumberjack : MonoBehaviour
     {
         StartAttack();
 
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
         agent.enabled = false;
 
         rb.isKinematic = true;
@@ -331,6 +441,11 @@ public class Lumberjack : MonoBehaviour
 
     private void StartAttack()
     {
+        if (isStunned)
+        {
+            return;
+        }
+
         isAttacking = true;
         enemyState.AttackState();
         chaseAgent.StopChase();
@@ -339,6 +454,7 @@ public class Lumberjack : MonoBehaviour
     private void EndAttack()
     {
         isAttacking = false;
+        currentAction = null;
         enemyState.StayState();
     }
 
