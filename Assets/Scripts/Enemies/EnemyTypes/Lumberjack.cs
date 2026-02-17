@@ -12,6 +12,7 @@ public class Lumberjack : MonoBehaviour
     private EnemyState enemyState;
     private ChaseAgent chaseAgent;
     private EnemyHealth enemyHealth;
+    private LumberjackAnimations animations;
     [SerializeField] BossAxe bossAxe;
 
     [Header("Axe State")]
