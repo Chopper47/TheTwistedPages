@@ -114,6 +114,8 @@ public class BossAxe : MonoBehaviour
         RaycastHit hit;
         Vector3 endPoint = Vector3.zero;
 
+        Debug.Log("Direction - " + dir);
+        Debug.DrawRay(startingPos, dir * 100, Color.yellow, 100f);
         if(Physics.Raycast(startingPos, dir, out hit ,100f, WallMask))
         {
             endPoint = hit.point - (hit.normal * -0.25f);

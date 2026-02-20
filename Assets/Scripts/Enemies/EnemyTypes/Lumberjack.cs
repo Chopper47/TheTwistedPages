@@ -323,7 +323,8 @@ public class Lumberjack : MonoBehaviour
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
-        bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.5f, new Vector3(chaseAgent.TargetPosition().x - transform.position.x,0f, chaseAgent.TargetPosition().z - transform.position.z).normalized, axeOnAirTime);
+        Debug.Log(chaseAgent.TargetDirection());
+        bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.5f, chaseAgent.TargetDirection(), axeOnAirTime);
     }
 
     private IEnumerator ThrowAttackB()
