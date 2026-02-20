@@ -6,8 +6,10 @@ public class BossRoomFunctionality : MonoBehaviour
 {
 
     [SerializeField] private List<BossRoomColumn> columns = new List<BossRoomColumn>();
-    [SerializeField] private int maxHp = 6;
+    [SerializeField] private int maxHp;
     public int currentHp;
+
+    [SerializeField] private EnemyHealth bossHealth;
 
     private void Start()
     {
@@ -16,6 +18,9 @@ public class BossRoomFunctionality : MonoBehaviour
     public void LoseHp()
     {
         currentHp--;
+
+        if(bossHealth != null) bossHealth.TakeDamage(1);
+
         if (currentHp <= 0)
         {
             EndBoss();

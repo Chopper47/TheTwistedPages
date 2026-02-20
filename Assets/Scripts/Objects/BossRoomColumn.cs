@@ -3,17 +3,18 @@ using UnityEngine;
 public class BossRoomColumn : MonoBehaviour
 {
     [SerializeField] private BossRoomFunctionality bossRoom;
-    private int maxHp;
-    private int currentHp;
+    [SerializeField] private int maxHp;
+    [SerializeField] private int currentHp;
 
     private void Start()
     {
         bossRoom = transform.GetComponentInParent<BossRoomFunctionality>();
+        currentHp = maxHp;
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "BossHitbox")
+        if (other.gameObject.tag == "BossHitbox")
         {
             LoseHp(other.gameObject.GetComponent<Hitbox>().damage);
         }
