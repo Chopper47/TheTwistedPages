@@ -211,6 +211,7 @@ MonoBehaviour:
   columns: []
   maxHp: 0
   currentHp: 0
+  bossHealth: {fileID: 0}
 --- !u!1001 &838145650866241445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -289,6 +290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 5652322141344518252}
+  maxHp: 0
+  currentHp: 0
 --- !u!4 &6895510598199748551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6057472743271077986, guid: 6e1740111a3c3b24a976311c4fef49c5, type: 3}
@@ -372,6 +375,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 5652322141344518252}
+  maxHp: 0
+  currentHp: 0
 --- !u!4 &4991894921560563454 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6057472743271077986, guid: 6e1740111a3c3b24a976311c4fef49c5, type: 3}
@@ -455,6 +460,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 5652322141344518252}
+  maxHp: 0
+  currentHp: 0
 --- !u!4 &4685517016797273233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6057472743271077986, guid: 6e1740111a3c3b24a976311c4fef49c5, type: 3}
@@ -519,6 +526,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bbf09281b816443488dfd609f52c9298, type: 3}
       propertyPath: m_Name
       value: room_boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740432707631955653, guid: bbf09281b816443488dfd609f52c9298, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -767,6 +778,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 5652322141344518252}
+  maxHp: 0
+  currentHp: 0
 --- !u!1001 &7086670145691477386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -850,6 +863,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 5652322141344518252}
+  maxHp: 0
+  currentHp: 0
 --- !u!1001 &7180270633479587095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -933,6 +948,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 5652322141344518252}
+  maxHp: 0
+  currentHp: 0
 --- !u!1001 &7184355376328109919
 PrefabInstance:
   m_ObjectHideFlags: 0
