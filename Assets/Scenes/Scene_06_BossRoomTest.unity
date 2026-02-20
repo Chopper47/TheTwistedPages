@@ -592,6 +592,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196502710}
   m_CullTransparentMesh: 1
+--- !u!1 &209351527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8030653671940903438, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+  m_PrefabInstance: {fileID: 1328918378}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &209351532
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209351527}
+  serializedVersion: 5
+  m_Mass: 1e+9
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &226979087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,6 +3082,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1061978122529101613, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 1302975750273684234, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_Name
       value: RoomBoss
@@ -3057,6 +3093,10 @@ PrefabInstance:
     - target: {fileID: 1457819347189648084, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: maxHp
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1732169276321884143, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2184959558727255903, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_TagString
@@ -3122,6 +3162,10 @@ PrefabInstance:
       propertyPath: maxHp
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5449481243354284304, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5652322141344518252, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: maxHp
       value: 6
@@ -3145,6 +3189,10 @@ PrefabInstance:
     - target: {fileID: 7769629310287875524, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030653671940903438, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 8059014820633740619, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_Enabled
@@ -3172,6 +3220,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 721965121014217899, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       insertIndex: -1
       addedObject: {fileID: 185954996}
+    - targetCorrespondingSourceObject: {fileID: 8030653671940903438, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 209351532}
     - targetCorrespondingSourceObject: {fileID: 25406194430744387, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       insertIndex: -1
       addedObject: {fileID: 845981420}
