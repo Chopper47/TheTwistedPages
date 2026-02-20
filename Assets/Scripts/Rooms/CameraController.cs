@@ -129,4 +129,9 @@ public class CameraController : MonoBehaviour
         
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref followVelocity, followSmoothTime);
     }
+
+    public bool IsCurrentRoomFinished()
+    {
+        return currentRoom.isCleared;
+    }
 }

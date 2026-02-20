@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AxeThrow : MonoBehaviour
 {
@@ -10,17 +11,18 @@ public class AxeThrow : MonoBehaviour
 
     [SerializeField] float throwForce = 40f;
     [SerializeField] GameObject axe;
+    [SerializeField] CameraController camController;
 
     private Vector3 sphere;
+
+    private void Awake()
+    {
+        camController = FindAnyObjectByType<CameraController>();
+    }
 
     void Start()
     {
         StartCoroutine(ThrowPossibility());
-    }
-
-    void Update()
-    {
-        
     }
 
     IEnumerator ThrowPossibility()
@@ -31,7 +33,10 @@ public class AxeThrow : MonoBehaviour
 
         if(throwChance <= this.throwChance) 
         {
-            Throw();
+            if(!camController.IsCurrentRoomFinished())
+            {
+                Throw();
+            }
         }
 
         StartCoroutine(ThrowPossibility());
