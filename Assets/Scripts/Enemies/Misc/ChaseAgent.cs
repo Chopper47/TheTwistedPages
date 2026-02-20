@@ -148,6 +148,15 @@ public class ChaseAgent : MonoBehaviour
     }
 
     /// <summary>
+    /// Method for changing chase speed of nav mesh agent
+    /// </summary>
+    /// <param name="newSpeed">New wanted speed</param>
+    public void SetVelocity(float newSpeed)
+    {
+        agent.speed = newSpeed;
+    }
+
+    /// <summary>
     /// Method for making the enemy stay in its place
     /// </summary>
     public void Stay()
