@@ -60,12 +60,12 @@ public class LumberjackAnimations : MonoBehaviour
     
     public void Falling()
     {
-        animator.SetBool("falling", false);
+        animator.SetBool("falling", true);
     }
 
     public void StopFalling()
     {
-        animator.SetBool("falling", true);
+        animator.SetBool("falling", false);
     }
 
     public void StartSwipeAttack()

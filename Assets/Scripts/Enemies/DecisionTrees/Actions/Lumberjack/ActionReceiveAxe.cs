@@ -14,6 +14,7 @@ public class ActionReceiveAxe : IAction
 
     public override void Act()
     {
+        lumberjack.FalseRecieveAxe();
         Debug.Log("Lumberjack: Receive Axe");
     }
 }

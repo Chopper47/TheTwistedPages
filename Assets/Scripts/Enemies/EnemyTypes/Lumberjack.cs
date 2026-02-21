@@ -180,6 +180,11 @@ public class Lumberjack : MonoBehaviour
         recievedAxe = true;
         EndAttack();
     }
+
+    public void FalseRecieveAxe()
+    {
+        recievedAxe = false;
+    }
     #endregion
 
     #region Boss States
@@ -379,6 +384,7 @@ public class Lumberjack : MonoBehaviour
         }
         //anim
         animations.StopJumping();
+        animations.Falling();
         // Horizontal movement towards target in a straight line.
         float travelTime = 0.4f;
         timer = 0f;
@@ -393,7 +399,6 @@ public class Lumberjack : MonoBehaviour
         }
 
         //anim
-        animations.Falling();
         // Boss "falls" straight down towards the target.
         float fallTime = 0.35f;
         timer = 0f;
@@ -413,6 +418,8 @@ public class Lumberjack : MonoBehaviour
         jumpAttackHitbox.transform.position = transform.position;
         jumpAttackHitbox.SetActive(true);
 
+        animations.StopFalling();
+
         //anim
 
         yield return new WaitForSeconds(0.5f);
@@ -422,6 +429,8 @@ public class Lumberjack : MonoBehaviour
         agent.enabled = true;
 
         EndAttack();
+
+        animations.StopMoving();
     }
 
     private IEnumerator EnragedCharge()
