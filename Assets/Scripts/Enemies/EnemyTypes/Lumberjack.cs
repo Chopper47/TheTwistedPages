@@ -308,7 +308,7 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         animations.StartAreaAttackA();
         EnableHitbox(aoeAHitbox);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         DisableHitbox(aoeAHitbox);
         animations.EndAreaAttack();
         EndAttack();
