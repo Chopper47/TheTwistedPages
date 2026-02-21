@@ -33,9 +33,13 @@ public class AxeThrow : MonoBehaviour
 
         if(throwChance <= this.throwChance) 
         {
-            if(!camController.IsCurrentRoomFinished())
+            if(camController)
             {
-                Throw();
+
+                if(!camController.IsCurrentRoomFinished())
+                {
+                    Throw();
+                }
             }
         }
 

@@ -61,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
         Debug.Log("You died.");
         
         if (gameOverMenu)
@@ -69,7 +69,7 @@ public class PlayerHealth : MonoBehaviour
             gameOverMenu.SetActive(true);
         }
 
-        musicManager.SwitchToNewSongNoSave(2);
+        if(musicManager) musicManager.SwitchToNewSongNoSave(2);
     }
 
     public void TakeDamage(int damage)

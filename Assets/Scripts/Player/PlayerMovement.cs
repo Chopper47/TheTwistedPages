@@ -296,7 +296,7 @@ public class PlayerMovement: MonoBehaviour
     public IEnumerator UpdateBulletTimeUI()
     {
         float time = 0f;
-        bulletTimeTimer.fillAmount = 1.0f;
+        if(bulletTimeTimer) bulletTimeTimer.fillAmount = 1.0f;
 
         while (time < bulletTimeDuration)
         {
@@ -305,7 +305,7 @@ public class PlayerMovement: MonoBehaviour
             yield return null;
         }
 
-        bulletTimeTimer.fillAmount = 0f;
+        if (bulletTimeTimer) bulletTimeTimer.fillAmount = 0f;
         yield return null;
     }
 

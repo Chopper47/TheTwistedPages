@@ -16,7 +16,11 @@ public class BossRoomColumn : MonoBehaviour
     {
         if (other.gameObject.tag == "BossHitbox")
         {
-            LoseHp(other.gameObject.GetComponent<Hitbox>().damage);
+            if (other.gameObject.GetComponent<Hitbox>())
+            {
+                LoseHp(other.gameObject.GetComponent<Hitbox>().damage);
+
+            }
         }
     }
 
@@ -31,6 +35,6 @@ public class BossRoomColumn : MonoBehaviour
     }
     private void DestroySelf()
     {
-        Destroy(gameObject);
+        if(gameObject) Destroy(gameObject);
     }
 }

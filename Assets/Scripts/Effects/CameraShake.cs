@@ -52,7 +52,7 @@ public class CameraShake : MonoBehaviour
 
     public static void Shake(float duration, float strength)
     {
-        instance.OnShake(duration, strength);
+        //instance.OnShake(duration, strength);
     }
 
     public static void Shake(float duration, float strength, Vector3 dashDirection)
