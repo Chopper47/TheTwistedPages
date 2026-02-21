@@ -29,12 +29,16 @@ public class BossRoomColumn : MonoBehaviour
         currentHp -= dmgAmount;
         if (currentHp <= 0)
         {
-            bossRoom.LoseHp();
             DestroySelf();
         }   
     }
     private void DestroySelf()
     {
-        if(gameObject) Destroy(gameObject);
+        if (gameObject)
+        {
+            gameObject.SetActive(false);
+            bossRoom.LoseHp();
+
+        }
     }
 }

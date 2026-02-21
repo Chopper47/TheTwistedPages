@@ -46,11 +46,18 @@ public class RoomController : MonoBehaviour
             }
         }
 
-        minimapManager = ReferenceManager.Instance.minimapManager;
-        musicManager = ReferenceManager.Instance.musicManager;
+        if (ReferenceManager.Instance)
+        {
+            minimapManager = ReferenceManager.Instance.minimapManager;
+            musicManager = ReferenceManager.Instance.musicManager;
+        }
 
-        gameWonMenu = UIManager.Instance.gameWonMenu;
-        nextWaveText = UIManager.Instance.nextWaveText;
+        if (UIManager.Instance)
+        {
+            gameWonMenu = UIManager.Instance.gameWonMenu;
+            nextWaveText = UIManager.Instance.nextWaveText;
+
+        }
 
         if (gameWonMenu != null)
         {

@@ -31,6 +31,16 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    public void SetHealth(int healthAmount)
+    {
+        health = healthAmount;
+        if (health <= 0)
+        {
+            Die();
+            AM.Play(identity, null);
+        }
+    }
+
     public void Die()
     {
         if (roomController != null)
@@ -38,6 +48,7 @@ public class EnemyHealth : MonoBehaviour
             roomController.OnEnemyDied();
         }
 
+        //gameObject.SetActive(false);
         Destroy(gameObject);
     }
 }

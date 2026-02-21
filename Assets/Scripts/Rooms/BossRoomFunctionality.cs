@@ -17,14 +17,28 @@ public class BossRoomFunctionality : MonoBehaviour
     }
     public void LoseHp()
     {
-        currentHp--;
+        
+        currentHp = CheckNumberOfColumns();
 
-        if(bossHealth != null) bossHealth.TakeDamage(1);
+        if (bossHealth != null) bossHealth.SetHealth(currentHp);
 
         if (currentHp <= 0)
         {
             EndBoss();
         }
+    }
+
+    int CheckNumberOfColumns()
+    {
+        int numberOfColumnsActive = 0;
+        foreach (BossRoomColumn column in columns)
+        {
+            if (column.gameObject.activeSelf)
+            {
+                numberOfColumnsActive++;
+            }
+        }
+        return numberOfColumnsActive;
     }
 
     public void EndBoss()
