@@ -173,10 +173,6 @@ public class Lumberjack : MonoBehaviour
         {
             animations.CloseToAxe();
         }
-        else
-        {
-            animations.StopMoving();
-        }
     }
 
     public void RecieveAxe()
@@ -475,7 +471,7 @@ public class Lumberjack : MonoBehaviour
         {
             return;
         }
-
+        animations.StopMoving();
         isAttacking = true;
         enemyState.AttackState();
         chaseAgent.StopChase();
@@ -486,6 +482,7 @@ public class Lumberjack : MonoBehaviour
         isAttacking = false;
         currentAction = null;
         enemyState.StayState();
+        animations.Moving();
     }
 
     public void EnableHitbox(GameObject hitbox)
