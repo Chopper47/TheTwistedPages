@@ -13,7 +13,7 @@ public class Lumberjack : MonoBehaviour
     private EnemyState enemyState;
     private ChaseAgent chaseAgent;
     private EnemyHealth enemyHealth;
-    private LumberjackAnimations animations;
+    [SerializeField]private LumberjackAnimations animations;
     [SerializeField] BossAxe bossAxe;
 
     [Header("Axe State")]
@@ -69,8 +69,6 @@ public class Lumberjack : MonoBehaviour
         enemyState = GetComponent<EnemyState>();
         chaseAgent = GetComponent<ChaseAgent>();
         enemyHealth = GetComponent<EnemyHealth>();
-        animations = GetComponent<LumberjackAnimations>();
-
         bossAxe.gameObject.SetActive(false);
         bossAxe.SetLumberjack(this);
     }
@@ -171,6 +169,14 @@ public class Lumberjack : MonoBehaviour
     {
         hasAxe = true;
         axeOnGround = false;
+        if(enemyHealth.health <= 3)
+        {
+            animations.CloseToAxe();
+        }
+        else
+        {
+            animations.StopMoving();
+        }
     }
 
     public void RecieveAxe()
@@ -190,6 +196,10 @@ public class Lumberjack : MonoBehaviour
     public void GetAxe()
     {
         chaseAgent.Chase();
+        if(enemyHealth.health >=3)
+        {
+            animations.Moving();
+        }
         chaseAgent.SetNewDestination(axeGroundPosition);
     }
 
@@ -323,7 +333,8 @@ public class Lumberjack : MonoBehaviour
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
-        Debug.Log(chaseAgent.TargetDirection());
+        animations.SetLowerHp(enemyHealth.health <= 3 ? true : false);
+        animations.EndThrowAttack();
         bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.5f, chaseAgent.TargetDirection(), axeOnAirTime);
     }
 
@@ -407,7 +418,6 @@ public class Lumberjack : MonoBehaviour
         jumpAttackHitbox.SetActive(true);
 
         //anim
-        animations.StopFalling();
 
         yield return new WaitForSeconds(0.5f);
 

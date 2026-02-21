@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LumberjackAnimations : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class LumberjackAnimations : MonoBehaviour
     {
         animator.SetInteger("variation", 0);
         animator.SetBool("throwAttack", true);
+    }
+
+    public void SetLowerHp(bool newLowerHp)
+    {
+        animator.SetBool("lowerHp", newLowerHp);
     }
 
     public void StartThrowAttackB()
