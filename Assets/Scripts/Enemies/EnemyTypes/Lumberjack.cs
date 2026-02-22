@@ -38,6 +38,11 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private float closeRange = 4.0f;
     [SerializeField] private float midRange = 10.0f;
 
+    [Header("Pre-Attack Movement")]
+    [SerializeField] private float preAttackMoveTime = 1.0f;
+    [SerializeField] private float preAttackSpeed = 4.5f;
+    [SerializeField] private float preAttackMinDistance = 2.5f;
+
     [Header("Hitboxes")]
     [SerializeField] private GameObject aoeAHitbox;
     [SerializeField] private GameObject jumpAttackHitbox;
@@ -306,6 +311,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator SwipeAttack()
     {
         StartAttack();
+        yield return MoveSlightlyTowardsPlayer();
         animations.StartSwipeAttack();
         yield return new WaitForSeconds(0.1f);
         EnableHitbox(swipeHitbox);
@@ -318,6 +324,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackA()
     {
         StartAttack();
+        yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackA();
         EnableHitbox(aoeAHitbox);
         yield return new WaitForSeconds(0.4f);
@@ -329,6 +336,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackB()
     {
         StartAttack();
+        yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackB();
         yield return new WaitForSeconds(0.6f);
         StartCoroutine(ExpandAOEHitbox());
@@ -492,6 +500,31 @@ public class Lumberjack : MonoBehaviour
     private void SetSpeed(float newSpeed)
     {
         chaseAgent.SetVelocity(newSpeed);
+    }
+
+    private IEnumerator MoveSlightlyTowardsPlayer()
+    {
+        float timer = 0f;
+
+        SetSpeed(preAttackSpeed);
+        agent.isStopped = false;
+
+        while (timer < preAttackMoveTime)
+        {
+            float distance = chaseAgent.DistanceFromTarget();
+
+            if (distance <= preAttackMinDistance)
+            {
+                break;
+            }
+
+            agent.SetDestination(chaseAgent.TargetPosition());
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        agent.isStopped = true;
     }
 
     private void StartAttack()
