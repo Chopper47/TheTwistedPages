@@ -41,6 +41,7 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private float angleAmplitude = 2f;
     [SerializeField] private float frontAmplitude = 5f;
     [SerializeField] private float coneAngle = 35f;
+    [SerializeField] private float axeConeAngle = 35f;
     [SerializeField] private float maxPushDistance = 9f;
     [SerializeField] private float axeRotationSpeed = 1.0f;
     [SerializeField] private float axeThrowSpeed = 15.0f;
@@ -118,14 +119,9 @@ public class PlayerMovement: MonoBehaviour
             }
             else
             {
-                if(Input.GetKeyDown(KeyCode.Space))
+                if(Input.GetKeyDown(KeyCode.Space))                                         
                 {
-                    StopCoroutine(rotationCoroutine);
-                    StopCoroutine(btUICoroutine);
-                    StopCoroutine(bulletTimeCoroutine);
-                    EndBulletTime();
-                    bulletTimeTimer.fillAmount = 0f;
-                    ReleaseAxe();
+                    ThrowAxeInput();
                 }
             }
 
@@ -175,6 +171,19 @@ public class PlayerMovement: MonoBehaviour
         }
     }
     
+    public void ThrowAxeInput()                 //what input system should call for axe throwing
+    {
+        if(axeHolding)
+        {
+            StopCoroutine(rotationCoroutine);
+            StopCoroutine(btUICoroutine);
+            StopCoroutine(bulletTimeCoroutine);
+            EndBulletTime();
+            bulletTimeTimer.fillAmount = 0f;
+            ReleaseAxe();
+        }
+    }
+
     public void ReleaseAxe()
     {
         toPush.transform.parent = null;
@@ -183,12 +192,23 @@ public class PlayerMovement: MonoBehaviour
         Vector3 newDir = new Vector3(toPush.transform.position.x - transform.position.x, 0, toPush.transform.position.z - transform.position.z).normalized;
         if(axe != null)
         {
-            axe.NewDirection(newDir * axeThrowSpeed);
+            axe.NewDirection(PushTarget(false, true).normalized * axeThrowSpeed);
             axe.ActivateTrail();
         }
         else
         {
-            bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, newDir, 1.5f);
+            Lumberjack boss = FindAnyObjectByType<Lumberjack>();
+
+            if(Vector3.SignedAngle(newDir, boss.gameObject.transform.position - transform.position, Vector3.up) <= axeConeAngle && Vector3.SignedAngle(newDir, boss.gameObject.transform.position - transform.position, Vector3.up) > -axeConeAngle)
+            {
+                Debug.LogWarning("found boss within range, sent to him");
+                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, new Vector3(boss.gameObject.transform.position.x - transform.position.x, 0f, boss.gameObject.transform.position.z - transform.position.z).normalized ,1.5f);
+            }
+            else 
+            {
+                Debug.LogWarning("not even close bruh");
+                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, newDir, 1.5f);
+            }
         }
     }
 
@@ -314,7 +334,13 @@ public class PlayerMovement: MonoBehaviour
         return isRolling && isInBulletTime && enemyChecking == toPush;
     }
 
-    public Vector3 PushTarget(bool findTrap)
+    /// <summary>
+    /// Method used for getting lerp direction of enemy pushing, projectiles and axe throws
+    /// </summary>
+    /// <param name="findTrap">Is the method finding the direction of a trap</param>
+    /// <param name="axeTarget">Is the method using the max angle for an axe throw</param>
+    /// <returns>Returns max position of the target</returns>
+    public Vector3 PushTarget(bool findTrap, bool axeTarget)
     {
         Vector3 pushDir = new Vector3(toPush.transform.position.x - transform.position.x,0, toPush.transform.position.z - transform.position.z).normalized * frontAmplitude;
         Collider[] hits = Physics.OverlapSphere(toPush.transform.position, frontAmplitude);
@@ -326,14 +352,14 @@ public class PlayerMovement: MonoBehaviour
             {
                 if (nearestTrap == null)
                 {
-                    if (Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) <= coneAngle && Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) > -coneAngle)
+                    if (Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) <= (axeTarget? axeConeAngle:coneAngle) && Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) > (axeTarget ? -axeConeAngle : -coneAngle))
                     {
                         nearestTrap = hit.gameObject;
                     }
                 }
                 else
                 {
-                    if(Vector3.SignedAngle(pushDir,hit.gameObject.transform.position - toPush.transform.position,Vector3.up) <= coneAngle && Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) > -coneAngle)
+                    if(Vector3.SignedAngle(pushDir,hit.gameObject.transform.position - toPush.transform.position,Vector3.up) <= (axeTarget ? axeConeAngle : coneAngle) && Vector3.SignedAngle(pushDir, hit.gameObject.transform.position - toPush.transform.position, Vector3.up) > (axeTarget ? -axeConeAngle : -coneAngle))
                     {
                         if(Vector3.Distance(toPush.transform.position, hit.gameObject.transform.position) <= maxPushDistance)
                         {

@@ -50,13 +50,13 @@ public class EnemyHitbox : MonoBehaviour
             Projectile projectile = GetComponent<Projectile>();
             if (projectile != null)
             {
-                Pushed(playerMovement.PushTarget(false));
+                Pushed(playerMovement.PushTarget(false, false));
                 projectile.Deflect();
                 
             }
             else
             {
-                Pushed(playerMovement.PushTarget(true));
+                Pushed(playerMovement.PushTarget(true, false));
             }
             SetIgnore(true);
 
