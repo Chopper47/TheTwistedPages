@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -313,12 +314,16 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         yield return MoveSlightlyTowardsPlayer();
         animations.StartSwipeAttack();
-        yield return new WaitForSeconds(0.1f);
+    }
+
+    public void EnableSwipeHitbox()
+    {
         EnableHitbox(swipeHitbox);
-        yield return new WaitForSeconds(0.5f);
+    }
+
+    public void DisableSwipeHitbox()
+    {
         DisableHitbox(swipeHitbox);
-        animations.EndSwipeAttack();
-        EndAttack();
     }
 
     private IEnumerator AOEAttackA()
@@ -326,11 +331,16 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackA();
+    }
+
+    public void EnableAoeHitbox()
+    {
         EnableHitbox(aoeAHitbox);
-        yield return new WaitForSeconds(0.4f);
+    }
+
+    public void DisableAoeHitbox()
+    {
         DisableHitbox(aoeAHitbox);
-        animations.EndAreaAttack();
-        EndAttack();
     }
 
     private IEnumerator AOEAttackB()
@@ -338,11 +348,18 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackB();
-        yield return new WaitForSeconds(0.6f);
+    }
+
+    public void EnableAoeExpansion()
+    {
         StartCoroutine(ExpandAOEHitbox());
+        StartCoroutine(EndAOEAttackB());
+    }
+
+    private IEnumerator EndAOEAttackB()
+    {
         yield return new WaitForSeconds(aoeBExpandTime);
         animations.EndAreaAttack();
-        EndAttack();
     }
 
     private IEnumerator ThrowAttackA()
@@ -539,12 +556,11 @@ public class Lumberjack : MonoBehaviour
         chaseAgent.StopChase();
     }
 
-    private void EndAttack()
+    public void EndAttack()
     {
         isAttacking = false;
         currentAction = null;
         enemyState.StayState();
-        animations.Moving();
     }
 
     public void EnableHitbox(GameObject hitbox)

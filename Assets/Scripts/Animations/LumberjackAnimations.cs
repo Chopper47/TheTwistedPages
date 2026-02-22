@@ -4,7 +4,17 @@ using UnityEngine.UIElements;
 
 public class LumberjackAnimations : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Lumberjack boss;
+    private int swipeVariation = 0;
+
+    private void Awake()
+    {
+        if(boss == null)
+        {
+            boss = FindAnyObjectByType<Lumberjack>();
+        }
+    }
 
     public void Moving()
     {
@@ -70,12 +80,32 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void StartSwipeAttack()
     {
-        animator.SetInteger("variation", Random.Range(0, 2));
+        if(swipeVariation == 0)
+        {
+            swipeVariation = 1;
+        }
+        else
+        {
+            swipeVariation = 0;
+        }
+        animator.SetInteger("variation", swipeVariation);
         animator.SetBool("basicAttack", true);
     }
+
+    public void SwipeHitbox()
+    {
+        boss.EnableSwipeHitbox();
+    }
+
+    public void EndSwipeHitbox()
+    {
+        boss.DisableSwipeHitbox();
+    }
+
     public void EndSwipeAttack()
     {
         animator.SetBool("basicAttack", false);
+        boss.EndAttack();
     }
 
     public void CloseToAxe()
@@ -99,8 +129,24 @@ public class LumberjackAnimations : MonoBehaviour
         animator.SetBool("areaAttack", true);
     }
 
+    public void AoeHitbox()
+    {
+        boss.EnableAoeHitbox();
+    }
+
+    public void EndAoeHitbox()
+    {
+        boss.DisableAoeHitbox();
+    }
+
+    public void ExpansiveAoeHitbox()
+    {
+        boss.EnableAoeExpansion();
+    }
+
     public void EndAreaAttack()
     {
         animator.SetBool("areaAttack", false);
+        boss.EndAttack();
     }
 }
