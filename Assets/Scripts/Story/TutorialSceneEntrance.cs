@@ -16,6 +16,7 @@ public class TutorialSceneEntrance : MonoBehaviour
         DialogueManager.instance.StartDialogue();
     }
 
+
     // Update is called once per frame
     void Update()
     {

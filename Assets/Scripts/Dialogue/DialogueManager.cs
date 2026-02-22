@@ -66,6 +66,10 @@ public class DialogueManager : MonoBehaviour
         typingCoroutine = StartCoroutine(TypeLine());
     }
 
+    private IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+    }
     IEnumerator TypeLine()
     {
         textComponent.text = string.Empty;
@@ -93,11 +97,11 @@ public class DialogueManager : MonoBehaviour
             active = false;
             
 
+            PlayerMovement.canMove = true;
             var tempEvent = onDialogueEnd;
             onDialogueEnd = new UnityEngine.Events.UnityEvent();
 
             tempEvent?.Invoke();
-            PlayerMovement.canMove = true;
         }
     }
 
