@@ -16,6 +16,12 @@ public class Lumberjack : MonoBehaviour
     [SerializeField]private LumberjackAnimations animations;
     [SerializeField] BossAxe bossAxe;
 
+    [Header("Movement Speeds")]
+    [SerializeField] private float pursueSpeed = 3.5f;
+    [SerializeField] private float getAxeSpeed = 5.0f;
+    [SerializeField] private float enragedSpeed = 6.0f;
+    [SerializeField] private float defaultSpeed = 3.5f;
+
     [Header("Axe State")]
     public bool hasAxe = true;
     public bool recievedAxe = false;
@@ -190,22 +196,27 @@ public class Lumberjack : MonoBehaviour
     #region Boss States
     public void Wait()
     {
+        SetSpeed(defaultSpeed);
         animations.StopMoving();
         chaseAgent.StopChase();
     }
 
     public void GetAxe()
     {
+        SetSpeed(getAxeSpeed);
         chaseAgent.Chase();
-        if(enemyHealth.health >=3)
+
+        if (enemyHealth.health >= 3)
         {
             animations.Moving();
         }
+
         chaseAgent.SetNewDestination(axeGroundPosition);
     }
 
     public void Pursue()
     {
+        SetSpeed(pursueSpeed);
         animations.Moving();
         chaseAgent.Chase();
     }
@@ -441,6 +452,9 @@ public class Lumberjack : MonoBehaviour
         Vector3 dir, endPoint, startPoint;
         endPoint = Vector3.zero;
         Debug.Log("Enraged start");
+
+        SetSpeed(enragedSpeed);
+
         while (count < chargeAmount)
         {
             Debug.Log("loop start");
@@ -470,9 +484,15 @@ public class Lumberjack : MonoBehaviour
         }
         recievedAxe = false;
         EndAttack();
-        yield return null;
+
+        SetSpeed(defaultSpeed);
     }
     #endregion
+
+    private void SetSpeed(float newSpeed)
+    {
+        chaseAgent.SetVelocity(newSpeed);
+    }
 
     private void StartAttack()
     {
