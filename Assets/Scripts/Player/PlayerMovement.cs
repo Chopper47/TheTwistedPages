@@ -13,7 +13,6 @@ public class PlayerMovement: MonoBehaviour
     private Vector3 direction;
     [SerializeField] private UpgradeStats upgradeStatsScriptable;
 
-
     [Header("Movement")]
     [SerializeField] private float baseMoveSpeed = 10.0f;
     [SerializeField] private float rotationSpeed = 10.0f;
@@ -60,6 +59,7 @@ public class PlayerMovement: MonoBehaviour
 
     private InputAction moveAction;
     private InputAction rollAction;
+    private InputAction throwAxeAction;
 
     private Vector2 moveAmount;
 
@@ -73,8 +73,6 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private AudioManager AM;
     [SerializeField] private AudioSource Main;
 
-
-    
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -89,6 +87,7 @@ public class PlayerMovement: MonoBehaviour
     {
         moveAction = inputActions.FindActionMap("Player").FindAction("Move");
         rollAction = inputActions.FindActionMap("Player").FindAction("Roll");
+        throwAxeAction = inputActions.FindActionMap("Player").FindAction("ThrowAxe");
     }
 
     private void Start()
@@ -113,13 +112,13 @@ public class PlayerMovement: MonoBehaviour
 
         if (!isRolling)
         {
-            if(!axeHolding)
+            if (!axeHolding)
             {
                 Move();
             }
             else
             {
-                if(Input.GetKeyDown(KeyCode.Space))                                         
+                if (throwAxeAction.triggered)
                 {
                     ThrowAxeInput();
                 }
