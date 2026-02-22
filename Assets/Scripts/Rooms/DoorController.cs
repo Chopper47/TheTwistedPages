@@ -14,7 +14,7 @@ public class DoorController : MonoBehaviour
     public DoorDirection direction;
     public RoomController parentRoom;
 
-    private Collider doorCollider;
+    [SerializeField] private Collider doorCollider;
     private RoomTransition roomTransition;
     //public MusicManager music;
 
@@ -36,7 +36,7 @@ public class DoorController : MonoBehaviour
     public void OpenDoor()
     {
         doorCollider.isTrigger = true;
-        MusicManager.instance.SwitchStageSynced(0);
+        //MusicManager.instance.SwitchStageSynced(0);
     }
 
     public void CloseDoor()

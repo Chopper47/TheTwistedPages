@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public Image dialoguePanel;
     public DialogueData currentDialogue;
     public UnityEvent onDialogueEnd;
+    public UnityEvent onDialogueStart;
 
     private int index;
     private bool active = false;
@@ -57,6 +58,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue()
     {
+        PlayerMovement.canMove = false;
         index = 0;
         active = true;
         dialoguePanel.gameObject.SetActive(true);
@@ -89,12 +91,13 @@ public class DialogueManager : MonoBehaviour
         {
             dialoguePanel.gameObject.SetActive(false);
             active = false;
+            
 
             var tempEvent = onDialogueEnd;
             onDialogueEnd = new UnityEngine.Events.UnityEvent();
 
             tempEvent?.Invoke();
-
+            PlayerMovement.canMove = true;
         }
     }
 

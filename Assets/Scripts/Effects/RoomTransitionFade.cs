@@ -21,6 +21,7 @@ public class RoomTransitionFade : MonoBehaviour
 
     public IEnumerator FadeOut()
     {
+
         float timer = 0f;
         Color colour = fadeImage.color;
 

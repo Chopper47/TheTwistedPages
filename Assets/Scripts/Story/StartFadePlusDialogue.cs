@@ -37,6 +37,8 @@ public class StartFadePlusDialogue : MonoBehaviour
         DialogueManager.instance.currentDialogue = secondDialogue;
         DialogueManager.instance.onDialogueEnd.AddListener(EnablePlayerMovement);
         DialogueManager.instance.StartDialogue();
+        RoomTransitionFade.Instance.fadeDuration = 0.4f;
+
     }
 
     void EnablePlayerMovement()
