@@ -6,6 +6,7 @@ public class LumberjackAnimations : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Lumberjack boss;
+    [SerializeField] private GameObject visualAxe;
     private int swipeVariation = 0;
 
     private void Awake()
@@ -148,5 +149,15 @@ public class LumberjackAnimations : MonoBehaviour
     {
         animator.SetBool("areaAttack", false);
         boss.EndAttack();
+    }
+
+    public void DisableVisualAxe()
+    {
+        visualAxe.SetActive(false);
+    }
+
+    public void EnableVisualAxe() 
+    {
+        visualAxe.SetActive(true);
     }
 }

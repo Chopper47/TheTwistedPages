@@ -65,7 +65,8 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private float jumpImpactRadius = 5.0f;
 
     [Header("Throw Attacks Settings")]
-    [SerializeField] private float axeOnAirTime = 0.1f;
+    [SerializeField] private float axeOnAirTime = .1f;
+    [SerializeField] private float axeBoomerangTime = 1.5f; 
 
     [Header("Enraged Attack Settings")]
     [SerializeField] private LayerMask wallMask;
@@ -181,6 +182,7 @@ public class Lumberjack : MonoBehaviour
     {
         hasAxe = true;
         axeOnGround = false;
+        animations.GainAxe();
         if(enemyHealth.health <= 3)
         {
             animations.CloseToAxe();
@@ -383,8 +385,8 @@ public class Lumberjack : MonoBehaviour
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
-        bossAxe.StartThrowAttackA(axeOnAirTime, chaseAgent.DistanceFromTarget());
-        yield return new WaitForSeconds(axeOnAirTime);
+        bossAxe.StartThrowAttackA(axeBoomerangTime, chaseAgent.DistanceFromTarget());
+        yield return new WaitForSeconds(axeBoomerangTime);
         animations.EndThrowAttack();
         EndAttack();
     }
