@@ -3,21 +3,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class WolfEncounter : MonoBehaviour
 {
     [Header("Dialogue Data")]
     [SerializeField] private DialogueData dialogue;
     [SerializeField] private DialogueData secondDialogue;
+    [SerializeField] private DialogueData thirdDialogue;
 
     [Header("References")]
     [SerializeField] private PlayerMovement player;
     [SerializeField] private GameObject wolfPrefab;
     [SerializeField] private Transform wolfSpawnPoint;
     [SerializeField] private Transform wolfTarget;
+    [SerializeField] private Volume darknessVolume;
+    [SerializeField] private Vignette darknessVignette;
 
     [SerializeField] private bool frozenTime = false;
-    [SerializeField] private bool pressedShift = false; 
+    //[SerializeField] private bool pressedShift = false; 
     private InputAction rollInput;
 
     private GameObject wolfGO;
@@ -38,6 +43,7 @@ public class WolfEncounter : MonoBehaviour
             //wolfGO.GetComponent<NavMeshAgent>().enabled = true;
 
             StartCoroutine(player.Roll());
+            StartCoroutine(EndTutorial());
 
         }
     }
@@ -47,28 +53,64 @@ public class WolfEncounter : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             StartCoroutine(WolfEncounterCoroutine());
-            DialogueManager.instance.currentDialogue = dialogue;
-            DialogueManager.instance.onDialogueEnd.AddListener(SpawnWolfAndStartSecondDialogue);
-            DialogueManager.instance.StartDialogue();
+            
+            gameObject.transform.position = new Vector3(-9999, -9999, -9999);
         }
     }
     IEnumerator WolfEncounterCoroutine()
     {
-        //TODO start darkness
-        yield return new WaitForSeconds(2f); 
-        //ADD dialogue start here
+        PlayerMovement.canMove = false;
+
+        darknessVolume.profile.TryGet(out darknessVignette);
+        float intensity = darknessVignette.intensity.value;
+        float smoothness = darknessVignette.smoothness.value;
+        //darknessVignette.intensity.value = 1f;
+        float timer = 0f;
+        while (timer < 4f)
+        {
+            darknessVignette.intensity.value = Mathf.Lerp(intensity, 1f, timer /4f);
+            darknessVignette.smoothness.value = Mathf.Lerp(smoothness, 1f, timer / 4f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+
+        yield return new WaitForSeconds(2f);
+        DialogueManager.instance.currentDialogue = dialogue;
+        DialogueManager.instance.onDialogueEnd.AddListener(SpawnWolfAndStartSecondDialogueMethod);
+        DialogueManager.instance.StartDialogue();
     }
 
-    private void SpawnWolfAndStartSecondDialogue()
+    private void SpawnWolfAndStartSecondDialogueMethod()
     {
-        DialogueManager.instance.onDialogueEnd.RemoveListener(SpawnWolfAndStartSecondDialogue);
+        StartCoroutine(SpawnWolfAndStartSecondDialogue());   
+    }
+
+    private IEnumerator SpawnWolfAndStartSecondDialogue() 
+    {
+
+        DialogueManager.instance.onDialogueEnd.RemoveListener(SpawnWolfAndStartSecondDialogueMethod);
+
         wolfGO = Instantiate(wolfPrefab, wolfSpawnPoint.position, Quaternion.identity);
         wolfGO.GetComponent<NavMeshAgent>().enabled = false;
+
+        float intensity = darknessVignette.intensity.value;
+        float smoothness = darknessVignette.smoothness.value;
+        float timer = 0f;
+        while (timer < 4f)
+        {
+            darknessVignette.intensity.value = Mathf.Lerp(intensity, 0.45f, timer / 4f);
+            darknessVignette.smoothness.value = Mathf.Lerp(smoothness, 0.2f, timer / 4f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
         //TODO Take off darkness
         DialogueManager.instance.currentDialogue = secondDialogue;
         DialogueManager.instance.onDialogueEnd.AddListener(EnableWolfChase);
         DialogueManager.instance.StartDialogue();
     }
+        
+    
 
     private void EnableWolfChase()
     {
@@ -85,7 +127,12 @@ public class WolfEncounter : MonoBehaviour
         frozenTime = true;
         Time.timeScale = 0f;
 
-
-
+    }
+    
+    IEnumerator EndTutorial()
+    {
+        yield return new WaitForSeconds(1f);
+        DialogueManager.instance.currentDialogue = thirdDialogue;
+        DialogueManager.instance.StartDialogue();
     }
 }
