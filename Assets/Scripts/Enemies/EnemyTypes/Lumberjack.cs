@@ -59,10 +59,9 @@ public class Lumberjack : MonoBehaviour
     private List<SphereCollider> activeSpheres = new List<SphereCollider>();
 
     [Header("Jump Attack Settings")]
-    [SerializeField] private float jumpRiseHeight = 4.0f;
-    [SerializeField] private float jumpAirTime = 1.0f;
-    [SerializeField] private float jumpFallTime = 0.4f;
     [SerializeField] private float jumpImpactRadius = 5.0f;
+    [SerializeField] private int maxConsecutiveJumps = 3;
+    private int currentConsecutiveJumps = 0;
 
     [Header("Throw Attacks Settings")]
     [SerializeField] private float axeOnAirTime = .1f;
@@ -95,6 +94,8 @@ public class Lumberjack : MonoBehaviour
         {
             return;
         }
+
+        currentConsecutiveJumps = 0;
 
         if (currentAction != null)
         {
@@ -234,6 +235,11 @@ public class Lumberjack : MonoBehaviour
         axeOnGround = true;
         axeGroundPosition = bossAxe.transform.position;
         EndAttack();
+    }
+
+    public bool CanDoJumpAttack()
+    {
+        return currentConsecutiveJumps < maxConsecutiveJumps && !isStunned;
     }
     #endregion
 
@@ -393,6 +399,11 @@ public class Lumberjack : MonoBehaviour
 
     private IEnumerator JumpAttack()
     {
+        currentConsecutiveJumps++;
+
+        StopCoroutine("ResetJumpCounterAfterDelay");
+        StartCoroutine("ResetJumpCounterAfterDelay", 5f);
+
         StartAttack();
 
         agent.enabled = false;
@@ -469,6 +480,13 @@ public class Lumberjack : MonoBehaviour
         EndAttack();
 
         animations.StopMoving();
+    }
+
+    private IEnumerator ResetJumpCounterAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        currentConsecutiveJumps = 0;
+        Debug.Log("Jump counter reset after " + delay + " seconds");
     }
 
     private IEnumerator EnragedCharge()

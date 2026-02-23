@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f43bb963ce018d4698b4fd8140c5584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
+  maxHealth: 3
   health: 0
   roomController: {fileID: 0}
   AM: {fileID: 0}
@@ -301,8 +301,8 @@ MonoBehaviour:
   axeGroundPosition: {x: 0, y: 0, z: 0}
   isStunned: 0
   isAttacking: 0
-  closeRange: 4
-  midRange: 10
+  closeRange: 0
+  midRange: 50
   preAttackMoveTime: 3
   preAttackSpeed: 4.5
   preAttackMinDistance: 2.5
@@ -314,10 +314,8 @@ MonoBehaviour:
   aoeBExpandTime: 1
   aoeBRoot: {fileID: 1781791569602703458}
   aoeBSphereHitbox: {fileID: 5041311295763000854}
-  jumpRiseHeight: 4
-  jumpAirTime: 1
-  jumpFallTime: 0.4
   jumpImpactRadius: 5
+  maxConsecutiveJumps: 3
   axeOnAirTime: 0.1
   axeBoomerangTime: 1.5
   wallMask:
@@ -1512,6 +1510,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4124596563149319036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1111566311290780647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6924994026345259552}
+  - component: {fileID: 1375101193932267206}
+  - component: {fileID: 2777006222748491105}
+  m_Layer: 0
+  m_Name: No, Pursue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6924994026345259552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111566311290780647}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8205260215470420505}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1375101193932267206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111566311290780647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: {fileID: 2777006222748491105}
+--- !u!114 &2777006222748491105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111566311290780647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf3bdaf97252524193806bd0cea541a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 97395387761626863}
 --- !u!1 &1119666335266904630
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,7 +4588,7 @@ Transform:
   m_Children:
   - {fileID: 4317355756278920482}
   - {fileID: 3466461985939742877}
-  m_Father: {fileID: 1309340625172595285}
+  m_Father: {fileID: 8205260215470420505}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2453595857619452463
 MonoBehaviour:
@@ -4593,6 +4650,69 @@ Transform:
   - {fileID: 3546351512037407808}
   m_Father: {fileID: 2905426247035491400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
+--- !u!1 &4093823312211178494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8205260215470420505}
+  - component: {fileID: 7592807648152357893}
+  - component: {fileID: 4204127311263224891}
+  m_Layer: 0
+  m_Name: Yes, Can do Jump Attack?
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8205260215470420505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093823312211178494}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6924994026345259552}
+  - {fileID: 5653835699215870588}
+  m_Father: {fileID: 1309340625172595285}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7592807648152357893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093823312211178494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a7a41db1da55b46b441f61aa250748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 4204127311263224891}
+  falseNode: {fileID: 1375101193932267206}
+  trueNode: {fileID: 2453595857619452463}
+--- !u!114 &4204127311263224891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093823312211178494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e38adc88c8b474087a6f4505159621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lumberjack: {fileID: 6496424540935143022}
 --- !u!1 &4134999372920123561
 GameObject:
   m_ObjectHideFlags: 0
@@ -6986,8 +7106,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5653835699215870588}
   - {fileID: 8908018619003931741}
+  - {fileID: 8205260215470420505}
   m_Father: {fileID: 1398985015574670923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3767832753501828870
@@ -7004,7 +7124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   condition: {fileID: 7122510694038994841}
   falseNode: {fileID: 3532339476995281810}
-  trueNode: {fileID: 2453595857619452463}
+  trueNode: {fileID: 7592807648152357893}
 --- !u!114 &7122510694038994841
 MonoBehaviour:
   m_ObjectHideFlags: 0
