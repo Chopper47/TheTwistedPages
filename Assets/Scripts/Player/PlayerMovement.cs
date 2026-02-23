@@ -201,12 +201,12 @@ public class PlayerMovement: MonoBehaviour
             if(Vector3.SignedAngle(newDir, boss.gameObject.transform.position - transform.position, Vector3.up) <= axeConeAngle && Vector3.SignedAngle(newDir, boss.gameObject.transform.position - transform.position, Vector3.up) > -axeConeAngle)
             {
                 Debug.LogWarning("found boss within range, sent to him");
-                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, new Vector3(boss.gameObject.transform.position.x - transform.position.x, 0f, boss.gameObject.transform.position.z - transform.position.z).normalized ,1.5f);
+                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, new Vector3(boss.gameObject.transform.position.x - transform.position.x, 0f, boss.gameObject.transform.position.z - transform.position.z).normalized ,.2f);
             }
             else 
             {
                 Debug.LogWarning("not even close bruh");
-                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, newDir, 1.5f);
+                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, newDir, .2f);
             }
         }
     }

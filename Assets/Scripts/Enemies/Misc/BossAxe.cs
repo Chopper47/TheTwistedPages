@@ -45,12 +45,12 @@ public class BossAxe : MonoBehaviour
 
     public bool MovedByPlayer() { return playerGrabbed; }
 
-    public void StartThrowAttackA(Vector3 startingPos, Vector3 throwDirection, float timeOnAir)
+    public void StartThrowAttackA(Vector3 startingPos, Vector3 throwDirection, float timeToOneUnit)
     {
         transform.parent = null;
         thrown = true;
         canGet = false;
-        moving = StartCoroutine(Move(startingPos, throwDirection, timeOnAir));
+        moving = StartCoroutine(Move(startingPos, throwDirection, timeToOneUnit));
         StartCoroutine(WaitUntilCollision());
     }
 
@@ -75,10 +75,10 @@ public class BossAxe : MonoBehaviour
         followPath.Container.Spline[1] = farpoint;
     }
 
-    public void NewDirection(Vector3 startingPos, Vector3 throwDirection, float timeOnAir)
+    public void NewDirection(Vector3 startingPos, Vector3 throwDirection, float timeToOneUnit)
     {
         //StartCoroutine(Move(startingPos,new Vector3(lumberjack.transform.position.x - startingPos.x, 0f, lumberjack.transform.position.z - startingPos.z).normalized , timeOnAir));
-        StartCoroutine(Move(startingPos, throwDirection, timeOnAir));
+        StartCoroutine(Move(startingPos, throwDirection, timeToOneUnit));
     }
 
     public void InterruptedThrowAttack()
@@ -109,7 +109,7 @@ public class BossAxe : MonoBehaviour
         return thrown && !playerGrabbed;
     }
 
-    IEnumerator Move(Vector3 startingPos, Vector3 dir, float timeOnAir)
+    IEnumerator Move(Vector3 startingPos, Vector3 dir, float timeToOneUnit)
     {
         RaycastHit hit;
         Vector3 endPoint = Vector3.zero;
@@ -122,10 +122,11 @@ public class BossAxe : MonoBehaviour
         }
 
         float timer = 0f;
+        float maxTimer = timeToOneUnit * Vector3.Distance(startingPos, endPoint);
 
-        while (timer < timeOnAir)
+        while (timer < maxTimer)
         {
-            transform.position = Vector3.Lerp(startingPos, endPoint, timer / timeOnAir);
+            transform.position = Vector3.Lerp(startingPos, endPoint, timer / maxTimer);
             timer += Time.deltaTime;
             yield return null;
         }
