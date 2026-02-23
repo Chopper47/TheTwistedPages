@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class DestructibleEnviroment : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag == "DestructionCheck")
+        if (other.CompareTag("DestructionCheck"))
         {
             Destroy(gameObject);
         }
