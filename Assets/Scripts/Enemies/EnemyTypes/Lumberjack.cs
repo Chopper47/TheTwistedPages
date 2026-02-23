@@ -65,7 +65,7 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private float jumpImpactRadius = 5.0f;
 
     [Header("Throw Attacks Settings")]
-    [SerializeField] private float axeOnAirTime = 1.5f;
+    [SerializeField] private float axeOnAirTime = 0.1f;
 
     [Header("Enraged Attack Settings")]
     [SerializeField] private LayerMask wallMask;
@@ -362,19 +362,6 @@ public class Lumberjack : MonoBehaviour
         animations.EndAreaAttack();
     }
 
-    private IEnumerator ThrowAttackA()
-    {
-        StartAttack();
-        animations.StartThrowAttackA();
-        hasAxe = false;
-        transform.LookAt(transform.position + chaseAgent.TargetDirection());
-        yield return new WaitForSeconds(0.2f);
-        bossAxe.gameObject.SetActive(true);
-        animations.SetLowerHp(enemyHealth.health <= 3 ? true : false);
-        animations.EndThrowAttack();
-        bossAxe.StartThrowAttackA(transform.position + Vector3.up*0.5f, chaseAgent.TargetDirection(), axeOnAirTime);
-    }
-
     private IEnumerator ThrowAttackB()
     {
         StartAttack();
@@ -383,7 +370,20 @@ public class Lumberjack : MonoBehaviour
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
-        bossAxe.StartThrowAttackB(axeOnAirTime, chaseAgent.DistanceFromTarget());
+        animations.SetLowerHp(enemyHealth.health <= 3 ? true : false);
+        animations.EndThrowAttack();
+        bossAxe.StartThrowAttackB(transform.position + Vector3.up*0.5f, chaseAgent.TargetDirection(), axeOnAirTime);
+    }
+
+    private IEnumerator ThrowAttackA()
+    {
+        StartAttack();
+        animations.StartThrowAttackA();
+        hasAxe = false;
+        transform.LookAt(transform.position + chaseAgent.TargetDirection());
+        yield return new WaitForSeconds(0.2f);
+        bossAxe.gameObject.SetActive(true);
+        bossAxe.StartThrowAttackA(axeOnAirTime, chaseAgent.DistanceFromTarget());
         yield return new WaitForSeconds(axeOnAirTime);
         animations.EndThrowAttack();
         EndAttack();

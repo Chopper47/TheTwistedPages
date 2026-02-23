@@ -26,7 +26,7 @@ public class LumberjackAnimations : MonoBehaviour
         animator.SetBool("running", false);
     }
 
-    public void StartThrowAttackA()
+    public void StartThrowAttackB()
     {
         animator.SetInteger("variation", 0);
         animator.SetBool("throwAttack", true);
@@ -37,7 +37,7 @@ public class LumberjackAnimations : MonoBehaviour
         animator.SetBool("lowerHp", newLowerHp);
     }
 
-    public void StartThrowAttackB()
+    public void StartThrowAttackA()
     {
         animator.SetInteger("variation", 1);
         animator.SetBool("throwAttack", true);

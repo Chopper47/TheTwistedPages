@@ -45,7 +45,7 @@ public class BossAxe : MonoBehaviour
 
     public bool MovedByPlayer() { return playerGrabbed; }
 
-    public void StartThrowAttackA(Vector3 startingPos, Vector3 throwDirection, float timeToOneUnit)
+    public void StartThrowAttackB(Vector3 startingPos, Vector3 throwDirection, float timeToOneUnit)
     {
         transform.parent = null;
         thrown = true;
@@ -54,7 +54,7 @@ public class BossAxe : MonoBehaviour
         StartCoroutine(WaitUntilCollision());
     }
 
-    public void StartThrowAttackB(float timeOnAir, float distance)
+    public void StartThrowAttackA(float timeOnAir, float distance)
     {
         transform.parent = null;
         arrived = false;
