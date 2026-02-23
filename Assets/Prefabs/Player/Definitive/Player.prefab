@@ -410,7 +410,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6608424745813156610, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
+  - {fileID: 2100000, guid: 58358ce9af7cb7b47b48698a85cd08c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2222,7 +2222,7 @@ CharacterController:
   m_Height: 1.4
   m_Radius: 0.25
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.7, z: 0}
@@ -2280,11 +2280,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   invincibilityDuration: 1
   upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
-  fullLife: {fileID: 21300000, guid: 7e259fa96919ede4ca6aafd9e5be4785, type: 3}
-  halfLife: {fileID: 21300000, guid: 2eddffdfae5a183468d21e86526af376, type: 3}
-  emptyLife: {fileID: 21300000, guid: a472a74dfeb4a0d42863edecf5258f3d, type: 3}
+  fullLife: {fileID: 21300000, guid: 0d23a2e405809d84792b67b9e982ae5c, type: 3}
+  halfLife: {fileID: 21300000, guid: bb0b08c97fca4b741adb10cefda3faca, type: 3}
+  emptyLife: {fileID: 21300000, guid: 9816629483ac8694d8f6962927233547, type: 3}
   Main: {fileID: 0}
   AM: {fileID: 0}
 --- !u!114 &-5651913295414236988
@@ -2299,8 +2304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63705e262cf0cb943ad478d6b39b91dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenThrows: 5
-  throwChance: 30
+  timeBetweenThrows: 2
+  throwChance: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 256

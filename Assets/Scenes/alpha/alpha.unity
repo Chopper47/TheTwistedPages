@@ -1050,17 +1050,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9157670117471285181, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
   m_PrefabInstance: {fileID: 6336129}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &294845375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3261127876349614846, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-  m_PrefabInstance: {fileID: 6862546913126385092}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27aa95ab13c57ed419e4ce460a4c49b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &300349590 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4216939284243877280, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
@@ -2407,52 +2396,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5651913295414236988, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: throwChance
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: -5651913295414236988, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: camController
       value: 
       objectReference: {fileID: 1090635266}
-    - target: {fileID: -5651913295414236988, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: timeBetweenThrows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 559870943627579587, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: bulletTimeTrigger
-      value: 
-      objectReference: {fileID: 294845375}
-    - target: {fileID: 605872774845922029, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: m_StepOffset
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3656407427300801399, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: fullLife
-      value: 
-      objectReference: {fileID: 21300000, guid: 0d23a2e405809d84792b67b9e982ae5c, type: 3}
-    - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: halfLife
-      value: 
-      objectReference: {fileID: 21300000, guid: bb0b08c97fca4b741adb10cefda3faca, type: 3}
-    - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: emptyLife
-      value: 
-      objectReference: {fileID: 21300000, guid: 9816629483ac8694d8f6962927233547, type: 3}
-    - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: maxHealth
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: gameOverMenu
-      value: 
-      objectReference: {fileID: 1362583220}
-    - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: lives.Array.size
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: 'lives.Array.data[0]'
@@ -2486,10 +2435,6 @@ PrefabInstance:
       propertyPath: 'lives.Array.data[7]'
       value: 
       objectReference: {fileID: 149462286}
-    - target: {fileID: 8144846712389581049, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 58358ce9af7cb7b47b48698a85cd08c2, type: 2}
     - target: {fileID: 8650172336370932488, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
