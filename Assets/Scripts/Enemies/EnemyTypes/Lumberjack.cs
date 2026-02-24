@@ -70,6 +70,7 @@ public class Lumberjack : MonoBehaviour
     [Header("Enraged Attack Settings")]
     [SerializeField] private LayerMask wallMask;
     [SerializeField] private int chargeAmount = 3;
+    private int currentChargeCount = 0;
     [SerializeField] private float timeBetweenCharges = 0.5f;
     [Tooltip("Equals to the time it takes to get to one in-game meter")][SerializeField] private float chargeSpeed = 1f;
 
@@ -96,6 +97,7 @@ public class Lumberjack : MonoBehaviour
         }
 
         currentConsecutiveJumps = 0;
+        currentChargeCount = 0;
 
         if (currentAction != null)
         {
@@ -491,7 +493,6 @@ public class Lumberjack : MonoBehaviour
 
     private IEnumerator EnragedCharge()
     {
-        int count = 0;
         float timer;
         float maxTime;
         Vector3 dir, endPoint, startPoint;
@@ -500,7 +501,7 @@ public class Lumberjack : MonoBehaviour
 
         SetSpeed(enragedSpeed);
 
-        while (count < chargeAmount)
+        while (currentChargeCount < chargeAmount)
         {
             Debug.Log("loop start");
             timer = 0f;
@@ -523,10 +524,13 @@ public class Lumberjack : MonoBehaviour
             }
             Debug.Log("End charge");
 
-            count++;
+            currentChargeCount++;
             DisableHitbox(enragedHitbox);
             yield return new WaitForSeconds(timeBetweenCharges);
         }
+
+        currentChargeCount = 0;
+
         recievedAxe = false;
         EndAttack();
 
