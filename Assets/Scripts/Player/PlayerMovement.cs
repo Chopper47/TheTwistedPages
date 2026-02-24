@@ -158,7 +158,7 @@ public class PlayerMovement: MonoBehaviour
                     bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
                 }
 
-                if (!axeHolding)
+                if (!axeHolding && !isInBulletTime)
                 {
                     StartCoroutine(Roll());
                 }
