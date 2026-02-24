@@ -154,7 +154,10 @@ public class PlayerMovement: MonoBehaviour
                         toPush.GetComponent<SphereCollider>().radius *= 2f;
                     }
                     TimeManager.SlowTime();
-                    btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
+                    if(bulletTimeTimer != null)
+                    {
+                        btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
+                    }
                     bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
                 }
 
@@ -209,6 +212,7 @@ public class PlayerMovement: MonoBehaviour
                 bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, newDir, .2f);
             }
         }
+        toPush = null;
     }
 
     private IEnumerator AxeRotation()
