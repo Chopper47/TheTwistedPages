@@ -14,7 +14,7 @@ public class ConditionIsReceivingAxe : ICondition
 
     public override bool Check()
     {
-        bool result = lumberjack.recievedAxe;
+        bool result = lumberjack.receivedAxe;
         Debug.Log("ConditionReceivingAxe: " + result);
         return result;
     }

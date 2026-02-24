@@ -190,7 +190,7 @@ public class BossAxe : MonoBehaviour
         transform.rotation = ogTransform.rotation;
         transform.localScale = ogTransform.localScale;
         playerGrabbed = false;
-        boss.RecieveAxe();
+        boss.ReceiveAxe();
         if(moving != null)
         {
             StopCoroutine(moving);

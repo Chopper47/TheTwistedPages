@@ -25,7 +25,7 @@ public class Lumberjack : MonoBehaviour
 
     [Header("Axe State")]
     public bool hasAxe = true;
-    public bool recievedAxe = false;
+    public bool receivedAxe = false;
     public bool axeOnGround = false;
     public Vector3 axeGroundPosition;
 
@@ -192,15 +192,15 @@ public class Lumberjack : MonoBehaviour
         }
     }
 
-    public void RecieveAxe()
+    public void ReceiveAxe()
     {
-        recievedAxe = true;
+        receivedAxe = true;
         EndAttack();
     }
 
-    public void FalseRecieveAxe()
+    public void FalseReceiveAxe()
     {
-        recievedAxe = false;
+        receivedAxe = false;
     }
     #endregion
 
@@ -322,6 +322,7 @@ public class Lumberjack : MonoBehaviour
     {
         StartAttack();
         yield return MoveSlightlyTowardsPlayer();
+        Debug.LogWarning("Doing Swipe Attack");
         animations.StartSwipeAttack();
     }
 
@@ -338,6 +339,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackA()
     {
         StartAttack();
+        Debug.LogWarning("Doing AOE Attack A");
         yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackA();
     }
@@ -355,6 +357,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackB()
     {
         StartAttack();
+        Debug.LogWarning("Doing AOE Attack B");
         yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackB();
     }
@@ -374,6 +377,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator ThrowAttackB()
     {
         StartAttack();
+        Debug.LogWarning("Doing Throw Attack B");
         animations.StartThrowAttackB();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
@@ -387,6 +391,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator ThrowAttackA()
     {
         StartAttack();
+        Debug.LogWarning("Doing Throw Attack A");
         animations.StartThrowAttackA();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
@@ -402,6 +407,7 @@ public class Lumberjack : MonoBehaviour
     {
         currentConsecutiveJumps++;
 
+        Debug.LogWarning("Doing Jump Attack");
         StopCoroutine("ResetJumpCounterAfterDelay");
         StartCoroutine("ResetJumpCounterAfterDelay", 5f);
 
@@ -493,6 +499,8 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator EnragedCharge()
     {
         StartAttack();
+
+        Debug.LogWarning("Doing Enraged");
         float timer;
         float maxTime;
         Vector3 dir, endPoint, startPoint;
@@ -531,7 +539,7 @@ public class Lumberjack : MonoBehaviour
 
         currentChargeCount = 0;
 
-        recievedAxe = false;
+        receivedAxe = false;
         EndAttack();
 
         SetSpeed(defaultSpeed);
