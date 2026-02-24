@@ -44,6 +44,7 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private float maxPushDistance = 9f;
     [SerializeField] private float axeRotationSpeed = 1.0f;
     [SerializeField] private float axeThrowSpeed = 15.0f;
+    [SerializeField] private float bossAxeThrowSpeed = 15.0f;
     [SerializeField] private Transform axeHold;
     private GameObject toPush;
 
@@ -177,11 +178,23 @@ public class PlayerMovement: MonoBehaviour
     {
         if(axeHolding)
         {
-            StopCoroutine(rotationCoroutine);
-            StopCoroutine(btUICoroutine);
-            StopCoroutine(bulletTimeCoroutine);
+            if (rotationCoroutine != null)
+            {
+                StopCoroutine(rotationCoroutine);
+            }
+            if(btUICoroutine != null)
+            {
+                StopCoroutine(btUICoroutine);
+            }
+            if(bulletTimeCoroutine != null)
+            {
+                StopCoroutine(bulletTimeCoroutine);
+            }
             EndBulletTime();
-            bulletTimeTimer.fillAmount = 0f;
+            if(bulletTimeTimer != null)
+            {
+                bulletTimeTimer.fillAmount = 0f;
+            }
             ReleaseAxe();
         }
     }

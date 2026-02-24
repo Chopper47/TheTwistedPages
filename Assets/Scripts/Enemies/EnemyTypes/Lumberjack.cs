@@ -510,7 +510,7 @@ public class Lumberjack : MonoBehaviour
             Debug.Log("raycast start");
             if (Physics.Raycast(transform.position, dir, out RaycastHit hit, 100f, wallMask))
             {
-                endPoint = hit.point - dir * hb.radius;
+                endPoint = hit.point - dir * (hb.radius - 0.1f);
             }
 
             maxTime = chargeSpeed * Vector3.Distance(startPoint, endPoint);
