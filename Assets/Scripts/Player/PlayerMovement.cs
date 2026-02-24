@@ -44,7 +44,7 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private float maxPushDistance = 9f;
     [SerializeField] private float axeRotationSpeed = 1.0f;
     [SerializeField] private float axeThrowSpeed = 15.0f;
-    [SerializeField] private float bossAxeThrowSpeed = 15.0f;
+    [SerializeField] private float bossAxeThrowSpeed = .2f;
     [SerializeField] private Transform axeHold;
     private GameObject toPush;
 
@@ -217,12 +217,12 @@ public class PlayerMovement: MonoBehaviour
             if(Vector3.SignedAngle(newDir, boss.gameObject.transform.position - transform.position, Vector3.up) <= axeConeAngle && Vector3.SignedAngle(newDir, boss.gameObject.transform.position - transform.position, Vector3.up) > -axeConeAngle)
             {
                 Debug.LogWarning("found boss within range, sent to him");
-                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, new Vector3(boss.gameObject.transform.position.x - transform.position.x, 0f, boss.gameObject.transform.position.z - transform.position.z).normalized ,.2f);
+                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, new Vector3(boss.gameObject.transform.position.x - transform.position.x, 0f, boss.gameObject.transform.position.z - transform.position.z).normalized , bossAxeThrowSpeed);
             }
             else 
             {
                 Debug.LogWarning("not even close bruh");
-                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, newDir, .2f);
+                bossAxe.NewDirection(transform.position + Vector3.up * 0.1f, newDir, bossAxeThrowSpeed);
             }
         }
         toPush = null;

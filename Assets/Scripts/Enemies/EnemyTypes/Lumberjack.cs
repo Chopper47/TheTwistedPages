@@ -253,7 +253,6 @@ public class Lumberjack : MonoBehaviour
             return;
         }
 
-        StartAttack();
         currentAction = StartCoroutine(EnragedCharge());
     }
 
@@ -493,6 +492,7 @@ public class Lumberjack : MonoBehaviour
 
     private IEnumerator EnragedCharge()
     {
+        StartAttack();
         float timer;
         float maxTime;
         Vector3 dir, endPoint, startPoint;
