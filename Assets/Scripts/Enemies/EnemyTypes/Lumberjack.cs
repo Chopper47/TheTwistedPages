@@ -74,6 +74,8 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private float timeBetweenCharges = 0.5f;
     [Tooltip("Equals to the time it takes to get to one in-game meter")][SerializeField] private float chargeSpeed = 1f;
 
+
+    string currentAttack;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -321,6 +323,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator SwipeAttack()
     {
         StartAttack();
+        currentAttack = "Swipe";
         yield return MoveSlightlyTowardsPlayer();
         Debug.LogWarning("Doing Swipe Attack");
         animations.StartSwipeAttack();
@@ -339,6 +342,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackA()
     {
         StartAttack();
+        currentAttack = "AOE A";
         Debug.LogWarning("Doing AOE Attack A");
         yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackA();
@@ -357,6 +361,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackB()
     {
         StartAttack();
+        currentAttack = "AOE B";
         Debug.LogWarning("Doing AOE Attack B");
         yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackB();
@@ -377,6 +382,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator ThrowAttackB()
     {
         StartAttack();
+        currentAttack = "Throw B";
         Debug.LogWarning("Doing Throw Attack B");
         animations.StartThrowAttackB();
         hasAxe = false;
@@ -391,6 +397,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator ThrowAttackA()
     {
         StartAttack();
+        currentAttack = "Throw A";
         Debug.LogWarning("Doing Throw Attack A");
         animations.StartThrowAttackA();
         hasAxe = false;
@@ -407,6 +414,7 @@ public class Lumberjack : MonoBehaviour
     {
         currentConsecutiveJumps++;
 
+        currentAttack = "Jump";
         Debug.LogWarning("Doing Jump Attack");
         StopCoroutine("ResetJumpCounterAfterDelay");
         StartCoroutine("ResetJumpCounterAfterDelay", 5f);
@@ -499,7 +507,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator EnragedCharge()
     {
         StartAttack();
-
+        currentAttack = "Enraged";
         Debug.LogWarning("Doing Enraged");
         float timer;
         float maxTime;

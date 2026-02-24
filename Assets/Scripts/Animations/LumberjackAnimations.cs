@@ -117,6 +117,7 @@ public class LumberjackAnimations : MonoBehaviour
     public void EndCloseToAxe()
     {
         animator.SetBool("closeToAxe", false);
+        boss.EndAttack();
     }
 
     public void StartAreaAttackA()
