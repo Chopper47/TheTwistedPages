@@ -191,7 +191,10 @@ public class BossAxe : MonoBehaviour
         transform.localScale = ogTransform.localScale;
         playerGrabbed = false;
         boss.RecieveAxe();
-        StopCoroutine(moving);
+        if(moving != null)
+        {
+            StopCoroutine(moving);
+        }
         boss.PickUpAxe();
         gameObject.SetActive(false);
     }
