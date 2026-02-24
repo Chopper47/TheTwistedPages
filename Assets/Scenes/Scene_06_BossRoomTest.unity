@@ -2357,13 +2357,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: midRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: closeRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: axeOnAirTime
-      value: 1.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6588809794490680986, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: AM
       value: 
       objectReference: {fileID: 1594221039}
+    - target: {fileID: 6588809794490680986, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: maxHealth
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8322229737831031411, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: damage
       value: 2
@@ -3351,6 +3363,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 25406194430744387, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1302975750273684234, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_Name
       value: RoomBoss
@@ -3359,6 +3375,10 @@ PrefabInstance:
       propertyPath: lumberjack
       value: 
       objectReference: {fileID: 1029246535}
+    - target: {fileID: 1922264556108852858, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3106574192148580603, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: lumberjack
       value: 
@@ -3438,6 +3458,10 @@ PrefabInstance:
     - target: {fileID: 7498686353752899792, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310294261582328917, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -5631,6 +5655,7 @@ MonoBehaviour:
   maxPushDistance: 9
   axeRotationSpeed: 2.5
   axeThrowSpeed: 15
+  bossAxeThrowSpeed: 0.15
   axeHold: {fileID: 2653514580975151193}
   canTriggerBulletTime: 1
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
