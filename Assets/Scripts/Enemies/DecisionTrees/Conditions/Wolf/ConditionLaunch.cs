@@ -18,6 +18,6 @@ public class ConditionLaunch : ICondition
     /// <returns>IsLaunching return value</returns>
     public override bool Check()
     {
-        return wolf.IsLaunching();
+        return wolf.IsLaunching() || wolf.IsHowling();
     }
 }

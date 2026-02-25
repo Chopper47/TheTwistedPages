@@ -55,6 +55,7 @@ public class Wolf : CollisionRefresh
     [Header("General Variables")]
 
     [SerializeField] float raycastOffset = 0.7f;
+    [SerializeField] float howlTime = 0.7f;
     [SerializeField] LayerMask mask;
     [SerializeField] LayerMask triggerMask;
 
@@ -88,7 +89,11 @@ public class Wolf : CollisionRefresh
     {
         if(chase.IsMoving())
         {
-            //bla bla
+            animations.SetWalking(true);
+        }
+        else
+        {
+            animations.SetWalking(false);
         }
     }
 
@@ -123,6 +128,7 @@ public class Wolf : CollisionRefresh
             StartCoroutine(WaitForStepback());
         }
     }
+
     public bool CanLaunch()
     {
         return canLaunch;
@@ -141,6 +147,25 @@ public class Wolf : CollisionRefresh
     public bool IsSteppingBack()
     {
         return stepback;
+    }
+
+    public bool IsHowling()
+    {
+        return howling;
+    }
+
+    public void Howl()
+    {
+        howling = true;
+        animations.SetHowling(true);
+        StartCoroutine(HowlTimer());
+    }
+
+    IEnumerator HowlTimer()
+    {
+        yield return new WaitForSeconds(howlTime);
+        howling = false;
+        animations.SetHowling(false);
     }
 
     IEnumerator WaitForStepback()

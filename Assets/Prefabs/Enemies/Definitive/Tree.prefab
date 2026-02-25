@@ -223,6 +223,7 @@ MonoBehaviour:
   speed: 2.5
   target: {fileID: 0}
   agent: {fileID: 3953412257303193511}
+  animations: {fileID: 0}
   usingNavMesh: 1
   followPath: 0
   pointTimeInterval: 0.2
@@ -4287,7 +4288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6266814525709059278}
   m_Layer: 0
-  m_Name: Tree
+  m_Name: TreeModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4301,7 +4302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8536773638291393757}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -4309,7 +4310,7 @@ Transform:
   - {fileID: 6688291222883170766}
   - {fileID: 14730239015767404}
   m_Father: {fileID: 2684697873207394274}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &8547293957756792882
 GameObject:
   m_ObjectHideFlags: 0
