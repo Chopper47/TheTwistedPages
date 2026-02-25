@@ -32,6 +32,7 @@ public class Lumberjack : MonoBehaviour
     [Header("Boss State")]
     public bool isStunned = false;
     public bool isAttacking = false;
+    private bool cancelAttack = false;
 
     private Coroutine currentAction;
 
@@ -91,20 +92,14 @@ public class Lumberjack : MonoBehaviour
     #region Stun
     public void ApplyStun(float duration)
     {
-        Debug.Log("Stunned.");
-
         if (isStunned)
         {
             return;
         }
 
-        currentConsecutiveJumps = 0;
-        currentChargeCount = 0;
+        Debug.Log("Stunned.");
 
-        if (currentAction != null)
-        {
-            StopCoroutine(currentAction);
-        }
+        cancelAttack = true;
 
         StartCoroutine(StunCoroutine(duration));
     }
@@ -112,9 +107,8 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator StunCoroutine(float duration)
     {
         isStunned = true;
-        isAttacking = false;
 
-        ForceStopAllAttacks();
+        CancelCurrentAttackState();
 
         chaseAgent.StopChase();
 
@@ -128,6 +122,7 @@ public class Lumberjack : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         isStunned = false;
+        cancelAttack = false;
 
         if (agent.enabled)
         {
@@ -137,7 +132,12 @@ public class Lumberjack : MonoBehaviour
         enemyState.StayState();
     }
 
-    private void ForceStopAllAttacks()
+    private bool ShouldCancelAttack()
+    {
+        return cancelAttack || isStunned;
+    }
+
+    private void CancelCurrentAttackState()
     {
         DisableHitbox(aoeAHitbox);
         DisableHitbox(jumpAttackHitbox);
@@ -154,12 +154,15 @@ public class Lumberjack : MonoBehaviour
 
         activeSpheres.Clear();
 
-        rb.isKinematic = false;
+        currentChargeCount = 0;
+        currentConsecutiveJumps = 0;
 
-        if (!agent.enabled)
-        {
-            agent.enabled = true;
-        }
+        receivedAxe = false;
+
+        SetSpeed(defaultSpeed);
+
+        isAttacking = false;
+        enemyState.StayState();
     }
     #endregion
 
@@ -508,48 +511,54 @@ public class Lumberjack : MonoBehaviour
     {
         StartAttack();
         currentAttack = "Enraged";
-        Debug.LogWarning("Doing Enraged");
-        float timer;
-        float maxTime;
-        Vector3 dir, endPoint, startPoint;
-        endPoint = Vector3.zero;
-        Debug.Log("Enraged start");
 
         SetSpeed(enragedSpeed);
 
         while (currentChargeCount < chargeAmount)
         {
-            Debug.Log("loop start");
-            timer = 0f;
-            dir = chaseAgent.TargetDirection();
-            startPoint = transform.position;
-            Debug.Log("raycast start");
+            if (ShouldCancelAttack())
+            {
+                CancelCurrentAttackState();
+                yield break;
+            }
+
+            float timer = 0f;
+            Vector3 dir = chaseAgent.TargetDirection();
+            Vector3 startPoint = transform.position;
+            Vector3 endPoint = startPoint;
+
             if (Physics.Raycast(transform.position, dir, out RaycastHit hit, 100f, wallMask))
             {
                 endPoint = hit.point - dir * (hb.radius - 0.1f);
             }
 
-            maxTime = chargeSpeed * Vector3.Distance(startPoint, endPoint);
+            float maxTime = chargeSpeed * Vector3.Distance(startPoint, endPoint);
+
             EnableHitbox(enragedHitbox);
-            Debug.Log("Should charge in " + maxTime + " seconds");
+
             while (timer < maxTime)
             {
+                if (ShouldCancelAttack())
+                {
+                    CancelCurrentAttackState();
+                    yield break;
+                }
+
                 transform.position = Vector3.Lerp(startPoint, endPoint, timer / maxTime);
                 timer += Time.deltaTime;
                 yield return null;
             }
-            Debug.Log("End charge");
 
-            currentChargeCount++;
             DisableHitbox(enragedHitbox);
+            currentChargeCount++;
+
             yield return new WaitForSeconds(timeBetweenCharges);
         }
 
         currentChargeCount = 0;
-
         receivedAxe = false;
-        EndAttack();
 
+        EndAttack();
         SetSpeed(defaultSpeed);
     }
     #endregion
@@ -590,6 +599,9 @@ public class Lumberjack : MonoBehaviour
         {
             return;
         }
+
+        cancelAttack = false;
+
         animations.StopMoving();
         isAttacking = true;
         enemyState.AttackState();
