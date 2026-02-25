@@ -59,6 +59,7 @@ public class Wolf : CollisionRefresh
     Rigidbody rb;
     EnemyHealth enemyHealth;
     EnemyState states;
+    [SerializeField] WolfAnimations animations;
     [SerializeField] ChaseAgent chase;
 
 

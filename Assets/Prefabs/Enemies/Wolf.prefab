@@ -2500,9 +2500,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8258345377358818347}
   - component: {fileID: 157444657866056434}
-  - component: {fileID: 2998291460580959326}
+  - component: {fileID: 6518595943286839784}
   m_Layer: 0
-  m_Name: TargetDoesntExist
+  m_Name: TargetDoesntExist, wander
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2535,8 +2535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 2998291460580959326}
---- !u!114 &2998291460580959326
+  action: {fileID: 6518595943286839784}
+--- !u!114 &6518595943286839784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2545,10 +2545,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1114239048232841218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b60948556dcc3934aa0a49c68784873f, type: 3}
+  m_Script: {fileID: 11500000, guid: 30936ebb02309bd43a8035d52fbe848c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 8737206857049744820}
+  wanderRadius: 10
+  centerPoint: {fileID: 300675395774542524}
+  minSpeed: 2
+  maxSpeed: 3.5
+  pauseChance: 0.15
+  minPauseTime: 1
+  maxPauseTime: 3
+  repathDelay: 0.5
 --- !u!1 &1145233132247702675
 GameObject:
   m_ObjectHideFlags: 0
@@ -5047,6 +5054,7 @@ MonoBehaviour:
   triggerMask:
     serializedVersion: 2
     m_Bits: 64
+  animations: {fileID: 7333638831792451134}
   chase: {fileID: 8737206857049744820}
   AM: {fileID: 0}
   Main: {fileID: 0}
@@ -5092,6 +5100,7 @@ MonoBehaviour:
   speed: 6
   target: {fileID: 0}
   agent: {fileID: 8700578349658707284}
+  animations: {fileID: 0}
   usingNavMesh: 1
   followPath: 0
   pointTimeInterval: 0.2
@@ -8509,6 +8518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2413128072150585514}
   - component: {fileID: 2647362070317264092}
+  - component: {fileID: 7333638831792451134}
   m_Layer: 0
   m_Name: wolf_animations
   m_TagString: Untagged
@@ -8555,6 +8565,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7333638831792451134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3330726043845483494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6690be4daf1cac24fbde8b01baffb1f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2647362070317264092}
 --- !u!1 &3347748294262634916
 GameObject:
   m_ObjectHideFlags: 0
