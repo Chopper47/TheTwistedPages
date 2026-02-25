@@ -20,6 +20,7 @@ public class WolfEncounter : MonoBehaviour
     [SerializeField] private Transform wolfTarget;
     [SerializeField] private Volume darknessVolume;
     [SerializeField] private Vignette darknessVignette;
+    [SerializeField] private GameObject pressShiftCanvas;
 
     [SerializeField] private bool frozenTime = false;
     //[SerializeField] private bool pressedShift = false; 
@@ -43,6 +44,7 @@ public class WolfEncounter : MonoBehaviour
             //wolfGO.GetComponent<NavMeshAgent>().enabled = true;
 
             StartCoroutine(player.Roll());
+            pressShiftCanvas.SetActive(false);
             StartCoroutine(EndTutorial());
 
         }
@@ -93,7 +95,10 @@ public class WolfEncounter : MonoBehaviour
 
         wolfGO = Instantiate(wolfPrefab, wolfSpawnPoint.position, Quaternion.identity);
         wolfGO.GetComponent<NavMeshAgent>().enabled = false;
+        wolfGO.GetComponent<ChaseAgent>().enabled = false;
+        wolfGO.GetComponent<DecisionTreeAgent>().enabled = false;
 
+        wolfGO.transform.GetChild(0).gameObject.SetActive(false);
         float intensity = darknessVignette.intensity.value;
         float smoothness = darknessVignette.smoothness.value;
         float timer = 0f;
@@ -116,6 +121,8 @@ public class WolfEncounter : MonoBehaviour
     {
         PlayerMovement.canMove = false;
         wolfGO.GetComponent<NavMeshAgent>().enabled = true;
+        wolfGO.GetComponent<ChaseAgent>().enabled = true;
+        wolfGO.GetComponent<DecisionTreeAgent>().enabled = true;
         wolfGO.GetComponent<ChaseAgent>().target = wolfTarget;
         StartCoroutine(waitToStopWolf());
     }
@@ -125,6 +132,7 @@ public class WolfEncounter : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         //wolfGO.GetComponent<NavMeshAgent>().enabled = false;
         frozenTime = true;
+        pressShiftCanvas.SetActive(true);
         Time.timeScale = 0f;
 
     }
@@ -135,4 +143,6 @@ public class WolfEncounter : MonoBehaviour
         DialogueManager.instance.currentDialogue = thirdDialogue;
         DialogueManager.instance.StartDialogue();
     }
+
+
 }
