@@ -6,6 +6,8 @@ public class ChaseAgent : MonoBehaviour
 {
     public float speed = 1f;
     public Transform target;
+    public Transform player;
+    [SerializeField] float detectionRange = 10f;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] LumberjackAnimations animations;
     [SerializeField] bool usingNavMesh = true;
@@ -27,9 +29,9 @@ public class ChaseAgent : MonoBehaviour
     /// </summary>
     void Start()
     {
-        if (target == null)
+        if (player == null)
         {
-            target = FindFirstObjectByType<PlayerMovement>().transform;
+            player = FindFirstObjectByType<PlayerMovement>().transform;
         }
         agent.speed = speed;
         enemyHealth = GetComponent<EnemyHealth>();
@@ -57,6 +59,14 @@ public class ChaseAgent : MonoBehaviour
 
     private void Update()
     {
+        if(player != null && target == null)
+        {
+            if(Vector3.Distance(transform.position, player.position) <= detectionRange)
+            {
+                target = player;
+            }
+        }
+
         if(!usingNavMesh && target != null && chase)
         {
             if(!followPath)
@@ -125,6 +135,11 @@ public class ChaseAgent : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool IsMoving()
+    {
+        return Mathf.Approximately(agent.velocity.magnitude, 0f);
     }
 
     /// <summary>

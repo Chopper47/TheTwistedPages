@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 
 public class Wolf : CollisionRefresh 
@@ -10,6 +11,7 @@ public class Wolf : CollisionRefresh
     [SerializeField] float maxStepbackDistance = 3.5f;
     [SerializeField] float launchRange = 4f;
     [SerializeField] int consecutiveStepback = 0;
+    [SerializeField] bool howling = false;
 
     [Header("Launch variables")]
     [SerializeField] float timeForLaunch = .8f;
@@ -84,22 +86,10 @@ public class Wolf : CollisionRefresh
     /// </summary>
     public void Update()
     {
-        //if (checkLaunchDistance) 
-        //{ 
-        //    if(Vector3.Distance(launchStartingPos, transform.position) >= launchDistance)
-        //    {
-        //        //UnityEngine.Debug.Log(rb.linearVelocity.magnitude);
-        //        StopLaunch();
-        //    }
-        //}
-
-        //if(checkStepbackDistance) 
-        //{ 
-        //    if(Vector3.Distance(stepbackStartingPos, transform.position) >=  stepbackDistance)
-        //    {
-        //        StopStepback();
-        //    }
-        //}
+        if(chase.IsMoving())
+        {
+            //bla bla
+        }
     }
 
     public void SetLaunch(bool launching)
@@ -155,6 +145,8 @@ public class Wolf : CollisionRefresh
 
     IEnumerator WaitForStepback()
     {
+        animations.SetWalking(false);
+
         yield return new WaitForSeconds(timeForStepback);
 
         transform.LookAt(new Vector3(chase.TargetPosition().x,transform.position.y, chase.TargetPosition().z));
@@ -177,7 +169,8 @@ public class Wolf : CollisionRefresh
         }
 
         //Debug.LogWarning("Accelerate");
-
+        
+        animations.SetStepback(true);
         float time = 0;                                                                                   //Acceleration
 
         while (time < stepbackDuration * stepbackAcceleratePercentage)
@@ -209,6 +202,7 @@ public class Wolf : CollisionRefresh
         }
         //rb.AddForce(sbDir * stepbackForce);
 
+        animations.SetStepback(false);
         StopStepback();
         if (!checkConsecutiveStepback)
         {
@@ -232,6 +226,7 @@ public class Wolf : CollisionRefresh
 
     IEnumerator WaitForLaunch()
     {
+        animations.SetWalking(false);
         yield return new WaitForSeconds(timeForLaunch);
 
         transform.LookAt(new Vector3(chase.TargetPosition().x, transform.position.y, chase.TargetPosition().z));
@@ -261,6 +256,8 @@ public class Wolf : CollisionRefresh
             launchEndingPos = transform.position + launchDir * launchDistance;
         }
 
+        animations.SetAttacking(true);
+        
         float time = 0;                                                                                   //Acceleration
         StopCoroutine(Panting());
         AM.Play("Growl", Main);
@@ -268,6 +265,7 @@ public class Wolf : CollisionRefresh
         {
             if(states.IsBeingPushed())
             {
+                animations.SetAttacking(false);
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -283,6 +281,7 @@ public class Wolf : CollisionRefresh
         {
             if (states.IsBeingPushed())
             {
+                animations.SetAttacking(false);
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -298,6 +297,7 @@ public class Wolf : CollisionRefresh
         {
             if (states.IsBeingPushed())
             {
+                animations.SetAttacking(false);
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -307,6 +307,8 @@ public class Wolf : CollisionRefresh
         }
 
         consecutiveStepback = 0;
+
+        animations.SetAttacking(false);
 
         StopLaunch();
     }
