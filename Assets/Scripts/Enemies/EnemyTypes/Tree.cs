@@ -15,6 +15,7 @@ public class Tree : MonoBehaviour
     private EnemyState enemyState;
     private ChaseAgent chaseAgent;
     private EnemyHealth enemyHealth;
+    [SerializeField] private TreeAnimations animations; 
 
     [Header("Apple Attack")]
     [SerializeField] private GameObject appleGrenadePrefab;
