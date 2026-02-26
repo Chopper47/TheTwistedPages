@@ -18,6 +18,11 @@ public class TreeAnimations : MonoBehaviour
     {
         animator.SetTrigger("walk");
     }
+    
+    public void ResetWalkTrigger()
+    {
+        animator.ResetTrigger("walk");
+    }
 
     public void StopWalkTrigger()
     {

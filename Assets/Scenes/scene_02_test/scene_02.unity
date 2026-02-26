@@ -918,6 +918,30 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2125809762}
         m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: StopWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2125809762}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: ResetWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2125809762}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
         m_MethodName: ShakeTrigger
         m_Mode: 1
         m_Arguments:
@@ -1448,17 +1472,35 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 502617043}
     - target: {fileID: 3443493462980677713, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: slamDelay
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3443493462980677713, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
       propertyPath: animations
       value: 
       objectReference: {fileID: 2125809762}
+    - target: {fileID: 6112147003112909007, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 1509917398}
     - target: {fileID: 6532036151420423590, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
       propertyPath: action
       value: 
       objectReference: {fileID: 875105627}
+    - target: {fileID: 6957206538573397950, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: distance
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4233235086608045456, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1509917398}
+    - targetCorrespondingSourceObject: {fileID: 4233235086608045456, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1509917397}
     - targetCorrespondingSourceObject: {fileID: 8034099486253928953, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 875105630}
@@ -1679,6 +1721,30 @@ MonoBehaviour:
   methodCalled:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 2125809762}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: StopWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2125809762}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: ResetWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2125809762}
         m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
         m_MethodName: DropTrigger
@@ -2329,6 +2395,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414173720}
   m_CullTransparentMesh: 1
+--- !u!1 &1509917393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4233235086608045456, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+  m_PrefabInstance: {fileID: 875105617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1509917395 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1338741926161868753, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+  m_PrefabInstance: {fileID: 875105617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509917393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30936ebb02309bd43a8035d52fbe848c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1509917397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509917393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2125809762}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: WalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1509917398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509917393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 1509917395}
+  ActionsToDo:
+  - {fileID: 1509917397}
+  EndingActions: []
 --- !u!1001 &1535823981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3042,6 +3168,10 @@ PrefabInstance:
     - target: {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: m_Name
       value: Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

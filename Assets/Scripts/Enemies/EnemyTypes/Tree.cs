@@ -29,7 +29,6 @@ public class Tree : MonoBehaviour
     [SerializeField] private int slamDamage = 1;
     [SerializeField] private float slamDelay = 1.0f;
     [SerializeField] private float slamRotationAngle = 90.0f;
-    [SerializeField] private float slamRotationSpeed = 3.0f;
 
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
@@ -132,14 +131,6 @@ public class Tree : MonoBehaviour
         GetComponent<NavMeshAgent>().enabled = false;
 
         transform.LookAt(new Vector3(chaseAgent.TargetPosition().x, transform.position.y, chaseAgent.TargetPosition().z));
-
-        float timer = 0f;
-        while (timer < 1)
-        {
-            timer += Time.deltaTime * slamRotationSpeed;
-            transform.Rotate(Vector3.right, slamRotationAngle*Time.deltaTime * slamRotationSpeed);
-            yield return null;
-        }
 
         yield return new WaitForSeconds(slamDelay);
 
