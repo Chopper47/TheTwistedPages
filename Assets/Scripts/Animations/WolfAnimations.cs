@@ -8,21 +8,36 @@ public class WolfAnimations : MonoBehaviour
     {
         if(animator == null) animator = GetComponent<Animator>();
     }
+ 
+    public void TriggerWalk()
+    {
+        animator.SetTrigger("walk");
+    }
+    public void TriggerAttack()
+    {
+        animator.SetTrigger("attack");
+    }
+    public void TriggerEndAttack()
+    {
+        animator.SetTrigger("endAttack");
+    }
+    public void TriggerStepback()
+    {
+        animator.SetTrigger("stepBack");
+    }
 
-    public void SetWalking(bool value)
+    public void TriggerStopStepback()
     {
-        animator.SetBool("walking", value);
+        animator.SetTrigger("stopStepback");
     }
-    public void SetAttacking(bool value)
+
+    public void TriggerHowl()
     {
-        animator.SetBool("attacking", value);
+        animator.SetTrigger("howl");
     }
-    public void SetStepback(bool value)
+
+    public void TriggerStopHowl()
     {
-        animator.SetBool("stepBack", value);
-    }
-    public void SetHowling(bool value)
-    {
-        animator.SetBool("howling", value);
+        animator.SetTrigger("StopHowl");
     }
 }

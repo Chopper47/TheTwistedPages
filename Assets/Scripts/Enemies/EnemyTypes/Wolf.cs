@@ -89,11 +89,11 @@ public class Wolf : CollisionRefresh
     {
         if(chase.IsMoving())
         {
-            animations.SetWalking(true);
+            //animations.TriggerWalk(true);
         }
         else
         {
-            animations.SetWalking(false);
+            //animations.TriggerWalk(false);
         }
     }
 
@@ -157,7 +157,7 @@ public class Wolf : CollisionRefresh
     public void Howl()
     {
         howling = true;
-        animations.SetHowling(true);
+        //animations.SetHowling(true);
         StartCoroutine(HowlTimer());
     }
 
@@ -165,12 +165,12 @@ public class Wolf : CollisionRefresh
     {
         yield return new WaitForSeconds(howlTime);
         howling = false;
-        animations.SetHowling(false);
+        animations.TriggerStepback();
     }
 
     IEnumerator WaitForStepback()
     {
-        animations.SetWalking(false);
+        //animations.SetWalking();
 
         yield return new WaitForSeconds(timeForStepback);
 
@@ -195,7 +195,7 @@ public class Wolf : CollisionRefresh
 
         //Debug.LogWarning("Accelerate");
         
-        animations.SetStepback(true);
+        //animations.SetStepback(true);
         float time = 0;                                                                                   //Acceleration
 
         while (time < stepbackDuration * stepbackAcceleratePercentage)
@@ -227,7 +227,7 @@ public class Wolf : CollisionRefresh
         }
         //rb.AddForce(sbDir * stepbackForce);
 
-        animations.SetStepback(false);
+        //animations.SetStepback(false);
         StopStepback();
         if (!checkConsecutiveStepback)
         {
@@ -251,7 +251,7 @@ public class Wolf : CollisionRefresh
 
     IEnumerator WaitForLaunch()
     {
-        animations.SetWalking(false);
+        //animations.TriggerWalk(false);
         yield return new WaitForSeconds(timeForLaunch);
 
         transform.LookAt(new Vector3(chase.TargetPosition().x, transform.position.y, chase.TargetPosition().z));
@@ -281,7 +281,7 @@ public class Wolf : CollisionRefresh
             launchEndingPos = transform.position + launchDir * launchDistance;
         }
 
-        animations.SetAttacking(true);
+        //animations.SetAttacking(true);
         
         float time = 0;                                                                                   //Acceleration
         StopCoroutine(Panting());
@@ -290,7 +290,7 @@ public class Wolf : CollisionRefresh
         {
             if(states.IsBeingPushed())
             {
-                animations.SetAttacking(false);
+                //animations.SetAttacking(false);
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -306,7 +306,7 @@ public class Wolf : CollisionRefresh
         {
             if (states.IsBeingPushed())
             {
-                animations.SetAttacking(false);
+                //animations.SetAttacking(false);
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -322,7 +322,7 @@ public class Wolf : CollisionRefresh
         {
             if (states.IsBeingPushed())
             {
-                animations.SetAttacking(false);
+                //animations.SetAttacking(false);
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -333,7 +333,7 @@ public class Wolf : CollisionRefresh
 
         consecutiveStepback = 0;
 
-        animations.SetAttacking(false);
+        //animations.SetAttacking(false);
 
         StopLaunch();
     }
