@@ -33,6 +33,9 @@ public class Tree : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
     public AudioSource Main;
+
+    [Header("Animations variables")]
+    [SerializeField] private float appleAppearOffset = 0.5f;
     private void Awake()
     {
         appleAttacksLeft = totalAppleAttacks;
@@ -76,7 +79,7 @@ public class Tree : MonoBehaviour
         enemyState.AttackState();
         chaseAgent.StopChase();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(appleAppearOffset);
         AM.Play("Creak",Main);
         for (int i = 0; i < applesPerAttack; i++)
         {
@@ -96,6 +99,8 @@ public class Tree : MonoBehaviour
 
         isThrowing = false;
         canThrow = true;
+
+        animations.EndShakeTrigger();
 
         if (appleAttacksLeft <= 0)
         {
