@@ -7,7 +7,6 @@ public class ChaseAgent : MonoBehaviour
     public float speed = 1f;
     public Transform target;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] LumberjackAnimations animations;
     [SerializeField] bool usingNavMesh = true;
 
     [Header("Follow Path variables (Only if not using nav mesh)")]
@@ -197,12 +196,6 @@ public class ChaseAgent : MonoBehaviour
             agent.SetDestination(target.transform.position);
             agent.isStopped = false;
         }
-    }
-
-    public void BossChase()
-    {
-        Chase();
-        animations.Moving();
     }
 
     /// <summary>

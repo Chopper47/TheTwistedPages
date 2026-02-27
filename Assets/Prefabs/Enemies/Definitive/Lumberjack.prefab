@@ -243,7 +243,6 @@ MonoBehaviour:
   speed: 5
   target: {fileID: 0}
   agent: {fileID: 2023562113078921226}
-  animations: {fileID: 6624029125940982003}
   usingNavMesh: 1
   followPath: 0
   pointTimeInterval: 0.2
@@ -296,13 +295,13 @@ MonoBehaviour:
   enragedSpeed: 7
   defaultSpeed: 2.5
   hasAxe: 1
-  recievedAxe: 0
+  receivedAxe: 0
   axeOnGround: 0
   axeGroundPosition: {x: 0, y: 0, z: 0}
   isStunned: 0
   isAttacking: 0
-  closeRange: 0
-  midRange: 50
+  closeRange: 4
+  midRange: 10
   preAttackMoveTime: 3
   preAttackSpeed: 4.5
   preAttackMinDistance: 2.5
@@ -1139,7 +1138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c029a36fb3fda42bc76ae25e6c24f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
 --- !u!136 &2219183209868205484
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8083,6 +8082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 97395387761626863}
+  animations: {fileID: 6624029125940982003}
 --- !u!1 &8533943943899079797
 GameObject:
   m_ObjectHideFlags: 0

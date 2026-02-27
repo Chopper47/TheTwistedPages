@@ -315,6 +315,7 @@ GameObject:
   - component: {fileID: 185735702}
   - component: {fileID: 185735701}
   - component: {fileID: 185735700}
+  - component: {fileID: 185735705}
   m_Layer: 5
   m_Name: Control
   m_TagString: Untagged
@@ -419,6 +420,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &185735705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185735699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061072d566563844c8cc6d717a71408c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &196502710
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +568,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196502710}
   m_CullTransparentMesh: 1
+--- !u!4 &202160542 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 981938766720687185, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+  m_PrefabInstance: {fileID: 1029246534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &226979087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,6 +1554,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756639458}
   m_CullTransparentMesh: 1
+--- !u!1 &847749816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 300363593015560273, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+  m_PrefabInstance: {fileID: 1029246534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &847749817 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1409351442965834730, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+  m_PrefabInstance: {fileID: 1029246534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &847749819 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2749497434290857445, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+  m_PrefabInstance: {fileID: 1029246534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &851163340
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,13 +2341,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lumberjack
       objectReference: {fileID: 0}
-    - target: {fileID: 499795731503791274, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+    - target: {fileID: 300363593015560273, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4705895037245250678, guid: b584b32e08db8604786de258ed1073a5, type: 3}
-      propertyPath: m_Mesh
-      value: 
+    - target: {fileID: 1409351442965834730, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.010210555
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409351442965834730, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02629163
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409351442965834730, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.014236528
       objectReference: {fileID: 0}
     - target: {fileID: 5327002227996684137, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2357,25 +2398,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
-      propertyPath: midRange
-      value: 10
-      objectReference: {fileID: 0}
+      propertyPath: axeRb
+      value: 
+      objectReference: {fileID: 847749819}
     - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
-      propertyPath: closeRange
-      value: 4
-      objectReference: {fileID: 0}
+      propertyPath: axeTransform
+      value: 
+      objectReference: {fileID: 847749817}
     - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
-      propertyPath: axeOnAirTime
-      value: 0.1
-      objectReference: {fileID: 0}
+      propertyPath: axeSpawnPoint
+      value: 
+      objectReference: {fileID: 202160542}
+    - target: {fileID: 6496424540935143022, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: bossAxePrefab
+      value: 
+      objectReference: {fileID: 847749816}
     - target: {fileID: 6588809794490680986, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: AM
       value: 
       objectReference: {fileID: 1594221039}
-    - target: {fileID: 8322229737831031411, guid: b584b32e08db8604786de258ed1073a5, type: 3}
-      propertyPath: damage
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
