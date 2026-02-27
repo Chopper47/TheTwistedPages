@@ -118,21 +118,24 @@ public class PlayerHealth : MonoBehaviour
     {   
         for (int i = 0; i < lives.Length; i++)
         {
-            Image lifeImage = lives[i].GetComponent<Image>();
+            if (lives[i] != null)
+            {
+                Image lifeImage = lives[i].GetComponent<Image>();
 
-            int heartHealth = currentHealth - (i * 2);
+                int heartHealth = currentHealth - (i * 2);
 
-            if (heartHealth >= 2)
-            {
-                lifeImage.sprite = fullLife;
-            }
-            else if (heartHealth == 1)
-            {
-                lifeImage.sprite = halfLife;
-            }
-            else
-            {
-                lifeImage.sprite = emptyLife;
+                if (heartHealth >= 2)
+                {
+                    lifeImage.sprite = fullLife;
+                }
+                else if (heartHealth == 1)
+                {
+                    lifeImage.sprite = halfLife;
+                }
+                else
+                {
+                    lifeImage.sprite = emptyLife;
+                }
             }
         }
     }

@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594c21212b880ad47963d0c067a6344c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animations: {fileID: 4580104729076109082}
   appleGrenadePrefab: {fileID: 8997155561679911745, guid: 1e148d64adde45d40aa6448d3539d4a9, type: 3}
   totalAppleAttacks: 2
   applesPerAttack: 8
@@ -259,11 +260,11 @@ MonoBehaviour:
   appleAttackCooldown: 2
   slamRadius: 4
   slamDamage: 1
-  slamDelay: 0.1
+  slamDelay: 2
   slamRotationAngle: 90
-  slamRotationSpeed: 1
   AM: {fileID: 0}
   Main: {fileID: 0}
+  appleAppearOffset: 1.2
 --- !u!1 &243132066129724855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,6 +1905,8 @@ GameObject:
   - component: {fileID: 1042764232064452997}
   - component: {fileID: 6532036151420423590}
   - component: {fileID: 5366951537320306263}
+  - component: {fileID: 8779386981837487311}
+  - component: {fileID: 6045243054720495918}
   m_Layer: 0
   m_Name: Yes, Stay
   m_TagString: Untagged
@@ -1938,7 +1941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 5366951537320306263}
+  action: {fileID: 6045243054720495918}
 --- !u!114 &5366951537320306263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1952,6 +1955,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 6871944910178554106}
+--- !u!114 &8779386981837487311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3369845245415736148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: StopWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6045243054720495918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3369845245415736148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 5366951537320306263}
+  ActionsToDo:
+  - {fileID: 8779386981837487311}
+  EndingActions: []
 --- !u!1 &3411524950324401535
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,6 +2074,8 @@ GameObject:
   - component: {fileID: 7590570886367494547}
   - component: {fileID: 3091608366183798597}
   - component: {fileID: 253804722738445366}
+  - component: {fileID: 1712902021382746093}
+  - component: {fileID: 4301052453277081050}
   m_Layer: 0
   m_Name: Yes, AppleAttack
   m_TagString: Untagged
@@ -2061,7 +2110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 253804722738445366}
+  action: {fileID: 4301052453277081050}
 --- !u!114 &253804722738445366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2076,6 +2125,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseAgent: {fileID: 6871944910178554106}
   tree: {fileID: 3443493462980677713}
+--- !u!114 &1712902021382746093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856901601774100403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: StopWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: ResetWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: ShakeTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4301052453277081050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856901601774100403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 253804722738445366}
+  ActionsToDo:
+  - {fileID: 1712902021382746093}
+  EndingActions: []
 --- !u!1 &3883872276002822099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,6 +2300,8 @@ GameObject:
   - component: {fileID: 8378422113910632316}
   - component: {fileID: 6112147003112909007}
   - component: {fileID: 1338741926161868753}
+  - component: {fileID: 674683972218862641}
+  - component: {fileID: 1331695002006712395}
   m_Layer: 0
   m_Name: No, Wander
   m_TagString: Untagged
@@ -2217,7 +2336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 1338741926161868753}
+  action: {fileID: 674683972218862641}
 --- !u!114 &1338741926161868753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2238,6 +2357,50 @@ MonoBehaviour:
   minPauseTime: 1
   maxPauseTime: 3
   repathDelay: 2
+--- !u!114 &674683972218862641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4233235086608045456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 1338741926161868753}
+  ActionsToDo:
+  - {fileID: 1331695002006712395}
+  EndingActions: []
+--- !u!114 &1331695002006712395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4233235086608045456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: WalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4299127536808450357
 GameObject:
   m_ObjectHideFlags: 0
@@ -3753,6 +3916,8 @@ GameObject:
   - component: {fileID: 6075121093887914225}
   - component: {fileID: 692359740870002391}
   - component: {fileID: 3920140990253658416}
+  - component: {fileID: 1863369573126275967}
+  - component: {fileID: 6362099579140526902}
   m_Layer: 0
   m_Name: No, Pursue
   m_TagString: Untagged
@@ -3787,7 +3952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 3920140990253658416}
+  action: {fileID: 6362099579140526902}
 --- !u!114 &3920140990253658416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3801,6 +3966,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 6871944910178554106}
+--- !u!114 &1863369573126275967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8034099486253928953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: WalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6362099579140526902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8034099486253928953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 3920140990253658416}
+  ActionsToDo:
+  - {fileID: 1863369573126275967}
+  EndingActions: []
 --- !u!1 &8093886373934955170
 GameObject:
   m_ObjectHideFlags: 0
@@ -4287,6 +4496,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6266814525709059278}
+  - component: {fileID: 2991713713448558431}
+  - component: {fileID: 4580104729076109082}
   m_Layer: 0
   m_Name: TreeModel
   m_TagString: Untagged
@@ -4311,6 +4522,41 @@ Transform:
   - {fileID: 14730239015767404}
   m_Father: {fileID: 2684697873207394274}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!95 &2991713713448558431
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8536773638291393757}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 754a5628abc69d643ad4c22b17c7322c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4580104729076109082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8536773638291393757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fceb2140380d9104987d444092ae8934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2991713713448558431}
 --- !u!1 &8547293957756792882
 GameObject:
   m_ObjectHideFlags: 0
@@ -4513,6 +4759,8 @@ GameObject:
   - component: {fileID: 1087425665864091075}
   - component: {fileID: 1758869651994800014}
   - component: {fileID: 1729458687650942365}
+  - component: {fileID: 3870539051106288255}
+  - component: {fileID: 8452462696483744716}
   m_Layer: 0
   m_Name: No, RegularAttack
   m_TagString: Untagged
@@ -4547,7 +4795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 1729458687650942365}
+  action: {fileID: 8452462696483744716}
 --- !u!114 &1729458687650942365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4562,6 +4810,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseAgent: {fileID: 6871944910178554106}
   tree: {fileID: 3443493462980677713}
+--- !u!114 &3870539051106288255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942500559746817564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: StopWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: ResetWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: DropTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8452462696483744716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942500559746817564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 1729458687650942365}
+  ActionsToDo:
+  - {fileID: 3870539051106288255}
+  EndingActions: []
 --- !u!1 &8970750981995072266
 GameObject:
   m_ObjectHideFlags: 0
