@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
-        creditsMenu.SetActive(false);
+       creditsMenu.SetActive(false);
         upgradesMenu.SetActive(false);
         controlsMenu.SetActive(false);
 
@@ -73,6 +73,7 @@ public class MainMenu : MonoBehaviour
 
     private void SwitchMenu(GameObject from, GameObject to)
     {
+        Debug.Log("SWITCH MENU");
         from.SetActive(false);
         to.SetActive(true);
         SelectFirst(to);
