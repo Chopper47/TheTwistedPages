@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,6 +17,7 @@ public class Lumberjack : MonoBehaviour
     private EnemyHealth enemyHealth;
     [SerializeField]private LumberjackAnimations animations;
     [SerializeField] BossAxe bossAxe;
+    public List<AudioSource> audioSources;
 
     [Header("Movement Speeds")]
     [SerializeField] private float pursueSpeed = 3.5f;
@@ -330,6 +332,7 @@ public class Lumberjack : MonoBehaviour
         yield return MoveSlightlyTowardsPlayer();
         Debug.LogWarning("Doing Swipe Attack");
         animations.StartSwipeAttack();
+        audioSources[0].Play();
     }
 
     public void EnableSwipeHitbox()
@@ -349,6 +352,8 @@ public class Lumberjack : MonoBehaviour
         Debug.LogWarning("Doing AOE Attack A");
         yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackA();
+        int groan = UnityEngine.Random.Range(1, 3);
+        audioSources[groan].Play();
     }
 
     public void EnableAoeHitbox()
@@ -368,6 +373,8 @@ public class Lumberjack : MonoBehaviour
         Debug.LogWarning("Doing AOE Attack B");
         yield return MoveSlightlyTowardsPlayer();
         animations.StartAreaAttackB();
+        int groan = UnityEngine.Random.Range(1, 3);
+        audioSources[groan].Play();
     }
 
     public void EnableAoeExpansion()
@@ -395,6 +402,7 @@ public class Lumberjack : MonoBehaviour
         animations.SetLowerHp(enemyHealth.health <= 3 ? true : false);
         animations.EndThrowAttack();
         bossAxe.StartThrowAttackB(transform.position + Vector3.up*0.5f, chaseAgent.TargetDirection(), axeOnAirTime);
+        audioSources[0].Play();
     }
 
     private IEnumerator ThrowAttackA()
@@ -408,6 +416,7 @@ public class Lumberjack : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
         bossAxe.StartThrowAttackA(axeBoomerangTime, chaseAgent.DistanceFromTarget());
+        audioSources[0].Play();
         yield return new WaitForSeconds(axeBoomerangTime);
         animations.EndThrowAttack();
         EndAttack();
@@ -434,6 +443,7 @@ public class Lumberjack : MonoBehaviour
         targetPosition.y = transform.position.y;
 
         Debug.Log("Jump Attack: jumping towards " + targetPosition);
+        audioSources[0].Play();
 
         // Boss "jumps" very high, off-screen, vertically.
         float riseTime = 0.5f;                  // Duration of the upwards movement.
@@ -478,7 +488,7 @@ public class Lumberjack : MonoBehaviour
             transform.position = Vector3.Lerp(fallStart, fallEnd, timer / fallTime);
             yield return null;
         }
-
+        audioSources[4].Play();
         SphereCollider collider = jumpAttackHitbox.GetComponent<SphereCollider>();
         collider.radius = jumpImpactRadius;
 
@@ -511,7 +521,7 @@ public class Lumberjack : MonoBehaviour
     {
         StartAttack();
         currentAttack = "Enraged";
-
+        audioSources[3].Play();
         SetSpeed(enragedSpeed);
 
         while (currentChargeCount < chargeAmount)

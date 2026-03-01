@@ -8,6 +8,8 @@ public class BossRoomFunctionality : MonoBehaviour
     [SerializeField] private List<BossRoomColumn> columns = new List<BossRoomColumn>();
     [SerializeField] private int maxHp;
     public int currentHp;
+    public List<AudioSource> pillarHit;
+    public AudioSource bossDeath;
 
     [SerializeField] private EnemyHealth bossHealth;
 
@@ -17,7 +19,8 @@ public class BossRoomFunctionality : MonoBehaviour
     }
     public void LoseHp()
     {
-        
+        int hit = Random.Range(0, 2);
+        pillarHit[hit].Play();
         currentHp = CheckNumberOfColumns();
 
         if (bossHealth != null) bossHealth.SetHealth(currentHp);
@@ -25,6 +28,7 @@ public class BossRoomFunctionality : MonoBehaviour
         if (currentHp <= 0)
         {
             EndBoss();
+            bossDeath.Play();
         }
     }
 

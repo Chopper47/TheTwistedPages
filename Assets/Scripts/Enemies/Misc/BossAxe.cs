@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,6 +8,8 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class BossAxe : MonoBehaviour
 {
+    public AudioSource throwSFX;
+    public List<AudioSource> hitSFXs;
     private bool playerGrabbed = false;
     private bool thrown = false;
     private bool arrived = false;
@@ -51,6 +54,7 @@ public class BossAxe : MonoBehaviour
         thrown = true;
         canGet = false;
         moving = StartCoroutine(Move(startingPos, throwDirection, timeToOneUnit));
+        throwSFX.Play();
         StartCoroutine(WaitUntilCollision());
     }
 
@@ -64,6 +68,7 @@ public class BossAxe : MonoBehaviour
         SetFarthestPoint(distance);
         followPath.ElapsedTime = 0f;
         followPath.Play();
+        throwSFX.Play();
         StartCoroutine(WaitUntilCollision());
     }
 
@@ -147,6 +152,9 @@ public class BossAxe : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Lumberjack boss = other.GetComponent<Lumberjack>();
+        int hit = Random.Range(0, 2);
+        throwSFX.Stop();
+        hitSFXs[hit].Play();
 
         if (boss != null && canGet) 
         {
