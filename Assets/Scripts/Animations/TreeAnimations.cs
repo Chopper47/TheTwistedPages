@@ -9,6 +9,11 @@ public class TreeAnimations : MonoBehaviour
         animator.SetTrigger("shake");
     }
 
+    public void ResetShakeTrigger()
+    {
+        animator.ResetTrigger("shake");
+    }
+
     public void EndShakeTrigger()
     {
         animator.SetTrigger("stopShake");

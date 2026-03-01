@@ -97,10 +97,11 @@ public class Tree : MonoBehaviour
 
         yield return new WaitForSeconds(appleAttackCooldown);
 
+        animations.ResetShakeTrigger();
+        animations.EndShakeTrigger();
         isThrowing = false;
         canThrow = true;
 
-        animations.EndShakeTrigger();
 
         if (appleAttacksLeft <= 0)
         {

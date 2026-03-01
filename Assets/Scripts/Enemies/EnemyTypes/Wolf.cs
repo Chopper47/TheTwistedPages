@@ -165,7 +165,7 @@ public class Wolf : CollisionRefresh
     {
         yield return new WaitForSeconds(howlTime);
         howling = false;
-        animations.TriggerStepback();
+        animations.TriggerStopHowl();
     }
 
     IEnumerator WaitForStepback()
@@ -228,6 +228,8 @@ public class Wolf : CollisionRefresh
         //rb.AddForce(sbDir * stepbackForce);
 
         //animations.SetStepback(false);
+        animations.TriggerStopStepback();
+
         StopStepback();
         if (!checkConsecutiveStepback)
         {
@@ -251,7 +253,6 @@ public class Wolf : CollisionRefresh
 
     IEnumerator WaitForLaunch()
     {
-        //animations.TriggerWalk(false);
         yield return new WaitForSeconds(timeForLaunch);
 
         transform.LookAt(new Vector3(chase.TargetPosition().x, transform.position.y, chase.TargetPosition().z));
@@ -291,6 +292,8 @@ public class Wolf : CollisionRefresh
             if(states.IsBeingPushed())
             {
                 //animations.SetAttacking(false);
+                animations.TriggerStopWalk();
+                animations.TriggerStopAttack();
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -307,6 +310,8 @@ public class Wolf : CollisionRefresh
             if (states.IsBeingPushed())
             {
                 //animations.SetAttacking(false);
+                animations.TriggerStopWalk();
+                animations.TriggerStopAttack();
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -323,6 +328,8 @@ public class Wolf : CollisionRefresh
             if (states.IsBeingPushed())
             {
                 //animations.SetAttacking(false);
+                animations.TriggerStopWalk();
+                animations.TriggerStopAttack();
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
             }
@@ -334,6 +341,8 @@ public class Wolf : CollisionRefresh
         consecutiveStepback = 0;
 
         //animations.SetAttacking(false);
+        animations.TriggerStopWalk();
+        animations.TriggerStopAttack();
 
         StopLaunch();
     }

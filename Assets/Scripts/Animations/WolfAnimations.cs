@@ -13,13 +13,24 @@ public class WolfAnimations : MonoBehaviour
     {
         animator.SetTrigger("walk");
     }
+
+    public void ResetTriggerWalk()
+    {
+        animator.ResetTrigger("walk");
+    }
+
+    public void TriggerStopWalk()
+    {
+        animator.SetTrigger("stopWalk");
+    }
+
     public void TriggerAttack()
     {
         animator.SetTrigger("attack");
     }
-    public void TriggerEndAttack()
+    public void TriggerStopAttack()
     {
-        animator.SetTrigger("endAttack");
+        animator.SetTrigger("stopAttack");
     }
     public void TriggerStepback()
     {
@@ -38,6 +49,6 @@ public class WolfAnimations : MonoBehaviour
 
     public void TriggerStopHowl()
     {
-        animator.SetTrigger("StopHowl");
+        animator.SetTrigger("stopHowl");
     }
 }

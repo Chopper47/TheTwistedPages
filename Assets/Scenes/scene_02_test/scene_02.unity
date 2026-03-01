@@ -493,6 +493,28 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 8949973302642525902, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
   m_PrefabInstance: {fileID: 1535823981}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &321715314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+  m_PrefabInstance: {fileID: 875105617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &321715315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1729458687650942365, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+  m_PrefabInstance: {fileID: 875105617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ab771720a55dd4c9a2e056fa68fb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &407724402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,6 +1417,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3443493462980677713, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: appleAttackCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1336145360}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetShakeTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ResetWalkTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: StopWalkTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: DropTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: TreeAnimations, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870539051106288255, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: methodCalled.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452462696483744716, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: 'ActionsToDo.Array.data[0]'
+      value: 
+      objectReference: {fileID: 321715315}
+    - target: {fileID: 8452462696483744716, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: 'StartingActions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 321715314}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1933,6 +2007,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1336145360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4580104729076109082, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+  m_PrefabInstance: {fileID: 875105617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fceb2140380d9104987d444092ae8934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1414173720
 GameObject:
   m_ObjectHideFlags: 0
@@ -2199,6 +2284,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+--- !u!114 &1544141352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 1544141353}
+  ActionsToDo:
+  - {fileID: 5195334164662394891}
+  EndingActions: []
+--- !u!114 &1544141353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: ResetTriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerStopWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerStepback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1564932174
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,6 +2494,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+--- !u!114 &1653099192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1685020068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,6 +2585,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 146149861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1729883913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 1729883914}
+  ActionsToDo:
+  - {fileID: 5195334164662394888}
+  EndingActions: []
+--- !u!114 &1729883914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: ResetTriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1778298194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,19 +2949,341 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1284404354120964347, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: distance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: m_Name
       value: Wolf
       objectReference: {fileID: 0}
     - target: {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2970693804657606959, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 5195334164662394900}
+    - target: {fileID: 3344153970263364908, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: StartingActions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344153970263364908, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: 'StartingActions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1653099192}
+    - target: {fileID: 5202055217801065038, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 5195334164662394898}
+    - target: {fileID: 6402180229326768764, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 1544141352}
+    - target: {fileID: 6416772503907219833, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: m_Name
+      value: Yes, Is launching or howling?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162284094370402281, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 5195334164662394902}
+    - target: {fileID: 8969101574829644142, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 1729883913}
+    m_RemovedComponents:
+    - {fileID: 8236820172328955161, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1977908925477763581, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5195334164662394903}
+    - targetCorrespondingSourceObject: {fileID: 1977908925477763581, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5195334164662394902}
+    - targetCorrespondingSourceObject: {fileID: 7915876233976860910, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5195334164662394901}
+    - targetCorrespondingSourceObject: {fileID: 7915876233976860910, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5195334164662394900}
+    - targetCorrespondingSourceObject: {fileID: 98668954334549213, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5195334164662394899}
+    - targetCorrespondingSourceObject: {fileID: 98668954334549213, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5195334164662394898}
+    - targetCorrespondingSourceObject: {fileID: 6409197578507383820, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1544141353}
+    - targetCorrespondingSourceObject: {fileID: 6409197578507383820, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1544141352}
+    - targetCorrespondingSourceObject: {fileID: 8142087614916163794, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1653099192}
+    - targetCorrespondingSourceObject: {fileID: 8135216642771005188, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1729883914}
+    - targetCorrespondingSourceObject: {fileID: 8135216642771005188, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1729883913}
   m_SourcePrefab: {fileID: 100100000, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+--- !u!114 &5195334164662394886 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7333638831792451134, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6690be4daf1cac24fbde8b01baffb1f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5195334164662394887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8135216642771005188, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5195334164662394888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1843280787149485093, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e5c6954429e9174bac9b4142f71fc31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5195334164662394889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8142087614916163794, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5195334164662394890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6409197578507383820, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5195334164662394891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7021659333510823944, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c7c0e7a505f5940824594a6e01da37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5195334164662394892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 98668954334549213, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5195334164662394893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4649632068039325130, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e5c6954429e9174bac9b4142f71fc31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5195334164662394894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7915876233976860910, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5195334164662394895 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2696777150359329827, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf3bdaf97252524193806bd0cea541a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5195334164662394896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1977908925477763581, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5195334164662394897 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2483369655509272959, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
+  m_PrefabInstance: {fileID: 5195334164662394885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30936ebb02309bd43a8035d52fbe848c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5195334164662394898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 5195334164662394899}
+  ActionsToDo:
+  - {fileID: 5195334164662394893}
+  EndingActions: []
+--- !u!114 &5195334164662394899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: ResetTriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerStopWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5195334164662394900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 5195334164662394901}
+  ActionsToDo:
+  - {fileID: 5195334164662394895}
+  EndingActions: []
+--- !u!114 &5195334164662394901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5195334164662394902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 5195334164662394903}
+  ActionsToDo:
+  - {fileID: 5195334164662394897}
+  EndingActions: []
+--- !u!114 &5195334164662394903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195334164662394896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5195334164662394886}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
