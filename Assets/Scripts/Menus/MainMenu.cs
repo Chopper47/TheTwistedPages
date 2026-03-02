@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("alpha");
+        SceneManager.LoadScene("HubRoom");
     }
 
     public void OptionsMenu()

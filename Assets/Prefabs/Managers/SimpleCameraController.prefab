@@ -47,11 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  smoothTime: 0.15
+  followSmoothTime: 0.15
   minX: -10
   maxX: 10
   minZ: -15
-  maxZ: 15
+  maxZ: 1000
   lookAheadDistance: 1
   lookAheadSmooth: 10
 --- !u!114 &3217237680651874227
@@ -184,7 +184,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
