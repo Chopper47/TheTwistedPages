@@ -212,7 +212,6 @@ public class Lumberjack : MonoBehaviour
     {
         receivedAxe = true;
         EndAttack();
-        EditorApplication.isPaused = true;
     }
 
     public void FalseReceiveAxe()
