@@ -51,7 +51,7 @@ public class HubStartGameInteractable : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene("alpha");
+        SceneManager.LoadScene("Tutorial");
     }
 
     

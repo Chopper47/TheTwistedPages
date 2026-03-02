@@ -8,6 +8,7 @@ public class ActionPursueBoss : IAction
     public override void Act()
     {
         agent.Chase();
-        animations.Moving();
+        animations.ResetStopMovingTrigger();
+        animations.MovingTrigger();
     }
 }

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BossRoomFunctionality : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BossRoomFunctionality : MonoBehaviour
     public int currentHp;
     public List<AudioSource> pillarHit;
     public AudioSource bossDeath;
+    public UnityEvent onBossEnd;
+
 
     [SerializeField] private EnemyHealth bossHealth;
 
@@ -47,7 +50,9 @@ public class BossRoomFunctionality : MonoBehaviour
 
     public void EndBoss()
     {
-        //TODO Boss death, fade out, end game
+        var tempEvent = onBossEnd;
+        onBossEnd = new UnityEngine.Events.UnityEvent();
+        tempEvent?.Invoke();
     }
 
 }
