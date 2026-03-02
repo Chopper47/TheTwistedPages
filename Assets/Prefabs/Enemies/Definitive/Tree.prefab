@@ -87,7 +87,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2684697873207394274
 Transform:
   m_ObjectHideFlags: 0
@@ -223,7 +223,6 @@ MonoBehaviour:
   speed: 2.5
   target: {fileID: 0}
   agent: {fileID: 3953412257303193511}
-  animations: {fileID: 0}
   usingNavMesh: 1
   followPath: 0
   pointTimeInterval: 0.2
@@ -4827,7 +4826,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4580104729076109082}
         m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
-        m_MethodName: StopWalkTrigger
+        m_MethodName: ResetShakeTrigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4840,6 +4839,18 @@ MonoBehaviour:
       - m_Target: {fileID: 4580104729076109082}
         m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
         m_MethodName: ResetWalkTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4580104729076109082}
+        m_TargetAssemblyTypeName: TreeAnimations, Assembly-CSharp
+        m_MethodName: StopWalkTrigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4874,9 +4885,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingActions:
-  - {fileID: 1729458687650942365}
-  ActionsToDo:
   - {fileID: 3870539051106288255}
+  ActionsToDo:
+  - {fileID: 1729458687650942365}
   EndingActions: []
 --- !u!1 &8970750981995072266
 GameObject:

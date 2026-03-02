@@ -115,7 +115,7 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void EndSwipeAttack()
     {
-        animator.SetTrigger("endSwipe");
+        animator.ResetTrigger("swipe");
         boss.EndAttack();
     }
 

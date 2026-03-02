@@ -69,7 +69,14 @@ public class BossAxe : MonoBehaviour
         followPath.ElapsedTime = 0f;
         followPath.Play();
         throwSFX.Play();
+        StartCoroutine(SplineArrived(timeOnAir * 0.75f));
         StartCoroutine(WaitUntilCollision());
+    }
+
+    IEnumerator SplineArrived(float timeToWait)
+    {
+        yield return new WaitForSeconds(timeToWait);
+        arrived = true;
     }
 
     private void SetFarthestPoint(float distance)

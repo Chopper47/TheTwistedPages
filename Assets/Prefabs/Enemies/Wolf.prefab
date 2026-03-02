@@ -329,6 +329,8 @@ GameObject:
   - component: {fileID: 949232217634794074}
   - component: {fileID: 4649632068039325130}
   - component: {fileID: 5202055217801065038}
+  - component: {fileID: 400099846773512037}
+  - component: {fileID: 2325074038944463938}
   m_Layer: 0
   m_Name: Yes, RevengeLaunch
   m_TagString: Untagged
@@ -377,7 +379,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 4649632068039325130}
+  action: {fileID: 2325074038944463938}
+--- !u!114 &400099846773512037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98668954334549213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: ResetTriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerStopWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2325074038944463938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98668954334549213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 400099846773512037}
+  ActionsToDo:
+  - {fileID: 4649632068039325130}
+  EndingActions: []
 --- !u!1 &130332428731351977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,7 +2682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8737206857049744820}
-  distance: 4
+  distance: 20
 --- !u!1 &1145233132247702675
 GameObject:
   m_ObjectHideFlags: 0
@@ -4830,6 +4900,8 @@ GameObject:
   - component: {fileID: 3538259072797629163}
   - component: {fileID: 7162284094370402281}
   - component: {fileID: 2483369655509272959}
+  - component: {fileID: 233098428629541150}
+  - component: {fileID: 6118675267709412648}
   m_Layer: 0
   m_Name: No, Wander
   m_TagString: Untagged
@@ -4864,7 +4936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 2483369655509272959}
+  action: {fileID: 6118675267709412648}
 --- !u!114 &2483369655509272959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4885,6 +4957,50 @@ MonoBehaviour:
   minPauseTime: 1
   maxPauseTime: 3
   repathDelay: 0.5
+--- !u!114 &233098428629541150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977908925477763581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6118675267709412648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977908925477763581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 233098428629541150}
+  ActionsToDo:
+  - {fileID: 2483369655509272959}
+  EndingActions: []
 --- !u!1 &1984964915594005626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5170,7 +5286,6 @@ MonoBehaviour:
   speed: 6
   target: {fileID: 0}
   agent: {fileID: 8700578349658707284}
-  animations: {fileID: 0}
   usingNavMesh: 1
   followPath: 0
   pointTimeInterval: 0.2
@@ -15341,6 +15456,8 @@ GameObject:
   - component: {fileID: 4721656740766701110}
   - component: {fileID: 6402180229326768764}
   - component: {fileID: 7021659333510823944}
+  - component: {fileID: 7611792530772005396}
+  - component: {fileID: 5652494168131629727}
   m_Layer: 0
   m_Name: No, StepBack
   m_TagString: Untagged
@@ -15375,7 +15492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 7021659333510823944}
+  action: {fileID: 5652494168131629727}
 --- !u!114 &7021659333510823944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15389,6 +15506,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wolf: {fileID: 3344937382672473425}
+--- !u!114 &7611792530772005396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409197578507383820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: ResetTriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerStopWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerStepback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5652494168131629727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409197578507383820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 7611792530772005396}
+  ActionsToDo:
+  - {fileID: 7021659333510823944}
+  EndingActions: []
 --- !u!1 &6409930382073812091
 GameObject:
   m_ObjectHideFlags: 0
@@ -15465,7 +15650,7 @@ GameObject:
   - component: {fileID: 769834614697281885}
   - component: {fileID: 7473890589808538986}
   m_Layer: 0
-  m_Name: Yes, Is launching?
+  m_Name: Yes, Is launching or howling?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18554,6 +18739,8 @@ GameObject:
   - component: {fileID: 3987433651362091587}
   - component: {fileID: 2970693804657606959}
   - component: {fileID: 2696777150359329827}
+  - component: {fileID: 115372794463928653}
+  - component: {fileID: 7278806761422560578}
   m_Layer: 0
   m_Name: No, Chase
   m_TagString: Untagged
@@ -18588,7 +18775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 2696777150359329827}
+  action: {fileID: 7278806761422560578}
 --- !u!114 &2696777150359329827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18602,6 +18789,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8737206857049744820}
+--- !u!114 &115372794463928653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915876233976860910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7278806761422560578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915876233976860910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 115372794463928653}
+  ActionsToDo:
+  - {fileID: 2696777150359329827}
+  EndingActions: []
 --- !u!1 &7918087808937207429
 GameObject:
   m_ObjectHideFlags: 0
@@ -19053,6 +19284,8 @@ GameObject:
   - component: {fileID: 8823596776657385517}
   - component: {fileID: 1843280787149485093}
   - component: {fileID: 8969101574829644142}
+  - component: {fileID: 59978786472979436}
+  - component: {fileID: 4283429008593560662}
   m_Layer: 0
   m_Name: Yes, Launch
   m_TagString: Untagged
@@ -19101,7 +19334,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 1843280787149485093}
+  action: {fileID: 4283429008593560662}
+--- !u!114 &59978786472979436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135216642771005188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: ResetTriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4283429008593560662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135216642771005188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 59978786472979436}
+  ActionsToDo:
+  - {fileID: 1843280787149485093}
+  EndingActions: []
 --- !u!1 &8142087614916163794
 GameObject:
   m_ObjectHideFlags: 0
@@ -19114,7 +19403,7 @@ GameObject:
   - component: {fileID: 8573067377585600702}
   - component: {fileID: 8894068967711032594}
   - component: {fileID: 3344153970263364908}
-  - component: {fileID: 8236820172328955161}
+  - component: {fileID: 1696500808770432296}
   m_Layer: 0
   m_Name: No, Chase
   m_TagString: Untagged
@@ -19175,11 +19464,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingActions: []
+  StartingActions:
+  - {fileID: 1696500808770432296}
   ActionsToDo:
   - {fileID: 8573067377585600702}
   EndingActions: []
---- !u!114 &8236820172328955161
+--- !u!114 &1696500808770432296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19188,10 +19478,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 8142087614916163794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a3e4cc3c59a65e4390ce8282903041a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wolf: {fileID: 0}
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7333638831792451134}
+        m_TargetAssemblyTypeName: WolfAnimations, Assembly-CSharp
+        m_MethodName: TriggerWalk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8160199526846857193
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,11 +92,11 @@ public class Tree : MonoBehaviour
             Instantiate(appleGrenadePrefab, spawnPosition, Quaternion.identity);
         }
 
-        appleAttacksLeft--;
         //Debug.Log($"Tree spawned {applesPerAttack} apples. Remaining apple attacks: {appleAttacksLeft}.");
 
         yield return new WaitForSeconds(appleAttackCooldown);
 
+        appleAttacksLeft--;
         animations.ResetShakeTrigger();
         animations.EndShakeTrigger();
         isThrowing = false;
