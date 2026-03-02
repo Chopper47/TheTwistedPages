@@ -17,20 +17,30 @@ public class LumberjackAnimations : MonoBehaviour
         }
     }
 
-    public void Moving()
+    public void MovingTrigger()
     {
-        animator.SetBool("running", true);
+        animator.SetTrigger("moving");
     }
 
-    public void StopMoving()
+    public void ResetMovingTrigger()
     {
-        animator.SetBool("running", false);
+        animator.ResetTrigger("moving");
     }
 
-    public void StartThrowAttackB()
+    public void StopMovingTrigger()
+    {
+        animator.SetTrigger("endMoving");
+    }
+
+    public void ResetStopMovingTrigger()
+    {
+        animator.ResetTrigger("endMoving");
+    }
+
+    public void StartThrowAttackBTrigger()
     {
         animator.SetInteger("variation", 0);
-        animator.SetBool("throwAttack", true);
+        animator.SetTrigger("throwAttack");
     }
 
     public void SetLowerHp(bool newLowerHp)
@@ -38,48 +48,48 @@ public class LumberjackAnimations : MonoBehaviour
         animator.SetBool("lowerHp", newLowerHp);
     }
 
-    public void StartThrowAttackA()
+    public void StartThrowAttackATrigger()
     {
         animator.SetInteger("variation", 1);
-        animator.SetBool("throwAttack", true);
+        animator.SetTrigger("throwAttack");
     }
 
-    public void GainAxe()
+    public void GetAxe()
     {
-        animator.SetBool("gainAxe", true);
+        animator.SetTrigger("getAxe");
     }
 
-    public void EndGainAxe()
+    public void ResetGetAxe()
     {
-        animator.SetBool("gainAxe", false);
+        animator.ResetTrigger("getAxe");
     }
 
-    public void EndThrowAttack()
+    public void EndThrowAttackTrigger()
     {
-        animator.SetBool("throwAttack", false);
+        animator.ResetTrigger("throwAttack");
     }
 
-    public void Jumping()
+    public void JumpingTrigger()
     {
-        animator.SetBool("jumping", true);
+        animator.SetTrigger("jump");
     }
 
-    public void StopJumping()
+    public void StopJumpingTrigger()
     {
-        animator.SetBool("jumping", false);
+        animator.ResetTrigger("jump");
     }
     
-    public void Falling()
+    public void FallingTrigger()
     {
-        animator.SetBool("falling", true);
+        animator.SetTrigger("fall");
     }
 
     public void StopFalling()
     {
-        animator.SetBool("falling", false);
+        animator.SetTrigger("endFall");
     }
 
-    public void StartSwipeAttack()
+    public void StartSwipeAttackTrigger()
     {
         if(swipeVariation == 0)
         {
@@ -90,7 +100,7 @@ public class LumberjackAnimations : MonoBehaviour
             swipeVariation = 0;
         }
         animator.SetInteger("variation", swipeVariation);
-        animator.SetBool("basicAttack", true);
+        animator.SetTrigger("swipe");
     }
 
     public void SwipeHitbox()
@@ -105,30 +115,30 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void EndSwipeAttack()
     {
-        animator.SetBool("basicAttack", false);
+        animator.SetTrigger("endSwipe");
         boss.EndAttack();
     }
 
-    public void CloseToAxe()
+    public void CloseToAxeTrigger()
     {
-        animator.SetBool("closeToAxe", true);
+        animator.SetTrigger("getAxe");
     }
 
     public void EndCloseToAxe()
     {
-        animator.SetBool("closeToAxe", false);
+        animator.ResetTrigger("getAxe");
         boss.EndAttack();
     }
 
-    public void StartAreaAttackA()
+    public void StartAreaAttackATrigger()
     {
         animator.SetInteger("variation", 0);
-        animator.SetBool("areaAttack", true);
+        animator.SetTrigger("areaAttack");
     }
-    public void StartAreaAttackB()
+    public void StartAreaAttackBTrigger()
     {
         animator.SetInteger("variation", 1);
-        animator.SetBool("areaAttack", true);
+        animator.SetTrigger("areaAttack");
     }
 
     public void AoeHitbox()
@@ -146,9 +156,9 @@ public class LumberjackAnimations : MonoBehaviour
         boss.EnableAoeExpansion();
     }
 
-    public void EndAreaAttack()
+    public void EndAreaAttackTrigger()
     {
-        animator.SetBool("areaAttack", false);
+        animator.SetTrigger("endAreaAttack");
         boss.EndAttack();
     }
 
@@ -160,5 +170,20 @@ public class LumberjackAnimations : MonoBehaviour
     public void EnableVisualAxe() 
     {
         visualAxe.SetActive(true);
+    }
+
+    public void EnragedTrigger()
+    {
+        animator.SetTrigger("enraged");
+    }
+
+    public void ResetEnragedTrigger()
+    {
+        animator.ResetTrigger("enraged");
+    }
+
+    public void EndEnragedTrigger()
+    {
+        animator.SetTrigger("endEnraged");
     }
 }

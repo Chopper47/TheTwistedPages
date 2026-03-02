@@ -192,10 +192,10 @@ public class Lumberjack : MonoBehaviour
     {
         hasAxe = true;
         axeOnGround = false;
-        animations.GainAxe();
+        animations.GetAxe();
         if(enemyHealth.health <= 3)
         {
-            animations.CloseToAxe();
+            animations.CloseToAxeTrigger();
         }
     }
 
@@ -215,7 +215,7 @@ public class Lumberjack : MonoBehaviour
     public void Wait()
     {
         SetSpeed(defaultSpeed);
-        animations.StopMoving();
+        animations.StopMovingTrigger();
         chaseAgent.StopChase();
     }
 
@@ -226,7 +226,7 @@ public class Lumberjack : MonoBehaviour
 
         if (enemyHealth.health >= 3)
         {
-            animations.Moving();
+            animations.MovingTrigger();
         }
 
         chaseAgent.SetNewDestination(axeGroundPosition);
@@ -235,7 +235,7 @@ public class Lumberjack : MonoBehaviour
     public void Pursue()
     {
         SetSpeed(pursueSpeed);
-        animations.Moving();
+        animations.MovingTrigger();
         chaseAgent.Chase();
     }
 
@@ -331,7 +331,6 @@ public class Lumberjack : MonoBehaviour
         currentAttack = "Swipe";
         yield return MoveSlightlyTowardsPlayer();
         Debug.LogWarning("Doing Swipe Attack");
-        animations.StartSwipeAttack();
         audioSources[0].Play();
     }
 
@@ -351,7 +350,6 @@ public class Lumberjack : MonoBehaviour
         currentAttack = "AOE A";
         Debug.LogWarning("Doing AOE Attack A");
         yield return MoveSlightlyTowardsPlayer();
-        animations.StartAreaAttackA();
         int groan = UnityEngine.Random.Range(1, 3);
         audioSources[groan].Play();
     }
@@ -372,7 +370,6 @@ public class Lumberjack : MonoBehaviour
         currentAttack = "AOE B";
         Debug.LogWarning("Doing AOE Attack B");
         yield return MoveSlightlyTowardsPlayer();
-        animations.StartAreaAttackB();
         int groan = UnityEngine.Random.Range(1, 3);
         audioSources[groan].Play();
     }
@@ -386,7 +383,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator EndAOEAttackB()
     {
         yield return new WaitForSeconds(aoeBExpandTime);
-        animations.EndAreaAttack();
+        animations.EndAreaAttackTrigger();
     }
 
     private IEnumerator ThrowAttackB()
@@ -394,13 +391,12 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         currentAttack = "Throw B";
         Debug.LogWarning("Doing Throw Attack B");
-        animations.StartThrowAttackB();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
         bossAxe.gameObject.SetActive(true);
         animations.SetLowerHp(enemyHealth.health <= 3 ? true : false);
-        animations.EndThrowAttack();
+        animations.EndThrowAttackTrigger();
         bossAxe.StartThrowAttackB(transform.position + Vector3.up*0.5f, chaseAgent.TargetDirection(), axeOnAirTime);
         audioSources[0].Play();
     }
@@ -410,7 +406,6 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         currentAttack = "Throw A";
         Debug.LogWarning("Doing Throw Attack A");
-        animations.StartThrowAttackA();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
@@ -418,7 +413,7 @@ public class Lumberjack : MonoBehaviour
         bossAxe.StartThrowAttackA(axeBoomerangTime, chaseAgent.DistanceFromTarget());
         audioSources[0].Play();
         yield return new WaitForSeconds(axeBoomerangTime);
-        animations.EndThrowAttack();
+        animations.EndThrowAttackTrigger();
         EndAttack();
     }
 
@@ -449,7 +444,7 @@ public class Lumberjack : MonoBehaviour
         float riseTime = 0.5f;                  // Duration of the upwards movement.
         float timer = 0f;
         //anim
-        animations.Jumping();
+        animations.JumpingTrigger();
         Vector3 startPosition = transform.position;
         Vector3 peakPosition = startPosition + Vector3.up * 25f;
 
@@ -460,8 +455,7 @@ public class Lumberjack : MonoBehaviour
             yield return null;
         }
         //anim
-        animations.StopJumping();
-        animations.Falling();
+        animations.FallingTrigger();
         // Horizontal movement towards target in a straight line.
         float travelTime = 0.4f;
         timer = 0f;
@@ -495,8 +489,6 @@ public class Lumberjack : MonoBehaviour
         jumpAttackHitbox.transform.position = transform.position;
         jumpAttackHitbox.SetActive(true);
 
-        animations.StopFalling();
-
         //anim
 
         yield return new WaitForSeconds(0.5f);
@@ -504,10 +496,10 @@ public class Lumberjack : MonoBehaviour
         jumpAttackHitbox.SetActive(false);
 
         agent.enabled = true;
+        animations.StopFalling();
+        animations.ResetStopMovingTrigger();
 
         EndAttack();
-
-        animations.StopMoving();
     }
 
     private IEnumerator ResetJumpCounterAfterDelay(float delay)
@@ -561,12 +553,16 @@ public class Lumberjack : MonoBehaviour
 
             DisableHitbox(enragedHitbox);
             currentChargeCount++;
+            animations.EndEnragedTrigger();
+            animations.EnragedTrigger();
 
             yield return new WaitForSeconds(timeBetweenCharges);
         }
 
         currentChargeCount = 0;
         receivedAxe = false;
+
+        animations.ResetEnragedTrigger();
 
         EndAttack();
         SetSpeed(defaultSpeed);
@@ -612,7 +608,7 @@ public class Lumberjack : MonoBehaviour
 
         cancelAttack = false;
 
-        animations.StopMoving();
+        animations.StopMovingTrigger();
         isAttacking = true;
         enemyState.AttackState();
         chaseAgent.StopChase();
