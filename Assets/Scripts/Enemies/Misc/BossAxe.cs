@@ -15,6 +15,7 @@ public class BossAxe : MonoBehaviour
     private bool arrived = false;
     private bool canGet = false;
     private Coroutine moving;
+    private Coroutine splineArrived;
     private Transform originalParent;
     private Transform ogTransform;
     private Lumberjack lumberjack;
@@ -70,7 +71,7 @@ public class BossAxe : MonoBehaviour
         followPath.Play();
         throwSFX.Play();
         StartCoroutine(WaitUntilCollision());
-        StartCoroutine(SplineArrived(timeOnAir * 0.75f));
+        splineArrived = StartCoroutine(SplineArrived(timeOnAir * 0.75f));
     }
 
     IEnumerator SplineArrived(float timeToWait)
@@ -102,6 +103,10 @@ public class BossAxe : MonoBehaviour
         if(followPath.IsPlaying)
         {
             followPath.Pause();
+            if(splineArrived != null)
+            {
+                StopCoroutine(splineArrived);
+            }
         }
         arrived = false;
         playerGrabbed = true;
