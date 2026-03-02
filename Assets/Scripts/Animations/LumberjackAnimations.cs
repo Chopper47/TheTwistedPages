@@ -169,7 +169,10 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void EnableVisualAxe() 
     {
-        visualAxe.SetActive(true);
+        if (boss.hasAxe)
+        {
+            visualAxe.SetActive(true);
+        }
     }
 
     public void EnragedTrigger()

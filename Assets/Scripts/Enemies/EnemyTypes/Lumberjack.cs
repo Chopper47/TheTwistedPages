@@ -393,7 +393,7 @@ public class Lumberjack : MonoBehaviour
         Debug.LogWarning("Doing Throw Attack B");
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         bossAxe.gameObject.SetActive(true);
         animations.SetLowerHp(enemyHealth.health <= 3 ? true : false);
         animations.EndThrowAttackTrigger();
@@ -482,6 +482,7 @@ public class Lumberjack : MonoBehaviour
             transform.position = Vector3.Lerp(fallStart, fallEnd, timer / fallTime);
             yield return null;
         }
+        transform.position = fallEnd;
         audioSources[4].Play();
         SphereCollider collider = jumpAttackHitbox.GetComponent<SphereCollider>();
         collider.radius = jumpImpactRadius;
