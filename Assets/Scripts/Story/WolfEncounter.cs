@@ -18,6 +18,7 @@ public class WolfEncounter : MonoBehaviour
     [SerializeField] private GameObject wolfPrefab;
     [SerializeField] private Transform wolfSpawnPoint;
     [SerializeField] private Transform wolfTarget;
+    [SerializeField] private GameObject wolfEyes;
     [SerializeField] private Volume darknessVolume;
     [SerializeField] private Vignette darknessVignette;
     [SerializeField] private GameObject pressShiftCanvas;
@@ -64,18 +65,8 @@ public class WolfEncounter : MonoBehaviour
         PlayerMovement.canMove = false;
 
         darknessVolume.profile.TryGet(out darknessVignette);
-        float intensity = darknessVignette.intensity.value;
-        float smoothness = darknessVignette.smoothness.value;
-        //darknessVignette.intensity.value = 1f;
-        float timer = 0f;
-        while (timer < 4f)
-        {
-            darknessVignette.intensity.value = Mathf.Lerp(intensity, 1f, timer /4f);
-            darknessVignette.smoothness.value = Mathf.Lerp(smoothness, 1f, timer / 4f);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
+        yield return DarkenVignette();
+        wolfEyes.SetActive(true);
 
         yield return new WaitForSeconds(2f);
         DialogueManager.instance.currentDialogue = dialogue;
@@ -93,22 +84,14 @@ public class WolfEncounter : MonoBehaviour
 
         DialogueManager.instance.onDialogueEnd.RemoveListener(SpawnWolfAndStartSecondDialogueMethod);
 
+        wolfEyes.SetActive(false);
         wolfGO = Instantiate(wolfPrefab, wolfSpawnPoint.position, Quaternion.identity);
         wolfGO.GetComponent<NavMeshAgent>().enabled = false;
         wolfGO.GetComponent<ChaseAgent>().enabled = false;
         wolfGO.GetComponent<DecisionTreeAgent>().enabled = false;
 
         wolfGO.transform.GetChild(0).gameObject.SetActive(false);
-        float intensity = darknessVignette.intensity.value;
-        float smoothness = darknessVignette.smoothness.value;
-        float timer = 0f;
-        while (timer < 4f)
-        {
-            darknessVignette.intensity.value = Mathf.Lerp(intensity, 0.45f, timer / 4f);
-            darknessVignette.smoothness.value = Mathf.Lerp(smoothness, 0.2f, timer / 4f);
-            timer += Time.deltaTime;
-            yield return null;
-        }
+        yield return LightenVignette();
         //TODO Take off darkness
         DialogueManager.instance.currentDialogue = secondDialogue;
         DialogueManager.instance.onDialogueEnd.AddListener(EnableWolfChase);
@@ -139,10 +122,47 @@ public class WolfEncounter : MonoBehaviour
     
     IEnumerator EndTutorial()
     {
+        yield return DarkenVignette();
+        wolfEyes.SetActive(true);
         yield return new WaitForSeconds(1f);
         DialogueManager.instance.currentDialogue = thirdDialogue;
+        DialogueManager.instance.onDialogueEnd.AddListener(EndTutorialEvent);
+
         DialogueManager.instance.StartDialogue();
     }
 
+    IEnumerator DarkenVignette()
+    {
+        float intensity = darknessVignette.intensity.value;
+        float smoothness = darknessVignette.smoothness.value;
+        //darknessVignette.intensity.value = 1f;
+        float timer = 0f;
+        while (timer < 4f)
+        {
+            darknessVignette.intensity.value = Mathf.Lerp(intensity, 1f, timer / 4f);
+            darknessVignette.smoothness.value = Mathf.Lerp(smoothness, 1f, timer / 4f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    void EndTutorialEvent()
+    {
+        StartCoroutine(LightenVignette());
+        wolfEyes.SetActive(false);
+    }
+    IEnumerator LightenVignette()
+    {
+        float intensity = darknessVignette.intensity.value;
+        float smoothness = darknessVignette.smoothness.value;
+        float timer = 0f;
+        while (timer < 4f)
+        {
+            darknessVignette.intensity.value = Mathf.Lerp(intensity, 0.45f, timer / 4f);
+            darknessVignette.smoothness.value = Mathf.Lerp(smoothness, 0.2f, timer / 4f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
 
 }
