@@ -78,7 +78,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 1
+    - _Brightness: 0.8
     - _Fresnel_intensity: 5
     - _Metallic_intensity: 0
     - _Normal_intensity: 1
@@ -89,7 +89,8 @@ Material:
     - _Scale: 0.1
     - _Speed: 0.5
     - _Y_Hight: -20
-    m_Colors: []
+    m_Colors:
+    - _FresnelColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8770912930680196206
