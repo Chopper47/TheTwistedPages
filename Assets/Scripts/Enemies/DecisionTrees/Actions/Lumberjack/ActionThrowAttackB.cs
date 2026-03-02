@@ -15,6 +15,9 @@ public class ActionThrowAttackB : IAction
     public override void Act()
     {
         Debug.Log("Lumberjack: Throw Attack B");
-        lumberjack.DoThrowAttackB();
+        if(!lumberjack.isAttacking)
+        {
+            lumberjack.DoThrowAttackB();
+        }
     }
 }

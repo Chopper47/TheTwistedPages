@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.AI;
 
 public class Lumberjack : MonoBehaviour
@@ -188,14 +189,19 @@ public class Lumberjack : MonoBehaviour
 
     #region Axe States
 
-    public void PickUpAxe()
+    public void PickUpAxe(bool playerThrow)
     {
         hasAxe = true;
         axeOnGround = false;
         animations.GetAxe();
-        if(enemyHealth.health <= 3)
+        if (enemyHealth.health <= 3)
         {
             animations.CloseToAxeTrigger();
+        }
+
+        if (!playerThrow)
+        {
+            EndAttack();
         }
     }
 
@@ -203,6 +209,7 @@ public class Lumberjack : MonoBehaviour
     {
         receivedAxe = true;
         EndAttack();
+        EditorApplication.isPaused = true;
     }
 
     public void FalseReceiveAxe()
@@ -255,71 +262,65 @@ public class Lumberjack : MonoBehaviour
     #region Attacks
     public void DoEnragedAttack()
     {
-        if (isStunned)
+        if (isStunned || isAttacking)
         {
             return;
         }
-
+        if (currentAction != null) StopCoroutine(currentAction);
         currentAction = StartCoroutine(EnragedCharge());
     }
 
     public void DoSwipeAttack()
     {
-        if (isStunned)
+        if (isStunned || isAttacking)
         {
             return;
         }
-
         currentAction = StartCoroutine(SwipeAttack());
     }
 
     public void DoAOEAttackA()
     {
-        if (isStunned)
+        if (isStunned || isAttacking)
         {
             return;
         }
-
         currentAction = StartCoroutine(AOEAttackA());
     }
 
     public void DoAOEAttackB()
     {
-        if (isStunned)
+        if (isStunned || isAttacking)
         {
             return;
         }
-
         currentAction = StartCoroutine(AOEAttackB());
     }
 
     public void DoThrowAttackA()
     {
-        if (isStunned)
+        if (isStunned || isAttacking)
         {
             return;
         }
-
         currentAction = StartCoroutine(ThrowAttackA());
     }
 
     public void DoThrowAttackB()
     {
-        if (isStunned)
+        if (isStunned || isAttacking)
         {
             return;
         }
-
         currentAction = StartCoroutine(ThrowAttackB());
     }
 
     public void DoJumpAttack()
     {
-        if (isStunned)
+        if (isStunned || isAttacking)
         {
             return;
         }
-
         currentAction = StartCoroutine(JumpAttack());
     }
     #endregion
@@ -391,6 +392,7 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         currentAttack = "Throw B";
         Debug.LogWarning("Doing Throw Attack B");
+        animations.ResetGetAxe();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.3f);
@@ -406,6 +408,7 @@ public class Lumberjack : MonoBehaviour
         StartAttack();
         currentAttack = "Throw A";
         Debug.LogWarning("Doing Throw Attack A");
+        animations.ResetGetAxe();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
         yield return new WaitForSeconds(0.2f);
@@ -423,6 +426,7 @@ public class Lumberjack : MonoBehaviour
 
         currentAttack = "Jump";
         Debug.LogWarning("Doing Jump Attack");
+        Debug.LogError("J");
         StopCoroutine("ResetJumpCounterAfterDelay");
         StartCoroutine("ResetJumpCounterAfterDelay", 5f);
 
@@ -498,6 +502,7 @@ public class Lumberjack : MonoBehaviour
 
         agent.enabled = true;
         animations.StopFalling();
+        animations.StopJumpingTrigger();
         animations.ResetStopMovingTrigger();
 
         EndAttack();
@@ -602,7 +607,7 @@ public class Lumberjack : MonoBehaviour
 
     private void StartAttack()
     {
-        if (isStunned)
+        if (isStunned || isAttacking)
         {
             return;
         }

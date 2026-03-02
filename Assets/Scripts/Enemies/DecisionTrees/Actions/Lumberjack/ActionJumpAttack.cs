@@ -15,6 +15,9 @@ public class ActionJumpAttack : IAction
     public override void Act()
     {
         Debug.Log("Lumberjack: Jump Attack");
-        lumberjack.DoJumpAttack();
+        if (!lumberjack.isAttacking)
+        {
+            lumberjack.DoJumpAttack();
+        }
     }
 }

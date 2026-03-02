@@ -1560,9 +1560,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingActions:
-  - {fileID: 675399656}
-  ActionsToDo:
   - {fileID: 675399652}
+  ActionsToDo:
+  - {fileID: 675399656}
   EndingActions: []
 --- !u!114 &675399658
 MonoBehaviour:
@@ -3500,6 +3500,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.6531669
       objectReference: {fileID: 0}
+    - target: {fileID: 2742847513323509225, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: probability
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2783221864955393166, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: action
       value: 
@@ -4032,6 +4036,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 52.56547
       objectReference: {fileID: 0}
+    - target: {fileID: 6352766538495863705, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 1147613976}
     - target: {fileID: 6379253479710616010, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 39.214382
@@ -4108,6 +4116,10 @@ PrefabInstance:
       propertyPath: AM
       value: 
       objectReference: {fileID: 1594221039}
+    - target: {fileID: 6588809794490680986, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: maxHealth
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6700670413964662937, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -4.15629
@@ -4128,6 +4140,10 @@ PrefabInstance:
       propertyPath: action
       value: 
       objectReference: {fileID: 245973797}
+    - target: {fileID: 6968787189083607902, guid: b584b32e08db8604786de258ed1073a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7042508225077409257, guid: b584b32e08db8604786de258ed1073a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 23.183779
@@ -6315,6 +6331,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 295772827924944172, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1302975750273684234, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_Name
       value: RoomBoss
@@ -6323,6 +6343,10 @@ PrefabInstance:
       propertyPath: lumberjack
       value: 
       objectReference: {fileID: 1029246535}
+    - target: {fileID: 1922264556108852858, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3106574192148580603, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: lumberjack
       value: 
@@ -6412,6 +6436,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1029246535}
     - target: {fileID: 7498686353752899792, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262278424796779720, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -15508,7 +15536,7 @@ Transform:
   m_GameObject: {fileID: 3656407428284098649}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.535, z: -1.34}
+  m_LocalPosition: {x: 0, y: -0.535, z: -10.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

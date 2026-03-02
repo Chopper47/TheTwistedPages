@@ -175,7 +175,10 @@ public class ChaseAgent : MonoBehaviour
         if (usingNavMesh)
         {
             states.StayState();
-            agent.SetDestination(transform.position);
+            if(agent.isOnNavMesh)
+            {
+                agent.SetDestination(transform.position);
+            }
         }
     }
 
@@ -193,8 +196,11 @@ public class ChaseAgent : MonoBehaviour
 
         if(usingNavMesh)
         {
-            agent.SetDestination(target.transform.position);
-            agent.isStopped = false;
+            if(agent.isOnNavMesh)
+            {
+                agent.SetDestination(target.transform.position);
+                agent.isStopped = false;
+            }
         }
     }
 
@@ -217,12 +223,16 @@ public class ChaseAgent : MonoBehaviour
     /// </summary>
     public void StopChase()
     {
+        
         Stay();
         chase = false;
 
         if(usingNavMesh)
         {
-           agent.isStopped = true;
+            if(agent.isOnNavMesh)
+            {
+                agent.isStopped = true;
+            }
         }
     }
 

@@ -53,9 +53,9 @@ public class BossAxe : MonoBehaviour
         transform.parent = null;
         thrown = true;
         canGet = false;
+        StartCoroutine(WaitUntilCollision());
         moving = StartCoroutine(Move(startingPos, throwDirection, timeToOneUnit));
         throwSFX.Play();
-        StartCoroutine(WaitUntilCollision());
     }
 
     public void StartThrowAttackA(float timeOnAir, float distance)
@@ -103,6 +103,7 @@ public class BossAxe : MonoBehaviour
         {
             followPath.Pause();
         }
+        arrived = false;
         playerGrabbed = true;
     }
 
@@ -146,7 +147,7 @@ public class BossAxe : MonoBehaviour
         thrown = false;
         arrived = true;
         lumberjack.CanGetAxe();
-        transform.position = endPoint       ;
+        transform.position = endPoint;
         yield return null;
     }
     
@@ -159,7 +160,6 @@ public class BossAxe : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Lumberjack boss = other.GetComponent<Lumberjack>();
-        Debug.LogError("boss: " + boss);
         int hit = Random.Range(0, 2);
         throwSFX.Stop();
         hitSFXs[hit].Play();
@@ -168,12 +168,10 @@ public class BossAxe : MonoBehaviour
         {
             if(arrived)
             {
-                Debug.LogError("arrived and got to boss");
-               RecoveredFromBoss(boss);
+                RecoveredFromBoss(boss);
             }
             else
             {
-                Debug.LogError("not arrived and got to boss");
                 ThrownToBoss(boss);
             }
         }
@@ -195,7 +193,7 @@ public class BossAxe : MonoBehaviour
         transform.position = ogTransform.position;
         transform.rotation = ogTransform.rotation;
         transform.localScale = ogTransform.localScale;
-        boss.PickUpAxe();
+        boss.PickUpAxe(false);
         arrived = false;
         playerGrabbed = false;
         gameObject.SetActive(false);
@@ -208,12 +206,12 @@ public class BossAxe : MonoBehaviour
         transform.rotation = ogTransform.rotation;
         transform.localScale = ogTransform.localScale;
         playerGrabbed = false;
+        boss.PickUpAxe(true);
         boss.ReceiveAxe();
         if(moving != null)
         {
             StopCoroutine(moving);
         }
-        boss.PickUpAxe();
         gameObject.SetActive(false);
     }
 }
