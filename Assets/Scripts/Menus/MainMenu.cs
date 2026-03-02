@@ -34,6 +34,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("HubRoom");
     }
+    public void GoToBoss()
+    {
+        SceneManager.LoadScene("Scene_06_BossRoomTest");
+    }
 
     public void OptionsMenu()
     {
