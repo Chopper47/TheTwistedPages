@@ -126,6 +126,7 @@ public class Lumberjack : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
+        decisionTree.SetDecide(true);
         isStunned = false;
         cancelAttack = false;
 
