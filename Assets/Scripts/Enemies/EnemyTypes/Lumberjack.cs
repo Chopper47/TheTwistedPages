@@ -16,6 +16,7 @@ public class Lumberjack : MonoBehaviour
     private EnemyState enemyState;
     private ChaseAgent chaseAgent;
     private EnemyHealth enemyHealth;
+    private DecisionTreeAgent decisionTree;
     [SerializeField]private LumberjackAnimations animations;
     [SerializeField] BossAxe bossAxe;
     public List<AudioSource> audioSources;
@@ -82,6 +83,7 @@ public class Lumberjack : MonoBehaviour
     string currentAttack;
     private void Awake()
     {
+        decisionTree = GetComponent<DecisionTreeAgent>();
         rb = GetComponent<Rigidbody>();
         hb = GetComponent<CapsuleCollider>();
         agent = GetComponent<NavMeshAgent>();
@@ -612,8 +614,8 @@ public class Lumberjack : MonoBehaviour
             return;
         }
 
+        decisionTree.SetDecide(false);
         cancelAttack = false;
-
         animations.StopMovingTrigger();
         isAttacking = true;
         enemyState.AttackState();
@@ -622,6 +624,7 @@ public class Lumberjack : MonoBehaviour
 
     public void EndAttack()
     {
+        decisionTree.SetDecide(true);
         isAttacking = false;
         currentAction = null;
         enemyState.StayState();
