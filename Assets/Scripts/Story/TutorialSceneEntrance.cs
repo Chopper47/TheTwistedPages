@@ -10,6 +10,7 @@ public class TutorialSceneEntrance : MonoBehaviour
         if(player == null)
         {
             player = FindFirstObjectByType<PlayerMovement>();
+            player.gameObject.GetComponent<PlayerHealth>().inTutorial = true;
         }
 
         DialogueManager.instance.currentDialogue = dialogue;

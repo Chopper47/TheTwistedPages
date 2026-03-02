@@ -46,10 +46,11 @@ public class Trap : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerHealth player = other.GetComponent<PlayerHealth>();
-            if (player != null)
+
+            //PlayerHealth player = other.GetComponent<PlayerHealth>();
+            if (other.GetComponent<PlayerHealth>().enabled)
             {
-                player.TakeDamage(damage);
+                other.GetComponent<PlayerHealth>().TakeDamage(damage);
             }
         }
 

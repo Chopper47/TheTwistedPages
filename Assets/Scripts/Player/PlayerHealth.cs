@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private UpgradeStats upgradeStatsScriptable;
 
     private GameObject gameOverMenu;
+    public bool inTutorial = false;
 
     [Header("Life Sprites")]
     public Sprite fullLife;
@@ -79,7 +80,7 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        currentHealth -= damage;
+        if(!inTutorial) currentHealth -= damage;
         CameraShake.Shake(0.2f, 0.2f);
         Debug.Log("Health: " +  currentHealth);
 
