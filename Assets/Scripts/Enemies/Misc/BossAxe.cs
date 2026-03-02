@@ -69,8 +69,8 @@ public class BossAxe : MonoBehaviour
         followPath.ElapsedTime = 0f;
         followPath.Play();
         throwSFX.Play();
-        StartCoroutine(SplineArrived(timeOnAir * 0.75f));
         StartCoroutine(WaitUntilCollision());
+        StartCoroutine(SplineArrived(timeOnAir * 0.75f));
     }
 
     IEnumerator SplineArrived(float timeToWait)
@@ -159,6 +159,7 @@ public class BossAxe : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Lumberjack boss = other.GetComponent<Lumberjack>();
+        Debug.LogError("boss: " + boss);
         int hit = Random.Range(0, 2);
         throwSFX.Stop();
         hitSFXs[hit].Play();
@@ -167,10 +168,12 @@ public class BossAxe : MonoBehaviour
         {
             if(arrived)
             {
+                Debug.LogError("arrived and got to boss");
                RecoveredFromBoss(boss);
             }
             else
             {
+                Debug.LogError("not arrived and got to boss");
                 ThrownToBoss(boss);
             }
         }
