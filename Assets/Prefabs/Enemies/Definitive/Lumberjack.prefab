@@ -62,7 +62,7 @@ Transform:
   m_Children:
   - {fileID: 2087223999588719576}
   m_Father: {fileID: 69925017324493298}
-  m_LocalEulerAnglesHint: {x: 26.34426, y: -1.1908436, z: -2.770379}
+  m_LocalEulerAnglesHint: {x: 69.81964, y: -6.7349725, z: -7.212826}
 --- !u!1 &134271815900883750
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ Transform:
   m_Children:
   - {fileID: 6379253479710616010}
   m_Father: {fileID: 420886813959238047}
-  m_LocalEulerAnglesHint: {x: -19.40887, y: 0.24817237, z: 1.8855237}
+  m_LocalEulerAnglesHint: {x: -8.525488, y: 0.60790366, z: 1.80024}
 --- !u!1 &213119516036381737
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,11 +290,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animations: {fileID: 6624029125940982003}
   bossAxe: {fileID: 2856297040693002979}
-  audioSources: []
+  audioSources:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   pursueSpeed: 3.5
   getAxeSpeed: 6
   enragedSpeed: 7
-  defaultSpeed: 2.5
+  defaultSpeed: 3.5
   hasAxe: 1
   receivedAxe: 0
   axeOnGround: 0
@@ -355,7 +360,7 @@ Transform:
   m_Children:
   - {fileID: 5355843576383631367}
   m_Father: {fileID: 4186830841336282452}
-  m_LocalEulerAnglesHint: {x: 44.220425, y: 34.38741, z: 69.76713}
+  m_LocalEulerAnglesHint: {x: 39.509354, y: 22.855568, z: 52.56547}
 --- !u!1 &282933824797234824
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +424,7 @@ Transform:
   m_Children:
   - {fileID: 7042508225077409257}
   m_Father: {fileID: 7095057721934517067}
-  m_LocalEulerAnglesHint: {x: 16.481054, y: -0.50360626, z: 0.13643214}
+  m_LocalEulerAnglesHint: {x: 27.36997, y: -0.4743471, z: 0.14762127}
 --- !u!1 &300363593015560273
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,13 +439,15 @@ GameObject:
   - component: {fileID: 213634008119569993}
   - component: {fileID: 2749497434290857445}
   - component: {fileID: 9059533730782909671}
+  - component: {fileID: 8932651228635426421}
+  - component: {fileID: 2410099958740474540}
   m_Layer: 0
   m_Name: AxeGO
   m_TagString: BossHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1409351442965834730
 Transform:
   m_ObjectHideFlags: 0
@@ -453,10 +460,9 @@ Transform:
   m_LocalPosition: {x: 0.02849431, y: 0.00047822055, z: 0.014535711}
   m_LocalScale: {x: 0.010000001, y: 0.010000001, z: 0.0100000035}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5761574765169885778}
+  m_Children: []
   m_Father: {fileID: 6700670413964662937}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 80.934, y: -100.847, z: -15.487}
 --- !u!95 &5009850088859270525
 Animator:
   serializedVersion: 7
@@ -492,7 +498,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwSFX: {fileID: 0}
-  hitSFXs: []
+  hitSFXs:
+  - {fileID: 0}
+  - {fileID: 0}
   damage: 1
   farthestPoint:
     m_KnotsLink: []
@@ -518,8 +526,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.002, y: 0.0125, z: 0.01}
-  m_Center: {x: 0, y: 0.002, z: -0.0025}
+  m_Size: {x: 0.3, y: 1.2, z: 1.15}
+  m_Center: {x: 0, y: 0.3, z: -0.15}
 --- !u!54 &2749497434290857445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -563,13 +571,66 @@ MonoBehaviour:
   m_PlayOnAwake: 0
   m_LoopMode: 0
   m_Method: 0
-  m_Duration: 2
-  m_MaxSpeed: 27.433292
+  m_Duration: 1.5
+  m_MaxSpeed: 36.577724
   m_EasingMode: 3
   m_AlignmentMode: 1
   m_ObjectForwardAxis: 2
   m_ObjectUpAxis: 1
   m_StartOffset: 0
+--- !u!33 &8932651228635426421
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300363593015560273}
+  m_Mesh: {fileID: -8287839383430266118, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
+--- !u!23 &2410099958740474540
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300363593015560273}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: fd7f81ebcde170644bc0822790d24d1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &318581301832864342
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +932,7 @@ Transform:
   m_Children:
   - {fileID: 5203076460271382600}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -36.780273, y: -0.7514613, z: -13.556198}
+  m_LocalEulerAnglesHint: {x: -36.780273, y: -0.7514625, z: -13.556198}
 --- !u!1 &384749102658200252
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,7 +964,7 @@ Transform:
   m_Children:
   - {fileID: 3416048799959726606}
   m_Father: {fileID: 7475591889775530606}
-  m_LocalEulerAnglesHint: {x: -8.415445, y: -6.3681116, z: -1.366082}
+  m_LocalEulerAnglesHint: {x: 35.16663, y: -7.5204024, z: -1.6531669}
 --- !u!1 &418415281641282396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,7 +1125,7 @@ Transform:
   m_Children:
   - {fileID: 2451609849698041242}
   m_Father: {fileID: 3186082436764563350}
-  m_LocalEulerAnglesHint: {x: 44.084286, y: 45.952713, z: 81.23723}
+  m_LocalEulerAnglesHint: {x: 3.6432238, y: 12.318251, z: 42.601803}
 --- !u!1 &488749479647939705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,7 +1257,7 @@ Transform:
   m_Children:
   - {fileID: 1602796055828225415}
   m_Father: {fileID: 6700670413964662937}
-  m_LocalEulerAnglesHint: {x: 14.389139, y: -14.579248, z: 14.008996}
+  m_LocalEulerAnglesHint: {x: 14.389141, y: -14.57925, z: 14.008993}
 --- !u!1 &785673160730321329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,7 +1320,7 @@ Transform:
   m_Children:
   - {fileID: 4209720841151942586}
   m_Father: {fileID: 7150349990741944869}
-  m_LocalEulerAnglesHint: {x: -8.092869, y: 19.70959, z: -6.143752}
+  m_LocalEulerAnglesHint: {x: -11.099944, y: -0.03076915, z: 0.17963102}
 --- !u!1 &870396463839270634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,6 +1332,8 @@ GameObject:
   - component: {fileID: 6884971003549144905}
   - component: {fileID: 7346753456975421706}
   - component: {fileID: 1941306683315861292}
+  - component: {fileID: 2831243721361463599}
+  - component: {fileID: 2309359838396361473}
   m_Layer: 0
   m_Name: Throw attack A
   m_TagString: Untagged
@@ -1305,7 +1368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 1941306683315861292}
+  action: {fileID: 2309359838396361473}
 --- !u!114 &1941306683315861292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,6 +1382,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &2831243721361463599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870396463839270634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetGetAxe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StartThrowAttackATrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2309359838396361473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870396463839270634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 2831243721361463599}
+  ActionsToDo:
+  - {fileID: 1941306683315861292}
+  EndingActions: []
 --- !u!1 &925987861662740671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1493,7 @@ Transform:
   m_Children:
   - {fileID: 70189848846332227}
   m_Father: {fileID: 1768613982932001407}
-  m_LocalEulerAnglesHint: {x: -4.597915, y: -1.745841, z: 3.9081123}
+  m_LocalEulerAnglesHint: {x: 38.880013, y: 1.7153989, z: 5.0066338}
 --- !u!1 &971999766852099941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,7 +1665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6924994026345259552}
   - component: {fileID: 1375101193932267206}
-  - component: {fileID: 2777006222748491105}
+  - component: {fileID: 6298178174485824210}
   m_Layer: 0
   m_Name: No, Pursue
   m_TagString: Untagged
@@ -1557,8 +1700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 2777006222748491105}
---- !u!114 &2777006222748491105
+  action: {fileID: 6298178174485824210}
+--- !u!114 &6298178174485824210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1567,10 +1710,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1111566311290780647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbf3bdaf97252524193806bd0cea541a, type: 3}
+  m_Script: {fileID: 11500000, guid: 639f26103920ccc4b848d1f94474efce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 97395387761626863}
+  agent: {fileID: 97395387761626863}
+  animations: {fileID: 6624029125940982003}
 --- !u!1 &1119666335266904630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,7 +1808,7 @@ Transform:
   m_Children:
   - {fileID: 3727553176930414331}
   m_Father: {fileID: 4209720841151942586}
-  m_LocalEulerAnglesHint: {x: 73.20013, y: 17.984962, z: 17.264015}
+  m_LocalEulerAnglesHint: {x: 73.20013, y: 17.984964, z: 17.264013}
 --- !u!1 &1270998467244792763
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,7 +1902,7 @@ Transform:
   m_Children:
   - {fileID: 1302132017974515177}
   m_Father: {fileID: 2650357077996036791}
-  m_LocalEulerAnglesHint: {x: -2.0899167, y: 4.2569027, z: -5.093085}
+  m_LocalEulerAnglesHint: {x: 8.755708, y: 3.2821047, z: -5.1563406}
 --- !u!1 &1392535338690728303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1934,7 @@ Transform:
   m_Children:
   - {fileID: 7591683664113138122}
   m_Father: {fileID: 2396402604332959544}
-  m_LocalEulerAnglesHint: {x: -8.092869, y: 19.70959, z: -6.143752}
+  m_LocalEulerAnglesHint: {x: -11.099944, y: -0.03076915, z: 0.17963102}
 --- !u!1 &1432515755327816373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,7 +2033,7 @@ Transform:
   m_Children:
   - {fileID: 7900500002889683334}
   m_Father: {fileID: 5355843576383631367}
-  m_LocalEulerAnglesHint: {x: 19.204514, y: -6.778224, z: -5.472759}
+  m_LocalEulerAnglesHint: {x: 19.204514, y: -6.7782254, z: -5.47276}
 --- !u!1 &1509734099290969911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,7 +2128,7 @@ Transform:
   m_Children:
   - {fileID: 4186830841336282452}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -62.868572, y: 78.57344, z: -20.093409}
+  m_LocalEulerAnglesHint: {x: -65.2368, y: 77.0693, z: -18.881948}
 --- !u!1 &1522537780860457348
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,7 +2160,7 @@ Transform:
   m_Children:
   - {fileID: 5079254097850045173}
   m_Father: {fileID: 5355843576383631367}
-  m_LocalEulerAnglesHint: {x: 9.829994, y: 11.79791, z: 26.874979}
+  m_LocalEulerAnglesHint: {x: 9.829997, y: 11.797911, z: 26.87498}
 --- !u!1 &1576013249695409482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,7 +2199,7 @@ Transform:
   - {fileID: 3682984821052492508}
   - {fileID: 1409351442965834730}
   m_Father: {fileID: 1995750182381554425}
-  m_LocalEulerAnglesHint: {x: 18.333628, y: -0.11551941, z: 24.573997}
+  m_LocalEulerAnglesHint: {x: -4.15629, y: 45.40451, z: 4.139977}
 --- !u!1 &1599615637305369815
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,7 +2231,7 @@ Transform:
   m_Children:
   - {fileID: 958832606236384753}
   m_Father: {fileID: 5355843576383631367}
-  m_LocalEulerAnglesHint: {x: 15.030909, y: -8.122268, z: -27.17217}
+  m_LocalEulerAnglesHint: {x: 15.0309105, y: -8.122268, z: -27.172169}
 --- !u!1 &1623899030554750404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2150,7 +2294,7 @@ Transform:
   m_Children:
   - {fileID: 7475591889775530606}
   m_Father: {fileID: 4616261649969297803}
-  m_LocalEulerAnglesHint: {x: -16.218441, y: 0.35523778, z: 0.4637074}
+  m_LocalEulerAnglesHint: {x: 27.37583, y: 0.7153168, z: 0.5014059}
 --- !u!1 &1788235477419384108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,7 +2357,7 @@ Transform:
   m_Children:
   - {fileID: 7427167354354098425}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -63.085438, y: -121.424545, z: 56.253048}
+  m_LocalEulerAnglesHint: {x: -68.76653, y: -151.33093, z: 86.941605}
 --- !u!1 &1929729593747661513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,7 +2393,7 @@ Transform:
   - {fileID: 1227606911641720231}
   - {fileID: 7784210672096036217}
   m_Father: {fileID: 6313977264499282532}
-  m_LocalEulerAnglesHint: {x: -67.07983, y: -143.47925, z: -12.126543}
+  m_LocalEulerAnglesHint: {x: -3.4379773, y: -174.49133, z: -20.19302}
 --- !u!1 &1980991389002654703
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,7 +2456,7 @@ Transform:
   m_Children:
   - {fileID: 2863893972063841872}
   m_Father: {fileID: 5529937228758883696}
-  m_LocalEulerAnglesHint: {x: -15.204368, y: 0.67099375, z: 0.5776437}
+  m_LocalEulerAnglesHint: {x: 28.389093, y: 1.1237632, z: 0.6336236}
 --- !u!1 &2254483971232216491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,7 +2494,7 @@ Transform:
   - {fileID: 4283784918859276972}
   - {fileID: 7463946487140636855}
   m_Father: {fileID: 5453684644962854616}
-  m_LocalEulerAnglesHint: {x: -1.2370522e-17, y: -8.192628e-11, z: 180}
+  m_LocalEulerAnglesHint: {x: -8.170013e-18, y: -5.4107552e-11, z: 180}
 --- !u!1 &2294049261115563076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2382,7 +2526,7 @@ Transform:
   m_Children:
   - {fileID: 1995750182381554425}
   m_Father: {fileID: 5035553900005318219}
-  m_LocalEulerAnglesHint: {x: 20.666292, y: 46.266434, z: -116.172356}
+  m_LocalEulerAnglesHint: {x: 24.943386, y: 100.5092, z: -78.0068}
 --- !u!1 &2296635246484549781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,7 +2978,7 @@ Transform:
   m_Children:
   - {fileID: 1013510644109213802}
   m_Father: {fileID: 2905426247035491400}
-  m_LocalEulerAnglesHint: {x: 68.72323, y: -95.098495, z: -108.30517}
+  m_LocalEulerAnglesHint: {x: 86.83106, y: -167.78183, z: 179.9981}
 --- !u!1 &2564073021022176205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2866,7 +3010,7 @@ Transform:
   m_Children:
   - {fileID: 220264016071750419}
   m_Father: {fileID: 3390846662856872780}
-  m_LocalEulerAnglesHint: {x: 12.005797, y: -3.9296923, z: 5.2186565}
+  m_LocalEulerAnglesHint: {x: 55.318928, y: 2.3987696, z: 8.995396}
 --- !u!1 &2583278735887445154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,7 +3068,7 @@ Transform:
   m_GameObject: {fileID: 2613799575714213324}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.21, y: 0, z: 1.0476837}
+  m_LocalPosition: {x: 2.21, y: 0.5, z: 1.0476837}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3146,7 +3290,7 @@ Transform:
   m_Children:
   - {fileID: 609326209255289889}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -0.50503176, y: 1.2883168, z: 7.763007}
+  m_LocalEulerAnglesHint: {x: -0.50503296, y: 1.2883161, z: 7.76301}
 --- !u!1 &2751786247788354890
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,7 +3501,7 @@ Transform:
   m_Children:
   - {fileID: 1980362987386781743}
   m_Father: {fileID: 1602796055828225415}
-  m_LocalEulerAnglesHint: {x: 27.192984, y: 4.7958164, z: 1.6904994}
+  m_LocalEulerAnglesHint: {x: 70.74225, y: 8.331928, z: 4.5631766}
 --- !u!1 &2867251261096546198
 GameObject:
   m_ObjectHideFlags: 0
@@ -3421,7 +3565,7 @@ Transform:
   m_Children:
   - {fileID: 2599386209614151901}
   m_Father: {fileID: 6519567760587709112}
-  m_LocalEulerAnglesHint: {x: -19.694586, y: -38.714817, z: -26.373028}
+  m_LocalEulerAnglesHint: {x: 0.8421692, y: -16.278107, z: -51.40104}
 --- !u!1 &2954778367657993120
 GameObject:
   m_ObjectHideFlags: 0
@@ -3484,7 +3628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fff493180b6dc499b06d689af04fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  probability: 0.5
+  probability: 0
 --- !u!1 &3008491111237308248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3496,6 +3640,8 @@ GameObject:
   - component: {fileID: 2429248277523320597}
   - component: {fileID: 2783221864955393166}
   - component: {fileID: 3243448157555200312}
+  - component: {fileID: 6314281856678452116}
+  - component: {fileID: 6404284538006545225}
   m_Layer: 0
   m_Name: AOE Attack A
   m_TagString: Untagged
@@ -3530,7 +3676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 3243448157555200312}
+  action: {fileID: 6404284538006545225}
 --- !u!114 &3243448157555200312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3544,6 +3690,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &6314281856678452116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3008491111237308248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StartAreaAttackATrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6404284538006545225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3008491111237308248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 6314281856678452116}
+  ActionsToDo:
+  - {fileID: 3243448157555200312}
+  EndingActions: []
 --- !u!1 &3132100671125735237
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,7 +3789,7 @@ Transform:
   m_Children:
   - {fileID: 4935989060115627718}
   m_Father: {fileID: 8170044277836016201}
-  m_LocalEulerAnglesHint: {x: -7.0760508, y: 0.49956384, z: -18.815466}
+  m_LocalEulerAnglesHint: {x: -12.610173, y: 0.7978493, z: -3.3338795}
 --- !u!1 &3190540882217268604
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3801,8 @@ GameObject:
   - component: {fileID: 8427844200516738176}
   - component: {fileID: 5102875175837974620}
   - component: {fileID: 8496747653783651864}
+  - component: {fileID: 1404687943240318444}
+  - component: {fileID: 5270059416846650083}
   m_Layer: 0
   m_Name: AOE Attack A
   m_TagString: Untagged
@@ -3621,7 +3837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 8496747653783651864}
+  action: {fileID: 5270059416846650083}
 --- !u!114 &8496747653783651864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3635,6 +3851,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &1404687943240318444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190540882217268604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StartAreaAttackATrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5270059416846650083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190540882217268604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 1404687943240318444}
+  ActionsToDo:
+  - {fileID: 8496747653783651864}
+  EndingActions: []
 --- !u!1 &3329354884541587729
 GameObject:
   m_ObjectHideFlags: 0
@@ -3823,7 +4107,7 @@ Transform:
   m_Children:
   - {fileID: 5084804986496744500}
   m_Father: {fileID: 2905426247035491400}
-  m_LocalEulerAnglesHint: {x: 1.0077188, y: -1.6655587, z: 25.329473}
+  m_LocalEulerAnglesHint: {x: 7.916887e-18, y: 5.336092e-11, z: -0.000009540136}
 --- !u!1 &3431813038854190999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3855,7 +4139,7 @@ Transform:
   m_Children:
   - {fileID: 4624609451599078275}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -63.08544, y: -121.42449, z: 56.25299}
+  m_LocalEulerAnglesHint: {x: -68.766525, y: -151.33092, z: 86.94161}
 --- !u!1 &3495923201861343989
 GameObject:
   m_ObjectHideFlags: 0
@@ -3887,7 +4171,7 @@ Transform:
   m_Children:
   - {fileID: 1025845112179064051}
   m_Father: {fileID: 4945132147466443148}
-  m_LocalEulerAnglesHint: {x: 16.087006, y: -1.4092484, z: -1.2604231}
+  m_LocalEulerAnglesHint: {x: 26.973137, y: -1.6785605, z: -1.3616399}
 --- !u!1 &3537811940251712216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3919,7 +4203,7 @@ Transform:
   m_Children:
   - {fileID: 7142848896130774223}
   m_Father: {fileID: 5079254097850045173}
-  m_LocalEulerAnglesHint: {x: 16.472048, y: 0.41848728, z: 1.4361875}
+  m_LocalEulerAnglesHint: {x: 27.357307, y: 0.72644794, z: 1.5538551}
 --- !u!1 &3607635904205612724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3951,7 +4235,7 @@ Transform:
   m_Children:
   - {fileID: 4945132147466443148}
   m_Father: {fileID: 4180008152825882443}
-  m_LocalEulerAnglesHint: {x: -9.265788, y: 0.65956527, z: 2.5192862}
+  m_LocalEulerAnglesHint: {x: 1.6128206, y: 1.135999, z: 2.490256}
 --- !u!1 &3618696672452909256
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,7 +4267,7 @@ Transform:
   m_Children:
   - {fileID: 7517197160812206082}
   m_Father: {fileID: 196225684070696525}
-  m_LocalEulerAnglesHint: {x: -23.407368, y: -24.785038, z: 98.77018}
+  m_LocalEulerAnglesHint: {x: -22.588896, y: -14.326049, z: 72.374176}
 --- !u!1 &3682516739978671157
 GameObject:
   m_ObjectHideFlags: 0
@@ -4167,7 +4451,7 @@ Transform:
   m_Children:
   - {fileID: 4816881568237305067}
   m_Father: {fileID: 7900500002889683334}
-  m_LocalEulerAnglesHint: {x: 28.342813, y: 0.038468022, z: -3.030018}
+  m_LocalEulerAnglesHint: {x: 39.214382, y: -0.7102216, z: -3.4535885}
 --- !u!1 &3938115948152520032
 GameObject:
   m_ObjectHideFlags: 0
@@ -4378,7 +4662,7 @@ Transform:
   m_Children:
   - {fileID: 9066931249783783547}
   m_Father: {fileID: 4209720841151942586}
-  m_LocalEulerAnglesHint: {x: 71.81017, y: 29.08062, z: 27.850176}
+  m_LocalEulerAnglesHint: {x: 71.81017, y: 29.080622, z: 27.850176}
 --- !u!1 &3966667934828370008
 GameObject:
   m_ObjectHideFlags: 0
@@ -4568,7 +4852,7 @@ Transform:
   m_Children:
   - {fileID: 4237153146767270757}
   m_Father: {fileID: 6700670413964662937}
-  m_LocalEulerAnglesHint: {x: 22.513369, y: 5.6653533, z: -27.039465}
+  m_LocalEulerAnglesHint: {x: 22.513369, y: 5.6653504, z: -27.039463}
 --- !u!1 &4168595222786063215
 GameObject:
   m_ObjectHideFlags: 0
@@ -4600,7 +4884,7 @@ Transform:
   m_Children:
   - {fileID: 6278643620531499701}
   m_Father: {fileID: 2599386209614151901}
-  m_LocalEulerAnglesHint: {x: 19.474874, y: -108.064995, z: -121.75368}
+  m_LocalEulerAnglesHint: {x: 63.673325, y: -87.240974, z: -117.93075}
 --- !u!1 &4311421040859677034
 GameObject:
   m_ObjectHideFlags: 0
@@ -4663,7 +4947,7 @@ Transform:
   m_Children:
   - {fileID: 4319882154693064936}
   m_Father: {fileID: 489787855745486227}
-  m_LocalEulerAnglesHint: {x: 20.718847, y: 0.7319526, z: -3.9341815}
+  m_LocalEulerAnglesHint: {x: 64.11434, y: -5.489351, z: -8.452651}
 --- !u!1 &4549169348401457323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4758,7 +5042,7 @@ Transform:
   m_Children:
   - {fileID: 3381738193402859672}
   m_Father: {fileID: 4209720841151942586}
-  m_LocalEulerAnglesHint: {x: -76.395775, y: -94.52445, z: 95.66989}
+  m_LocalEulerAnglesHint: {x: -70.896935, y: -146.0101, z: 147.49779}
 --- !u!1 &4646872724260187329
 GameObject:
   m_ObjectHideFlags: 0
@@ -4821,7 +5105,7 @@ Transform:
   m_Children:
   - {fileID: 7602001748218197414}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -4.6457005, y: 6.56679, z: 25.682669}
+  m_LocalEulerAnglesHint: {x: -4.6457024, y: 6.566789, z: 25.682673}
 --- !u!1 &4707065831516205497
 GameObject:
   m_ObjectHideFlags: 0
@@ -4884,7 +5168,7 @@ Transform:
   m_Children:
   - {fileID: 4627366510839594430}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -16.906322, y: -170.19955, z: 163.99915}
+  m_LocalEulerAnglesHint: {x: 5.803639, y: -178.00253, z: 172.98425}
 --- !u!1 &5053827736678257006
 GameObject:
   m_ObjectHideFlags: 0
@@ -5042,7 +5326,7 @@ Transform:
   m_Children:
   - {fileID: 1768613982932001407}
   m_Father: {fileID: 6266056263921802030}
-  m_LocalEulerAnglesHint: {x: -11.822136, y: 0.10390352, z: 0.06296782}
+  m_LocalEulerAnglesHint: {x: 31.77352, y: 0.15497386, z: 0.07249576}
 --- !u!1 &5167348682693669566
 GameObject:
   m_ObjectHideFlags: 0
@@ -5137,7 +5421,7 @@ Transform:
   m_Children:
   - {fileID: 196225684070696525}
   m_Father: {fileID: 2396402604332959544}
-  m_LocalEulerAnglesHint: {x: -10.603128, y: -3.951516, z: -147.54062}
+  m_LocalEulerAnglesHint: {x: -10.603126, y: -3.951513, z: -147.54062}
 --- !u!1 &5289391623310047787
 GameObject:
   m_ObjectHideFlags: 0
@@ -5329,7 +5613,7 @@ Transform:
   m_Children:
   - {fileID: 5529937228758883696}
   m_Father: {fileID: 8815892758617308494}
-  m_LocalEulerAnglesHint: {x: -2.4862952, y: -0.62906873, z: -5.1744227}
+  m_LocalEulerAnglesHint: {x: 40.89622, y: -5.3483424, z: -6.8459506}
 --- !u!1 &5348302853480090293
 GameObject:
   m_ObjectHideFlags: 0
@@ -5341,6 +5625,8 @@ GameObject:
   - component: {fileID: 3466461985939742877}
   - component: {fileID: 7928756233198506143}
   - component: {fileID: 5530958821861112115}
+  - component: {fileID: 2089614293443252863}
+  - component: {fileID: 3334136121402405597}
   m_Layer: 0
   m_Name: Jump Attack
   m_TagString: Untagged
@@ -5375,7 +5661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 5530958821861112115}
+  action: {fileID: 3334136121402405597}
 --- !u!114 &5530958821861112115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5389,6 +5675,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &2089614293443252863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5348302853480090293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3334136121402405597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5348302853480090293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 5530958821861112115}
+  ActionsToDo:
+  - {fileID: 2089614293443252863}
+  EndingActions: []
 --- !u!1 &5447151110915173279
 GameObject:
   m_ObjectHideFlags: 0
@@ -5451,7 +5793,7 @@ Transform:
   m_Children:
   - {fileID: 169670133171310020}
   m_Father: {fileID: 6700670413964662937}
-  m_LocalEulerAnglesHint: {x: -4.4350376, y: 25.108343, z: 68.41105}
+  m_LocalEulerAnglesHint: {x: -4.4350395, y: 25.108341, z: 68.41105}
 --- !u!1 &5552000257348370251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5483,7 +5825,7 @@ Transform:
   m_Children:
   - {fileID: 489787855745486227}
   m_Father: {fileID: 6700670413964662937}
-  m_LocalEulerAnglesHint: {x: 8.821939, y: 9.910057, z: -13.276357}
+  m_LocalEulerAnglesHint: {x: 8.821941, y: 9.91006, z: -13.276355}
 --- !u!1 &5609008411567436616
 GameObject:
   m_ObjectHideFlags: 0
@@ -5609,7 +5951,7 @@ Transform:
   m_Children:
   - {fileID: 6228340112795293074}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -62.868607, y: 78.57344, z: -20.093395}
+  m_LocalEulerAnglesHint: {x: -65.236824, y: 77.069305, z: -18.881952}
 --- !u!1 &5879456495211442904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5672,7 +6014,7 @@ Transform:
   m_Children:
   - {fileID: 7817144506830754171}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -28.188585, y: -11.289406, z: 31.97477}
+  m_LocalEulerAnglesHint: {x: -28.188585, y: -11.289403, z: 31.974771}
 --- !u!1 &5913590450789909758
 GameObject:
   m_ObjectHideFlags: 0
@@ -5704,7 +6046,7 @@ Transform:
   m_Children:
   - {fileID: 912506487746926217}
   m_Father: {fileID: 7784210672096036217}
-  m_LocalEulerAnglesHint: {x: 9.954747, y: -0.46023083, z: 4.0797625}
+  m_LocalEulerAnglesHint: {x: 20.814636, y: 0.3685145, z: 4.3064094}
 --- !u!1 &5923472370512990884
 GameObject:
   m_ObjectHideFlags: 0
@@ -5742,7 +6084,7 @@ Transform:
   - {fileID: 3687461140406495734}
   - {fileID: 2103469571643723307}
   m_Father: {fileID: 1013510644109213802}
-  m_LocalEulerAnglesHint: {x: 23.263266, y: 14.989988, z: 11.943406}
+  m_LocalEulerAnglesHint: {x: 23.107864, y: 0.23874575, z: 1.4812698}
 --- !u!1 &5941407465086420419
 GameObject:
   m_ObjectHideFlags: 0
@@ -5774,7 +6116,7 @@ Transform:
   m_Children:
   - {fileID: 7095057721934517067}
   m_Father: {fileID: 5355843576383631367}
-  m_LocalEulerAnglesHint: {x: 4.9903154, y: 14.732987, z: 49.90656}
+  m_LocalEulerAnglesHint: {x: 4.990314, y: 14.732987, z: 49.90656}
 --- !u!1 &5956085700478444971
 GameObject:
   m_ObjectHideFlags: 0
@@ -5806,7 +6148,7 @@ Transform:
   m_Children:
   - {fileID: 172409653874490678}
   m_Father: {fileID: 220264016071750419}
-  m_LocalEulerAnglesHint: {x: -19.959936, y: 0.2490849, z: 6.332198}
+  m_LocalEulerAnglesHint: {x: 23.388666, y: 5.002214, z: 6.485301}
 --- !u!1 &5964745649361794066
 GameObject:
   m_ObjectHideFlags: 0
@@ -5838,7 +6180,7 @@ Transform:
   m_Children:
   - {fileID: 7656448538649391129}
   m_Father: {fileID: 2451609849698041242}
-  m_LocalEulerAnglesHint: {x: 61.440533, y: -66.1938, z: 116.38615}
+  m_LocalEulerAnglesHint: {x: 71.579834, y: -52.171253, z: 118.48255}
 --- !u!1 &5977010344229235670
 GameObject:
   m_ObjectHideFlags: 0
@@ -5932,7 +6274,7 @@ Transform:
   m_Children:
   - {fileID: 4037543736464422004}
   m_Father: {fileID: 2502019617785696693}
-  m_LocalEulerAnglesHint: {x: 15.702074, y: -0.18872088, z: 0.8762835}
+  m_LocalEulerAnglesHint: {x: 26.58965, y: -0.0021304078, z: 0.9452295}
 --- !u!1 &6051312182001324704
 GameObject:
   m_ObjectHideFlags: 0
@@ -6100,7 +6442,7 @@ Transform:
   m_Children:
   - {fileID: 1595142774249101939}
   m_Father: {fileID: 2396402604332959544}
-  m_LocalEulerAnglesHint: {x: -11.134636, y: 4.811619, z: 146.51787}
+  m_LocalEulerAnglesHint: {x: -11.134633, y: 4.8116174, z: 146.51787}
 --- !u!1 &6111740031612647157
 GameObject:
   m_ObjectHideFlags: 0
@@ -6194,7 +6536,7 @@ Transform:
   m_Children:
   - {fileID: 5987636670751151221}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: 8.634846, y: -4.206388, z: -25.33877}
+  m_LocalEulerAnglesHint: {x: 8.634845, y: -4.206389, z: -25.338772}
 --- !u!1 &6294579339327496406
 GameObject:
   m_ObjectHideFlags: 0
@@ -6226,7 +6568,7 @@ Transform:
   m_Children:
   - {fileID: 6776563170324273242}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: -70.1989, y: -122.26862, z: -63.638172}
+  m_LocalEulerAnglesHint: {x: -52.435726, y: -9.990801, z: -161.20639}
 --- !u!1 &6306795697794485877
 GameObject:
   m_ObjectHideFlags: 0
@@ -6258,7 +6600,7 @@ Transform:
   m_Children:
   - {fileID: 2675727940530647370}
   m_Father: {fileID: 4237153146767270757}
-  m_LocalEulerAnglesHint: {x: 18.493803, y: 2.2757494, z: 4.26087}
+  m_LocalEulerAnglesHint: {x: 61.869026, y: 8.513964, z: 8.5946665}
 --- !u!1 &6336885647115889534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6321,7 +6663,7 @@ Transform:
   m_Children:
   - {fileID: 3813421142977564775}
   m_Father: {fileID: 54871533201837245}
-  m_LocalEulerAnglesHint: {x: -28.395693, y: -2.5926435, z: -0.4195705}
+  m_LocalEulerAnglesHint: {x: 15.198995, y: -2.8924508, z: -0.38246676}
 --- !u!1 &6355466276517231907
 GameObject:
   m_ObjectHideFlags: 0
@@ -6355,7 +6697,7 @@ Transform:
   - {fileID: 3186082436764563350}
   - {fileID: 6519567760587709112}
   m_Father: {fileID: 5453684644962854616}
-  m_LocalEulerAnglesHint: {x: -68.72326, y: 95.098465, z: 71.694855}
+  m_LocalEulerAnglesHint: {x: -86.830986, y: 167.65633, z: -0.0018899575}
 --- !u!1 &6373252571194675904
 GameObject:
   m_ObjectHideFlags: 0
@@ -6387,7 +6729,7 @@ Transform:
   m_Children:
   - {fileID: 7774705184097757499}
   m_Father: {fileID: 6700670413964662937}
-  m_LocalEulerAnglesHint: {x: -51.61281, y: 23.714102, z: 68.20729}
+  m_LocalEulerAnglesHint: {x: -51.61281, y: 23.714106, z: 68.20729}
 --- !u!1 &6376222858430842335
 GameObject:
   m_ObjectHideFlags: 0
@@ -6578,6 +6920,8 @@ GameObject:
   - component: {fileID: 8282110529367783500}
   - component: {fileID: 3946885447967458879}
   - component: {fileID: 5376668680070774250}
+  - component: {fileID: 8509061299984005090}
+  - component: {fileID: 8815995272055419441}
   m_Layer: 0
   m_Name: Chase
   m_TagString: Untagged
@@ -6612,7 +6956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 5376668680070774250}
+  action: {fileID: 8815995272055419441}
 --- !u!114 &5376668680070774250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6626,6 +6970,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 97395387761626863}
+--- !u!114 &8509061299984005090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446415512244130434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetStopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: MovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8815995272055419441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446415512244130434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 8509061299984005090}
+  ActionsToDo:
+  - {fileID: 5376668680070774250}
+  EndingActions: []
 --- !u!1 &6451066347214705209
 GameObject:
   m_ObjectHideFlags: 0
@@ -6657,7 +7057,7 @@ Transform:
   m_Children:
   - {fileID: 8503515466633400204}
   m_Father: {fileID: 169670133171310020}
-  m_LocalEulerAnglesHint: {x: 18.276237, y: -0.43953797, z: 9.366339}
+  m_LocalEulerAnglesHint: {x: 60.828705, y: 12.87167, z: 18.484543}
 --- !u!1 &6475810375285618169
 GameObject:
   m_ObjectHideFlags: 0
@@ -6669,6 +7069,8 @@ GameObject:
   - component: {fileID: 5052008965992186843}
   - component: {fileID: 6946439690436433936}
   - component: {fileID: 2206965544485387308}
+  - component: {fileID: 7591778956396757465}
+  - component: {fileID: 2768398535444072227}
   m_Layer: 0
   m_Name: Throw attack B
   m_TagString: Untagged
@@ -6703,7 +7105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 2206965544485387308}
+  action: {fileID: 2768398535444072227}
 --- !u!114 &2206965544485387308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6717,6 +7119,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &7591778956396757465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475810375285618169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetGetAxe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StartThrowAttackBTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2768398535444072227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475810375285618169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 7591778956396757465}
+  ActionsToDo:
+  - {fileID: 2206965544485387308}
+  EndingActions: []
 --- !u!1 &6492290968252604453
 GameObject:
   m_ObjectHideFlags: 0
@@ -6728,6 +7210,8 @@ GameObject:
   - component: {fileID: 2394023584224213303}
   - component: {fileID: 1810377338987001559}
   - component: {fileID: 8957893319266686207}
+  - component: {fileID: 3978158267194609427}
+  - component: {fileID: 1420214028110024384}
   m_Layer: 0
   m_Name: Swipe Attack
   m_TagString: Untagged
@@ -6762,7 +7246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 8957893319266686207}
+  action: {fileID: 1420214028110024384}
 --- !u!114 &8957893319266686207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6776,6 +7260,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &3978158267194609427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6492290968252604453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StartSwipeAttackTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1420214028110024384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6492290968252604453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 3978158267194609427}
+  ActionsToDo:
+  - {fileID: 8957893319266686207}
+  EndingActions: []
 --- !u!1 &6537464590697416140
 GameObject:
   m_ObjectHideFlags: 0
@@ -6807,7 +7359,7 @@ Transform:
   m_Children:
   - {fileID: 9187293141591434346}
   m_Father: {fileID: 4886098872630296497}
-  m_LocalEulerAnglesHint: {x: 51.776546, y: 9.072858, z: 20.46892}
+  m_LocalEulerAnglesHint: {x: 21.413746, y: 0.050040293, z: 1.8910905}
 --- !u!1 &6544038413496729200
 GameObject:
   m_ObjectHideFlags: 0
@@ -6850,6 +7402,8 @@ GameObject:
   - component: {fileID: 3970143445370760915}
   - component: {fileID: 6119778279961218177}
   - component: {fileID: 6660201815577164}
+  - component: {fileID: 5859168012136716065}
+  - component: {fileID: 7717748308550960181}
   m_Layer: 0
   m_Name: Swipe Attack
   m_TagString: Untagged
@@ -6884,7 +7438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 6660201815577164}
+  action: {fileID: 7717748308550960181}
 --- !u!114 &6660201815577164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6898,6 +7452,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &5859168012136716065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6591286685787834901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StartSwipeAttackTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7717748308550960181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6591286685787834901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 5859168012136716065}
+  ActionsToDo:
+  - {fileID: 6660201815577164}
+  EndingActions: []
 --- !u!1 &6835875016958501705
 GameObject:
   m_ObjectHideFlags: 0
@@ -6972,6 +7594,8 @@ GameObject:
   - component: {fileID: 4239016037583148158}
   - component: {fileID: 107436914091790112}
   - component: {fileID: 5111399777417599875}
+  - component: {fileID: 8157951134520375068}
+  - component: {fileID: 5773331098504133930}
   m_Layer: 0
   m_Name: Yes, Chase
   m_TagString: Untagged
@@ -7006,7 +7630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 5111399777417599875}
+  action: {fileID: 5773331098504133930}
 --- !u!114 &5111399777417599875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7020,6 +7644,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 97395387761626863}
+--- !u!114 &8157951134520375068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013142702183676536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetStopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: MovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5773331098504133930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013142702183676536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 8157951134520375068}
+  ActionsToDo:
+  - {fileID: 5111399777417599875}
+  EndingActions: []
 --- !u!1 &7394887578602136184
 GameObject:
   m_ObjectHideFlags: 0
@@ -7051,7 +7731,7 @@ Transform:
   m_Children:
   - {fileID: 5313225048034627527}
   m_Father: {fileID: 1595142774249101939}
-  m_LocalEulerAnglesHint: {x: 75.1817, y: -43.77364, z: 158.95505}
+  m_LocalEulerAnglesHint: {x: 43.951557, y: 165.40312, z: 5.288863}
 --- !u!1 &7435944969350516460
 GameObject:
   m_ObjectHideFlags: 0
@@ -7083,7 +7763,7 @@ Transform:
   m_Children:
   - {fileID: 2034143787917556396}
   m_Father: {fileID: 1302132017974515177}
-  m_LocalEulerAnglesHint: {x: 12.316067, y: -3.1051698, z: -3.4693952}
+  m_LocalEulerAnglesHint: {x: 23.183779, y: -3.822526, z: -3.6941423}
 --- !u!1 &7512064618210612738
 GameObject:
   m_ObjectHideFlags: 0
@@ -7115,7 +7795,7 @@ Transform:
   m_Children:
   - {fileID: 74075013339710720}
   m_Father: {fileID: 958832606236384753}
-  m_LocalEulerAnglesHint: {x: 21.542215, y: -0.22240564, z: 1.3884909}
+  m_LocalEulerAnglesHint: {x: 32.427635, y: 0.09153548, z: 1.5338631}
 --- !u!1 &7516454323265253730
 GameObject:
   m_ObjectHideFlags: 0
@@ -7147,7 +7827,7 @@ Transform:
   m_Children:
   - {fileID: 69925017324493298}
   m_Father: {fileID: 6700670413964662937}
-  m_LocalEulerAnglesHint: {x: 12.798814, y: -9.887637, z: 0.34631535}
+  m_LocalEulerAnglesHint: {x: 12.798814, y: -9.887636, z: 0.3463147}
 --- !u!1 &7521847045899390280
 GameObject:
   m_ObjectHideFlags: 0
@@ -7179,7 +7859,7 @@ Transform:
   m_Children:
   - {fileID: 529385921351822832}
   m_Father: {fileID: 4209720841151942586}
-  m_LocalEulerAnglesHint: {x: -71.69163, y: -149.75258, z: -18.494682}
+  m_LocalEulerAnglesHint: {x: -5.4035983, y: -46.85209, z: -148.32538}
 --- !u!1 &7628383846463395864
 GameObject:
   m_ObjectHideFlags: 0
@@ -7222,6 +7902,8 @@ GameObject:
   - component: {fileID: 5824007882558991589}
   - component: {fileID: 1740049232457359629}
   - component: {fileID: 6220194817489432}
+  - component: {fileID: 5659173906660708203}
+  - component: {fileID: 4265040784197075359}
   m_Layer: 0
   m_Name: No, Enraged
   m_TagString: Untagged
@@ -7256,7 +7938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 6220194817489432}
+  action: {fileID: 5659173906660708203}
 --- !u!114 &6220194817489432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7270,6 +7952,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &5659173906660708203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714766836991225146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 4265040784197075359}
+  ActionsToDo:
+  - {fileID: 6220194817489432}
+  EndingActions: []
+--- !u!114 &4265040784197075359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714766836991225146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: EnragedTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7777140311642751616
 GameObject:
   m_ObjectHideFlags: 0
@@ -7399,7 +8125,7 @@ Transform:
   m_Children:
   - {fileID: 981938766720687185}
   m_Father: {fileID: 5453684644962854616}
-  m_LocalEulerAnglesHint: {x: -54.75509, y: 8.838311, z: 84.91392}
+  m_LocalEulerAnglesHint: {x: -21.028313, y: 148.38885, z: -30.968325}
 --- !u!1 &7840231917319262402
 GameObject:
   m_ObjectHideFlags: 0
@@ -7431,7 +8157,7 @@ Transform:
   m_Children:
   - {fileID: 6700670413964662937}
   m_Father: {fileID: 4624609451599078275}
-  m_LocalEulerAnglesHint: {x: 43.653053, y: -7.515621, z: -18.001644}
+  m_LocalEulerAnglesHint: {x: 16.538702, y: -1.0584828, z: -5.5198016}
 --- !u!1 &7924627034939308609
 GameObject:
   m_ObjectHideFlags: 0
@@ -7463,7 +8189,7 @@ Transform:
   m_Children:
   - {fileID: 3460157469652987492}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: 71.55355, y: 159.4525, z: 152.87376}
+  m_LocalEulerAnglesHint: {x: 33.13738, y: 175.9635, z: 168.66904}
 --- !u!1 &7973016457580504714
 GameObject:
   m_ObjectHideFlags: 0
@@ -7495,7 +8221,7 @@ Transform:
   m_Children:
   - {fileID: 5501575255634301870}
   m_Father: {fileID: 2905426247035491400}
-  m_LocalEulerAnglesHint: {x: 7.800854, y: -0.00000036394067, z: -0.0000085287265}
+  m_LocalEulerAnglesHint: {x: 7.916885e-18, y: 5.3360913e-11, z: -0.000009540136}
 --- !u!1 &8059421230341937787
 GameObject:
   m_ObjectHideFlags: 0
@@ -7648,7 +8374,7 @@ Transform:
   m_Children:
   - {fileID: 6313977264499282532}
   m_Father: {fileID: 5914910359901854129}
-  m_LocalEulerAnglesHint: {x: 19.784563, y: -99.90463, z: 66.849045}
+  m_LocalEulerAnglesHint: {x: 9.211898, y: -88.965576, z: 72.64522}
 --- !u!1 &8217477289048489197
 GameObject:
   m_ObjectHideFlags: 0
@@ -7680,7 +8406,7 @@ Transform:
   m_Children:
   - {fileID: 3494756822435387420}
   m_Father: {fileID: 221086843264599293}
-  m_LocalEulerAnglesHint: {x: 29.537567, y: -1.0951319, z: -0.996224}
+  m_LocalEulerAnglesHint: {x: 40.424675, y: -1.3459533, z: -1.1424962}
 --- !u!1 &8220580203439517584
 GameObject:
   m_ObjectHideFlags: 0
@@ -7787,7 +8513,7 @@ Transform:
   - {fileID: 4886098872630296497}
   - {fileID: 8170044277836016201}
   m_Father: {fileID: 1972636656727989573}
-  m_LocalEulerAnglesHint: {x: 23.263266, y: 14.989988, z: 11.943406}
+  m_LocalEulerAnglesHint: {x: 23.107864, y: 0.23874575, z: 1.4812698}
 --- !u!1 &8453480594786497713
 GameObject:
   m_ObjectHideFlags: 0
@@ -8000,7 +8726,7 @@ Transform:
   m_Children:
   - {fileID: 7863207261143293563}
   m_Father: {fileID: 6379253479710616010}
-  m_LocalEulerAnglesHint: {x: 15.395715, y: -1.5995816, z: -2.7718596}
+  m_LocalEulerAnglesHint: {x: 26.270926, y: -2.1878672, z: -2.9862316}
 --- !u!1 &8615495118971460136
 GameObject:
   m_ObjectHideFlags: 0
@@ -8220,7 +8946,7 @@ Transform:
   m_Children:
   - {fileID: 4901555043032370866}
   m_Father: {fileID: 2905426247035491400}
-  m_LocalEulerAnglesHint: {x: 0.0000034150944, y: -53.19221, z: -90}
+  m_LocalEulerAnglesHint: {x: 0.000005779647, y: -96.78788, z: -90}
 --- !u!1 &8693464981028473462
 GameObject:
   m_ObjectHideFlags: 0
@@ -8252,7 +8978,7 @@ Transform:
   m_Children:
   - {fileID: 221086843264599293}
   m_Father: {fileID: 1227606911641720231}
-  m_LocalEulerAnglesHint: {x: -13.808773, y: -1.0356449, z: -5.7183166}
+  m_LocalEulerAnglesHint: {x: -2.9721837, y: -2.1156528, z: -5.566254}
 --- !u!1 &8735227844005835380
 GameObject:
   m_ObjectHideFlags: 0
@@ -8284,7 +9010,7 @@ Transform:
   m_Children:
   - {fileID: 597526091830375876}
   m_Father: {fileID: 9048562539296426704}
-  m_LocalEulerAnglesHint: {x: 21.662855, y: -11.601839, z: -3.2820837}
+  m_LocalEulerAnglesHint: {x: 25.79293, y: -0.76719046, z: -3.5649316}
 --- !u!1 &8740280105822260061
 GameObject:
   m_ObjectHideFlags: 0
@@ -8363,6 +9089,8 @@ GameObject:
   - component: {fileID: 607489396846377449}
   - component: {fileID: 6352766538495863705}
   - component: {fileID: 6736266149273369448}
+  - component: {fileID: 6963123080597946013}
+  - component: {fileID: 945064843228808095}
   m_Layer: 0
   m_Name: Throw attack A
   m_TagString: Untagged
@@ -8397,7 +9125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 6736266149273369448}
+  action: {fileID: 6963123080597946013}
 --- !u!114 &6736266149273369448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8411,6 +9139,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &6963123080597946013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785625949288399612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 945064843228808095}
+  ActionsToDo:
+  - {fileID: 6736266149273369448}
+  EndingActions: []
+--- !u!114 &945064843228808095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785625949288399612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetGetAxe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StartThrowAttackATrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8875672323091586051
 GameObject:
   m_ObjectHideFlags: 0
@@ -8505,7 +9313,7 @@ Transform:
   m_Children:
   - {fileID: 586972939512930499}
   m_Father: {fileID: 7591683664113138122}
-  m_LocalEulerAnglesHint: {x: 45.47329, y: -171.62088, z: -135.08266}
+  m_LocalEulerAnglesHint: {x: 23.956411, y: -177.36986, z: -166.91272}
 --- !u!1 &8968576568062151703
 GameObject:
   m_ObjectHideFlags: 0
@@ -8537,7 +9345,7 @@ Transform:
   m_Children:
   - {fileID: 7088349268774988761}
   m_Father: {fileID: 2905426247035491400}
-  m_LocalEulerAnglesHint: {x: -0.0000017697722, y: -85.20209, z: -90}
+  m_LocalEulerAnglesHint: {x: 0.000011488562, y: -96.0419, z: -90.00001}
 --- !u!1 &8987215513056486182
 GameObject:
   m_ObjectHideFlags: 0
@@ -8548,7 +9356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4317355756278920482}
   - component: {fileID: 3023243943389932498}
-  - component: {fileID: 3078708092398117858}
+  - component: {fileID: 5391163786546558592}
   m_Layer: 0
   m_Name: Pursue
   m_TagString: Untagged
@@ -8583,8 +9391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 3078708092398117858}
---- !u!114 &3078708092398117858
+  action: {fileID: 5391163786546558592}
+--- !u!114 &5391163786546558592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8593,10 +9401,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8987215513056486182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbf3bdaf97252524193806bd0cea541a, type: 3}
+  m_Script: {fileID: 11500000, guid: 639f26103920ccc4b848d1f94474efce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 97395387761626863}
+  agent: {fileID: 97395387761626863}
+  animations: {fileID: 6624029125940982003}
 --- !u!1 &9049336800385123321
 GameObject:
   m_ObjectHideFlags: 0
@@ -8628,7 +9437,7 @@ Transform:
   m_Children:
   - {fileID: 7457088238260255594}
   m_Father: {fileID: 282188996292862907}
-  m_LocalEulerAnglesHint: {x: 7.828677, y: -0.6901531, z: -54.192024}
+  m_LocalEulerAnglesHint: {x: 10.966705, y: 0.24367282, z: -16.547464}
 --- !u!1 &9050837829329843624
 GameObject:
   m_ObjectHideFlags: 0
@@ -8660,7 +9469,7 @@ Transform:
   m_Children:
   - {fileID: 6448270949116581926}
   m_Father: {fileID: 4209720841151942586}
-  m_LocalEulerAnglesHint: {x: 22.51463, y: -7.14102, z: 5.0601554}
+  m_LocalEulerAnglesHint: {x: 25.137394, y: 4.2645745, z: 5.0358315}
 --- !u!1 &9158153126129638816
 GameObject:
   m_ObjectHideFlags: 0
@@ -8672,6 +9481,8 @@ GameObject:
   - component: {fileID: 2939631343726108774}
   - component: {fileID: 6962228327760635496}
   - component: {fileID: 2608302993341938736}
+  - component: {fileID: 9144429891226626852}
+  - component: {fileID: 4425963428720145621}
   m_Layer: 0
   m_Name: AOE Attack B
   m_TagString: Untagged
@@ -8706,7 +9517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d37efdb631ac9498b54a83f59a00f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 2608302993341938736}
+  action: {fileID: 4425963428720145621}
 --- !u!114 &2608302993341938736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8720,6 +9531,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumberjack: {fileID: 6496424540935143022}
+--- !u!114 &9144429891226626852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158153126129638816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd2350845570f9428c68d358cbf6bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  methodCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: ResetMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StopMovingTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6624029125940982003}
+        m_TargetAssemblyTypeName: LumberjackAnimations, Assembly-CSharp
+        m_MethodName: StartAreaAttackBTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4425963428720145621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158153126129638816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23810625cfbf6b94facace1a7eeb062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingActions:
+  - {fileID: 9144429891226626852}
+  ActionsToDo:
+  - {fileID: 2608302993341938736}
+  EndingActions: []
 --- !u!1 &9207797116380492247
 GameObject:
   m_ObjectHideFlags: 0
@@ -8869,82 +9748,4 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
   m_PrefabInstance: {fileID: 3789267070718324023}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5224035674062267833
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1409351442965834730}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.004
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.492
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.365
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.693406
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7093122
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.090633035
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.08860037
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -91.299
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -0.0010070801
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 14.563995
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-      propertyPath: m_Name
-      value: Axe
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
---- !u!4 &5761574765169885778 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d33233efbe765794c93f9e67eddcbaf8, type: 3}
-  m_PrefabInstance: {fileID: 5224035674062267833}
   m_PrefabAsset: {fileID: 0}
