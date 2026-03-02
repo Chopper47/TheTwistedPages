@@ -128,7 +128,7 @@ public class PlayerMovement: MonoBehaviour
             if (rollAction.triggered && canRoll)
             {
 
-                if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime && toPush != null)
+                if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime && bulletTimeTrigger.FirstHarm() != null)
                 {
                     canTriggerBulletTime = false;
                     isInBulletTime = true;
