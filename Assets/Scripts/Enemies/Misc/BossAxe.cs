@@ -170,6 +170,10 @@ public class BossAxe : MonoBehaviour
                 lumberjack.GetAnimations().CloseInAxeTrigger();
             }
         }
+        else
+        {
+            lumberjack.GetAnimations().CloseInAxeTrigger();
+        }
         yield return null;
     }
     

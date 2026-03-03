@@ -454,9 +454,8 @@ public class Lumberjack : MonoBehaviour
         StartCoroutine("ResetJumpCounterAfterDelay", 5f);
 
         StartAttack();
-        StartCoroutine(JumpAttack());
         agent.enabled = false;
-
+        
         rb.isKinematic = true;
         rb.linearVelocity = Vector3.zero;
 
@@ -484,8 +483,13 @@ public class Lumberjack : MonoBehaviour
             yield return null;
         }
         //anim
+
+        StartCoroutine(JumpIndicator());
+        jumpIndicator.transform.parent = chaseAgent.target;
+        jumpIndicator.transform.localPosition = new Vector3(0, 0.1f, 0);
         animations.FallingTrigger();
         // Horizontal movement towards target in a straight line.
+        
         float travelTime = 0.4f;
         timer = 0f;
         Vector3 travelStart = transform.position;
@@ -499,6 +503,7 @@ public class Lumberjack : MonoBehaviour
         }
 
         //anim
+        jumpIndicator.transform.parent = null;
         // Boss "falls" straight down towards the target.
         float fallTime = 0.35f;
         timer = 0f;
@@ -511,6 +516,7 @@ public class Lumberjack : MonoBehaviour
             transform.position = Vector3.Lerp(fallStart, fallEnd, timer / fallTime);
             yield return null;
         }
+        jumpIndicator.transform.parent = this.transform;
         transform.position = fallEnd;
         audioSources[4].Play();
         SphereCollider collider = jumpAttackHitbox.GetComponent<SphereCollider>();
