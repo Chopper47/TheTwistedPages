@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FloorChangeObject : MonoBehaviour
 {
@@ -6,7 +7,8 @@ public class FloorChangeObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            FindFirstObjectByType<FloorManager>().GoToNextFloor();
+            //FindFirstObjectByType<FloorManager>().GoToNextFloor();
+            SceneManager.LoadScene("Scene_06_BossRoomTest");
         }
     }
 }
