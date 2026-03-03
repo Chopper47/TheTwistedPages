@@ -209,6 +209,19 @@ public class BossAxe : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        Lumberjack boss = other.GetComponent<Lumberjack>();
+
+        if (boss != null && canGet)
+        {
+            if (arrived)
+            {
+                RecoveredFromBoss(boss);
+            }
+        }
+    }
+
     public void RecoveredFromBoss(Lumberjack boss)
     {
         transform.parent = originalParent;
