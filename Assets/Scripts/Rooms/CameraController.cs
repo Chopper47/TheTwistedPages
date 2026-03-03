@@ -134,4 +134,46 @@ public class CameraController : MonoBehaviour
     {
         return currentRoom.isCleared;
     }
+
+    public void UpdateCameraFollow(float deltaTime)
+    {
+        float targetX = Mathf.Clamp(player.position.x, minX, maxX);
+        float targetZ = Mathf.Clamp(player.position.z, minZ, maxZ);
+
+        Vector3 targetPosition = new Vector3(targetX, transform.position.y, targetZ);
+
+        targetPosition += lookAheadOffset;
+
+        targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
+        targetPosition.z = Mathf.Clamp(targetPosition.z, minZ, maxZ);
+
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref followVelocity, followSmoothTime, Mathf.Infinity, deltaTime);
+    }
+
+    public void UpdateLookAhead(float deltaTime)
+    {
+        Vector3 playerDelta = player.position - lastPlayerPosition;
+
+        Vector3 targetLookAhead = Vector3.zero;
+
+        if (playerDelta.sqrMagnitude > 0.0001f)
+        {
+            Vector3 moveDirection = playerDelta.normalized;
+
+            if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.z))
+            {
+                moveDirection = new Vector3(moveDirection.x, 0, 0);
+            }
+            else
+            {
+                moveDirection = new Vector3(0, 0, moveDirection.z);
+            }
+
+            targetLookAhead = moveDirection * lookAheadDistance;
+        }
+
+        lookAheadOffset = Vector3.Lerp(lookAheadOffset, targetLookAhead, lookAheadSmooth * deltaTime);
+
+        lastPlayerPosition = player.position;
+    }
 }

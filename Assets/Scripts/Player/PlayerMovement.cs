@@ -405,8 +405,8 @@ public class PlayerMovement: MonoBehaviour
             }
             if(cameraController != null)
             {
-                cameraController.UpdateLookAhead();
-                cameraController.UpdateCameraFollow();
+                cameraController.UpdateLookAhead(0.02f);
+                cameraController.UpdateCameraFollow(0.02f);
             }
             yield return null;
         }
