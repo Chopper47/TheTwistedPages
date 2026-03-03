@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float invincibilityDuration = 0.5f;
     [SerializeField] private UpgradeStats upgradeStatsScriptable;
 
-    private GameObject gameOverMenu;
+    [SerializeField] private GameObject gameOverMenu;
     public bool inTutorial = false;
 
     [Header("Life Sprites")]
@@ -62,7 +62,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        //Destroy(gameObject);
         Debug.Log("You died.");
         
         if (gameOverMenu)
@@ -71,6 +70,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if(musicManager) musicManager.SwitchToNewSongNoSave(2);
+        Destroy(gameObject);
     }
 
     public void TakeDamage(int damage)
