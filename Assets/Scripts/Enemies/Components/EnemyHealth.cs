@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -48,7 +49,18 @@ public class EnemyHealth : MonoBehaviour
             roomController.OnEnemyDied();
         }
 
+        if (GetComponent<Lumberjack>())
+        {
+            GetComponent<Lumberjack>().enabled = false;
+            GetComponent<ChaseAgent>().enabled = false;
+            GetComponent<DecisionTreeAgent>().enabled = false;
+            GetComponent<NavMeshAgent>().enabled = false;
+        }
         //gameObject.SetActive(false);
-        Destroy(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

@@ -2,12 +2,14 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class BossRoomFunctionality : MonoBehaviour
 {
 
     [SerializeField] private List<BossRoomColumn> columns = new List<BossRoomColumn>();
     [SerializeField] private int maxHp;
+    [SerializeField] private Slider bossHealthbar;
     public int currentHp;
     public List<AudioSource> pillarHit;
     public AudioSource bossDeath;
@@ -26,7 +28,11 @@ public class BossRoomFunctionality : MonoBehaviour
         pillarHit[hit].Play();
         currentHp = CheckNumberOfColumns();
 
-        if (bossHealth != null) bossHealth.SetHealth(currentHp);
+        if (bossHealth != null)
+        {
+            bossHealth.SetHealth(currentHp);
+            UpdateHealthbar();
+        } 
 
         if (currentHp <= 0)
         {
@@ -55,4 +61,11 @@ public class BossRoomFunctionality : MonoBehaviour
         tempEvent?.Invoke();
     }
 
+    private void UpdateHealthbar()
+    {
+        if (bossHealthbar != null)
+        {
+            bossHealthbar.value = (float)currentHp / maxHp;
+        }
+    }
 }

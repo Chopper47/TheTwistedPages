@@ -9,6 +9,7 @@ public class BossRoomStart : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] SimpleCameraController cameraController;
     [SerializeField] GameObject endScreen;
+    [SerializeField] GameObject bossHealthBar;
 
     [Header("Dialogues")]
     [SerializeField] DialogueData startDialogue;   
@@ -31,6 +32,7 @@ public class BossRoomStart : MonoBehaviour
 
     void EndBoss()
     {
+        bossHealthBar.SetActive(false);
         cameraController.player = bossGO.transform;
         bossGO.GetComponent<DecisionTreeAgent>().enabled = false;
         CameraShake.Shake(9999f, 0.05f);
@@ -41,20 +43,23 @@ public class BossRoomStart : MonoBehaviour
     }
     void EnableBossActions()
     {
+        bossHealthBar.SetActive(true);
         bossGO.GetComponent<DecisionTreeAgent>().enabled = true;
         cameraController.player = player;
     }
 
     void EndingFadeMethod()
     {
-
         StartCoroutine(EndingFadeCoroutine());
     }
 
     IEnumerator EndingFadeCoroutine()
     {
+
         RoomTransitionFade.Instance.fadeDuration = 4f;
+        CameraShake.Stop();
         yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut());
+        bossGO.SetActive(false);
         endScreen.SetActive(true);
 
     }

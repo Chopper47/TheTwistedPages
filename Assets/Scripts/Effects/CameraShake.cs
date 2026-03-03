@@ -59,4 +59,15 @@ public class CameraShake : MonoBehaviour
     {
         instance.OnShake(duration, strength, dashDirection);
     }
+    public void StopShake()
+    {
+        // Kills all tweens on this transform (position and rotation shakes)
+        transform.DOKill();
+    }
+
+    // Static version for convenience
+    public static void Stop()
+    {
+        instance.StopShake();
+    }
 }
