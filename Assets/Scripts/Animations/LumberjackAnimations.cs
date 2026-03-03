@@ -179,7 +179,10 @@ public class LumberjackAnimations : MonoBehaviour
     {
         animator.SetTrigger("enraged");
     }
-
+    public void ResetEndAreaAttack()
+    {
+        animator.ResetTrigger("endAreaAttack");
+    }
     public void ResetEnragedTrigger()
     {
         animator.ResetTrigger("enraged");

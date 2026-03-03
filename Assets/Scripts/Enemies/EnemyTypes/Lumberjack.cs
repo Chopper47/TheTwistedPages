@@ -151,7 +151,7 @@ public class Lumberjack : MonoBehaviour
         {
             agent.isStopped = false;
         }
-
+        animations.ResetEndAreaAttack();
         enemyState.StayState();
     }
 
