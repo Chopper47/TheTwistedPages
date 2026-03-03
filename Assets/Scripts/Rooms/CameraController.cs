@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour
         UpdateCameraFollow();
     }
 
-    private void UpdateLookAhead()
+    public void UpdateLookAhead()
     {
         Vector3 playerDelta = player.position - lastPlayerPosition;
 
@@ -115,7 +115,7 @@ public class CameraController : MonoBehaviour
         lastPlayerPosition = player.position;
     }
 
-    private void UpdateCameraFollow()
+    public void UpdateCameraFollow()
     {
         float targetX = Mathf.Clamp(player.position.x, minX, maxX);
         float targetZ = Mathf.Clamp(player.position.z, minZ, maxZ);

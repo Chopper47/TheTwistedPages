@@ -91,10 +91,17 @@ public class PlayerMovement: MonoBehaviour
 
     private void Awake()
     {
-        leftRangeRender = CreateLine(LeftRangeGO);
-        rightRangeRender = CreateLine(RightRangeGO);
+        if(leftRangeRender && rightRangeRender)
+        {
+            leftRangeRender = CreateLine(LeftRangeGO);
+            rightRangeRender = CreateLine(RightRangeGO);
+            ShowCone(false);
+        }
+        else
+        {
+            Debug.LogWarning("Range renders not assigned");
+        }
 
-        ShowCone(false);
 
         // ^ Utilizado para dibujar rango en tiempo bala
 
@@ -207,7 +214,11 @@ public class PlayerMovement: MonoBehaviour
                         btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
                     }
                     bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
-                    ShowCone(true);
+
+                    if (leftRangeRender && rightRangeRender)
+                    {
+                        ShowCone(true);
+                    }
                 }
 
                 if (!axeHolding && !isInBulletTime && !throwAxe)
@@ -250,7 +261,10 @@ public class PlayerMovement: MonoBehaviour
             }
             ReleaseAxe();
             throwAxe = true;
-            ShowCone(false);
+            if(leftRangeRender && rightRangeRender)
+            {
+                ShowCone(false);
+            }
         }
     }
 
@@ -371,7 +385,10 @@ public class PlayerMovement: MonoBehaviour
         while(timer < bulletTimeDuration)
         {
             timer += Time.unscaledDeltaTime;
-            DrawRange(toPush.transform.position, new Vector3(toPush.transform.position.x - transform.position.x, 0f, toPush.transform.position.z - transform.position.z), maxPushDistance, axeHolding);
+            if(leftRangeRender && rightRangeRender)
+            {
+                DrawRange(toPush.transform.position, new Vector3(toPush.transform.position.x - transform.position.x, 0f, toPush.transform.position.z - transform.position.z), maxPushDistance, axeHolding);
+            }
             yield return null;
         }
 
@@ -381,7 +398,10 @@ public class PlayerMovement: MonoBehaviour
             throwAxe = false;
         }
 
-        ShowCone(false);
+        if(leftRangeRender && rightRangeRender)
+        {
+            ShowCone(false);
+        }
         EndBulletTime();
     }
 
