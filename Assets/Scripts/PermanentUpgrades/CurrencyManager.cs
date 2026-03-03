@@ -86,6 +86,7 @@ public class CurrencyManager : MonoBehaviour
         else
         {
             currencyText = currencyUI.transform.GetComponentInChildren<TextMeshProUGUI>();
+            UpdateUI();
         }
     }
     private GameObject SearchCurrencyUI(string tag)
