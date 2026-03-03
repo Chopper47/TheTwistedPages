@@ -217,12 +217,10 @@ public class Lumberjack : MonoBehaviour
         {
             animations.CloseToAxeTrigger();
         }
-        Debug.LogWarning("pickUp");
     }
 
     public void ReceiveAxe()
     {
-        Debug.LogWarning("recieve");
         receivedAxe = true;
         EndAttack();
     }

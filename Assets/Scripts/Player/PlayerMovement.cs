@@ -54,6 +54,7 @@ public class PlayerMovement: MonoBehaviour
     private Coroutine btUICoroutine;
     private bool isInBulletTime = false;
     private bool axeHolding = false;
+    private bool throwAxe = false;
 
     [Header("Input System")]
     public InputActionAsset inputActions;
@@ -162,9 +163,14 @@ public class PlayerMovement: MonoBehaviour
                     bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
                 }
 
-                if (!axeHolding && !isInBulletTime)
+                if (!axeHolding && !isInBulletTime && !throwAxe)
                 {
                     StartCoroutine(Roll());
+                }
+
+                if (throwAxe)
+                {
+                    throwAxe = false;
                 }
             }
         }
@@ -196,6 +202,7 @@ public class PlayerMovement: MonoBehaviour
                 bulletTimeTimer.fillAmount = 0f;
             }
             ReleaseAxe();
+            throwAxe = true;
         }
     }
 
@@ -316,6 +323,7 @@ public class PlayerMovement: MonoBehaviour
         if(toPush.GetComponent<Axe>() || toPush.GetComponent<BossAxe>())
         {
             ReleaseAxe();
+            throwAxe = false;
         }
 
         EndBulletTime();
