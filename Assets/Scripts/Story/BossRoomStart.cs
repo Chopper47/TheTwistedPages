@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossRoomStart : MonoBehaviour
@@ -7,6 +8,7 @@ public class BossRoomStart : MonoBehaviour
     [SerializeField] BossRoomFunctionality bossRoom;
     [SerializeField] Transform player;
     [SerializeField] SimpleCameraController cameraController;
+    [SerializeField] GameObject endScreen;
 
     [Header("Dialogues")]
     [SerializeField] DialogueData startDialogue;   
@@ -33,7 +35,7 @@ public class BossRoomStart : MonoBehaviour
         bossGO.GetComponent<DecisionTreeAgent>().enabled = false;
         CameraShake.Shake(9999f, 0.05f);
         DialogueManager.instance.currentDialogue = endDialogue;
-        DialogueManager.instance.onDialogueEnd.AddListener(EndingFade);
+        DialogueManager.instance.onDialogueEnd.AddListener(EndingFadeMethod);
         DialogueManager.instance.StartDialogue();
 
     }
@@ -43,11 +45,18 @@ public class BossRoomStart : MonoBehaviour
         cameraController.player = player;
     }
 
-    void EndingFade()
+    void EndingFadeMethod()
     {
 
+        StartCoroutine(EndingFadeCoroutine());
+    }
+
+    IEnumerator EndingFadeCoroutine()
+    {
         RoomTransitionFade.Instance.fadeDuration = 4f;
-        StartCoroutine(RoomTransitionFade.Instance.FadeOut());
+        yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut());
+        endScreen.SetActive(true);
+
     }
 
 }
