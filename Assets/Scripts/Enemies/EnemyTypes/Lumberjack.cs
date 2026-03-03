@@ -79,6 +79,15 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] private float timeBetweenCharges = 0.5f;
     [Tooltip("Equals to the time it takes to get to one in-game meter")][SerializeField] private float chargeSpeed = 1f;
 
+    [Header("Attacks indicators")]
+    [SerializeField] GameObject aoeAIndicator;
+    [SerializeField] GameObject aoeBIndicator;
+    [SerializeField] GameObject jumpIndicator;
+
+    [SerializeField] float aoeABuildup = 1f;
+    [SerializeField] float aoeBBuildup = 1f;
+    [SerializeField] float jumpBuildup = 1f;
+
 
     string currentAttack;
     private void Awake()
@@ -361,6 +370,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackA()
     {
         StartAttack();
+        StartCoroutine(AoeAIndicator());
         currentAttack = "AOE A";
         Debug.LogWarning("Doing AOE Attack A");
         yield return MoveSlightlyTowardsPlayer();
@@ -381,6 +391,7 @@ public class Lumberjack : MonoBehaviour
     private IEnumerator AOEAttackB()
     {
         StartAttack();
+        StartCoroutine(AoeBIndicator());
         currentAttack = "AOE B";
         Debug.LogWarning("Doing AOE Attack B");
         yield return MoveSlightlyTowardsPlayer();
@@ -443,7 +454,7 @@ public class Lumberjack : MonoBehaviour
         StartCoroutine("ResetJumpCounterAfterDelay", 5f);
 
         StartAttack();
-
+        StartCoroutine(JumpAttack());
         agent.enabled = false;
 
         rb.isKinematic = true;
@@ -593,6 +604,57 @@ public class Lumberjack : MonoBehaviour
     }
     #endregion
 
+    #region Attack Indicators Coroutines
+    
+    IEnumerator AoeAIndicator()
+    {
+        float timer = 0f;
+        float maxSize = aoeAHitbox.GetComponent<SphereCollider>().radius * 2;
+        aoeAIndicator.transform.localScale = Vector3.zero;
+        aoeAIndicator.SetActive(true);
+        while (timer < aoeABuildup)
+        {
+            aoeAIndicator.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * maxSize, timer / aoeABuildup);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        aoeAIndicator.SetActive(false);
+        yield return null;
+    }
+
+    IEnumerator AoeBIndicator()
+    {
+        float timer = 0f;
+        float maxSize = aoeBMaxRadius * 2;
+        aoeBIndicator.transform.localScale = Vector3.zero;
+        aoeBIndicator.SetActive(true);
+        while (timer < aoeBBuildup)
+        {
+            aoeBIndicator.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * maxSize, timer / aoeBBuildup);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        aoeBIndicator.SetActive(false);
+        yield return null;
+    }
+
+    IEnumerator JumpIndicator()
+    {
+        float timer = 0f;
+        float maxSize = jumpImpactRadius * 2;
+        jumpIndicator.transform.localScale = Vector3.zero;
+        jumpIndicator.SetActive(true);
+        while (timer < jumpBuildup)
+        {
+            jumpIndicator.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * maxSize, timer / jumpBuildup);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        jumpIndicator.SetActive(false);
+        yield return null;
+    }
+
+    #endregion
     private void SetSpeed(float newSpeed)
     {
         chaseAgent.SetVelocity(newSpeed);
