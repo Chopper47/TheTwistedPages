@@ -189,4 +189,23 @@ public class LumberjackAnimations : MonoBehaviour
     {
         animator.SetTrigger("endEnraged");
     }
+
+    public void StunnedTrigger()
+    {
+        animator.SetTrigger("stunned");
+    }
+
+    public void EndStunnedTrigger()
+    {
+        animator.SetTrigger("endStunned");
+    }
+
+    public void SentToWallTrigger()
+    {
+        animator.SetTrigger("sentToWall");
+    }
+    public void CloseInAxeTrigger()
+    {
+        animator.SetTrigger("closeInToAxe");
+    }
 }

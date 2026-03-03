@@ -14,6 +14,7 @@ public class BossAxe : MonoBehaviour
     private bool thrown = false;
     private bool arrived = false;
     private bool canGet = false;
+    private int throwType = 0;   // 0 = A   |   1 = B
     private Coroutine moving;
     private Coroutine splineArrived;
     private Transform originalParent;
@@ -51,6 +52,7 @@ public class BossAxe : MonoBehaviour
 
     public void StartThrowAttackB(Vector3 startingPos, Vector3 throwDirection, float timeToOneUnit)
     {
+        throwType = 1;
         transform.parent = null;
         thrown = true;
         canGet = false;
@@ -61,6 +63,7 @@ public class BossAxe : MonoBehaviour
 
     public void StartThrowAttackA(float timeOnAir, float distance)
     {
+        throwType = 0;
         transform.parent = null;
         arrived = false;
         thrown = true;
@@ -153,6 +156,20 @@ public class BossAxe : MonoBehaviour
         arrived = true;
         lumberjack.CanGetAxe();
         transform.position = endPoint;
+        if(playerGrabbed)
+        {
+            lumberjack.GetAnimations().SentToWallTrigger();
+            lumberjack.GetAnimations().ResetStopMovingTrigger();
+            lumberjack.GetAnimations().MovingTrigger();
+            if(throwType == 0)
+            {
+                lumberjack.GetAnimations().ResetGetAxe();
+            }
+            else
+            {
+                lumberjack.GetAnimations().CloseInAxeTrigger();
+            }
+        }
         yield return null;
     }
     
@@ -198,7 +215,14 @@ public class BossAxe : MonoBehaviour
         transform.position = ogTransform.position;
         transform.rotation = ogTransform.rotation;
         transform.localScale = ogTransform.localScale;
-        boss.PickUpAxe(false);
+        if(throwType == 1)
+        {
+            boss.PickUpAxe(false, false);
+        }
+        else
+        {
+            boss.PickUpAxe(false, playerGrabbed);
+        }
         arrived = false;
         playerGrabbed = false;
         gameObject.SetActive(false);
@@ -211,7 +235,7 @@ public class BossAxe : MonoBehaviour
         transform.rotation = ogTransform.rotation;
         transform.localScale = ogTransform.localScale;
         playerGrabbed = false;
-        boss.PickUpAxe(true);
+        boss.PickUpAxe(true, playerGrabbed);
         boss.ReceiveAxe();
         if(moving != null)
         {

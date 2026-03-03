@@ -94,6 +94,11 @@ public class Lumberjack : MonoBehaviour
         bossAxe.SetLumberjack(this);
     }
 
+    public LumberjackAnimations GetAnimations()
+    {
+        return animations;
+    }
+
     #region Stun
     public void ApplyStun(float duration)
     {
@@ -103,6 +108,8 @@ public class Lumberjack : MonoBehaviour
         }
 
         Debug.Log("Stunned.");
+
+        animations.StunnedTrigger();
 
         cancelAttack = true;
 
@@ -126,6 +133,7 @@ public class Lumberjack : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
+        animations.EndStunnedTrigger();
         decisionTree.SetDecide(true);
         isStunned = false;
         cancelAttack = false;
@@ -192,24 +200,29 @@ public class Lumberjack : MonoBehaviour
 
     #region Axe States
 
-    public void PickUpAxe(bool playerThrow)
+    public void PickUpAxe(bool playerThrow, bool truePlayerThrow)
     {
         hasAxe = true;
         axeOnGround = false;
         animations.GetAxe();
+        if (!playerThrow)
+        {
+            animations.StopMovingTrigger();
+            if (truePlayerThrow)
+            {
+                EndAttack();
+            }
+        }
         if (enemyHealth.health <= 3)
         {
             animations.CloseToAxeTrigger();
         }
-
-        if (!playerThrow)
-        {
-            EndAttack();
-        }
+        Debug.LogWarning("pickUp");
     }
 
     public void ReceiveAxe()
     {
+        Debug.LogWarning("recieve");
         receivedAxe = true;
         EndAttack();
     }
@@ -397,7 +410,7 @@ public class Lumberjack : MonoBehaviour
         animations.ResetGetAxe();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.7f);
         bossAxe.gameObject.SetActive(true);
         animations.SetLowerHp(enemyHealth.health <= 3 ? true : false);
         animations.EndThrowAttackTrigger();
@@ -413,7 +426,7 @@ public class Lumberjack : MonoBehaviour
         animations.ResetGetAxe();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         bossAxe.gameObject.SetActive(true);
         bossAxe.StartThrowAttackA(axeBoomerangTime, chaseAgent.DistanceFromTarget());
         audioSources[0].Play();
@@ -428,7 +441,6 @@ public class Lumberjack : MonoBehaviour
 
         currentAttack = "Jump";
         Debug.LogWarning("Doing Jump Attack");
-        Debug.LogError("J");
         StopCoroutine("ResetJumpCounterAfterDelay");
         StartCoroutine("ResetJumpCounterAfterDelay", 5f);
 
@@ -438,6 +450,8 @@ public class Lumberjack : MonoBehaviour
 
         rb.isKinematic = true;
         rb.linearVelocity = Vector3.zero;
+
+        Debug.Log("distance: "+chaseAgent.DistanceFromTarget());
 
         // Store the player's position at the moment the jump begins (the Boss will always land on this exact point).
         Vector3 targetPosition = chaseAgent.TargetPosition();
@@ -524,7 +538,7 @@ public class Lumberjack : MonoBehaviour
         audioSources[3].Play();
         SetSpeed(enragedSpeed);
 
-        while (currentChargeCount < chargeAmount)
+        while (currentChargeCount < chargeAmount)               
         {
             if (ShouldCancelAttack())
             {
@@ -536,6 +550,7 @@ public class Lumberjack : MonoBehaviour
             Vector3 dir = chaseAgent.TargetDirection();
             Vector3 startPoint = transform.position;
             Vector3 endPoint = startPoint;
+            transform.LookAt(endPoint);
 
             if (Physics.Raycast(transform.position, dir, out RaycastHit hit, 100f, wallMask))
             {
@@ -561,8 +576,11 @@ public class Lumberjack : MonoBehaviour
 
             DisableHitbox(enragedHitbox);
             currentChargeCount++;
-            animations.EndEnragedTrigger();
-            animations.EnragedTrigger();
+            if(currentChargeCount != chargeAmount)
+            {
+                animations.EndEnragedTrigger();
+                animations.EnragedTrigger();
+            }
 
             yield return new WaitForSeconds(timeBetweenCharges);
         }
@@ -571,7 +589,7 @@ public class Lumberjack : MonoBehaviour
         receivedAxe = false;
 
         animations.ResetEnragedTrigger();
-
+        animations.EndEnragedTrigger();
         EndAttack();
         SetSpeed(defaultSpeed);
     }
@@ -620,6 +638,19 @@ public class Lumberjack : MonoBehaviour
         isAttacking = true;
         enemyState.AttackState();
         chaseAgent.StopChase();
+    }
+
+    public void StartAttackWOstop()
+    {
+        if (isStunned || isAttacking)
+        {
+            return;
+        }
+
+        decisionTree.SetDecide(false);
+        cancelAttack = false;
+        isAttacking = true;
+        enemyState.AttackState();
     }
 
     public void EndAttack()

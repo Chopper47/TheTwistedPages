@@ -25,7 +25,7 @@ public class DecisionTreeAgent : MonoBehaviour
             if (action != null) 
             {
                 action.Act();
-                Debug.Log(action.name +" - "+ action.transform.parent.name);
+                //Debug.Log(action.name +" - "+ action.transform.parent.name);
             }
         }
     }
