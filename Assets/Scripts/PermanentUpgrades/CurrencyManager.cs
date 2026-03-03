@@ -11,7 +11,9 @@ public class CurrencyManager : MonoBehaviour
     public int currentCurrencyAmount = 0;
 
     [SerializeField] private GameObject currencyUI;
+    [SerializeField] private GameObject pauseMenuCurrencyUI;
     [SerializeField] private TextMeshProUGUI currencyText;
+    [SerializeField] private TextMeshProUGUI pauseMenuCurrencyText;
 
     private void Awake()
     {
@@ -72,7 +74,8 @@ public class CurrencyManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        currencyText.text = currentCurrencyAmount.ToString();
+        if(currencyText)currencyText.text = currentCurrencyAmount.ToString();
+        if(pauseMenuCurrencyText) pauseMenuCurrencyText.text = currentCurrencyAmount.ToString();
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

@@ -71,10 +71,10 @@ public class OptionsMenu : MonoBehaviour
 
     private void CloseAllOptionMenus()
     {
-        soundMenu.SetActive(false);
-        graphicsMenu.SetActive(false);
-        controllerMenu.SetActive(false);
-        keyboardMenu.SetActive(false);
+        if(soundMenu)soundMenu.SetActive(false);
+        if (graphicsMenu) graphicsMenu.SetActive(false);
+        if (controllerMenu) controllerMenu.SetActive(false);
+        if (keyboardMenu) keyboardMenu.SetActive(false);
     }
     public void SetResolution(int resolutionIndex)
     {
