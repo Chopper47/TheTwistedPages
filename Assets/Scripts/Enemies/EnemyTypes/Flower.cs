@@ -292,7 +292,7 @@ public class Flower : MonoBehaviour
         else
         {
 
-            GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+            GameObject straightBullet = Instantiate(projectile, transform.position + Vector3.one * 0.5f, Quaternion.identity, null);
             straightBullet.GetComponent<Projectile>().SetDirection(straightDir);
         }
         StartCoroutine(ShootCooldown());
