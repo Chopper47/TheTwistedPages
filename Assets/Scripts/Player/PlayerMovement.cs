@@ -46,6 +46,8 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private float axeThrowSpeed = 15.0f;
     [SerializeField] private float bossAxeThrowSpeed = .2f;
     [SerializeField] private Transform axeHold;
+    [SerializeField] private GameObject LeftRangeGO;
+    [SerializeField] private GameObject RightRangeGO;
     private GameObject toPush;
 
     public bool canTriggerBulletTime = true;
@@ -56,6 +58,8 @@ public class PlayerMovement: MonoBehaviour
     private bool axeHolding = false;
     private bool throwAxe = false;
 
+    private LineRenderer leftRangeRender;
+    private LineRenderer rightRangeRender;
     [Header("Input System")]
     public InputActionAsset inputActions;
 
@@ -87,9 +91,51 @@ public class PlayerMovement: MonoBehaviour
 
     private void Awake()
     {
+        leftRangeRender = CreateLine(LeftRangeGO);
+        rightRangeRender = CreateLine(RightRangeGO);
+
+        ShowCone(false);
+
+        // ^ Utilizado para dibujar rango en tiempo bala
+
         moveAction = inputActions.FindActionMap("Player").FindAction("Move");
         rollAction = inputActions.FindActionMap("Player").FindAction("Roll");
         throwAxeAction = inputActions.FindActionMap("Player").FindAction("ThrowAxe");
+    }
+
+    public LineRenderer CreateLine(GameObject reference)
+    {
+        LineRenderer lr = reference.GetComponent<LineRenderer>();
+
+        lr.positionCount = 2;
+        lr.useWorldSpace = true;
+
+        lr.startWidth = 0.01f;
+        lr.endWidth = 0.05f;
+
+        lr.material = new Material(Shader.Find("Sprites/Default"));
+        lr.startColor = Color.coral;
+        lr.endColor = Color.red;
+
+        return lr;
+    }
+
+    public void ShowCone(bool show)
+    {
+        leftRangeRender.enabled = show;
+        rightRangeRender.enabled = show;
+    }
+
+    public void DrawRange(Vector3 origin, Vector3 forward, float length, bool axeHolding)
+    {
+        Vector3 leftDir = Quaternion.AngleAxis(axeHolding ? -axeConeAngle : -coneAngle, Vector3.up) * forward;
+        Vector3 rightDir = Quaternion.AngleAxis(axeHolding ? axeConeAngle : coneAngle, Vector3.up) * forward;
+
+        leftRangeRender.SetPosition(0, origin);
+        leftRangeRender.SetPosition(1, origin + leftDir.normalized * length);
+
+        rightRangeRender.SetPosition(0, origin);
+        rightRangeRender.SetPosition(1, origin + rightDir.normalized * length);
     }
 
     private void Start()
@@ -161,6 +207,7 @@ public class PlayerMovement: MonoBehaviour
                         btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
                     }
                     bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
+                    ShowCone(true);
                 }
 
                 if (!axeHolding && !isInBulletTime && !throwAxe)
@@ -203,6 +250,7 @@ public class PlayerMovement: MonoBehaviour
             }
             ReleaseAxe();
             throwAxe = true;
+            ShowCone(false);
         }
     }
 
@@ -241,7 +289,7 @@ public class PlayerMovement: MonoBehaviour
 
         while (timer < bulletTimeDuration)
         {
-            transform.Rotate(Vector3.up, axeRotationSpeed);
+            transform.Rotate(Vector3.up, Time.unscaledDeltaTime * axeRotationSpeed);
             timer += Time.unscaledDeltaTime;
             yield return null;
         }
@@ -318,7 +366,14 @@ public class PlayerMovement: MonoBehaviour
 
     public IEnumerator WaitForNormalTime()
     {
-        yield return new WaitForSecondsRealtime(bulletTimeDuration);
+        float timer = 0f;
+
+        while(timer < bulletTimeDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+            DrawRange(toPush.transform.position, new Vector3(toPush.transform.position.x - transform.position.x, 0f, toPush.transform.position.z - transform.position.z), maxPushDistance, axeHolding);
+            yield return null;
+        }
 
         if(toPush.GetComponent<Axe>() || toPush.GetComponent<BossAxe>())
         {
@@ -326,6 +381,7 @@ public class PlayerMovement: MonoBehaviour
             throwAxe = false;
         }
 
+        ShowCone(false);
         EndBulletTime();
     }
 

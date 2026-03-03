@@ -230,7 +230,7 @@ public class BossAxe : MonoBehaviour
         transform.localScale = ogTransform.localScale;
         if(throwType == 1)
         {
-            boss.PickUpAxe(false, false);
+            boss.PickUpAxe(false, true);
         }
         else
         {
