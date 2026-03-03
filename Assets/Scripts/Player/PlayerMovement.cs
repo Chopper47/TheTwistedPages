@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -59,6 +60,7 @@ public class PlayerMovement: MonoBehaviour
     private Coroutine rotationCoroutine;
     private Coroutine bulletTimeCoroutine;
     private Coroutine btUICoroutine;
+    private bool firstDash = false;
     private bool isInBulletTime = false;
     private bool axeHolding = false;
     private bool throwAxe = false;
@@ -189,13 +191,10 @@ public class PlayerMovement: MonoBehaviour
 
                 if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime && bulletTimeTrigger.FirstHarm() != null)
                 {
-                    if(rollCoroutine != null)
-                    {
-                        StopCoroutine(rollCoroutine);
-                    }
                     canTriggerBulletTime = false;
                     isInBulletTime = true;
                     toPush = bulletTimeTrigger.FirstHarm();
+                    bulletTimeTrigger.gameObject.SetActive(false);
                     Axe axe = toPush.GetComponent<Axe>();
                     BossAxe bossAxe = toPush.GetComponent<BossAxe>();
                     if (axe != null || bossAxe != null)
@@ -232,11 +231,22 @@ public class PlayerMovement: MonoBehaviour
 
                 if (!axeHolding && !isInBulletTime && !throwAxe)
                 {
+                    firstDash = false;
+                    Debug.Log("start rolling");
                     rollCoroutine = StartCoroutine(Roll());
                 }
                 else if(!axeHolding && isInBulletTime && !throwAxe)
                 {
-                    rollCoroutine = StartCoroutine(Roll());
+                    if (!firstDash)
+                    {
+                        firstDash = true;
+                    }
+                    else
+                    {
+                        firstDash = false;
+                        rollCoroutine = StartCoroutine(Roll());
+                    }
+                    Debug.Log("start rolling on bullet time");
                 }
 
                 if (throwAxe)
@@ -247,7 +257,7 @@ public class PlayerMovement: MonoBehaviour
         }
         else
         {
-            controller.Move(rollDirection * rollSpeed * Time.unscaledDeltaTime);
+            if(!firstDash) controller.Move(rollDirection * rollSpeed * Time.unscaledDeltaTime);
         }
     }
     
@@ -399,7 +409,7 @@ public class PlayerMovement: MonoBehaviour
         while(timer < bulletTimeDuration)
         {
             timer += Time.unscaledDeltaTime;
-            if(leftRangeRender && rightRangeRender)
+            if(leftRangeRender && rightRangeRender && !toPush)
             {
                 DrawRange(toPush.transform.position, new Vector3(toPush.transform.position.x - transform.position.x, 0f, toPush.transform.position.z - transform.position.z), maxPushDistance, axeHolding);
             }
@@ -426,18 +436,21 @@ public class PlayerMovement: MonoBehaviour
 
     public void StopBulletTime()
     {
+        Debug.Log("stopped bullet time");
         if (bulletTimeCoroutine != null) StopCoroutine(bulletTimeCoroutine);
         if (btUICoroutine != null) StopCoroutine(btUICoroutine);
         if (leftRangeRender && rightRangeRender)
         {
             ShowCone(false);
         }
+        toPush = null;
         EndBulletTime();
     }
 
     public void EndBulletTime()
     {
         blackAndWhiteFilter.enabled = false;
+        bulletTimeTrigger.gameObject.SetActive(true);
         TimeManager.ReturnTime();
         axeHolding = false;
         canTriggerBulletTime = true;
@@ -462,6 +475,7 @@ public class PlayerMovement: MonoBehaviour
 
     public bool CanPush(GameObject enemyChecking)
     {
+        Debug.Log("Can push " + enemyChecking + "? - " + isRolling + "|" + isInBulletTime + "|" + (enemyChecking == toPush));
         return isRolling && isInBulletTime && enemyChecking == toPush;
     }
 
