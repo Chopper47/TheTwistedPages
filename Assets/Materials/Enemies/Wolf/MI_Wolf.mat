@@ -25,11 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Ambient_Oclussion:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d4c8d92c938020b4bba4277c3f879e5c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: 1e51a6a6595c0b546af4b1de48656f0c, type: 3}
+        m_Texture: {fileID: 2800000, guid: f752eff6eeaa44d4b8d5446f02a3f346, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic:
@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: cae6c411f6e22fa40a17cbd0d8f1b131, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Roughness:
@@ -58,14 +58,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _IntFresnel: 0.1
     - _IntMetallic: 1
     - _IntNormals: 1
     - _IntRoughness: 20
     - _Metallic_intensity: 0
+    - _PowerFresnel: 5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Saturation: 1
-    m_Colors: []
+    m_Colors:
+    - _FresnelColor: {r: 0.99762696, g: 1, b: 0.7783019, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7737034821571199219
