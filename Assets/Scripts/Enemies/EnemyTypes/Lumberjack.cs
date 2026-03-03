@@ -711,6 +711,7 @@ public class Lumberjack : MonoBehaviour
         activeSpheres.Clear();
     }
 
+    /*
     private void OnDrawGizmosSelected()
     {
         if (aoeAHitbox)
@@ -743,4 +744,5 @@ public class Lumberjack : MonoBehaviour
             }
         }
     }
+    */
 }
