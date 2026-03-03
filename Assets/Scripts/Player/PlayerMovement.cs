@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using static UnityEditor.IMGUI.Controls.PrimitiveBoundsHandle;
 
@@ -30,11 +31,13 @@ public class PlayerMovement: MonoBehaviour
     private bool canRoll = true;
     public static bool isInvincible = false;
     private float rollTimer;
+    private Coroutine rollCoroutine;
 
     private Vector3 rollDirection;
 
     [Header("Bullet Time")]
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private Volume blackAndWhiteFilter;
     [SerializeField] private BulletTimeTrigger bulletTimeTrigger;
 
     [SerializeField] private float bulletTimeSpeed;             // 15.0f
@@ -186,6 +189,10 @@ public class PlayerMovement: MonoBehaviour
 
                 if (bulletTimeTrigger.CanDodge() && canTriggerBulletTime && bulletTimeTrigger.FirstHarm() != null)
                 {
+                    if(rollCoroutine != null)
+                    {
+                        StopCoroutine(rollCoroutine);
+                    }
                     canTriggerBulletTime = false;
                     isInBulletTime = true;
                     toPush = bulletTimeTrigger.FirstHarm();
@@ -216,7 +223,7 @@ public class PlayerMovement: MonoBehaviour
                         btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
                     }
                     bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
-
+                    blackAndWhiteFilter.enabled = true;
                     if (leftRangeRender && rightRangeRender)
                     {
                         ShowCone(true);
@@ -225,11 +232,11 @@ public class PlayerMovement: MonoBehaviour
 
                 if (!axeHolding && !isInBulletTime && !throwAxe)
                 {
-                    StartCoroutine(Roll());
+                    rollCoroutine = StartCoroutine(Roll());
                 }
                 else if(!axeHolding && isInBulletTime && !throwAxe)
                 {
-                    StartCoroutine(Roll());
+                    rollCoroutine = StartCoroutine(Roll());
                 }
 
                 if (throwAxe)
@@ -267,6 +274,7 @@ public class PlayerMovement: MonoBehaviour
             }
             ReleaseAxe();
             throwAxe = true;
+            blackAndWhiteFilter.enabled = false;
             if(leftRangeRender && rightRangeRender)
             {
                 ShowCone(false);
@@ -416,8 +424,20 @@ public class PlayerMovement: MonoBehaviour
         EndBulletTime();
     }
 
+    public void StopBulletTime()
+    {
+        if (bulletTimeCoroutine != null) StopCoroutine(bulletTimeCoroutine);
+        if (btUICoroutine != null) StopCoroutine(btUICoroutine);
+        if (leftRangeRender && rightRangeRender)
+        {
+            ShowCone(false);
+        }
+        EndBulletTime();
+    }
+
     public void EndBulletTime()
     {
+        blackAndWhiteFilter.enabled = false;
         TimeManager.ReturnTime();
         axeHolding = false;
         canTriggerBulletTime = true;

@@ -51,12 +51,14 @@ public class EnemyHitbox : MonoBehaviour
             if (projectile != null)
             {
                 Pushed(playerMovement.PushTarget(false, false));
+                playerMovement.StopBulletTime();
                 projectile.Deflect();
                 
             }
             else
             {
                 Pushed(playerMovement.PushTarget(true, false));
+                playerMovement.StopBulletTime();
             }
             SetIgnore(true);
 
@@ -89,6 +91,8 @@ public class EnemyHitbox : MonoBehaviour
         {
             states.StayState();
         }
+        Projectile projectile = GetComponent<Projectile>();
+        if (projectile != null) { Destroy(this.gameObject); }
         yield return null;
     }
 }
