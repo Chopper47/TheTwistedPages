@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -33,6 +34,7 @@ public class PlayerMovement: MonoBehaviour
     private Vector3 rollDirection;
 
     [Header("Bullet Time")]
+    [SerializeField] private CameraController cameraController;
     [SerializeField] private BulletTimeTrigger bulletTimeTrigger;
 
     [SerializeField] private float bulletTimeSpeed;             // 15.0f
@@ -91,7 +93,7 @@ public class PlayerMovement: MonoBehaviour
 
     private void Awake()
     {
-        if(leftRangeRender && rightRangeRender)
+        if(LeftRangeGO && LeftRangeGO)
         {
             leftRangeRender = CreateLine(LeftRangeGO);
             rightRangeRender = CreateLine(RightRangeGO);
@@ -101,9 +103,9 @@ public class PlayerMovement: MonoBehaviour
         {
             Debug.LogWarning("Range renders not assigned");
         }
-
-
         // ^ Utilizado para dibujar rango en tiempo bala
+
+        cameraController = FindAnyObjectByType<CameraController>();
 
         moveAction = inputActions.FindActionMap("Player").FindAction("Move");
         rollAction = inputActions.FindActionMap("Player").FindAction("Roll");
@@ -222,6 +224,10 @@ public class PlayerMovement: MonoBehaviour
                 }
 
                 if (!axeHolding && !isInBulletTime && !throwAxe)
+                {
+                    StartCoroutine(Roll());
+                }
+                else if(!axeHolding && isInBulletTime && !throwAxe)
                 {
                     StartCoroutine(Roll());
                 }
@@ -388,6 +394,11 @@ public class PlayerMovement: MonoBehaviour
             if(leftRangeRender && rightRangeRender)
             {
                 DrawRange(toPush.transform.position, new Vector3(toPush.transform.position.x - transform.position.x, 0f, toPush.transform.position.z - transform.position.z), maxPushDistance, axeHolding);
+            }
+            if(cameraController != null)
+            {
+                cameraController.UpdateLookAhead();
+                cameraController.UpdateCameraFollow();
             }
             yield return null;
         }

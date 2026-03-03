@@ -110,7 +110,7 @@ public class CameraController : MonoBehaviour
             targetLookAhead = moveDirection * lookAheadDistance;
         }
 
-        lookAheadOffset = Vector3.Lerp(lookAheadOffset, targetLookAhead, lookAheadSmooth * Time.deltaTime);
+        lookAheadOffset = Vector3.Lerp(lookAheadOffset, targetLookAhead, lookAheadSmooth * Time.unscaledDeltaTime);
 
         lastPlayerPosition = player.position;
     }
