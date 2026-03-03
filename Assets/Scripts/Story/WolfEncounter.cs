@@ -41,6 +41,7 @@ public class WolfEncounter : MonoBehaviour
         {
             frozenTime = false;
             PlayerMovement.canMove = true;
+            player.canRoll = true;
             Time.timeScale = 1f;
             //wolfGO.GetComponent<NavMeshAgent>().enabled = true;
 
@@ -63,7 +64,7 @@ public class WolfEncounter : MonoBehaviour
     IEnumerator WolfEncounterCoroutine()
     {
         PlayerMovement.canMove = false;
-
+        player.canRoll = false;
         darknessVolume.profile.TryGet(out darknessVignette);
         yield return DarkenVignette();
         wolfEyes.SetActive(true);
@@ -103,6 +104,7 @@ public class WolfEncounter : MonoBehaviour
     private void EnableWolfChase()
     {
         PlayerMovement.canMove = false;
+        player.canRoll = false;
         wolfGO.GetComponent<NavMeshAgent>().enabled = true;
         wolfGO.GetComponent<ChaseAgent>().enabled = true;
         wolfGO.GetComponent<DecisionTreeAgent>().enabled = true;
@@ -122,6 +124,9 @@ public class WolfEncounter : MonoBehaviour
     
     IEnumerator EndTutorial()
     {
+        PlayerMovement.canMove = false;
+        player.canRoll = false;
+
         yield return DarkenVignette();
         wolfEyes.SetActive(true);
         yield return new WaitForSeconds(1f);
@@ -149,6 +154,7 @@ public class WolfEncounter : MonoBehaviour
     void EndTutorialEvent()
     {
         StartCoroutine(LightenVignette());
+        player.canRoll = true;
         wolfEyes.SetActive(false);
     }
     IEnumerator LightenVignette()

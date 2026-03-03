@@ -28,7 +28,7 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField] private GameObject destructionCheck;
 
     private bool isRolling = false;
-    private bool canRoll = true;
+    public bool canRoll = true;
     public static bool isInvincible = false;
     private float rollTimer;
     private Coroutine rollCoroutine;

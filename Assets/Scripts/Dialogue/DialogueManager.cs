@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
 
     private int index;
     private bool active = false;
+    private PlayerMovement player;
     private Coroutine typingCoroutine;
 
     public static DialogueManager instance;
@@ -28,6 +29,7 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         textComponent.text = string.Empty;
+        player = FindFirstObjectByType<PlayerMovement>();
         //StartDialogue();
     }
 
@@ -59,6 +61,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue()
     {
         PlayerMovement.canMove = false;
+        player.canRoll = false;
         index = 0;
         active = true;
         dialoguePanel.gameObject.SetActive(true);
@@ -98,6 +101,7 @@ public class DialogueManager : MonoBehaviour
             
 
             PlayerMovement.canMove = true;
+            player.canRoll = true;
             var tempEvent = onDialogueEnd;
             onDialogueEnd = new UnityEngine.Events.UnityEvent();
 
