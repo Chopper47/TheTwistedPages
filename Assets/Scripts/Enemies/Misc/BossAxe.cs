@@ -4,7 +4,6 @@ using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class BossAxe : MonoBehaviour
 {

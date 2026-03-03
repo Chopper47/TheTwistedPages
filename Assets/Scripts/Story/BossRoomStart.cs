@@ -13,10 +13,17 @@ public class BossRoomStart : MonoBehaviour
 
     [Header("Dialogues")]
     [SerializeField] DialogueData startDialogue;   
-    [SerializeField] DialogueData endDialogue;   
+    [SerializeField] DialogueData endDialogue;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        bossGO.GetComponent<DecisionTreeAgent>().enabled = false;
+        StartCoroutine(StartBossDelayed());
+    }
+
+    IEnumerator StartBossDelayed()
+    {
+        yield return null; // wait one frame
         StartBoss();
     }
 

@@ -21,9 +21,13 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager instance;
     private void Awake()
     {
-        if(instance != this)
+        if (instance == null)
         {
             instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
         }
     }
     private void Start()
