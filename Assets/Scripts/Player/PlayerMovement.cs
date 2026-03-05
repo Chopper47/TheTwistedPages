@@ -40,12 +40,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Bullet Time")]
     [SerializeField] private float bulletTimeDuration = 1.2f;
 
-    [SerializeField] private float coneAngle = 35f;
-    [SerializeField] private float axeConeAngle = 35f;
+    [SerializeField] private float coneAngle = 35.0f;
+    [SerializeField] private float axeConeAngle = 35.0f;
 
-    [SerializeField] private float frontAmplitude = 5f;
-    [SerializeField] private float angleAmplitude = 2f;
-    [SerializeField] private float maxPushDistance = 9f;
+    [SerializeField] private float frontAmplitude = 5.0f;
+    [SerializeField] private float angleAmplitude = 2.0f;
+    [SerializeField] private float maxPushDistance = 9.0f;
 
     private bool isInBulletTime = false;
     public bool canTriggerBulletTime = true;
@@ -56,8 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Axe")]
     [SerializeField] private Transform axeHold;
-    [SerializeField] private float axeRotationSpeed = 1f;
-    [SerializeField] private float axeThrowSpeed = 15f;
+    [SerializeField] private float axeRotationSpeed = 1.0f;
+    [SerializeField] private float axeThrowSpeed = 15.0f;
     [SerializeField] private float bossAxeThrowSpeed = 0.2f;
 
     private bool axeHolding = false;
@@ -210,8 +210,7 @@ public class PlayerMovement : MonoBehaviour
         controller.transform.rotation = Quaternion.Slerp(
             controller.transform.rotation,
             targetRotation,
-            Time.unscaledDeltaTime * rotationSpeed
-        );
+            Time.unscaledDeltaTime * rotationSpeed);
     }
     #endregion
 

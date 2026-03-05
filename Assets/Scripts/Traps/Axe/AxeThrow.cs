@@ -52,7 +52,7 @@ public class AxeThrow : MonoBehaviour
         {
             GameObject axeGO = Instantiate(axePrefab, hit.point, Quaternion.identity, null);
 
-            axeGO.GetComponent<Axe>().SetDir((transform.position - hit.point).normalized * throwForce);
+            axeGO.GetComponent<Axe>().SetDirection((transform.position - hit.point).normalized * throwForce);
         }
     }
 }

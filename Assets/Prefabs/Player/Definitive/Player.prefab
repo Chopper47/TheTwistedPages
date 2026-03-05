@@ -2379,6 +2379,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef62aff1ab30804295cc3f425573810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 571309779194971223}
+  cameraController: {fileID: 0}
+  blackAndWhiteFilter: {fileID: 0}
+  bulletTimeTrigger: {fileID: 3261127876349614846}
   upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   baseMoveSpeed: 6
   rotationSpeed: 10
@@ -2386,25 +2390,22 @@ MonoBehaviour:
   rollDuration: 0.25
   rollCooldown: 0.25
   destructionCheck: {fileID: 6381343205093987888}
-  cameraController: {fileID: 0}
-  bulletTimeTrigger: {fileID: 3261127876349614846}
-  bulletTimeSpeed: 15
+  canRoll: 1
   bulletTimeDuration: 1.2
-  angleAmplitude: 5
-  frontAmplitude: 9
   coneAngle: 35
   axeConeAngle: 35
+  frontAmplitude: 9
+  angleAmplitude: 5
   maxPushDistance: 9
+  canTriggerBulletTime: 1
+  axeHold: {fileID: 2653514581354478455}
   axeRotationSpeed: 480
   axeThrowSpeed: 15
   bossAxeThrowSpeed: 0.2
-  axeHold: {fileID: 2653514581354478455}
   LeftRangeGO: {fileID: 9217305404475890493}
   RightRangeGO: {fileID: 2805364282926060331}
-  canTriggerBulletTime: 1
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   bulletTimeTimer: {fileID: 0}
-  animator: {fileID: 571309779194971223}
   AM: {fileID: 0}
   Main: {fileID: 0}
 --- !u!114 &7002907576181809036
@@ -2430,14 +2431,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  invincibilityDuration: 1
-  upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
-  inTutorial: 0
   fullLife: {fileID: 21300000, guid: 0d23a2e405809d84792b67b9e982ae5c, type: 3}
   halfLife: {fileID: 21300000, guid: bb0b08c97fca4b741adb10cefda3faca, type: 3}
   emptyLife: {fileID: 21300000, guid: 9816629483ac8694d8f6962927233547, type: 3}
-  Main: {fileID: 0}
+  invincibilityDuration: 1
+  upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
+  inTutorial: 0
+  gameOverMenu: {fileID: 0}
   AM: {fileID: 0}
+  Main: {fileID: 0}
 --- !u!114 &-5651913295414236988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2450,14 +2452,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63705e262cf0cb943ad478d6b39b91dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenThrows: 1
-  throwChance: 0
+  timeBetweenThrows: 20
+  throwChance: 5
+  throwForce: 20
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  throwForce: 20
-  axe: {fileID: 5681774981070429426, guid: a4127f41ae3f6c246a075f1805e43040, type: 3}
-  camController: {fileID: 0}
+  axePrefab: {fileID: 5681774981070429426, guid: a4127f41ae3f6c246a075f1805e43040, type: 3}
+  cameraController: {fileID: 0}
 --- !u!1 &3703395783786454196
 GameObject:
   m_ObjectHideFlags: 0
