@@ -4,75 +4,54 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Health Settings")]
     public int maxHealth;
     public int currentHealth;
 
-    public GameObject[] lives;
+    [Header("UI")]
+    [SerializeField] private GameObject[] lives;
+    [SerializeField] private Sprite fullLife;
+    [SerializeField] private Sprite halfLife;
+    [SerializeField] private Sprite emptyLife;
 
+    [Header("Gameplay Settings")]
     [SerializeField] private float invincibilityDuration = 0.5f;
     [SerializeField] private UpgradeStats upgradeStatsScriptable;
-
-    [SerializeField] private GameObject gameOverMenu;
     public bool inTutorial = false;
 
-    [Header("Life Sprites")]
-    public Sprite fullLife;
-    public Sprite halfLife;
-    public Sprite emptyLife;
-    
-    [Header("Music")]
-    private MusicManager musicManager;
-    [SerializeField] private AudioSource Main;
+    [Header("Game Over")]
+    [SerializeField] private GameObject gameOverMenu;
+
+    [Header("Audio")]
     [SerializeField] private AudioManager AM;
+    [SerializeField] private AudioSource Main;
+    private MusicManager musicManager;
 
     private void Start()
     {
+        InitializeHealth();
+        InitializeAudio();
+        UpdateHealthUI();
+    }
+
+    #region Initialization
+    private void InitializeHealth()
+    {
         maxHealth += upgradeStatsScriptable.health;
-
-        Debug.Log(upgradeStatsScriptable.health);
-
-        if(maxHealth <= 8)
-        {
-            int healthAmount = maxHealth / 2;
-
-            if(maxHealth%2 != 0 )
-            {
-                healthAmount++;
-            }
-
-            for (int i = 0; i < healthAmount; i++)
-            {
-                lives[i].SetActive(true);            
-            }
-
-            if(maxHealth % 2 != 0) 
-            { 
-                lives[healthAmount-1].GetComponent<Image>().sprite = halfLife;
-            }
-        }
-
         currentHealth = maxHealth;
+        SetUpHealthUI();
+    }
 
+    private void InitializeAudio()
+    {
         AM = FindAnyObjectByType<AudioManager>();
         Main = GetComponentInChildren<AudioSource>();
 
-        //gameOverMenu = UIManager.Instance.gameOverMenu;
         //musicManager = ReferenceManager.Instance.musicManager;
     }
+    #endregion
 
-    private void Die()
-    {
-        Debug.Log("You died.");
-        
-        if (gameOverMenu)
-        {
-            gameOverMenu.SetActive(true);
-        }
-
-        if(musicManager) musicManager.SwitchToNewSongNoSave(2);
-        Destroy(gameObject);
-    }
-
+    #region Health Management
     public void TakeDamage(int damage)
     {
         if (PlayerMovement.IsInvincible())
@@ -80,17 +59,48 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        if(!inTutorial) currentHealth -= damage;
+        if (!inTutorial)
+        {
+            currentHealth -= damage;
+        }
+
         CameraShake.Shake(0.2f, 0.2f);
-        Debug.Log("Health: " +  currentHealth);
+        AM.Play("Hurt", Main);
+
+        UpdateHealthUI();
 
         if (currentHealth <= 0)
         {
             Die();
         }
-        AM.Play("Hurt", Main);
+        else
+        {
+            StartCoroutine(TemporaryInvincibility());
+        }
+    }
+
+    public void Heal(int amount)
+    {
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+
         UpdateHealthUI();
-        StartCoroutine(TemporaryInvincibility());
+    }
+
+    private void Die()
+    {
+        Debug.Log("You died.");
+
+        if (gameOverMenu)
+        {
+            gameOverMenu.SetActive(true);
+        }
+
+        if (musicManager)
+        {
+            musicManager.SwitchToNewSongNoSave(2);
+        }
+
+        Destroy(gameObject);
     }
 
     private IEnumerator TemporaryInvincibility()
@@ -101,18 +111,30 @@ public class PlayerHealth : MonoBehaviour
 
         PlayerMovement.isInvincible = false;
     }
+    #endregion
 
-    public void Heal(int amount)
+    #region UI
+    private void SetUpHealthUI()
     {
-        currentHealth += amount;
-        Debug.Log("Health: " + currentHealth);
-
-        if (currentHealth > maxHealth)
+        if (maxHealth <= 8)
         {
-            currentHealth = maxHealth;
-        }
+            int hearts = maxHealth / 2;
 
-        UpdateHealthUI();
+            if (maxHealth % 2 != 0)
+            {
+                hearts++;
+            }
+
+            for (int i = 0; i < hearts; i++)
+            {
+                lives[i].SetActive(true);
+
+                if (maxHealth % 2 != 0 && i == hearts - 1)
+                {
+                    lives[i].GetComponent<Image>().sprite = halfLife;
+                }
+            }
+        }
     }
 
     private void UpdateHealthUI()
@@ -140,4 +162,6 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
+    #endregion
+    
 }
