@@ -1,65 +1,58 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class AxeThrow : MonoBehaviour
 {
-    [SerializeField] float timeBetweenThrows = 5f;
+    [Header("Throw Settings")]
+    [SerializeField] float timeBetweenThrows = 5.0f;
     [SerializeField] int throwChance = 30;
+    [SerializeField] private float throwForce = 40.0f;
+    [SerializeField] private LayerMask layerMask;
 
-    [SerializeField] LayerMask layerMask;
-
-    [SerializeField] float throwForce = 40f;
-    [SerializeField] GameObject axe;
-    [SerializeField] CameraController camController;
-
-    private Vector3 sphere;
+    [Header("References")]
+    [SerializeField] private GameObject axePrefab;
+    [SerializeField] private CameraController cameraController;
 
     private void Awake()
     {
-        camController = FindAnyObjectByType<CameraController>();
+        if (!cameraController)
+        {
+            cameraController = FindAnyObjectByType<CameraController>();
+        }
     }
 
-    void Start()
+    private void Start()
     {
-        StartCoroutine(ThrowPossibility());
+        StartCoroutine(TryThrowAxe());
     }
 
-    IEnumerator ThrowPossibility()
+    private IEnumerator TryThrowAxe()
     {
         yield return new WaitForSeconds(timeBetweenThrows);
 
-        int throwChance = Random.Range(1, 101);
+        int random = Random.Range(1, 101);
 
-        if(throwChance <= this.throwChance) 
+        if (random <= throwChance)
         {
-            if(camController)
+            if (cameraController && !cameraController.IsCurrentRoomFinished())
             {
-
-                if(!camController.IsCurrentRoomFinished())
-                {
-                    Throw();
-                }
+                ThrowAxe();
             }
         }
 
-        StartCoroutine(ThrowPossibility());
+        StartCoroutine(TryThrowAxe());
     }
 
-    void Throw()
+    private void ThrowAxe()
     {
-        Vector3 dir = new Vector3(Random.Range(-1f,1f),0, Random.Range(-1f, 1f));
+        Vector3 randomDir = new Vector3(Random.Range(-1.0f, 1.0f),0, Random.Range(-1.0f, 1.0f)).normalized;
 
-        dir.Normalize();
         RaycastHit hit;
-        if(Physics.Raycast(transform.position + Vector3.up*0.7f,dir,out hit, 100f, layerMask))
+        if (Physics.Raycast(transform.position + Vector3.up * 0.7f, randomDir, out hit, 100.0f, layerMask))
         {
-            sphere = hit.point;
-            GameObject gO = Instantiate(axe, hit.point,Quaternion.identity,null);
+            GameObject axeGO = Instantiate(axePrefab, hit.point, Quaternion.identity, null);
 
-            gO.GetComponent<Axe>().SetDir((transform.position - hit.point).normalized * throwForce);
-
-            //gO.GetComponent<Rigidbody>().AddForce((transform.position - hit.point).normalized * throwForce);
+            axeGO.GetComponent<Axe>().SetDir((transform.position - hit.point).normalized * throwForce);
         }
     }
 }
