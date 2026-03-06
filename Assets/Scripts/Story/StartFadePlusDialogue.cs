@@ -13,8 +13,15 @@ public class StartFadePlusDialogue : MonoBehaviour
     void Start()
     {
         player = FindFirstObjectByType<PlayerMovement>();
-        player.enabled = false;
+        StartCoroutine(DelayedStart());
+    }
+
+    IEnumerator DelayedStart()
+    {
+        yield return null;
+        DisablePlayerMovement();
         StartCoroutine(PlayBookFallSound());
+
     }
 
     public IEnumerator PlayBookFallSound()
@@ -27,6 +34,7 @@ public class StartFadePlusDialogue : MonoBehaviour
     }
     public void StartFirstFadeInMethod()
     {
+        DisablePlayerMovement();
         RoomTransitionFade.Instance.fadeDuration = 4f;
         StartCoroutine(StartFirstFadeIn());
     }
@@ -35,14 +43,20 @@ public class StartFadePlusDialogue : MonoBehaviour
     {
         yield return StartCoroutine(RoomTransitionFade.Instance.FadeIn());
         DialogueManager.instance.currentDialogue = secondDialogue;
-        DialogueManager.instance.onDialogueEnd.AddListener(EnablePlayerMovement);
         DialogueManager.instance.StartDialogue();
         RoomTransitionFade.Instance.fadeDuration = 0.4f;
 
     }
 
+
+    void DisablePlayerMovement()
+    {
+        PlayerMovement.canMove = false;
+        player.canRoll = false;
+    }
     void EnablePlayerMovement()
     {
-        player.enabled = true;
+        PlayerMovement.canMove = true;
+        player.canRoll = true;
     }
 }

@@ -6,7 +6,8 @@ public class HubBedInteraction : MonoBehaviour
 {
     private bool playerInRange = false;
     [SerializeField] private PlayerMovement player;
-    [SerializeField] private GameObject UpgradeMenu;
+    [SerializeField] private GameObject upgradeMenu;
+    [SerializeField] private PauseMenu pauseMenu;
     private InputAction interactAction;
     private bool inMenu;
 
@@ -45,17 +46,22 @@ public class HubBedInteraction : MonoBehaviour
 
     IEnumerator Fade()
     {
+        PlayerMovement.canMove = false;
+        player.canRoll = false;
+        pauseMenu.SetCanShowFalse();
         StartCoroutine(RoomTransitionFade.Instance.FadeOut());
         yield return new WaitForSeconds(1f);
-        UpgradeMenu.SetActive(true);
+        upgradeMenu.SetActive(true);
         //StartCoroutine(RoomTransitionFade.Instance.FadeIn());
 
     }
 
     public void ReturnToGame()
     {
-        
-        UpgradeMenu.SetActive(false);
+        PlayerMovement.canMove = true;
+        player.canRoll = true;
+        pauseMenu.SetCanShowTrue();
+        upgradeMenu.SetActive(false);
         StartCoroutine(RoomTransitionFade.Instance.FadeIn());
     }
     

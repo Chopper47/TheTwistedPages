@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     public bool isPaused = false;
     public GameObject pauseMenu;
     public GameObject currencyUI;
+    private bool canShow;
 
     [Header("Options Menu")]
     public GameObject optionsMenu;
@@ -24,6 +25,7 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         pauseAction = inputActions.FindActionMap("Player").FindAction("Pause");
+        canShow = true;
 
         if (pauseMenu != null)
         {
@@ -43,25 +45,29 @@ public class PauseMenu : MonoBehaviour
 
     public void TogglePause()
     {
-        isPaused = !isPaused;
-        pauseMenu.SetActive(isPaused);
-        currencyUI.SetActive(isPaused);
-
-        if (Time.timeScale == 0)
+        if (canShow)
         {
-            Time.timeScale = 1;
-            PlayerMovement.canMove = true;
-            optionsMenu.SetActive(false);
-            AM.Play("Unpause", Main);
 
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponent<MenuNavigator>().firstSelected);
-        }
-        else
-        {
-            Time.timeScale = 0;
-            PlayerMovement.canMove = false;
-            AM.Play("Pause", Main);
+            isPaused = !isPaused;
+            pauseMenu.SetActive(isPaused);
+            currencyUI.SetActive(isPaused);
+
+            if (Time.timeScale == 0)
+            {
+                Time.timeScale = 1;
+                PlayerMovement.canMove = true;
+                optionsMenu.SetActive(false);
+                AM.Play("Unpause", Main);
+
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponent<MenuNavigator>().firstSelected);
+            }
+            else
+            {
+                Time.timeScale = 0;
+                PlayerMovement.canMove = false;
+                AM.Play("Pause", Main);
+            }
         }
     }
 
@@ -84,5 +90,15 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("main_menu");
+    }
+
+    public void SetCanShowTrue()
+    {
+        canShow = true;
+    }
+
+    public void SetCanShowFalse()
+    {
+        canShow = false;
     }
 }

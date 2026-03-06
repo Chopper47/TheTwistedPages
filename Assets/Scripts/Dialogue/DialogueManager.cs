@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+
 
 public class DialogueManager : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class DialogueManager : MonoBehaviour
     private bool active = false;
     private PlayerMovement player;
     private Coroutine typingCoroutine;
+
+    public InputAction interactAction;
 
     public static DialogueManager instance;
     private void Awake()
@@ -34,12 +38,14 @@ public class DialogueManager : MonoBehaviour
     {
         textComponent.text = string.Empty;
         player = FindFirstObjectByType<PlayerMovement>();
+        interactAction = player.inputActions.FindActionMap("Player").FindAction("Interact");
+
         //StartDialogue();
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (interactAction.triggered)
         {
             if (active)
             {
