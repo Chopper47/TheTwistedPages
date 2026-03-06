@@ -24,6 +24,7 @@ public class WolfEncounter : MonoBehaviour
     [SerializeField] private GameObject pressShiftCanvas;
 
     [SerializeField] private bool frozenTime = false;
+    [SerializeField] private bool playereCanRoll;
     //[SerializeField] private bool pressedShift = false; 
     private InputAction rollInput;
 
@@ -39,15 +40,7 @@ public class WolfEncounter : MonoBehaviour
     {
         if(frozenTime && rollInput.triggered)
         {
-            frozenTime = false;
-            PlayerMovement.canMove = true;
-            player.canRoll = true;
-            Time.timeScale = 1f;
-            //wolfGO.GetComponent<NavMeshAgent>().enabled = true;
-
-            StartCoroutine(player.Roll());
-            pressShiftCanvas.SetActive(false);
-            StartCoroutine(EndTutorial());
+            StartCoroutine(UnFreezeTimeAndRoll());
 
         }
     }
@@ -56,15 +49,14 @@ public class WolfEncounter : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            player.StopAllCoroutines();
             StartCoroutine(WolfEncounterCoroutine());
-            
             gameObject.transform.position = new Vector3(-9999, -9999, -9999);
         }
     }
     IEnumerator WolfEncounterCoroutine()
     {
-        PlayerMovement.canMove = false;
-        player.canRoll = false;
+        DisablePlayerMovement();
         darknessVolume.profile.TryGet(out darknessVignette);
         yield return DarkenVignette();
         wolfEyes.SetActive(true);
@@ -85,6 +77,8 @@ public class WolfEncounter : MonoBehaviour
 
         DialogueManager.instance.onDialogueEnd.RemoveListener(SpawnWolfAndStartSecondDialogueMethod);
 
+        DisablePlayerMovement();
+
         wolfEyes.SetActive(false);
         wolfGO = Instantiate(wolfPrefab, wolfSpawnPoint.position, Quaternion.identity);
         wolfGO.GetComponent<NavMeshAgent>().enabled = false;
@@ -103,8 +97,8 @@ public class WolfEncounter : MonoBehaviour
 
     private void EnableWolfChase()
     {
-        PlayerMovement.canMove = false;
-        player.canRoll = false;
+        DisablePlayerMovement();
+
         wolfGO.GetComponent<NavMeshAgent>().enabled = true;
         wolfGO.GetComponent<ChaseAgent>().enabled = true;
         wolfGO.GetComponent<DecisionTreeAgent>().enabled = true;
@@ -122,10 +116,21 @@ public class WolfEncounter : MonoBehaviour
 
     }
     
+    IEnumerator UnFreezeTimeAndRoll()
+    {
+        frozenTime = false;
+        Time.timeScale = 1f;
+        pressShiftCanvas.SetActive(false);
+
+        yield return StartCoroutine(player.Roll());
+
+        DisablePlayerMovement();
+        StartCoroutine(EndTutorial());
+    }
     IEnumerator EndTutorial()
     {
-        PlayerMovement.canMove = false;
-        player.canRoll = false;
+        DisablePlayerMovement();
+
 
         yield return DarkenVignette();
         wolfEyes.SetActive(true);
@@ -154,7 +159,7 @@ public class WolfEncounter : MonoBehaviour
     void EndTutorialEvent()
     {
         StartCoroutine(LightenVignette());
-        player.canRoll = true;
+        //player.canRoll = true;
         wolfEyes.SetActive(false);
     }
     IEnumerator LightenVignette()
@@ -169,6 +174,13 @@ public class WolfEncounter : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+    }
+
+    void DisablePlayerMovement()
+    {
+        PlayerMovement.canMove = false;
+        player.canRoll = false;
+        playereCanRoll = false;
     }
 
 }
