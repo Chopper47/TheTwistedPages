@@ -12462,6 +12462,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972895602}
   m_CullTransparentMesh: 1
+--- !u!1001 &979298222
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828241084209067747, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5773239601453712953, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_Name
+      value: PostProcess
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
 --- !u!1 &979745181 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8310294261582328917, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
@@ -14148,7 +14205,7 @@ PrefabInstance:
     - target: {fileID: 649782555436203942, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 87b2e4e5d129a434c9bd410d21a0409b, type: 2}
+      objectReference: {fileID: 2100000, guid: 07877d9f59678b143bbc397c696eb187, type: 2}
     - target: {fileID: 1302975750273684234, guid: 34473a3a1e92aac4396642d72cd0bd80, type: 3}
       propertyPath: m_Name
       value: RoomBoss
@@ -17547,6 +17604,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef62aff1ab30804295cc3f425573810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 571309779289085817}
+  cameraController: {fileID: 0}
+  blackAndWhiteFilter: {fileID: 656700533}
+  bulletTimeTrigger: {fileID: 3261127875366308304}
   upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   baseMoveSpeed: 6
   rotationSpeed: 10
@@ -17555,26 +17616,21 @@ MonoBehaviour:
   rollCooldown: 0.25
   destructionCheck: {fileID: 6381343205603853598}
   canRoll: 1
-  cameraController: {fileID: 0}
-  blackAndWhiteFilter: {fileID: 656700533}
-  bulletTimeTrigger: {fileID: 3261127875366308304}
-  bulletTimeSpeed: 15
   bulletTimeDuration: 1.2
-  angleAmplitude: 5
-  frontAmplitude: 9
   coneAngle: 35
   axeConeAngle: 35
+  frontAmplitude: 9
+  angleAmplitude: 5
   maxPushDistance: 9
+  canTriggerBulletTime: 1
+  axeHold: {fileID: 2653514580975151193}
   axeRotationSpeed: 480
   axeThrowSpeed: 15
   bossAxeThrowSpeed: 0.15
-  axeHold: {fileID: 2653514580975151193}
   LeftRangeGO: {fileID: 0}
   RightRangeGO: {fileID: 0}
-  canTriggerBulletTime: 1
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   bulletTimeTimer: {fileID: 0}
-  animator: {fileID: 571309779289085817}
   AM: {fileID: 1594221039}
   Main: {fileID: 0}
 --- !u!1 &564143915671223895
@@ -19600,12 +19656,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenThrows: 5
   throwChance: 30
+  throwForce: 40
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  throwForce: 40
-  axe: {fileID: 5681774981070429426, guid: a4127f41ae3f6c246a075f1805e43040, type: 3}
-  camController: {fileID: 0}
+  axePrefab: {fileID: 0}
+  cameraController: {fileID: 0}
 --- !u!4 &3598502712001359919
 Transform:
   m_ObjectHideFlags: 0
@@ -21983,15 +22039,15 @@ MonoBehaviour:
   - {fileID: 182558946}
   - {fileID: 1704247513}
   - {fileID: 1103782380}
-  invincibilityDuration: 1
-  upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
-  gameOverMenu: {fileID: 1709324761}
-  inTutorial: 0
   fullLife: {fileID: 21300000, guid: 0d23a2e405809d84792b67b9e982ae5c, type: 3}
   halfLife: {fileID: 21300000, guid: bb0b08c97fca4b741adb10cefda3faca, type: 3}
   emptyLife: {fileID: 21300000, guid: 9816629483ac8694d8f6962927233547, type: 3}
-  Main: {fileID: 0}
+  invincibilityDuration: 1
+  upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
+  inTutorial: 0
+  gameOverMenu: {fileID: 1709324761}
   AM: {fileID: 0}
+  Main: {fileID: 0}
 --- !u!1 &7009539450618560676
 GameObject:
   m_ObjectHideFlags: 0
@@ -23724,6 +23780,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1735662041}
+  - {fileID: 979298222}
   - {fileID: 8650172337085794342}
   - {fileID: 321247047}
   - {fileID: 320680296255984879}
