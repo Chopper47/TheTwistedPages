@@ -211,4 +211,9 @@ public class LumberjackAnimations : MonoBehaviour
     {
         animator.SetTrigger("closeInToAxe");
     }
+
+    public void DeathTrigger()
+    {
+        animator.SetTrigger("death");
+    }
 }
