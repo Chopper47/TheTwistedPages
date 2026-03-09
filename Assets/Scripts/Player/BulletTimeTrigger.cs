@@ -86,6 +86,11 @@ public class BulletTimeTrigger : MonoBehaviour
             {
                 harmOrigin = axeGO;
             }
+            else
+            {
+                canDodge = false;
+                harmOrigin = null;
+            }
         }
 
         if(axe != null)
@@ -94,6 +99,11 @@ public class BulletTimeTrigger : MonoBehaviour
             if(latestEnemy != null)
             {
                 harmOrigin = latestEnemy;
+            }
+            else
+            {
+                canDodge = false;
+                harmOrigin = null;
             }
         }
 
@@ -104,8 +114,7 @@ public class BulletTimeTrigger : MonoBehaviour
             {
                 harmOrigin = latestEnemy;
             }
-
-            if (latestEnemy == null)
+            else
             {
                 canDodge = false;
                 harmOrigin = null;
@@ -121,5 +130,11 @@ public class BulletTimeTrigger : MonoBehaviour
     public GameObject FirstHarm()
     {
         return harmOrigin;
+    }
+
+    public void DeactivateDodge()
+    {
+        Debug.Log("Deactivating dodge");
+        canDodge = false;
     }
 }
