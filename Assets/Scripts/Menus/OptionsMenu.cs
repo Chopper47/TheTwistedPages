@@ -7,6 +7,8 @@ public class OptionsMenu : MonoBehaviour
 {
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
+    Resolution? currentResolution;
+    FullScreenMode? currentScreenMode;
 
     [Header("Sound Menu")]
     public GameObject soundMenu;
@@ -22,7 +24,16 @@ public class OptionsMenu : MonoBehaviour
 
     void Awake()
     {
-        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+        // Load resolution values with defaults
+        int width = PlayerPrefs.GetInt("resWidth", 1920);
+        int height = PlayerPrefs.GetInt("resHeight", 1080);
+        int modeIndex = PlayerPrefs.GetInt("ScreenMode", 0);
+
+        // Apply fullscreen mode
+        SetScreenDisplayMode(modeIndex);
+
+        // Apply resolution using the current fullscreen mode
+        Screen.SetResolution(width, height, Screen.fullScreenMode);
     }
     private void Start()
     {
@@ -79,8 +90,12 @@ public class OptionsMenu : MonoBehaviour
     public void SetResolution(int resolutionIndex)
     {
         Debug.Log("Setting resolution" + resolutionIndex);
-        Resolution res = resolutions[resolutionIndex];
-        Screen.SetResolution(res.width, res.height, Screen.fullScreenMode);
+        currentResolution = resolutions[resolutionIndex];
+        PlayerPrefs.SetInt("redWidth", currentResolution.Value.width);
+        PlayerPrefs.SetInt("resHeight", currentResolution.Value.height);
+        PlayerPrefs.Save();
+
+        Screen.SetResolution(currentResolution.Value.width, currentResolution.Value.height, Screen.fullScreenMode);
     }
 
     public void SetScreenDisplayMode(int mode)
@@ -89,20 +104,19 @@ public class OptionsMenu : MonoBehaviour
         {
             case 0:
                 Screen.fullScreenMode = FullScreenMode.Windowed;
-                Debug.Log("windowed");
                 break;
+
             case 1:
                 Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                Debug.Log("borderless");
-
                 break;
+
             case 2:
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                Debug.Log("full screen");
-
                 break;
-
         }
+
+        PlayerPrefs.SetInt("ScreenMode", mode);
+        PlayerPrefs.Save();
     }
     public void ChangeVolumeSliderValue(float volume)
     {

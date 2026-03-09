@@ -17,8 +17,7 @@ public class BossRoomStart : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        bossGO.GetComponent<DecisionTreeAgent>().enabled = false;
-        StartCoroutine(StartBossDelayed());
+        bossGO.GetComponent<DecisionTreeAgent>().enabled = false;       StartCoroutine(StartBossDelayed());
     }
 
     IEnumerator StartBossDelayed()
@@ -39,6 +38,7 @@ public class BossRoomStart : MonoBehaviour
 
     void EndBoss()
     {
+
         bossHealthBar.SetActive(false);
         cameraController.player = bossGO.transform;
         bossGO.GetComponent<DecisionTreeAgent>().enabled = false;

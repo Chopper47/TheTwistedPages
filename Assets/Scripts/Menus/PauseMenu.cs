@@ -55,7 +55,7 @@ public class PauseMenu : MonoBehaviour
             if (Time.timeScale == 0)
             {
                 Time.timeScale = 1;
-                PlayerMovement.canMove = true;
+                //PlayerMovement.canMove = true;
                 optionsMenu.SetActive(false);
                 AM.Play("Unpause", Main);
 
@@ -65,7 +65,7 @@ public class PauseMenu : MonoBehaviour
             else
             {
                 Time.timeScale = 0;
-                PlayerMovement.canMove = false;
+                //PlayerMovement.canMove = false;
                 AM.Play("Pause", Main);
             }
         }
