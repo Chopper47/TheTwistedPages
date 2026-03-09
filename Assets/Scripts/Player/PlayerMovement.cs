@@ -301,6 +301,10 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        Debug.LogError("Can Dodge? " + bulletTimeTrigger.CanDodge() + " | Can Trigger? " + canTriggerBulletTime + " | First Harm? " + bulletTimeTrigger.FirstHarm());
+
+        bulletTimeTrigger.DeactivateDodge();
+
         canTriggerBulletTime = false;
         isInBulletTime = true;
 
@@ -337,8 +341,9 @@ public class PlayerMovement : MonoBehaviour
 
         TimeManager.SlowTime();
 
-        if (bulletTimeTimer != null)
+        if (bulletTimeTimer == null)
         {
+            Debug.LogWarning("Start bullet time");
             btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
         }
 
@@ -496,6 +501,7 @@ public class PlayerMovement : MonoBehaviour
             bulletTimeTimer.fillAmount = 0f;
         }
 
+        bulletTimeCoroutine = null;
         yield return null;
     }
 

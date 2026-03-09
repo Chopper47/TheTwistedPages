@@ -13,6 +13,8 @@ public class AxeThrow : MonoBehaviour
     [SerializeField] private GameObject axePrefab;
     [SerializeField] private CameraController cameraController;
 
+    public bool testingCheck = true;
+
     private void Awake()
     {
         if (!cameraController)
@@ -34,9 +36,16 @@ public class AxeThrow : MonoBehaviour
 
         if (random <= throwChance)
         {
-            if (cameraController && !cameraController.IsCurrentRoomFinished())
+            if(testingCheck)
             {
                 ThrowAxe();
+            }
+            else
+            {
+                if (cameraController && !cameraController.IsCurrentRoomFinished())
+                {
+                    ThrowAxe();
+                }
             }
         }
 
