@@ -13,6 +13,7 @@ public class StartFadePlusDialogue : MonoBehaviour
     void Start()
     {
         player = FindFirstObjectByType<PlayerMovement>();
+        DisablePlayerMovement();
         StartCoroutine(DelayedStart());
     }
 
@@ -26,6 +27,7 @@ public class StartFadePlusDialogue : MonoBehaviour
 
     public IEnumerator PlayBookFallSound()
     {
+        DisablePlayerMovement();
         yield return new WaitForSeconds(0.5f);
         //AudioManager.Instance.Play("BookFall");
         yield return new WaitForSeconds(0.5f);
