@@ -245,6 +245,9 @@ public class RoomController : MonoBehaviour
         foreach (DoorController door in doors)
         {
             door.OpenDoor();
+            door.GetComponentInChildren<Animator>().SetTrigger("OpenDoor");
+            door.GetComponentInChildren<Light>().enabled = true;
+
         }
         if (vines.Count > 0)
         {
