@@ -34,9 +34,13 @@ public class WolfAnimations : MonoBehaviour
     }
     public void TriggerStepback()
     {
-        animator.SetTrigger("stepBack");
+        animator.SetTrigger("stepback");
     }
 
+    public void ResetTriggerStepback()
+    {
+        animator.ResetTrigger("stepback");
+    }
     public void TriggerStopStepback()
     {
         animator.SetTrigger("stopStepback");

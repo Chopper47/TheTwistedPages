@@ -228,6 +228,7 @@ public class Wolf : CollisionRefresh
         //rb.AddForce(sbDir * stepbackForce);
 
         //animations.SetStepback(false);
+        animations.ResetTriggerStepback();
         animations.TriggerStopStepback();
 
         StopStepback();
