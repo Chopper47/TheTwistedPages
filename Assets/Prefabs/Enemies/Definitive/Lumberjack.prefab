@@ -323,12 +323,20 @@ MonoBehaviour:
   maxConsecutiveJumps: 3
   axeOnAirTime: 0.1
   axeBoomerangTime: 1.5
+  throwAttackAOffset: 0.5
+  throwAttackBOffset: 0.5
   wallMask:
     serializedVersion: 2
     m_Bits: 256
   chargeAmount: 3
   timeBetweenCharges: 0.5
   chargeSpeed: 0.1
+  aoeAIndicator: {fileID: 0}
+  aoeBIndicator: {fileID: 0}
+  jumpIndicator: {fileID: 0}
+  aoeABuildup: 1
+  aoeBBuildup: 1
+  jumpBuildup: 1
 --- !u!1 &226134891002600124
 GameObject:
   m_ObjectHideFlags: 0
@@ -3674,7 +3682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fff493180b6dc499b06d689af04fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  probability: 0
+  probability: 0.4
 --- !u!1 &3008491111237308248
 GameObject:
   m_ObjectHideFlags: 0

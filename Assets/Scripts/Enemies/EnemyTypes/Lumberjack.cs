@@ -70,7 +70,10 @@ public class Lumberjack : MonoBehaviour
 
     [Header("Throw Attacks Settings")]
     [SerializeField] private float axeOnAirTime = .1f;
-    [SerializeField] private float axeBoomerangTime = 1.5f; 
+    [SerializeField] private float axeBoomerangTime = 1.5f;
+
+    [SerializeField] private float throwAttackAOffset = 0.5f;
+    [SerializeField] private float throwAttackBOffset = 0.5f;
 
     [Header("Enraged Attack Settings")]
     [SerializeField] private LayerMask wallMask;
@@ -419,7 +422,7 @@ public class Lumberjack : MonoBehaviour
         animations.ResetGetAxe();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(throwAttackBOffset);
         bossAxe.gameObject.SetActive(true);
         animations.SetLowerHp(enemyHealth.health <= 3 ? true : false);
         animations.EndThrowAttackTrigger();
@@ -435,7 +438,7 @@ public class Lumberjack : MonoBehaviour
         animations.ResetGetAxe();
         hasAxe = false;
         transform.LookAt(transform.position + chaseAgent.TargetDirection());
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(throwAttackAOffset);
         bossAxe.gameObject.SetActive(true);
         bossAxe.StartThrowAttackA(axeBoomerangTime, chaseAgent.DistanceFromTarget());
         audioSources[0].Play();

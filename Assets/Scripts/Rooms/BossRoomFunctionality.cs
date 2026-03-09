@@ -14,7 +14,7 @@ public class BossRoomFunctionality : MonoBehaviour
     public List<AudioSource> pillarHit;
     public AudioSource bossDeath;
     public UnityEvent onBossEnd;
-
+    public LumberjackAnimations bossAnimations;
 
     [SerializeField] private EnemyHealth bossHealth;
 
@@ -38,6 +38,7 @@ public class BossRoomFunctionality : MonoBehaviour
         {
             EndBoss();
             bossDeath.Play();
+            bossAnimations.DeathTrigger();
         }
     }
 

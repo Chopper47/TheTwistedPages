@@ -497,9 +497,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0033498704
+  m_TransitionDuration: 0.0011878188
   m_TransitionOffset: 0
-  m_ExitTime: 0.0000000030693073
+  m_ExitTime: 0.0000000030628602
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -695,9 +695,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0056594578
+  m_TransitionDuration: 0.005659458
   m_TransitionOffset: 0
-  m_ExitTime: 0.00000001357667
+  m_ExitTime: 0.000000048663328
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -813,7 +813,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dead
-  m_Speed: 1
+  m_Speed: 0.7
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -913,7 +913,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AxeGain
-  m_Speed: 20
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2859426380694342401}
@@ -926,7 +926,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a055f95b1e4e867429e7d14f800d992c, type: 2}
+  m_Motion: {fileID: 7400000, guid: a5514e4d41b25464a9c776fa21635392, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1019,10 +1019,10 @@ AnimatorStateMachine:
     m_Position: {x: 260, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2550250244094121980}
-    m_Position: {x: 260, y: -150, z: 0}
+    m_Position: {x: 250, y: -150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2246478542961306061}
-    m_Position: {x: -190, y: -140, z: 0}
+    m_Position: {x: 30, y: -210, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 8163678428763773600}
