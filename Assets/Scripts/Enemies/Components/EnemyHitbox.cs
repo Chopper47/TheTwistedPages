@@ -34,14 +34,12 @@ public class EnemyHitbox : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(ignorePlayer) { return; }
-        PlayerHealth player = other.GetComponent<PlayerHealth>();
-
-        if(player != null && !PlayerMovement.IsInvincible()) 
+        if(ignorePlayer) 
         {
-            CameraShake.Shake(0.5f, 0.5f);
-            player.TakeDamage(dmg);
+            Debug.LogError("Enemy hitbox is ignoring player.");
+            return;
         }
+        PlayerHealth player = other.GetComponent<PlayerHealth>();
 
         PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
 
@@ -66,6 +64,12 @@ public class EnemyHitbox : MonoBehaviour
             {
                 states.PushedState();
             }
+        }
+
+        if(player != null && !PlayerMovement.IsInvincible() && !ignorePlayer) 
+        {
+            CameraShake.Shake(0.5f, 0.5f);
+            player.TakeDamage(dmg);
         }
     }
 

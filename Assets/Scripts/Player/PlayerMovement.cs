@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -341,7 +342,7 @@ public class PlayerMovement : MonoBehaviour
 
         TimeManager.SlowTime();
 
-        if (bulletTimeTimer == null)
+        if (bulletTimeTimer != null)
         {
             Debug.LogWarning("Start bullet time");
             btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
