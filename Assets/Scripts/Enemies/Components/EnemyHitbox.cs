@@ -36,7 +36,6 @@ public class EnemyHitbox : MonoBehaviour
     {
         if(ignorePlayer) 
         {
-            Debug.LogError("Enemy hitbox is ignoring player.");
             return;
         }
         PlayerHealth player = other.GetComponent<PlayerHealth>();

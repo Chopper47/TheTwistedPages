@@ -222,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
         {
             firstDash = false;
             rollCoroutine = StartCoroutine(Roll());
-            Debug.Log("start rolling");
+            //Debug.Log("start rolling");
         }
         else if (!axeHolding && isInBulletTime && !throwAxe)
         {
@@ -236,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
                 rollCoroutine = StartCoroutine(Roll());
             }
 
-            Debug.Log("start rolling on bullet time");
+            //Debug.Log("start rolling on bullet time");
         }
 
         if (throwAxe)
@@ -302,7 +302,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        Debug.LogError("Can Dodge? " + bulletTimeTrigger.CanDodge() + " | Can Trigger? " + canTriggerBulletTime + " | First Harm? " + bulletTimeTrigger.FirstHarm());
+        //Debug.LogError("Can Dodge? " + bulletTimeTrigger.CanDodge() + " | Can Trigger? " + canTriggerBulletTime + " | First Harm? " + bulletTimeTrigger.FirstHarm());
 
         bulletTimeTrigger.DeactivateDodge();
 
@@ -344,7 +344,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (bulletTimeTimer != null)
         {
-            Debug.LogWarning("Start bullet time");
+            //Debug.LogWarning("Start bullet time");
             btUICoroutine = StartCoroutine(UpdateBulletTimeUI());
         }
 
@@ -419,7 +419,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void StopBulletTime()
     {
-        Debug.Log("Bullet Time stopped.");
+        //Debug.Log("Bullet Time stopped.");
         if (bulletTimeCoroutine != null)
         {
             StopCoroutine(bulletTimeCoroutine);
@@ -665,7 +665,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanPush(GameObject enemyChecking)
     {
-        Debug.Log("Can push " + enemyChecking + "? - " + isRolling + "|" + isInBulletTime + "|" + (enemyChecking == toPush));
+        //Debug.Log("Can push " + enemyChecking + "? - " + isRolling + "|" + isInBulletTime + "|" + (enemyChecking == toPush));
         return isRolling && isInBulletTime && enemyChecking == toPush;
     }
 
