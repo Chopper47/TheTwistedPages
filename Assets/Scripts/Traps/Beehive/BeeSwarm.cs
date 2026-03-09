@@ -5,7 +5,7 @@ public class BeeSwarm : Trap
     private Transform target;
     private float duration;
     private float timer = 0f;
-
+    [SerializeField] private AudioSource swarm;
     [Header("Movement")]
     [SerializeField] private float followSpeed = 6.0f;
     [SerializeField] private float hoverHeight = 1.5f;
@@ -62,6 +62,7 @@ public class BeeSwarm : Trap
     {
         this.target = target;
         this.duration = duration;
+        swarm.Play();
         timer = 0f;
     }
 }
