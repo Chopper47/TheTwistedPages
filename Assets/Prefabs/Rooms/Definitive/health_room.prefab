@@ -129,7 +129,7 @@ Transform:
   m_GameObject: {fileID: 3515930608102249321}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -166,7 +166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 670975eece32c02418382bc58a3cfa2e, type: 2}
+  - {fileID: 2100000, guid: 660329250ebfe094c997d43377a5e987, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -929,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4221964642734565998, guid: b52352ddd6ffaa443a622a44360329d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4221964642734565998, guid: b52352ddd6ffaa443a622a44360329d6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -968,7 +968,8 @@ PrefabInstance:
       value: Room3Background
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2657367405058881438, guid: b52352ddd6ffaa443a622a44360329d6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b52352ddd6ffaa443a622a44360329d6, type: 3}
