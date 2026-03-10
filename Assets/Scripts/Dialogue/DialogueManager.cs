@@ -8,20 +8,21 @@ using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TextMeshProUGUI textComponent;
-    public TextMeshProUGUI characterName;
+    [Header("References")]
     public Image dialoguePanel;
+    public TextMeshProUGUI textComponent;
+    public InputAction interactAction;
+    private PlayerMovement player;
+
+    [Header("Dialogue Components")]
     public DialogueData currentDialogue;
+    public TextMeshProUGUI characterName;
     public UnityEvent onDialogueEnd;
     public UnityEvent onDialogueStart;
 
     private int index;
     private bool active = false;
-    private PlayerMovement player;
     private Coroutine typingCoroutine;
-
-    public InputAction interactAction;
-
     public static DialogueManager instance;
     private void Awake()
     {
@@ -72,6 +73,8 @@ public class DialogueManager : MonoBehaviour
     {
         PlayerMovement.canMove = false;
         player.canRoll = false;
+
+        PauseMenu.canShow = false;
         index = 0;
         active = true;
         dialoguePanel.gameObject.SetActive(true);
@@ -112,6 +115,8 @@ public class DialogueManager : MonoBehaviour
 
             PlayerMovement.canMove = true;
             player.canRoll = true;
+            PauseMenu.canShow = true;
+
             var tempEvent = onDialogueEnd;
             onDialogueEnd = new UnityEngine.Events.UnityEvent();
 

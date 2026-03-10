@@ -57,6 +57,7 @@ public class WolfEncounter : MonoBehaviour
     IEnumerator WolfEncounterCoroutine()
     {
         DisablePlayerMovement();
+        PauseMenu.canShow = false;
         darknessVolume.profile.TryGet(out darknessVignette);
         yield return DarkenVignette();
         wolfEyes.SetActive(true);
@@ -77,6 +78,7 @@ public class WolfEncounter : MonoBehaviour
 
         DialogueManager.instance.onDialogueEnd.RemoveListener(SpawnWolfAndStartSecondDialogueMethod);
 
+        PauseMenu.canShow = false;
         DisablePlayerMovement();
 
         wolfEyes.SetActive(false);
@@ -97,6 +99,7 @@ public class WolfEncounter : MonoBehaviour
 
     private void EnableWolfChase()
     {
+        PauseMenu.canShow = false;
         DisablePlayerMovement();
 
         wolfGO.GetComponent<NavMeshAgent>().enabled = true;

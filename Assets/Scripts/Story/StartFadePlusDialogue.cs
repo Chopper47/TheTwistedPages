@@ -14,6 +14,8 @@ public class StartFadePlusDialogue : MonoBehaviour
     {
         player = FindFirstObjectByType<PlayerMovement>();
         DisablePlayerMovement();
+        PauseMenu.canShow = false;
+
         StartCoroutine(DelayedStart());
     }
 
@@ -37,6 +39,8 @@ public class StartFadePlusDialogue : MonoBehaviour
     public void StartFirstFadeInMethod()
     {
         DisablePlayerMovement();
+        PauseMenu.canShow = false;
+
         RoomTransitionFade.Instance.fadeDuration = 4f;
         StartCoroutine(StartFirstFadeIn());
     }

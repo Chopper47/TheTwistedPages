@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private PlayerMovement player;
+
     [Header("Input System")]
     public InputActionAsset inputActions;
     private InputAction pauseAction;
@@ -13,7 +16,7 @@ public class PauseMenu : MonoBehaviour
     public bool isPaused = false;
     public GameObject pauseMenu;
     public GameObject currencyUI;
-    private bool canShow;
+    public static bool canShow;
 
     [Header("Options Menu")]
     public GameObject optionsMenu;
@@ -26,6 +29,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseAction = inputActions.FindActionMap("Player").FindAction("Pause");
         canShow = true;
+
+        player = FindFirstObjectByType<PlayerMovement>();
 
         if (pauseMenu != null)
         {
@@ -55,7 +60,8 @@ public class PauseMenu : MonoBehaviour
             if (Time.timeScale == 0)
             {
                 Time.timeScale = 1;
-                //PlayerMovement.canMove = true;
+                PlayerMovement.canMove = true;
+                player.canRoll = true;  
                 optionsMenu.SetActive(false);
                 AM.Play("Unpause", Main);
 
@@ -65,7 +71,8 @@ public class PauseMenu : MonoBehaviour
             else
             {
                 Time.timeScale = 0;
-                //PlayerMovement.canMove = false;
+                PlayerMovement.canMove = false;
+                player.canRoll = false;
                 AM.Play("Pause", Main);
             }
         }
@@ -92,13 +99,5 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("main_menu");
     }
 
-    public void SetCanShowTrue()
-    {
-        canShow = true;
-    }
-
-    public void SetCanShowFalse()
-    {
-        canShow = false;
-    }
+    
 }

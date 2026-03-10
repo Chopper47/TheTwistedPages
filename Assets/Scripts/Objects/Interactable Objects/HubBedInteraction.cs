@@ -7,7 +7,6 @@ public class HubBedInteraction : MonoBehaviour
     private bool playerInRange = false;
     [SerializeField] private PlayerMovement player;
     [SerializeField] private GameObject upgradeMenu;
-    [SerializeField] private PauseMenu pauseMenu;
     private InputAction interactAction;
     private bool inMenu;
 
@@ -48,7 +47,7 @@ public class HubBedInteraction : MonoBehaviour
     {
         PlayerMovement.canMove = false;
         player.canRoll = false;
-        pauseMenu.SetCanShowFalse();
+        PauseMenu.canShow = false;
         StartCoroutine(RoomTransitionFade.Instance.FadeOut());
         yield return new WaitForSeconds(1f);
         upgradeMenu.SetActive(true);
@@ -60,7 +59,7 @@ public class HubBedInteraction : MonoBehaviour
     {
         PlayerMovement.canMove = true;
         player.canRoll = true;
-        pauseMenu.SetCanShowTrue();
+        PauseMenu.canShow = true;
         upgradeMenu.SetActive(false);
         StartCoroutine(RoomTransitionFade.Instance.FadeIn());
     }
