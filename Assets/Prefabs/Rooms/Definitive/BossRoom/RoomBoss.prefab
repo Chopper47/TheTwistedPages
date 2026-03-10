@@ -67,6 +67,7 @@ MonoBehaviour:
   onBossEnd:
     m_PersistentCalls:
       m_Calls: []
+  bossAnimations: {fileID: 0}
   bossHealth: {fileID: 0}
 --- !u!114 &5702944201455192576
 MonoBehaviour:
@@ -420,8 +421,20 @@ PrefabInstance:
       value: FloorChangeDoor
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.09998
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -429,23 +442,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.4
+      value: 7.72
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -453,7 +466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 5939313005897942959, guid: 711496595e412b04ba29aa5c55d331fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
