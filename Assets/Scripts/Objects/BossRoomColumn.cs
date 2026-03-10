@@ -4,6 +4,7 @@ public class BossRoomColumn : MonoBehaviour
 {
     [SerializeField] private BossRoomFunctionality bossRoom;
     [SerializeField] private Lumberjack lumberjack;
+    [SerializeField] private GameObject brokenColumn;
 
     [SerializeField] private int maxHp;
     [SerializeField] private int currentHp;
@@ -43,6 +44,7 @@ public class BossRoomColumn : MonoBehaviour
         if (gameObject)
         {
             gameObject.SetActive(false);
+            Instantiate(brokenColumn, transform.position, transform.rotation);
             bossRoom.LoseHp();
             lumberjack.ApplyStun(stunDuration);
         }
