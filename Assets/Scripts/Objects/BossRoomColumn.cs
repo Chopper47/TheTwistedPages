@@ -5,6 +5,8 @@ public class BossRoomColumn : MonoBehaviour
     [SerializeField] private BossRoomFunctionality bossRoom;
     [SerializeField] private Lumberjack lumberjack;
     [SerializeField] private GameObject brokenColumn;
+    [SerializeField] private Material brokenColumnMaterial;
+    [SerializeField] private MeshRenderer columnMesh;
 
     [SerializeField] private int maxHp;
     [SerializeField] private int currentHp;
@@ -14,7 +16,7 @@ public class BossRoomColumn : MonoBehaviour
     private void Start()
     {
         bossRoom = transform.GetComponentInParent<BossRoomFunctionality>();
-
+        columnMesh = transform.GetComponentInChildren<MeshRenderer>();
         currentHp = maxHp;
     }
 
@@ -32,6 +34,7 @@ public class BossRoomColumn : MonoBehaviour
     private void LoseHp(int dmgAmount)
     {
         currentHp -= dmgAmount;
+        columnMesh.material = brokenColumnMaterial;
 
         if (currentHp <= 0)
         {
