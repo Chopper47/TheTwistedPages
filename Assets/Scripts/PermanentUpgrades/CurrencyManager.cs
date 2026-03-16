@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class CurrencyManager : MonoBehaviour
 {
-
     public static CurrencyManager instance;
 
     public int currentCurrencyAmount = 0;
 
-    [SerializeField] private GameObject currencyUI;
-    [SerializeField] private GameObject pauseMenuCurrencyUI;
-    [SerializeField] private TextMeshProUGUI currencyText;
+    [Header("UI References")]
     [SerializeField] private TextMeshProUGUI pauseMenuCurrencyText;
+
+    [Header("Popup Settings")]
+    [SerializeField] private CurrencyPopup currencyPopupPrefab;
+    [SerializeField] private Canvas mainCanvas;
 
     private void Awake()
     {
@@ -23,85 +24,57 @@ public class CurrencyManager : MonoBehaviour
             return;
         }
         instance = this;
+
         DontDestroyOnLoad(gameObject);
-
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
     }
 
     private void Start()
     {
         UpdateUI();
     }
+
     public void AddSingleCoin()
     {
         currentCurrencyAmount++;
-
-        StartCoroutine(ShowAndUpdateUI());
     }
 
     public void AddCurrency(int amount)
     {
         currentCurrencyAmount += amount;
-        StartCoroutine(ShowAndUpdateUI());
-
+        ShowPopup(amount);
+        UpdateUI();
     }
+
     public void RemoveCurrency(int amount)
     {
         currentCurrencyAmount -= amount;
-        StartCoroutine(ShowAndUpdateUI());
+        UpdateUI();
     }
 
     public bool CheckEnoughCurrencyAmount(int amountToCheck)
     {
-        if (currentCurrencyAmount >= amountToCheck) return true;
-        return false;
+        return currentCurrencyAmount >= amountToCheck;
     }
 
-    private IEnumerator ShowAndUpdateUI()
+    private void ShowPopup(int amount)
     {
-        if (currencyUI == null || currencyText == null) StopCoroutine(ShowAndUpdateUI());
+        if (currencyPopupPrefab == null || mainCanvas == null)
+        {
+            return;
+        }
 
-        currencyUI.SetActive(true);
-        UpdateUI();
+        CurrencyPopup popup = Instantiate(currencyPopupPrefab, mainCanvas.transform);
 
-        yield return new WaitForSeconds(2f);
+        popup.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 
-        currencyUI.SetActive(false);
+        popup.Setup(amount);
     }
-
 
     private void UpdateUI()
     {
-        if(currencyText)currencyText.text = currentCurrencyAmount.ToString();
-        if(pauseMenuCurrencyText) pauseMenuCurrencyText.text = currentCurrencyAmount.ToString();
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        currencyUI = SearchCurrencyUI("CurrencyUI");
-
-        if (currencyUI == null) Debug.LogWarning("Could not find CurrencyUI in scene: " + scene.name);
-
-        else
+        if (pauseMenuCurrencyText != null)
         {
-            currencyText = currencyUI.transform.GetComponentInChildren<TextMeshProUGUI>();
-            UpdateUI();
+            pauseMenuCurrencyText.text = currentCurrencyAmount.ToString();
         }
-    }
-    private GameObject SearchCurrencyUI(string tag)
-    {
-        var allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-
-        foreach (var obj in allObjects)
-        {
-            // Make sure it's a scene object (not a Prefab asset)
-            if (obj.CompareTag(tag) && obj.scene.isLoaded)
-            {
-                return obj;
-            }
-        }
-
-        return null;
     }
 }

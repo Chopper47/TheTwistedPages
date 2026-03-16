@@ -623,6 +623,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1940875666625100087, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
   m_PrefabInstance: {fileID: 6336129}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &240653325 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7222260064202406758, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
+  m_PrefabInstance: {fileID: 6336129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &248371855 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5750947729015096738, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
@@ -1219,6 +1224,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8521968167987567555, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
   m_PrefabInstance: {fileID: 6336129}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &910881691 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2491751142358774292, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
+  m_PrefabInstance: {fileID: 6336129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &912627055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8497096000367892417, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
@@ -1798,7 +1814,9 @@ MonoBehaviour:
   currencyUI: {fileID: 0}
   pauseMenuCurrencyUI: {fileID: 0}
   currencyText: {fileID: 0}
-  pauseMenuCurrencyText: {fileID: 0}
+  pauseMenuCurrencyText: {fileID: 910881691}
+  currencyPopupPrefab: {fileID: 8264170078410194125, guid: 82ea16efdf2fd2f4d81dca472fe6e1cc, type: 3}
+  mainCanvas: {fileID: 240653325}
 --- !u!4 &1876513390
 Transform:
   m_ObjectHideFlags: 0
