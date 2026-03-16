@@ -55,7 +55,6 @@ public class PauseMenu : MonoBehaviour
 
             isPaused = !isPaused;
             pauseMenu.SetActive(isPaused);
-            currencyUI.SetActive(isPaused);
 
             if (Time.timeScale == 0)
             {
