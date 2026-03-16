@@ -17,7 +17,7 @@ public class CurrencyPopup : MonoBehaviour
 
     private void Awake()
     {
-        if (canvasGroup != null)
+        if (canvasGroup == null)
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }
