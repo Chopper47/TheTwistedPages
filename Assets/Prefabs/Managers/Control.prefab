@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1466915887811757056}
   - component: {fileID: 7203878240146051107}
   - component: {fileID: 8717961186259529469}
+  - component: {fileID: 430916236221786783}
   m_Layer: 0
   m_Name: Control
   m_TagString: Untagged
@@ -62,10 +63,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ebf1bb1899f6e4388ff5bf886a6f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   isPaused: 0
   pauseMenu: {fileID: 0}
-  currencyUI: {fileID: 0}
   optionsMenu: {fileID: 0}
   AM: {fileID: 0}
   Main: {fileID: 0}
@@ -112,7 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapContainer: {fileID: 0}
   roomIconPrefab: {fileID: 2107058897396608980, guid: c5947779c5a41614b934512083880f0a, type: 3}
-  cellSize: 50
+  cellSizeX: 75
+  cellSizeY: 50
 --- !u!114 &7203878240146051107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,5 +146,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextWaveText: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
   gameWonMenu: {fileID: 0}
   gameOverMenu: {fileID: 0}
+  HUD: {fileID: 0}
+--- !u!114 &430916236221786783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4886736564870195055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23bf9a2db14e03439731cd6cc481e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 0}

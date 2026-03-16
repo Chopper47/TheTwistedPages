@@ -91,7 +91,7 @@ public class OptionsMenu : MonoBehaviour
     {
         Debug.Log("Setting resolution" + resolutionIndex);
         currentResolution = resolutions[resolutionIndex];
-        PlayerPrefs.SetInt("redWidth", currentResolution.Value.width);
+        PlayerPrefs.SetInt("resWidth", currentResolution.Value.width);
         PlayerPrefs.SetInt("resHeight", currentResolution.Value.height);
         PlayerPrefs.Save();
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -12,13 +11,12 @@ public class PauseMenu : MonoBehaviour
     public InputActionAsset inputActions;
     private InputAction pauseAction;
 
-    [Header("Pause Menu")]
+    [Header("Pause State")]
     public bool isPaused = false;
-    public GameObject pauseMenu;
-    public GameObject currencyUI;
-    public static bool canShow;
+    public static bool canShow = true;
 
-    [Header("Options Menu")]
+    [Header("Menus")]
+    public GameObject pauseMenu;
     public GameObject optionsMenu;
 
     [Header("SFX")]
@@ -28,16 +26,22 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         pauseAction = inputActions.FindActionMap("Player").FindAction("Pause");
-        canShow = true;
 
         player = FindFirstObjectByType<PlayerMovement>();
-
-        if (pauseMenu != null)
-        {
-            pauseMenu.SetActive(false);
-        }
         AM = FindFirstObjectByType<AudioManager>();
         Main = GetComponentInChildren<AudioSource>();
+
+        UIManager.Instance.CloseMenu(pauseMenu);
+    }
+
+    private void OnEnable()
+    {
+        pauseAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        pauseAction.Disable();
     }
 
     private void Update()
@@ -50,46 +54,58 @@ public class PauseMenu : MonoBehaviour
 
     public void TogglePause()
     {
-        if (canShow)
+        if (!canShow)
         {
-
-            isPaused = !isPaused;
-            pauseMenu.SetActive(isPaused);
-
-            if (Time.timeScale == 0)
-            {
-                Time.timeScale = 1;
-                PlayerMovement.canMove = true;
-                player.canRoll = true;  
-                optionsMenu.SetActive(false);
-                AM.Play("Unpause", Main);
-
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponent<MenuNavigator>().firstSelected);
-            }
-            else
-            {
-                Time.timeScale = 0;
-                PlayerMovement.canMove = false;
-                player.canRoll = false;
-                AM.Play("Pause", Main);
-            }
+            return;
         }
+
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Pause();
+        }
+        else
+        {
+            Unpause();
+        }
+    }
+
+    private void Pause()
+    {
+        Time.timeScale = 0;
+
+        PlayerMovement.canMove = false;
+        player.canRoll = false;
+
+        UIManager.Instance.OpenMenu(pauseMenu);
+        UIManager.Instance.ShowHUD(false);
+
+        AM.Play("Pause", Main);
+    }
+
+    private void Unpause()
+    {
+        Time.timeScale = 1;
+
+        PlayerMovement.canMove = true;
+        player.canRoll = true;
+
+        UIManager.Instance.CloseMenu(optionsMenu);
+        UIManager.Instance.CloseMenu(pauseMenu);
+        UIManager.Instance.ShowHUD(true);
+
+        AM.Play("Unpause", Main);
     }
 
     public void OptionsMenu()
     {
-        if (!optionsMenu.activeSelf)
-        {
-            pauseMenu.SetActive(false);
-            optionsMenu.SetActive(true);
+        UIManager.Instance.SwitchMenu(pauseMenu, optionsMenu);
+    }
 
-        }
-        else
-        {
-            pauseMenu.SetActive(true);
-            optionsMenu.SetActive(false);
-        }
+    public void BackToPause()
+    {
+        UIManager.Instance.SwitchMenu(optionsMenu, pauseMenu);
     }
 
     public void ReturnToMainMenu()
@@ -97,6 +113,4 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("main_menu");
     }
-
-    
 }
