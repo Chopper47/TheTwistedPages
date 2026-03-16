@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float invincibilityDuration = 0.5f;
     [SerializeField] private UpgradeStats upgradeStatsScriptable;
     public bool inTutorial = false;
+    public bool isHitStopping = false;
 
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverMenu;
@@ -66,6 +67,7 @@ public class PlayerHealth : MonoBehaviour
 
         CameraShake.Shake(0.2f, 0.2f);
         AM.Play("Hurt", Main);
+        //StartCoroutine(HitStop(0.1f));
 
         UpdateHealthUI();
 
@@ -77,6 +79,20 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(TemporaryInvincibility());
         }
+    }
+
+    IEnumerator HitStop(float duration)
+    {
+        if (isHitStopping) yield break;
+
+        isHitStopping = true;
+
+        float originalTimeScale = Time.timeScale;
+
+        Time.timeScale = 0.1f;
+        yield return new WaitForSecondsRealtime(duration);
+        isHitStopping = false;
+        Time.timeScale = originalTimeScale;
     }
 
     public void Heal(int amount)

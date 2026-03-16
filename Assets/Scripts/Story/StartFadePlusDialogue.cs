@@ -13,10 +13,20 @@ public class StartFadePlusDialogue : MonoBehaviour
     void Start()
     {
         player = FindFirstObjectByType<PlayerMovement>();
-        DisablePlayerMovement();
-        PauseMenu.canShow = false;
+        if(PlayerPrefs.GetInt("CompletedTutorial") != 1)
+        {
+            DisablePlayerMovement();
+            PauseMenu.canShow = false;
 
-        StartCoroutine(DelayedStart());
+            StartCoroutine(DelayedStart());
+
+        }
+
+        else
+        {
+            StartCoroutine(RoomTransitionFade.Instance.FadeIn());
+            this.enabled = false;
+        }
     }
 
     IEnumerator DelayedStart()

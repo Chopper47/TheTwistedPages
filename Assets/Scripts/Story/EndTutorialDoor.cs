@@ -7,6 +7,7 @@ public class EndTutorialDoor : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            PlayerPrefs.SetInt("CompletedTutorial", 1);
             SceneManager.LoadScene("alpha");
         }
     }

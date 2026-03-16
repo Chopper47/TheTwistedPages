@@ -26,6 +26,10 @@ public class CurrencyManager : MonoBehaviour
         instance = this;
 
         DontDestroyOnLoad(gameObject);
+#if UNITY_EDITOR
+        PlayerPrefs.DeleteKey("CompletedTutorial");
+#endif
+
     }
 
     private void Start()

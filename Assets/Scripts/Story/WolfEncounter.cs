@@ -32,6 +32,7 @@ public class WolfEncounter : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(!player) player = FindFirstObjectByType<PlayerMovement>();
         rollInput = player.inputActions.FindActionMap("Player").FindAction("Roll");
     }
 

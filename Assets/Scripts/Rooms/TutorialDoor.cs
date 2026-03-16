@@ -17,6 +17,8 @@ public class TutorialDoor : MonoBehaviour
     IEnumerator MoveToNextRoom()
     {
 
+        PlayerMovement.canMove = false;
+        player.GetComponent<PlayerMovement>().canRoll = false;
         yield return RoomTransitionFade.Instance.FadeOut();
         player.transform.position = nextDoor.transform.position;
 
