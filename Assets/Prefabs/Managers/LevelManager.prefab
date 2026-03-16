@@ -47,14 +47,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridDimensions: {x: 9, y: 9}
   roomWorldSize: {x: 100, y: 0, z: 100}
-  maxRooms: 4
+  maxRooms: 10
   roomPresets:
-  - {fileID: 11400000, guid: 4a2c4b8e89c56d940a1617814e2b3066, type: 2}
-  - {fileID: 11400000, guid: 0fec2b014fcf8b749bc6dcebbf4d855a, type: 2}
-  - {fileID: 11400000, guid: 36410ee021326c04681dd8753a003ccd, type: 2}
+  - {fileID: 11400000, guid: b1f9a1e383276dc408a3533c5362935c, type: 2}
+  - {fileID: 11400000, guid: 0fa7ac0bf03c03844861a697e8ac9431, type: 2}
   - {fileID: 11400000, guid: 9cee4d2ee6615ff468675e60847babf3, type: 2}
-  - {fileID: 11400000, guid: b5fdb85f7e216a44ebdbf44db390bb9e, type: 2}
-  - {fileID: 11400000, guid: b3617c8afab64a74bb86534f2f837546, type: 2}
+  - {fileID: 11400000, guid: fd63d71859c597848a14b63f697cfea2, type: 2}
+  - {fileID: 11400000, guid: 8af7f1c05b3ffdb42881950e0920026e, type: 2}
+  - {fileID: 11400000, guid: c141dd76631f563468bf61cb84d28401, type: 2}
+  - {fileID: 11400000, guid: bd5ae4722af506a439a2f60dc1382897, type: 2}
+  - {fileID: 11400000, guid: bd6dece5c7922a5458d47626ed032bf8, type: 2}
+  - {fileID: 11400000, guid: 64db27d4de270b14d90957c111f1e166, type: 2}
+  - {fileID: 11400000, guid: 7a9e00abace8ae749b67efc1494a28bf, type: 2}
+  - {fileID: 11400000, guid: 8f83e7785611ba24eaa70f9843982ab1, type: 2}
   isLastFloor: 0
 --- !u!114 &6076223077794933685
 MonoBehaviour:
@@ -68,4 +73,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e421aa20751e2a46b531e78b13a19c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalFloors: 3
+  totalFloors: 1
+  alphaEndText: {fileID: 0}

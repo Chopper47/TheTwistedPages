@@ -9,7 +9,7 @@ public class RoomPreset : ScriptableObject
     [Header("Room Settings")]
     public GameObject roomPrefab;
     public bool canBeStart;
-    public bool canBeShop;
+    public bool canBeUpgrade;
     public bool canBeHealth;
     public bool canBeFloorChange;
     public bool canBeBoss;

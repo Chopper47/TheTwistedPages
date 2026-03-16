@@ -319,14 +319,38 @@ public class LevelGenerator : MonoBehaviour
             return true;
         }
 
-        // Shop room.
-        //RoomInstance shopRoom = normalRooms[Random.Range(0, normalRooms.Count)];
-        //shopRoom.roomType = RoomType.Shop;
-        //shopRoom.roomPreset = GetRandomRoomPreset(RoomType.Shop, shopRoom.gridPosition);
-
-        // Health room (cannot be generated at a distance less than three depthwise from the starting room).
         Dictionary<Vector2Int, int> distances = BFS(startingPosition);
 
+        // Upgrade room(s) (cannot be generated at a distance less than two depthwise from the starting room).
+        int upgradeRoomCount = Random.Range(1, 3);
+
+        List<RoomInstance> upgradeCandidates = new List<RoomInstance>();
+
+        foreach (RoomInstance room in normalRooms)
+        { 
+            if (distances.ContainsKey(room.gridPosition) && distances[room.gridPosition] >= 2)
+            {
+                upgradeCandidates.Add(room);
+            }
+        }
+        
+        for (int i = 0; i < upgradeRoomCount; i++)
+        {
+            if (upgradeCandidates.Count == 0)
+            {
+                break;
+            }
+
+            RoomInstance upgradeRoom = upgradeCandidates[Random.Range(0, upgradeCandidates.Count)];
+
+            upgradeRoom.roomType = RoomType.Upgrade;
+            upgradeRoom.roomPreset = GetRandomRoomPreset(RoomType.Upgrade, upgradeRoom.gridPosition);
+
+            normalRooms.Remove(upgradeRoom);
+            upgradeCandidates.Remove(upgradeRoom);
+        }
+
+        // Health room (cannot be generated at a distance less than three depthwise from the starting room).
         List<RoomInstance> healthCandidates = new List<RoomInstance>();
 
         foreach (RoomInstance room in normalRooms)
@@ -400,10 +424,10 @@ public class LevelGenerator : MonoBehaviour
             {
                 validPresets.Add(preset);
             }
-            //else if (roomType == RoomType.Shop && preset.canBeShop)
-            //{
-            //    validPresets.Add(preset);
-            //}
+            else if (roomType == RoomType.Upgrade && preset.canBeUpgrade)
+            {
+                validPresets.Add(preset);
+            }
             else if (roomType == RoomType.Health && preset.canBeHealth)
             {
                 validPresets.Add(preset);
@@ -505,7 +529,9 @@ public class LevelGenerator : MonoBehaviour
                 foreach (RoomPreset candidate in filteredPresets)
                 {
                     if (candidate.difficultyRating != lastDifficulty)
+                    {
                         difficultyFilteredPresets.Add(candidate);
+                    }
                 }
             }
         }

@@ -11,6 +11,7 @@ public class MinimapRoomIcon : MonoBehaviour
     [Header("Colours")]
     public Color normalColor = Color.grey;
     public Color startColor = Color.green;
+    public Color upgradeColor = Color.magenta;
     public Color healthColor = Color.cyan;
     public Color bossColor = Color.red;
     public Color floorChangeColor = Color.yellow;
@@ -25,6 +26,9 @@ public class MinimapRoomIcon : MonoBehaviour
         {
             case RoomType.Start: 
                 iconImage.color = startColor; 
+                break;
+            case RoomType.Upgrade:
+                iconImage.color = upgradeColor;
                 break;
             case RoomType.Health: 
                 iconImage.color = healthColor; 

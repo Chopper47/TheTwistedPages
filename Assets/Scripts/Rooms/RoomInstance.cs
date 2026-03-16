@@ -4,7 +4,7 @@ public enum RoomType
 {
     Normal,
     Start,
-    Shop,
+    Upgrade,
     Health,
     FloorChange,
     Boss
