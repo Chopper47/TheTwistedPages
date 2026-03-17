@@ -13,9 +13,11 @@ public class BossAxe : MonoBehaviour
     private bool thrown = false;
     private bool arrived = false;
     private bool canGet = false;
+    private bool attacking = true;
     private int throwType = 0;   // 0 = A   |   1 = B
     private Coroutine moving;
     private Coroutine splineArrived;
+    private Coroutine attackingCoroutine;
     private Transform originalParent;
     private Transform ogTransform;
     private Lumberjack lumberjack;
@@ -52,6 +54,7 @@ public class BossAxe : MonoBehaviour
     public void StartThrowAttackB(Vector3 startingPos, Vector3 throwDirection, float timeToOneUnit)
     {
         throwType = 1;
+        attacking = true;
         transform.parent = null;
         thrown = true;
         canGet = false;
@@ -63,6 +66,7 @@ public class BossAxe : MonoBehaviour
     public void StartThrowAttackA(float timeOnAir, float distance)
     {
         throwType = 0;
+        attacking = true;
         transform.parent = null;
         arrived = false;
         thrown = true;
@@ -72,8 +76,15 @@ public class BossAxe : MonoBehaviour
         followPath.ElapsedTime = 0f;
         followPath.Play();
         throwSFX.Play();
+        attackingCoroutine = StartCoroutine(WaitUntilNotHandable());
         StartCoroutine(WaitUntilCollision());
         splineArrived = StartCoroutine(SplineArrived(timeOnAir * 0.75f));
+    }
+
+    IEnumerator WaitUntilNotHandable()
+    {
+        yield return new WaitForSeconds(1.1f);
+        attacking = false;
     }
 
     IEnumerator SplineArrived(float timeToWait)
@@ -105,6 +116,12 @@ public class BossAxe : MonoBehaviour
         if(followPath.IsPlaying)
         {
             followPath.Pause();
+
+            if(attackingCoroutine != null)
+            {
+                StopCoroutine(attackingCoroutine);
+            }
+
             if(splineArrived != null)
             {
                 StopCoroutine(splineArrived);
@@ -126,7 +143,7 @@ public class BossAxe : MonoBehaviour
 
     public bool IsAttacking()
     {
-        return thrown && !playerGrabbed;
+        return thrown && !playerGrabbed && attacking;
     }
 
     IEnumerator Move(Vector3 startingPos, Vector3 dir, float timeToOneUnit)

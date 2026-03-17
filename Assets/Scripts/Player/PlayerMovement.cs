@@ -235,8 +235,6 @@ public class PlayerMovement : MonoBehaviour
                 firstDash = false;
                 rollCoroutine = StartCoroutine(Roll());
             }
-
-            //Debug.Log("start rolling on bullet time");
         }
 
         if (throwAxe)
@@ -337,7 +335,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (toPush.GetComponent<Projectile>() != null)
         {
-            toPush.GetComponent<SphereCollider>().radius *= 2f;
+            toPush.GetComponent<SphereCollider>().radius *= 2.5f;
         }
 
         TimeManager.SlowTime();
