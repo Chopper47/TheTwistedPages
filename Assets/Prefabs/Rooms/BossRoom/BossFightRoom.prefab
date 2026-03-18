@@ -664,6 +664,7 @@ GameObject:
   - component: {fileID: 3831808193076430132}
   - component: {fileID: 6708405380790463543}
   - component: {fileID: 7831398885014660687}
+  - component: {fileID: 2373645339934600947}
   m_Layer: 0
   m_Name: room_boss
   m_TagString: Untagged
@@ -771,6 +772,28 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 1ff2fe305fc1d3147a5c95af5f8a01ad, type: 2}
   m_BuildHeightMesh: 0
+--- !u!64 &2373645339934600947
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8712103127683252567}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 17689488501315008, guid: bbf09281b816443488dfd609f52c9298, type: 3}
 --- !u!1001 &873251339010110505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -950,6 +973,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 7113800833776479363}
   lumberjack: {fileID: 0}
+  brokenColumn: {fileID: 0}
+  brokenColumnMaterial: {fileID: 0}
+  columnMesh: {fileID: 0}
   maxHp: 2
   currentHp: 0
   stunDuration: 3
@@ -1250,6 +1276,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 7113800833776479363}
   lumberjack: {fileID: 0}
+  brokenColumn: {fileID: 0}
+  brokenColumnMaterial: {fileID: 0}
+  columnMesh: {fileID: 0}
   maxHp: 2
   currentHp: 0
   stunDuration: 3
@@ -1442,6 +1471,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 7113800833776479363}
   lumberjack: {fileID: 0}
+  brokenColumn: {fileID: 0}
+  brokenColumnMaterial: {fileID: 0}
+  columnMesh: {fileID: 0}
   maxHp: 2
   currentHp: 0
   stunDuration: 3
@@ -1947,6 +1979,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 7113800833776479363}
   lumberjack: {fileID: 0}
+  brokenColumn: {fileID: 0}
+  brokenColumnMaterial: {fileID: 0}
+  columnMesh: {fileID: 0}
   maxHp: 2
   currentHp: 0
   stunDuration: 3
@@ -2181,6 +2216,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 7113800833776479363}
   lumberjack: {fileID: 0}
+  brokenColumn: {fileID: 0}
+  brokenColumnMaterial: {fileID: 0}
+  columnMesh: {fileID: 0}
   maxHp: 2
   currentHp: 0
   stunDuration: 3
@@ -2817,6 +2855,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossRoom: {fileID: 7113800833776479363}
   lumberjack: {fileID: 0}
+  brokenColumn: {fileID: 0}
+  brokenColumnMaterial: {fileID: 0}
+  columnMesh: {fileID: 0}
   maxHp: 2
   currentHp: 0
   stunDuration: 3
