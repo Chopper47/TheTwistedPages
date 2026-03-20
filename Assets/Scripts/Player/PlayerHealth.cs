@@ -68,7 +68,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         CameraShake.Shake(0.2f, 0.2f);
-        StartCoroutine(DamageFlicker(invincibilityDuration, 0.05f));
+        if(model) StartCoroutine(DamageFlicker(invincibilityDuration, 0.05f));
         AM.Play("Hurt", Main);
         //StartCoroutine(HitStop(0.1f));
 
