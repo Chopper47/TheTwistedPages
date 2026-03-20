@@ -37,12 +37,15 @@ public class CameraShake : MonoBehaviour
 
     private void OnShake(float duration, float strength)
     {
-        transform.DOShakePosition(duration, strength);
-        transform.DOShakeRotation(duration, strength);
+        transform.DOKill();
+        Vector3 shakeVector = new Vector3(strength, strength, 0);
+        transform.DOShakePosition(duration, shakeVector);
+        transform.DOShakeRotation(duration, shakeVector);
     }
 
     private void OnShake(float duration, float strength, Vector3 dashDirection)
     {
+        transform.DOKill();
         Vector3 shakeVector = dashDirection.normalized * strength;
 
         transform.DOShakePosition(duration, shakeVector);

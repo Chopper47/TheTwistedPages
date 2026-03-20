@@ -525,6 +525,7 @@ public class Lumberjack : MonoBehaviour
         SphereCollider collider = jumpAttackHitbox.GetComponent<SphereCollider>();
         collider.radius = jumpImpactRadius;
 
+        CameraShake.Shake(0.3f, 0.5f);
         jumpAttackHitbox.transform.position = transform.position;
         jumpAttackHitbox.SetActive(true);
 
