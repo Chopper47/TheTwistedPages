@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum RoomType
@@ -20,6 +21,8 @@ public class RoomInstance
 
     public bool visited = false;
     public bool cleared = false;
+
+    public HashSet<Vector2Int> connectedRooms = new HashSet<Vector2Int>();
 
     public RoomInstance(Vector2Int position, RoomType type, RoomPreset preset)
     {

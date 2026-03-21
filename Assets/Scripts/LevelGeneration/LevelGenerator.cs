@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
@@ -72,6 +72,10 @@ public class LevelGenerator : MonoBehaviour
                 RoomInstance nextRoom = new RoomInstance(nextPosition, RoomType.Normal, nextRoomPreset);
 
                 generatedRooms.Add(nextPosition, nextRoom);
+
+                generatedRooms[currentPosition].connectedRooms.Add(nextPosition);
+                nextRoom.connectedRooms.Add(currentPosition);
+
                 roomStack.Push(nextPosition);
             }
             else
@@ -113,11 +117,16 @@ public class LevelGenerator : MonoBehaviour
         RoomInstance finalRoom = new RoomInstance(finalRoomPosition, roomType, finalRoomPreset);
         generatedRooms.Add(finalRoomPosition, finalRoom);
 
+        generatedRooms[farthestRoomPosition].connectedRooms.Add(finalRoomPosition);
+        finalRoom.connectedRooms.Add(farthestRoomPosition);
+
         // Assign the Health and Shop rooms.
         if (!AssignSpecialRooms())
         {
             return false;
         }
+
+        AddExtraConnections(0.2f);
 
         // Instantiate rooms in the 3D world.
         foreach (RoomInstance room in generatedRooms.Values)
@@ -158,7 +167,9 @@ public class LevelGenerator : MonoBehaviour
                         break;
                 }
 
-                if (!generatedRooms.ContainsKey(neighbourPosition))
+                RoomInstance currentRoom = room;
+
+                if (!currentRoom.connectedRooms.Contains(neighbourPosition))
                 {
                     door.gameObject.SetActive(false);
                     continue;
@@ -355,11 +366,6 @@ public class LevelGenerator : MonoBehaviour
 
         foreach (RoomInstance room in normalRooms)
         {
-            //if (room == shopRoom)
-            //{
-            //    continue;
-            //}
-
             if (distances.ContainsKey(room.gridPosition) && distances[room.gridPosition] >= 3)
             {
                 healthCandidates.Add(room);
@@ -380,6 +386,58 @@ public class LevelGenerator : MonoBehaviour
         return true;
     }
 
+    private void AddExtraConnections(float chance = 0.2f)
+    {
+        Vector2Int[] directions =
+        {
+            Vector2Int.up,
+            Vector2Int.down,
+            Vector2Int.left,
+            Vector2Int.right
+        };
+
+        foreach (RoomInstance room in generatedRooms.Values)
+        {
+            foreach (Vector2Int direction in directions)
+            {
+                Vector2Int neighbourPosition = room.gridPosition + direction;
+
+                // Check that a neighbour exists in that direction.
+                if (!generatedRooms.ContainsKey(neighbourPosition))
+                {
+                    continue;
+                }
+
+                RoomInstance neighbour = generatedRooms[neighbourPosition];
+
+                // If they are already connected, skip.
+                if (room.connectedRooms.Contains(neighbourPosition))
+                {
+                    continue;
+                }
+
+                // Probability of making an extra connection.
+                if (Random.value > chance)
+                {
+                    continue;
+                }
+
+                // Avoid Boss and FloorChange rooms.
+                if (room.roomType == RoomType.Boss || neighbour.roomType == RoomType.Boss)
+                {
+                    continue;
+                }
+
+                if (room.roomType == RoomType.FloorChange || neighbour.roomType == RoomType.FloorChange)
+                {
+                    continue;
+                }
+
+                room.connectedRooms.Add(neighbourPosition);
+                neighbour.connectedRooms.Add(room.gridPosition);
+            }
+        }
+    }
 
     /// <summary>
     /// Instantiates a room in the 3D world at its designed grid position.
