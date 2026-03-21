@@ -310,6 +310,11 @@ public class LevelGenerator : MonoBehaviour
         return farthest;
     }
 
+    private int GetGridDistance(Vector2Int a, Vector2Int b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+
     /// <summary>
     /// Randomly assigns one Shop room and one Health room from the normal rooms.
     /// </summary>
@@ -344,19 +349,71 @@ public class LevelGenerator : MonoBehaviour
                 upgradeCandidates.Add(room);
             }
         }
-        
+
+        List<RoomInstance> selectedUpgradeRooms = new List<RoomInstance>();
+
         for (int i = 0; i < upgradeRoomCount; i++)
         {
-            if (upgradeCandidates.Count == 0)
+            List<RoomInstance> validCandidates = new List<RoomInstance>();
+
+            foreach (RoomInstance candidate in upgradeCandidates)
             {
-                break;
+                bool valid = true;
+
+                foreach (RoomInstance selected in selectedUpgradeRooms)
+                {
+                    int distance = GetGridDistance(candidate.gridPosition, selected.gridPosition);
+
+                    if (distance < 3)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                if (!valid)
+                {
+                    continue;
+                }
+
+                foreach (RoomInstance room in generatedRooms.Values)
+                {
+                    if (room.roomType != RoomType.Boss && room.roomType != RoomType.FloorChange && room.roomType != RoomType.Start)
+                    {
+                        continue;
+                    }
+
+                    int distance = GetGridDistance(candidate.gridPosition, room.gridPosition);
+
+                    if (distance < 3)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                if (valid)
+                {
+                    validCandidates.Add(candidate);
+                }
             }
 
-            RoomInstance upgradeRoom = upgradeCandidates[Random.Range(0, upgradeCandidates.Count)];
+            if (validCandidates.Count == 0 && upgradeCandidates.Count > 0)
+            {
+                validCandidates.AddRange(upgradeCandidates);
+            }
+
+            if (validCandidates.Count == 0)
+            {
+                return false;
+            }
+
+            RoomInstance upgradeRoom = validCandidates[Random.Range(0, validCandidates.Count)];
 
             upgradeRoom.roomType = RoomType.Upgrade;
             upgradeRoom.roomPreset = GetRandomRoomPreset(RoomType.Upgrade, upgradeRoom.gridPosition);
 
+            selectedUpgradeRooms.Add(upgradeRoom);
             normalRooms.Remove(upgradeRoom);
             upgradeCandidates.Remove(upgradeRoom);
         }
