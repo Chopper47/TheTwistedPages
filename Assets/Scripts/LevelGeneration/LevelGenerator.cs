@@ -13,6 +13,9 @@ public class LevelGenerator : MonoBehaviour
     [Header("Room Templates")]
     [SerializeField] private RoomPreset[] roomPresets;
 
+    [Header("Upgrade Room")]
+    [SerializeField] private RandomUpgradeList upgradeList;
+
     [Header("Room Locations")]
     public Dictionary<Vector2Int, RoomInstance> generatedRooms = new Dictionary<Vector2Int, RoomInstance>();
 
@@ -516,6 +519,16 @@ public class LevelGenerator : MonoBehaviour
         {
             roomController.roomInstance = room;
             roomController.roomPreset = room.roomPreset;
+        }
+
+        // Upgrade room object initialization.
+        if (room.roomType == RoomType.Upgrade)
+        {
+            UpgradeObject upgradeObject = roomObject.GetComponentInChildren<UpgradeObject>();
+            if (upgradeObject != null && upgradeList != null)
+            {
+                upgradeObject.Initialize(upgradeList.GetRandomUpgrade());
+            }
         }
     }
 
