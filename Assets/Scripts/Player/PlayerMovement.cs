@@ -11,10 +11,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Components")]
     private CharacterController controller;
     [SerializeField] private Animator animator;
-    [SerializeField] private CameraController cameraController;
+    private CameraController cameraController;
     [SerializeField] private Volume blackAndWhiteFilter;
     [SerializeField] private BulletTimeTrigger bulletTimeTrigger;
     [SerializeField] private UpgradeStats upgradeStatsScriptable;
+    private PlayerUpgrades playerUpgrades;
 
     [Header("Movement")]
     [SerializeField] private float baseMoveSpeed = 10.0f;
@@ -81,13 +82,14 @@ public class PlayerMovement : MonoBehaviour
     private InputAction moveAction;
     private InputAction rollAction;
     private InputAction throwAxeAction;
+    private InputAction useUpgradeAction;
 
     [Header("UI")]
     [SerializeField] private Image bulletTimeTimer;
 
     [Header("SFX")]
-    [SerializeField] private AudioManager AM;
-    [SerializeField] private AudioSource Main;
+    private AudioManager AM;
+    private AudioSource Main;
 
     private void OnEnable()
     {
@@ -102,12 +104,14 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        playerUpgrades = GetComponent<PlayerUpgrades>();
 
         playerMap = inputActions.FindActionMap("Player");
 
         moveAction = playerMap.FindAction("Move");
         rollAction = playerMap.FindAction("Roll");
         throwAxeAction = playerMap.FindAction("ThrowAxe");
+        useUpgradeAction = playerMap.FindAction("UseUpgrade");
 
         SetupRangeRenderers();
     }
@@ -142,12 +146,16 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleAxeInput();
         HandleRollInput();
+        HandleUpgradeInput();
     }
 
     #region Input
     private void HandleMovement()
     {
-        if (axeHolding) return;
+        if (axeHolding)
+        {
+            return;
+        }
 
         moveAmount = moveAction.ReadValue<Vector2>();
 
@@ -179,6 +187,21 @@ public class PlayerMovement : MonoBehaviour
         TryTriggerBulletTime();
 
         HandleRollState();
+    }
+
+    private void HandleUpgradeInput()
+    {
+        if (!useUpgradeAction.triggered)
+        {
+            return;
+        }
+
+        if (isRolling || isInBulletTime || axeHolding)
+        {
+            return;
+        }
+
+        playerUpgrades.UseActiveUpgrade();
     }
 
     private void HandleAxeInput()

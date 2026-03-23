@@ -18,13 +18,21 @@ public enum UpgradeType
     Passive
 }
 
+public enum ActivationType
+{
+    Automatic,
+    OneUse,
+    Toggleable
+}
+
 [CreateAssetMenu(menuName = "ScriptableObjects/RandomUpgrades/RandomUpgrade")]
 public class RandomUpgrade : ScriptableObject
 {
     public UpgradeID id;
     public UpgradeType type;
+    public ActivationType activationType;
 
     public float duration;
 
-    public GameObject pickupPrefab;
+    public UpgradeBehaviour behaviour;
 }

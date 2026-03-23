@@ -5,6 +5,8 @@ public class PlayerUpgrades : MonoBehaviour
     public RandomUpgrade activeUpgrade;
     public RandomUpgrade passiveUpgrade;
 
+    private bool isActiveRunning = false;
+
     public void AddUpgrade(RandomUpgrade newUpgrade)
     {
         if (newUpgrade == null)
@@ -12,54 +14,47 @@ public class PlayerUpgrades : MonoBehaviour
             return;
         }
 
-        switch (newUpgrade.type)
+        if (newUpgrade.type == UpgradeType.Passive)
         {
-            case UpgradeType.Active:
-                // Replace current active type upgrade.
-                if (activeUpgrade != null)
-                {
-                    Debug.Log("Replacing current active upgrade: " + activeUpgrade.id);
-                }
-                activeUpgrade = newUpgrade;
-                Debug.Log("New active upgrade: " + activeUpgrade.id);
-                break;
-
-            case UpgradeType.Passive:
-                // Replace current passive type upgrade.
-                if (passiveUpgrade != null)
-                {
-                    Debug.Log("Replacing current passive upgrade: " + passiveUpgrade.id);
-                    // aquí puedes desactivar efectos de la antigua pasiva si hace falta
-                }
-                passiveUpgrade = newUpgrade;
-                Debug.Log("New passive upgrade: " + passiveUpgrade.id);
-                break;
+            passiveUpgrade = newUpgrade;
+            newUpgrade.behaviour.OnAcquire(this);
         }
+        else
+        {
+            activeUpgrade = newUpgrade;
 
-        ApplyUpgrade(newUpgrade);
+            if (newUpgrade.activationType == ActivationType.Automatic)
+            {
+                newUpgrade.behaviour.OnUse(this);
+            }
+        }
     }
 
-    // Aplica efectos de la mejora al jugador
-    private void ApplyUpgrade(RandomUpgrade upgrade)
+    public void UseActiveUpgrade()
     {
-        // Temporary structure.
-        switch (upgrade.id)
+        if (activeUpgrade == null)
         {
-            case UpgradeID.SeedBasket:
-                // TODO.
+            return;
+        }
+
+        switch (activeUpgrade.activationType)
+        {
+            case ActivationType.OneUse:
+                activeUpgrade.behaviour.OnUse(this);
+                activeUpgrade = null;
                 break;
 
-            case UpgradeID.Shield:
-                // TODO.
-                break;
-
-            case UpgradeID.MoneyBoost:
-                // TODO.
-                break;
-
-            // case...
-
-            default:
+            case ActivationType.Toggleable:
+                if (isActiveRunning)
+                {
+                    activeUpgrade.behaviour.OnRemove(this);
+                    isActiveRunning = false;
+                }
+                else
+                {
+                    activeUpgrade.behaviour.OnUse(this);
+                    isActiveRunning = true;
+                }
                 break;
         }
     }
