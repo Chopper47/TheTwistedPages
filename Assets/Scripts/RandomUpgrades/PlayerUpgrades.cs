@@ -40,8 +40,13 @@ public class PlayerUpgrades : MonoBehaviour
         switch (activeUpgrade.activationType)
         {
             case ActivationType.OneUse:
-                activeUpgrade.behaviour.OnUse(this);
-                activeUpgrade = null;
+                bool usedSuccessfully = activeUpgrade.behaviour.OnUse(this);
+
+                if (usedSuccessfully)
+                {
+                    activeUpgrade = null;
+                    isActiveRunning = false;
+                }
                 break;
 
             case ActivationType.Toggleable:
