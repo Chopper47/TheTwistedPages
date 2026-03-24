@@ -186,7 +186,15 @@ public class BossAxe : MonoBehaviour
                 lumberjack.GetAnimations().CloseInAxeTrigger();
             }
         }
-
+        else
+        {
+            if (throwType == 1)
+            {
+                lumberjack.GetAnimations().CloseInAxeTrigger();
+                //lumberjack.GetAnimations().ResetGetAxe();
+            }
+        }
+        
         yield return null;
     }
     
@@ -247,7 +255,9 @@ public class BossAxe : MonoBehaviour
         transform.localScale = ogTransform.localScale;
         if(throwType == 1)
         {
+            boss.GetDecisionTree().SetDecide(false);
             boss.PickUpAxe(false, true);
+            boss.StartDelay();
         }
         else
         {

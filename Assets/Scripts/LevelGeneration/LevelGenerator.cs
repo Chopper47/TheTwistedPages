@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
@@ -12,6 +12,9 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Room Templates")]
     [SerializeField] private RoomPreset[] roomPresets;
+
+    [Header("Upgrade Room")]
+    [SerializeField] private RandomUpgradeList upgradeList;
 
     [Header("Room Locations")]
     public Dictionary<Vector2Int, RoomInstance> generatedRooms = new Dictionary<Vector2Int, RoomInstance>();
@@ -72,6 +75,10 @@ public class LevelGenerator : MonoBehaviour
                 RoomInstance nextRoom = new RoomInstance(nextPosition, RoomType.Normal, nextRoomPreset);
 
                 generatedRooms.Add(nextPosition, nextRoom);
+
+                generatedRooms[currentPosition].connectedRooms.Add(nextPosition);
+                nextRoom.connectedRooms.Add(currentPosition);
+
                 roomStack.Push(nextPosition);
             }
             else
@@ -113,11 +120,16 @@ public class LevelGenerator : MonoBehaviour
         RoomInstance finalRoom = new RoomInstance(finalRoomPosition, roomType, finalRoomPreset);
         generatedRooms.Add(finalRoomPosition, finalRoom);
 
+        generatedRooms[farthestRoomPosition].connectedRooms.Add(finalRoomPosition);
+        finalRoom.connectedRooms.Add(farthestRoomPosition);
+
         // Assign the Health and Shop rooms.
         if (!AssignSpecialRooms())
         {
             return false;
         }
+
+        AddExtraConnections(0.2f);
 
         // Instantiate rooms in the 3D world.
         foreach (RoomInstance room in generatedRooms.Values)
@@ -158,7 +170,9 @@ public class LevelGenerator : MonoBehaviour
                         break;
                 }
 
-                if (!generatedRooms.ContainsKey(neighbourPosition))
+                RoomInstance currentRoom = room;
+
+                if (!currentRoom.connectedRooms.Contains(neighbourPosition))
                 {
                     door.gameObject.SetActive(false);
                     continue;
@@ -299,6 +313,11 @@ public class LevelGenerator : MonoBehaviour
         return farthest;
     }
 
+    private int GetGridDistance(Vector2Int a, Vector2Int b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+
     /// <summary>
     /// Randomly assigns one Shop room and one Health room from the normal rooms.
     /// </summary>
@@ -333,19 +352,71 @@ public class LevelGenerator : MonoBehaviour
                 upgradeCandidates.Add(room);
             }
         }
-        
+
+        List<RoomInstance> selectedUpgradeRooms = new List<RoomInstance>();
+
         for (int i = 0; i < upgradeRoomCount; i++)
         {
-            if (upgradeCandidates.Count == 0)
+            List<RoomInstance> validCandidates = new List<RoomInstance>();
+
+            foreach (RoomInstance candidate in upgradeCandidates)
             {
-                break;
+                bool valid = true;
+
+                foreach (RoomInstance selected in selectedUpgradeRooms)
+                {
+                    int distance = GetGridDistance(candidate.gridPosition, selected.gridPosition);
+
+                    if (distance < 3)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                if (!valid)
+                {
+                    continue;
+                }
+
+                foreach (RoomInstance room in generatedRooms.Values)
+                {
+                    if (room.roomType != RoomType.Boss && room.roomType != RoomType.FloorChange && room.roomType != RoomType.Start)
+                    {
+                        continue;
+                    }
+
+                    int distance = GetGridDistance(candidate.gridPosition, room.gridPosition);
+
+                    if (distance < 3)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                if (valid)
+                {
+                    validCandidates.Add(candidate);
+                }
             }
 
-            RoomInstance upgradeRoom = upgradeCandidates[Random.Range(0, upgradeCandidates.Count)];
+            if (validCandidates.Count == 0 && upgradeCandidates.Count > 0)
+            {
+                validCandidates.AddRange(upgradeCandidates);
+            }
+
+            if (validCandidates.Count == 0)
+            {
+                return false;
+            }
+
+            RoomInstance upgradeRoom = validCandidates[Random.Range(0, validCandidates.Count)];
 
             upgradeRoom.roomType = RoomType.Upgrade;
             upgradeRoom.roomPreset = GetRandomRoomPreset(RoomType.Upgrade, upgradeRoom.gridPosition);
 
+            selectedUpgradeRooms.Add(upgradeRoom);
             normalRooms.Remove(upgradeRoom);
             upgradeCandidates.Remove(upgradeRoom);
         }
@@ -355,11 +426,6 @@ public class LevelGenerator : MonoBehaviour
 
         foreach (RoomInstance room in normalRooms)
         {
-            //if (room == shopRoom)
-            //{
-            //    continue;
-            //}
-
             if (distances.ContainsKey(room.gridPosition) && distances[room.gridPosition] >= 3)
             {
                 healthCandidates.Add(room);
@@ -380,6 +446,58 @@ public class LevelGenerator : MonoBehaviour
         return true;
     }
 
+    private void AddExtraConnections(float chance = 0.2f)
+    {
+        Vector2Int[] directions =
+        {
+            Vector2Int.up,
+            Vector2Int.down,
+            Vector2Int.left,
+            Vector2Int.right
+        };
+
+        foreach (RoomInstance room in generatedRooms.Values)
+        {
+            foreach (Vector2Int direction in directions)
+            {
+                Vector2Int neighbourPosition = room.gridPosition + direction;
+
+                // Check that a neighbour exists in that direction.
+                if (!generatedRooms.ContainsKey(neighbourPosition))
+                {
+                    continue;
+                }
+
+                RoomInstance neighbour = generatedRooms[neighbourPosition];
+
+                // If they are already connected, skip.
+                if (room.connectedRooms.Contains(neighbourPosition))
+                {
+                    continue;
+                }
+
+                // Probability of making an extra connection.
+                if (Random.value > chance)
+                {
+                    continue;
+                }
+
+                // Avoid Boss and FloorChange rooms.
+                if (room.roomType == RoomType.Boss || neighbour.roomType == RoomType.Boss)
+                {
+                    continue;
+                }
+
+                if (room.roomType == RoomType.FloorChange || neighbour.roomType == RoomType.FloorChange)
+                {
+                    continue;
+                }
+
+                room.connectedRooms.Add(neighbourPosition);
+                neighbour.connectedRooms.Add(room.gridPosition);
+            }
+        }
+    }
 
     /// <summary>
     /// Instantiates a room in the 3D world at its designed grid position.
@@ -401,6 +519,16 @@ public class LevelGenerator : MonoBehaviour
         {
             roomController.roomInstance = room;
             roomController.roomPreset = room.roomPreset;
+        }
+
+        // Upgrade room object initialization.
+        if (room.roomType == RoomType.Upgrade)
+        {
+            UpgradeObject upgradeObject = roomObject.GetComponentInChildren<UpgradeObject>();
+            if (upgradeObject != null && upgradeList != null)
+            {
+                upgradeObject.Initialize(upgradeList.GetRandomUpgrade());
+            }
         }
     }
 

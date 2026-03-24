@@ -2311,6 +2311,7 @@ GameObject:
   - component: {fileID: 605872774845922029}
   - component: {fileID: 559870943627579587}
   - component: {fileID: 7002907576181809036}
+  - component: {fileID: 7738423248794737938}
   - component: {fileID: -5651913295414236988}
   m_Layer: 0
   m_Name: Player
@@ -2380,7 +2381,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 571309779194971223}
-  cameraController: {fileID: 0}
   blackAndWhiteFilter: {fileID: 0}
   bulletTimeTrigger: {fileID: 3261127876349614846}
   upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
@@ -2406,8 +2406,6 @@ MonoBehaviour:
   RightRangeGO: {fileID: 2805364282926060331}
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   bulletTimeTimer: {fileID: 0}
-  AM: {fileID: 0}
-  Main: {fileID: 0}
 --- !u!114 &7002907576181809036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2437,9 +2435,25 @@ MonoBehaviour:
   invincibilityDuration: 1
   upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   inTutorial: 0
+  isHitStopping: 0
   gameOverMenu: {fileID: 0}
   AM: {fileID: 0}
   Main: {fileID: 0}
+  model: {fileID: 0}
+--- !u!114 &7738423248794737938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656407427300801399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535b07da624bb9743bb90d29029b2065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeUpgrade: {fileID: 11400000, guid: b9c417243019bc442ad4927617c85abb, type: 2}
+  passiveUpgrade: {fileID: 0}
 --- !u!114 &-5651913295414236988
 MonoBehaviour:
   m_ObjectHideFlags: 0

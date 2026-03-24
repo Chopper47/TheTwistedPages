@@ -20,6 +20,7 @@ public class LumberjackAnimations : MonoBehaviour
     public void MovingTrigger()
     {
         animator.SetTrigger("moving");
+        animator.SetBool("walk", true);
     }
 
     public void ResetMovingTrigger()
@@ -29,6 +30,8 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void StopMovingTrigger()
     {
+
+        animator.SetBool("walk", false);
         animator.SetTrigger("endMoving");
     }
 

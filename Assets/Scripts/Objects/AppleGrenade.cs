@@ -57,6 +57,7 @@ public class AppleGrenade : MonoBehaviour
             }
         }
 
+        CameraShake.Shake(0.2f, 0.4f);
         Destroy(gameObject);
     }
 }

@@ -28,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioSource Main;
     private MusicManager musicManager;
 
+    [Header("Other")]
+    [SerializeField] private GameObject model;
     private void Start()
     {
         InitializeHealth();
@@ -66,6 +68,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         CameraShake.Shake(0.2f, 0.2f);
+        if(model) StartCoroutine(DamageFlicker(invincibilityDuration, 0.05f));
         AM.Play("Hurt", Main);
         //StartCoroutine(HitStop(0.1f));
 
@@ -93,6 +96,24 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSecondsRealtime(duration);
         isHitStopping = false;
         Time.timeScale = originalTimeScale;
+    }
+
+    IEnumerator DamageFlicker(float duration, float interval)
+    {
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            model.SetActive(false);
+            yield return new WaitForSeconds(interval);
+
+            model.SetActive(true);
+            yield return new WaitForSeconds(interval);
+
+            timer += interval * 2;
+        }
+
+        model.SetActive(true);
     }
 
     public void Heal(int amount)

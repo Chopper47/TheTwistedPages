@@ -564,10 +564,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCurrencyAmount: 0
-  currencyUI: {fileID: 1885810273}
-  pauseMenuCurrencyUI: {fileID: 1885810273}
-  currencyText: {fileID: 198525564}
   pauseMenuCurrencyText: {fileID: 1270660986}
+  currencyPopupPrefab: {fileID: 0}
+  mainCanvas: {fileID: 0}
 --- !u!4 &113566317
 Transform:
   m_ObjectHideFlags: 0
@@ -2501,6 +2500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7002907576181809036, guid: 95af47dd368baa541bfb8ea0ec22846e, type: 3}
+      propertyPath: model
+      value: 
+      objectReference: {fileID: 1009034975}
     - target: {fileID: 8650172336370932488, guid: 95af47dd368baa541bfb8ea0ec22846e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.73
@@ -2546,6 +2549,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95af47dd368baa541bfb8ea0ec22846e, type: 3}
+--- !u!1 &1009034975 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5053783482205130562, guid: 95af47dd368baa541bfb8ea0ec22846e, type: 3}
+  m_PrefabInstance: {fileID: 1009034974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1031053280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4113,7 +4121,6 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   isPaused: 0
   pauseMenu: {fileID: 1031053281}
-  currencyUI: {fileID: 1885810273}
   optionsMenu: {fileID: 32061963}
   AM: {fileID: 0}
   Main: {fileID: 0}
