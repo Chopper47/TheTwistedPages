@@ -111,6 +111,23 @@ public class Lumberjack : MonoBehaviour
         return animations;
     }
 
+    public DecisionTreeAgent GetDecisionTree()
+    {
+        return decisionTree;
+    }
+
+    public void StartDelay()
+    {
+        Debug.Log("Starting delay...");
+        StartCoroutine(WaitForDecide(1.6f));
+    }
+
+    IEnumerator WaitForDecide(float time)
+    {
+        yield return new WaitForSeconds(time);
+        decisionTree.SetDecide(true);
+    }
+
     #region Stun
     public void ApplyStun(float duration)
     {
@@ -222,9 +239,10 @@ public class Lumberjack : MonoBehaviour
             animations.StopMovingTrigger();
             if (truePlayerThrow)
             {
-                EndAttack();
+                EndAttack(false);
             }
         }
+
         if (enemyHealth.health <= 3)
         {
             animations.CloseToAxeTrigger();
@@ -723,9 +741,12 @@ public class Lumberjack : MonoBehaviour
         enemyState.AttackState();
     }
 
-    public void EndAttack()
+    public void EndAttack(bool setIgnore = true)
     {
-        decisionTree.SetDecide(true);
+        if(setIgnore)
+        {
+            decisionTree.SetDecide(true);
+        }
         isAttacking = false;
         currentAction = null;
         enemyState.StayState();
