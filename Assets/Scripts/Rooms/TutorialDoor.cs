@@ -21,10 +21,9 @@ public class TutorialDoor : MonoBehaviour
         player.GetComponent<PlayerMovement>().canRoll = false;
         yield return RoomTransitionFade.Instance.FadeOut();
         player.transform.position = nextDoor.transform.position;
-
-
+        
         yield return new WaitForSeconds(0.4f);
-
+        
         yield return RoomTransitionFade.Instance.FadeIn();
     }
 }
