@@ -7,6 +7,7 @@ public enum UpgradeID
     MoneyBoost,
     DashExplosion,
     Heal,
+    ExtraLife,
     Dummy,
     Reroll,
     BearTrap
