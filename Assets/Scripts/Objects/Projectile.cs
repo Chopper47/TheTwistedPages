@@ -19,13 +19,18 @@ public class Projectile : MonoBehaviour
     {
         if (direction != Vector3.zero && !wasDeflected)
         {
-            transform.Translate(direction * speed * Time.deltaTime);
+            transform.Translate(direction * speed * Time.deltaTime, Space.World);
         }
     }
 
     public void SetDirection(Vector3 newDir)
     {
-        direction = newDir.normalized; 
+        direction = newDir.normalized;
+
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
 
     public void Deflect()

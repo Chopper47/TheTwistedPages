@@ -42,6 +42,7 @@ public class Flower : MonoBehaviour
     [SerializeField] private ChaseAgent chase;
     [SerializeField] private Animator animator;
     private EnemyHitbox enemyHb;
+    [SerializeField] private Transform shootPoint;
 
     [Header("Particle references")]
     [SerializeField] private Transform groundParticlePosition;
@@ -274,16 +275,21 @@ public class Flower : MonoBehaviour
         shotCount++;
         AM.Play("Shoot", Main);
 
-        Vector3 straightDir = chase.TargetPosition() - transform.position;
+        Vector3 straightDir = chase.TargetPosition() - shootPoint.position;
+
+        straightDir.y = 0f;
+
+        Vector3 lookDir = chase.TargetPosition() - transform.position;
+        lookDir.y = 0f;
+        transform.rotation = Quaternion.LookRotation(lookDir);
 
         if (shotCount == countForTripleShoot)
         {
             shotCount = 0;
-            straightDir.y = 0f;
 
-            GameObject straightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-            GameObject leftBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
-            GameObject rightBullet = Instantiate(projectile, transform.position, Quaternion.identity, null);
+            GameObject straightBullet = Instantiate(projectile, shootPoint.position, Quaternion.identity);
+            GameObject leftBullet = Instantiate(projectile, shootPoint.position, Quaternion.identity, null);
+            GameObject rightBullet = Instantiate(projectile, shootPoint.position, Quaternion.identity, null);
 
             straightBullet.GetComponent<Projectile>().SetDirection(straightDir);
             leftBullet.GetComponent<Projectile>().SetDirection(Quaternion.AngleAxis(-30, Vector3.up) * straightDir);
@@ -291,8 +297,7 @@ public class Flower : MonoBehaviour
         }
         else
         {
-
-            GameObject straightBullet = Instantiate(projectile, transform.position + Vector3.one * 0.5f, Quaternion.identity, null);
+            GameObject straightBullet = Instantiate(projectile, shootPoint.position, Quaternion.identity);
             straightBullet.GetComponent<Projectile>().SetDirection(straightDir);
         }
         StartCoroutine(ShootCooldown());
