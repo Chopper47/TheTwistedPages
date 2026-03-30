@@ -1423,6 +1423,7 @@ Transform:
   - {fileID: 9022098853364987255}
   - {fileID: 4476290535055517747}
   - {fileID: 2441779994072885352}
+  - {fileID: 2515616896458506460}
   m_Father: {fileID: 897180630079344103}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &1387173469494401074
@@ -3664,6 +3665,37 @@ Transform:
   - {fileID: 3014147882161700472}
   m_Father: {fileID: 6363766448865939737}
   m_LocalEulerAnglesHint: {x: -24.585207, y: 0.000023905668, z: -0.0000056848044}
+--- !u!1 &4851066782415103018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2515616896458506460}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2515616896458506460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4851066782415103018}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000029802326, y: -4.823324e-13, z: 5.828184e-13, w: 1}
+  m_LocalPosition: {x: -0.025, y: 0.555, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1294718206322170931}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5156409708385849604
 GameObject:
   m_ObjectHideFlags: 0
@@ -3889,6 +3921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  health: 0
   roomController: {fileID: 0}
   AM: {fileID: 0}
   Main: {fileID: 0}
@@ -3908,6 +3941,7 @@ MonoBehaviour:
   enemyHp: {fileID: 8243812384489386047}
   states: {fileID: 1927507799505062913}
   dmg: 1
+  pushable: 1
 --- !u!114 &1927507799505062913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3967,6 +4001,7 @@ MonoBehaviour:
   timeForComeoutChance: 0.25
   chase: {fileID: 9210463331880793626}
   animator: {fileID: 1387173469494401074}
+  shootPoint: {fileID: 2515616896458506460}
   groundParticlePosition: {fileID: 7485749153886335377}
   groundParticle: {fileID: 1545303763727217509}
   AM: {fileID: 0}

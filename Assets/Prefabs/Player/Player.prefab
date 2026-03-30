@@ -2420,18 +2420,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 6
   currentHealth: 0
-  lives:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  lifePrefab: {fileID: 2514247581373878177, guid: 4dc4ac09f13e2ce41a5da447d140c40d, type: 3}
+  livesContainer: {fileID: 0}
   fullLife: {fileID: 21300000, guid: 0d23a2e405809d84792b67b9e982ae5c, type: 3}
   halfLife: {fileID: 21300000, guid: bb0b08c97fca4b741adb10cefda3faca, type: 3}
   emptyLife: {fileID: 21300000, guid: 9816629483ac8694d8f6962927233547, type: 3}
+  extraFullLife: {fileID: 21300000, guid: 0d23a2e405809d84792b67b9e982ae5c, type: 3}
+  extraHalfLife: {fileID: 21300000, guid: bb0b08c97fca4b741adb10cefda3faca, type: 3}
   invincibilityDuration: 1
   upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   inTutorial: 0
@@ -2452,7 +2447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535b07da624bb9743bb90d29029b2065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeUpgrade: {fileID: 11400000, guid: b9c417243019bc442ad4927617c85abb, type: 2}
+  activeUpgrade: {fileID: 11400000, guid: 5ffadc54c86cb5145a4ad1e1ab08f22f, type: 2}
   passiveUpgrade: {fileID: 0}
 --- !u!114 &-5651913295414236988
 MonoBehaviour:

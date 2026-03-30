@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +8,19 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     public int maxHealth;
     public int currentHealth;
+    private int extraHealth = 0;
 
     [Header("UI")]
-    [SerializeField] private GameObject[] lives;
+    [SerializeField] private GameObject lifePrefab;
+    [SerializeField] private Transform livesContainer;
     [SerializeField] private Sprite fullLife;
     [SerializeField] private Sprite halfLife;
     [SerializeField] private Sprite emptyLife;
+
+    [SerializeField] private Sprite extraFullLife;
+    [SerializeField] private Sprite extraHalfLife;
+
+    private List<Image> lives = new List<Image>();
 
     [Header("Gameplay Settings")]
     [SerializeField] private float invincibilityDuration = 0.5f;
@@ -30,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] private GameObject model;
+
     private void Start()
     {
         InitializeHealth();
@@ -64,7 +73,19 @@ public class PlayerHealth : MonoBehaviour
 
         if (!inTutorial)
         {
-            currentHealth -= damage;
+            int remainingDamage = damage;
+
+            if (extraHealth > 0)
+            {
+                int used = Mathf.Min(extraHealth, remainingDamage);
+                extraHealth -= used;
+                remainingDamage -= used;
+            }
+
+            if (remainingDamage > 0 && !inTutorial)
+            {
+                currentHealth -= remainingDamage;
+            }
         }
 
         CameraShake.Shake(0.2f, 0.2f);
@@ -148,57 +169,112 @@ public class PlayerHealth : MonoBehaviour
 
         PlayerMovement.isInvincible = false;
     }
+
+    public void AddExtraLife(int amount)
+    {
+        extraHealth += amount;
+
+        // Añadir solo los corazones extra necesarios
+        int normalHearts = Mathf.CeilToInt(maxHealth / 2f);
+        int extraHeartsNeeded = Mathf.CeilToInt(extraHealth / 2f);
+        int currentExtraHearts = lives.Count - normalHearts;
+
+        int heartsToAdd = extraHeartsNeeded - currentExtraHearts;
+
+        for (int i = 0; i < heartsToAdd; i++)
+        {
+            GameObject heart = Instantiate(lifePrefab, livesContainer);
+            lives.Add(heart.GetComponent<Image>());
+        }
+
+        UpdateHealthUI();
+    }
     #endregion
 
     #region UI
     private void SetUpHealthUI()
     {
-        if (maxHealth <= 8)
+        if (livesContainer == null)
         {
-            int hearts = maxHealth / 2;
+            return;
+        }
 
-            if (maxHealth % 2 != 0)
-            {
-                hearts++;
-            }
+        foreach (Transform child in livesContainer)
+        {
+            Destroy(child.gameObject);
+        }
 
-            for (int i = 0; i < hearts; i++)
-            {
-                lives[i].SetActive(true);
+        lives.Clear();
 
-                if (maxHealth % 2 != 0 && i == hearts - 1)
-                {
-                    lives[i].GetComponent<Image>().sprite = halfLife;
-                }
-            }
+        int normalHearts = Mathf.CeilToInt(maxHealth / 2.0f);
+        int extraHearts = Mathf.CeilToInt(extraHealth / 2.0f);
+
+        for (int i = 0; i < normalHearts; i++)
+        {
+            GameObject heart = Instantiate(lifePrefab, livesContainer);
+            lives.Add(heart.GetComponent<Image>());
+        }
+
+        for (int i = 0; i < extraHearts; i++)
+        {
+            GameObject heart = Instantiate(lifePrefab, livesContainer);
+            lives.Add(heart.GetComponent<Image>());
         }
     }
 
     private void UpdateHealthUI()
-    {   
-        for (int i = 0; i < lives.Length; i++)
+    {
+        if (livesContainer == null)
         {
-            if (lives[i] != null)
+            return;
+        }
+
+        int normalHearts = Mathf.CeilToInt(maxHealth / 2f);
+        int extraHearts = Mathf.CeilToInt(extraHealth / 2f);
+
+        for (int i = 0; i < normalHearts; i++)
+        {
+            Image lifeImage = lives[i];
+
+            int heartHealth = currentHealth - (i * 2);
+
+            if (heartHealth >= 2)
             {
-                Image lifeImage = lives[i].GetComponent<Image>();
+                lifeImage.sprite = fullLife;
+            }
+            else if (heartHealth == 1)
+            {
+                lifeImage.sprite = halfLife;
+            }
+            else
+            {
+                lifeImage.sprite = emptyLife;
+            }
+        }
 
-                int heartHealth = currentHealth - (i * 2);
+        for (int i = lives.Count - 1; i >= normalHearts; i--)
+        {
+            Image lifeImage = lives[i];
 
-                if (heartHealth >= 2)
-                {
-                    lifeImage.sprite = fullLife;
-                }
-                else if (heartHealth == 1)
-                {
-                    lifeImage.sprite = halfLife;
-                }
-                else
-                {
-                    lifeImage.sprite = emptyLife;
-                }
+            int heartIndex = i - normalHearts;
+            int heartHealth = extraHealth - (heartIndex * 2);
+
+            if (heartHealth >= 2)
+            {
+                lifeImage.sprite = extraFullLife;
+                lifeImage.gameObject.SetActive(true);
+            }
+            else if (heartHealth == 1)
+            {
+                lifeImage.sprite = extraHalfLife;
+                lifeImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                Destroy(lifeImage.gameObject);
+                lives.RemoveAt(i);
             }
         }
     }
     #endregion
-    
 }
