@@ -9,6 +9,8 @@ public class CurrencyManager : MonoBehaviour
 
     public int currentCurrencyAmount = 0;
 
+    private float moneyMultiplier = 0f;
+
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI pauseMenuCurrencyText;
 
@@ -44,8 +46,9 @@ public class CurrencyManager : MonoBehaviour
 
     public void AddCurrency(int amount)
     {
-        currentCurrencyAmount += amount;
-        ShowPopup(amount);
+        int finalAmount = Mathf.RoundToInt(amount * moneyMultiplier);
+        currentCurrencyAmount += finalAmount;
+        ShowPopup(finalAmount);
         UpdateUI();
     }
 
@@ -53,6 +56,20 @@ public class CurrencyManager : MonoBehaviour
     {
         currentCurrencyAmount -= amount;
         UpdateUI();
+    }
+
+    public void AddMoneyMultiplier(float multiplier)
+    {
+        moneyMultiplier += multiplier;
+    }
+
+    public void RemoveMoneyMultiplier(float multiplier)
+    {
+        moneyMultiplier -= multiplier;
+        if (moneyMultiplier < 0f)
+        {
+            moneyMultiplier = 0f;
+        }
     }
 
     public bool CheckEnoughCurrencyAmount(int amountToCheck)

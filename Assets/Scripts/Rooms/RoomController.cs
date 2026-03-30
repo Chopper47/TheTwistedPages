@@ -234,6 +234,15 @@ public class RoomController : MonoBehaviour
             CurrencyManager.instance.AddCurrency(roomPreset.difficultyRating);
         }
 
+        PlayerUpgrades player = FindFirstObjectByType<PlayerUpgrades>();
+        if (player != null && player.passiveUpgrade != null)
+        {
+            if (player.passiveUpgrade.behaviour is MoneyBoostUpgrade moneyBoost)
+            {
+                moneyBoost.OnRoomCleared(player);
+            }
+        }
+
         if (roomInstance.roomType == RoomType.Boss)
         {
             OnBossRoomCleared();
