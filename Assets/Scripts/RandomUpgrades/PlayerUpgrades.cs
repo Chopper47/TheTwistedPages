@@ -5,7 +5,7 @@ public class PlayerUpgrades : MonoBehaviour
     public RandomUpgrade activeUpgrade;
     public RandomUpgrade passiveUpgrade;
 
-    private bool isActiveRunning = false;
+    public bool isActiveRunning = false;
 
     public void AddUpgrade(RandomUpgrade newUpgrade)
     {

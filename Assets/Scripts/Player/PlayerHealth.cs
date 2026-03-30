@@ -66,6 +66,19 @@ public class PlayerHealth : MonoBehaviour
     #region Health Management
     public void TakeDamage(int damage)
     {
+        PlayerUpgrades upgrades = GetComponent<PlayerUpgrades>();
+
+        if (upgrades != null && upgrades.activeUpgrade != null)
+        {
+            if (upgrades.activeUpgrade.behaviour is ShieldUpgrade shield)
+            {
+                if (shield.TryBlockDamage(upgrades))
+                {
+                    return;
+                }
+            }
+        }
+
         if (PlayerMovement.IsInvincible())
         {
             return;
@@ -174,9 +187,8 @@ public class PlayerHealth : MonoBehaviour
     {
         extraHealth += amount;
 
-        // Añadir solo los corazones extra necesarios
-        int normalHearts = Mathf.CeilToInt(maxHealth / 2f);
-        int extraHeartsNeeded = Mathf.CeilToInt(extraHealth / 2f);
+        int normalHearts = Mathf.CeilToInt(maxHealth / 2.0f);
+        int extraHeartsNeeded = Mathf.CeilToInt(extraHealth / 2.0f);
         int currentExtraHearts = lives.Count - normalHearts;
 
         int heartsToAdd = extraHeartsNeeded - currentExtraHearts;
@@ -229,8 +241,8 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        int normalHearts = Mathf.CeilToInt(maxHealth / 2f);
-        int extraHearts = Mathf.CeilToInt(extraHealth / 2f);
+        int normalHearts = Mathf.CeilToInt(maxHealth / 2.0f);
+        int extraHearts = Mathf.CeilToInt(extraHealth / 2.0f);
 
         for (int i = 0; i < normalHearts; i++)
         {

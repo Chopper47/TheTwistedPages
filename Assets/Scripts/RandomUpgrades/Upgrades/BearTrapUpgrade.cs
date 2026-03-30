@@ -16,7 +16,7 @@ public class BearTrapUpgrade : PlaceableUpgrade
 
         if (!placed)
         {
-            Debug.Log("Cannot place the dummy here.");
+            Debug.Log("Cannot place the bear trap here.");
         }
 
         return placed;

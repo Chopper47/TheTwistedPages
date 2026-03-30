@@ -32,32 +32,51 @@ public class UIManager : MonoBehaviour
 
     public void SwitchMenu(GameObject from, GameObject to)
     {
-        if (from) from.SetActive(false);
-        if (to) to.SetActive(true);
+        if (from)
+        {
+            from.SetActive(false);
+        }
+
+        if (to)
+        {
+            to.SetActive(true);
+        }
 
         SelectFirst(to);
     }
 
     public void OpenMenu(GameObject menu)
     {
-        if (menu) menu.SetActive(true);
+        if (menu)
+        {
+            menu.SetActive(true);
+        }
+
         SelectFirst(menu);
     }
 
     public void CloseMenu(GameObject menu)
     {
-        if (menu) menu.SetActive(false);
+        if (menu)
+        {
+            menu.SetActive(false);
+        }
     }
 
     public void ShowHUD(bool show)
     {
         if (HUD)
+        {
             HUD.SetActive(show);
+        }
     }
 
-    void SelectFirst(GameObject menu)
+    private void SelectFirst(GameObject menu)
     {
-        if (menu == null) return;
+        if (menu == null)
+        {
+            return;
+        }
 
         MenuNavigator nav = menu.GetComponent<MenuNavigator>();
 
