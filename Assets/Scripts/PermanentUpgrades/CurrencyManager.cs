@@ -9,7 +9,7 @@ public class CurrencyManager : MonoBehaviour
 
     public int currentCurrencyAmount = 0;
 
-    private float moneyMultiplier = 0f;
+    private float moneyMultiplier = 1.0f;
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI pauseMenuCurrencyText;
@@ -60,16 +60,12 @@ public class CurrencyManager : MonoBehaviour
 
     public void AddMoneyMultiplier(float multiplier)
     {
-        moneyMultiplier += multiplier;
+        moneyMultiplier *= multiplier;
     }
 
     public void RemoveMoneyMultiplier(float multiplier)
     {
-        moneyMultiplier -= multiplier;
-        if (moneyMultiplier < 0f)
-        {
-            moneyMultiplier = 0f;
-        }
+        moneyMultiplier /= multiplier;
     }
 
     public bool CheckEnoughCurrencyAmount(int amountToCheck)

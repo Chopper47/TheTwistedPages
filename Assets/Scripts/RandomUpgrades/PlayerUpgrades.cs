@@ -7,6 +7,15 @@ public class PlayerUpgrades : MonoBehaviour
 
     public bool isActiveRunning = false;
 
+    [Header("Upgrades")]
+    public int shieldUses;
+    public bool shieldActive;
+
+    public int moneyBoostRoomsRemaining;
+
+    public int dashExplosionUses;
+    public bool dashExplosionActive;
+
     public void AddUpgrade(RandomUpgrade newUpgrade)
     {
         if (newUpgrade == null)
@@ -22,6 +31,8 @@ public class PlayerUpgrades : MonoBehaviour
         else
         {
             activeUpgrade = newUpgrade;
+
+            newUpgrade.behaviour.OnAcquire(this);
 
             if (newUpgrade.activationType == ActivationType.Automatic)
             {
@@ -61,6 +72,27 @@ public class PlayerUpgrades : MonoBehaviour
                     isActiveRunning = true;
                 }
                 break;
+        }
+    }
+
+    public void RemoveUpgrade(UpgradeBehaviour behaviour)
+    {
+        if (behaviour == null)
+        {
+            return;
+        }
+
+        behaviour.OnRemove(this);
+
+        if (activeUpgrade != null && activeUpgrade.behaviour == behaviour)
+        {
+            activeUpgrade = null;
+            isActiveRunning = false;
+        }
+
+        if (passiveUpgrade != null && passiveUpgrade.behaviour == behaviour)
+        {
+            passiveUpgrade = null;
         }
     }
 }
