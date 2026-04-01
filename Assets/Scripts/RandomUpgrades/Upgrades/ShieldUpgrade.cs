@@ -5,23 +5,21 @@ public class ShieldUpgrade : UpgradeBehaviour
 {
     [SerializeField] private int maxUses = 3;
 
-    private int currentUses = 0;
-    private bool active = false;
-
     public override void OnAcquire(PlayerUpgrades playerUpgrades)
     {
-
+        playerUpgrades.shieldUses = maxUses;
+        playerUpgrades.shieldActive = false;
     }
 
     public override bool OnUse(PlayerUpgrades playerUpgrades)
     {
-        if (active)
+        if (playerUpgrades.shieldActive)
         {
-            Deactivate();
+            Deactivate(playerUpgrades);
         }
         else
         {
-            Activate();
+            Activate(playerUpgrades);
         }
 
         return true;
@@ -29,60 +27,41 @@ public class ShieldUpgrade : UpgradeBehaviour
 
     public override void OnRemove(PlayerUpgrades playerUpgrades)
     {
-        if (active)
+        if (playerUpgrades.shieldActive)
         {
-            Deactivate();
+            Deactivate(playerUpgrades);
         }
     }
 
-    
-    private void Activate()
+    private void Activate(PlayerUpgrades player)
     {
-        currentUses = maxUses;
-        active = true;
-
+        player.shieldActive = true;
         PlayerMovement.isInvincible = true;
-        Debug.Log("Shield activated.");
     }
 
-    private void Deactivate()
+    private void Deactivate(PlayerUpgrades player)
     {
-        active = false;
-
+        player.shieldActive = false;
         PlayerMovement.isInvincible = false;
-        Debug.Log("Shield deactivated.");
     }
 
     public bool TryBlockDamage(PlayerUpgrades player)
     {
-        if (!active)
+        if (!player.shieldActive)
         {
             return false;
         }
 
-        currentUses--;
+        player.shieldUses--;
 
-        if (currentUses <= 0)
+        Debug.Log("Shield uses: " + player.shieldUses);
+
+        if (player.shieldUses <= 0)
         {
-            Deactivate();
-
-            if (player != null)
-            {
-                player.activeUpgrade = null;
-                player.isActiveRunning = false;
-            }
+            Deactivate(player);
+            player.RemoveUpgrade(this);
         }
 
         return true;
-    }
-
-    public bool IsActive()
-    {
-        return active;
-    }
-
-    public int RemainingUses()
-    {
-        return currentUses;
     }
 }

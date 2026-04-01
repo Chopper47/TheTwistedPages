@@ -292,6 +292,11 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("isRolling", true);
 
+        if (playerUpgrades.activeUpgrade != null && playerUpgrades.activeUpgrade.behaviour is DashExplosionUpgrade dashExplosion)
+        {
+            dashExplosion.TriggerExplosion(transform.position, playerUpgrades);
+        }
+
         CameraShake.Shake(0.1f, 0.1f, inputDirection);
         CameraShake.DoDashZoom(-0.5f, 0.5f);
 

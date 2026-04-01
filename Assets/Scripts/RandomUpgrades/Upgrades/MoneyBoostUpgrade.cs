@@ -3,15 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Upgrades/MoneyBoost")]
 public class MoneyBoostUpgrade : UpgradeBehaviour
 {
-    [SerializeField] private float moneyMultiplier = 0.5f;
+    [SerializeField] private float moneyMultiplier = 2.0f;
 
     public int durationInRooms = 3;
 
-    private int roomsRemaining;
-
     public override void OnAcquire(PlayerUpgrades player)
     {
-        roomsRemaining = durationInRooms;
+        player.moneyBoostRoomsRemaining = durationInRooms;
 
         if (CurrencyManager.instance != null)
         {
@@ -34,11 +32,11 @@ public class MoneyBoostUpgrade : UpgradeBehaviour
 
     public void OnRoomCleared(PlayerUpgrades player)
     {
-        roomsRemaining--;
+        player.moneyBoostRoomsRemaining--;
 
-        if (roomsRemaining <= 0)
+        if (player.moneyBoostRoomsRemaining <= 0)
         {
-            player.passiveUpgrade = null;
+            player.RemoveUpgrade(this);
         }
     }
 }
