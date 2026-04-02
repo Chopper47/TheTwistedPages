@@ -22,6 +22,7 @@ public class WolfEncounter : MonoBehaviour
     [SerializeField] private Volume darknessVolume;
     [SerializeField] private Vignette darknessVignette;
     [SerializeField] private GameObject pressShiftCanvas;
+    [SerializeField] private TutorialDoor doorToOpen;
 
     [SerializeField] private bool frozenTime = false;
     [SerializeField] private bool playereCanRoll;
@@ -164,6 +165,7 @@ public class WolfEncounter : MonoBehaviour
     {
         StartCoroutine(LightenVignette());
         //player.canRoll = true;
+        doorToOpen.OpenDoor();
         wolfEyes.SetActive(false);
     }
     IEnumerator LightenVignette()
