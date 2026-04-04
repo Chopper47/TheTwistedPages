@@ -184,6 +184,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (playerUpgrades.seedBasketActive)
+        {
+            return;
+        }
+
         TryTriggerBulletTime();
 
         HandleRollState();
@@ -672,6 +677,11 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Utilities
+    public Vector3 GetDirection()
+    {
+        return direction;
+    }
+
     private Vector3 FlatDirection(Vector3 from, Vector3 to)
     {
         Vector3 direction = to - from;

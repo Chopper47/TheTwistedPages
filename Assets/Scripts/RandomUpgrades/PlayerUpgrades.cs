@@ -8,6 +8,9 @@ public class PlayerUpgrades : MonoBehaviour
     public bool isActiveRunning = false;
 
     [Header("Upgrades")]
+    public bool seedBasketActive;
+    public float seedBasketTimer;
+
     public int shieldUses;
     public bool shieldActive;
 
@@ -15,6 +18,17 @@ public class PlayerUpgrades : MonoBehaviour
 
     public int dashExplosionUses;
     public bool dashExplosionActive;
+
+    private void Update()
+    {
+        if (activeUpgrade != null)
+        {
+            if (activeUpgrade.behaviour is SeedBasketUpgrade seedBasket)
+            {
+                seedBasket.Tick(this, transform, GetComponent<PlayerMovement>().GetDirection());
+            }
+        }
+    }
 
     public void AddUpgrade(RandomUpgrade newUpgrade)
     {
