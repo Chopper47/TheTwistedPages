@@ -32,7 +32,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("Save file not fount in " + path);
+            Debug.LogWarning("Save file not fount in " + path);
             return null;
         }
     }

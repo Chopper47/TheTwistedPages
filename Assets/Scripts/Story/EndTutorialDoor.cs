@@ -7,7 +7,11 @@ public class EndTutorialDoor : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            PlayerPrefs.SetInt("CompletedTutorial", 1);
+            if(SaveManager.instance != null)
+            {
+                SaveManager.instance.player.tutorialCompleted = true;
+                SaveManager.instance.SavePlayerData();
+            }
             SceneManager.LoadScene("alpha");
         }
     }

@@ -110,6 +110,10 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        if(SaveManager.instance != null)
+        {
+            SaveManager.instance.SavePlayerData();
+        }
         Time.timeScale = 1;
         SceneManager.LoadScene("main_menu");
     }

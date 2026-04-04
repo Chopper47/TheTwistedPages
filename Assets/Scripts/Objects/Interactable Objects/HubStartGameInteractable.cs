@@ -51,9 +51,13 @@ public class HubStartGameInteractable : MonoBehaviour
 
     private void StartGame()
     {
-        if(PlayerPrefs.GetInt("CompletedTutorial") == 1)
+        if(SaveManager.instance != null)
         {
-            SceneManager.LoadScene("alpha");
+            if(SaveManager.instance.player.tutorialCompleted)
+            {
+                SceneManager.LoadScene("MainGame");
+            }
+            else SceneManager.LoadScene("Tutorial");
         }
         else SceneManager.LoadScene("Tutorial");
 

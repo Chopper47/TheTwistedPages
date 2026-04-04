@@ -6,19 +6,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(SaveManager))]
 public class PlayerInfo : MonoBehaviour
 {
-
-    public int testSave;
-
-    //public int goldAmount;
-    //public int gemAmount;
-
-    //public int strengthLevel;
-    //public int accuracyLevel;
-    //public int shieldLevel;
-
-    //public int levelsCompleted;
-
     
+    public int currencyAmount;
+    public int speedUpgradeLevel;
+    public int healthUpgradeLevel;
+    public bool tutorialCompleted;
 
-   
 }

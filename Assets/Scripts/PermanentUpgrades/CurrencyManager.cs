@@ -13,6 +13,7 @@ public class CurrencyManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI pauseMenuCurrencyText;
+    [SerializeField] private TextMeshProUGUI upgradeMenuCurrencyText;
 
     [Header("Popup Settings")]
     [SerializeField] private CurrencyPopup currencyPopupPrefab;
@@ -28,9 +29,7 @@ public class CurrencyManager : MonoBehaviour
         instance = this;
 
         DontDestroyOnLoad(gameObject);
-#if UNITY_EDITOR
-        PlayerPrefs.DeleteKey("CompletedTutorial");
-#endif
+
 
     }
 
@@ -92,6 +91,10 @@ public class CurrencyManager : MonoBehaviour
         if (pauseMenuCurrencyText != null)
         {
             pauseMenuCurrencyText.text = currentCurrencyAmount.ToString();
+        }
+        if(upgradeMenuCurrencyText != null)
+        {
+            upgradeMenuCurrencyText.text = currentCurrencyAmount.ToString();
         }
     }
 }

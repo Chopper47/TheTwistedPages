@@ -52,7 +52,18 @@ public class UpgradeManager : MonoBehaviour
             healthUpgradeLv++;
             UpdateScriptableObjectStats();
             currencyManager.RemoveCurrency(costToUpgradeHealth);
-            if(hpText != null) hpText.text = "Level: " + healthUpgradeLv;
+            if(SaveManager.instance != null)
+            {
+                SaveManager.instance.player.healthUpgradeLevel = healthUpgradeLv;
+                SaveManager.instance.player.currencyAmount = currencyManager.currentCurrencyAmount;
+                SaveManager.instance.SavePlayerData();
+            }
+
+            if (hpText != null) hpText.text = "Level: " + healthUpgradeLv;
+        }
+        else
+        {
+            Debug.Log("Not enough currency to upgrade health or max level reached.");
         }
     }
     public void UpgradeSpeed()
@@ -62,6 +73,12 @@ public class UpgradeManager : MonoBehaviour
             speedUpgradeLv++;
             UpdateScriptableObjectStats();
             currencyManager.RemoveCurrency(costToUpgradeSpeed);
+            if (SaveManager.instance != null)
+            {
+                SaveManager.instance.player.speedUpgradeLevel = speedUpgradeLv;
+                SaveManager.instance.player.currencyAmount = currencyManager.currentCurrencyAmount;
+                SaveManager.instance.SavePlayerData();
+            }
             if (speedText != null) speedText.text = "Level: " + speedUpgradeLv;
 
         }

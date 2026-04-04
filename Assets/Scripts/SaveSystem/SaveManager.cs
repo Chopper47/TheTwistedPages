@@ -21,7 +21,7 @@ public class SaveManager : MonoBehaviour
     }
     private void Start()
     {
-        //LoadPlayerData();
+        LoadPlayerData();
     }
     public void SavePlayerData()
     {
@@ -34,19 +34,12 @@ public class SaveManager : MonoBehaviour
 
         Debug.Log("LOADING");
 
-        player.testSave = data.testSave;
-        //player.SetGoldAmount(data.goldAmount);
-        //player.SetGemAmount(data.gemAmount);
-
-        //player.strengthLevel = data.strengthLevel;
-        //player.accuracyLevel = data.accuracyLevel;
-        //player.shieldLevel = data.shieldLevel;
-
-        //player.levelsCompleted = data.levelsCompleted;
-
-        //player.SetLevelsCompleted();
-
-
+        player.currencyAmount = data.currencyAmount;
+        player.speedUpgradeLevel = data.speedUpgradeLevel;
+        player.healthUpgradeLevel = data.healthUpgradeLevel;
+        player.tutorialCompleted = data.tutorialCompleted;
 
     }
+
+    
 }
