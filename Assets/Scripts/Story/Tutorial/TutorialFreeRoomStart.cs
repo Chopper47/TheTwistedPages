@@ -9,7 +9,7 @@ public class TutorialFreeRoomStart : MonoBehaviour
 
     private void Awake()
     {
-        enemyToEnable.SetActive(false);
+        if(enemyToEnable)enemyToEnable.SetActive(false);
         player = FindFirstObjectByType<PlayerMovement>();
     }
 

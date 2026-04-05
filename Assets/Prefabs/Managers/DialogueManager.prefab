@@ -258,10 +258,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7954af747e42aa47bdda1f6f3481ff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textComponent: {fileID: 4518112854897585086}
-  characterName: {fileID: 1279031432105274312}
   dialoguePanel: {fileID: 6855637435917529201}
+  textComponent: {fileID: 4518112854897585086}
+  interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ca26b62a-65ef-4d6f-8bab-17d43e8e5f85
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   currentDialogue: {fileID: 0}
+  characterName: {fileID: 1279031432105274312}
   onDialogueEnd:
     m_PersistentCalls:
       m_Calls: []
