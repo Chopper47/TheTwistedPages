@@ -1436,6 +1436,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 559870943627579587, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: blackAndWhiteFilter
+      value: 
+      objectReference: {fileID: 1101355621}
     - target: {fileID: 3656407427300801399, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1605,6 +1609,10 @@ PrefabInstance:
     - target: {fileID: 5374007112237385488, guid: cb129c385cb0e444da92b6e578430899, type: 3}
       propertyPath: m_Name
       value: Flower
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374007112237385488, guid: cb129c385cb0e444da92b6e578430899, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2488,7 +2496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2655c09970c49c84ea4f804c7a2887b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowTime: 0.1
+  slowTime: 0.01
 --- !u!4 &1973386912
 Transform:
   m_ObjectHideFlags: 0
@@ -2694,7 +2702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -124,6 +124,11 @@ public class PlayerMovement : MonoBehaviour
         AM = FindFirstObjectByType<AudioManager>();
         Main = GetComponentInChildren<AudioSource>();
 
+        if(blackAndWhiteFilter == null)
+        {
+            Debug.LogWarning("Black and white filter not assigned.");
+        }
+
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
 
@@ -368,10 +373,37 @@ public class PlayerMovement : MonoBehaviour
 
         if (toPush.GetComponent<Projectile>() != null)
         {
-            toPush.GetComponent<SphereCollider>().radius *= 2.5f;
+            toPush.GetComponent<Projectile>().IgnorePlayer();
+            float distance = Vector3.Distance(transform.position, new Vector3(toPush.transform.position.x, transform.position.y, toPush.transform.position.z));
+            SphereCollider proyectile = toPush.GetComponent<SphereCollider>();
+            if (distance > proyectile.radius * 2.5f)
+            {
+                Debug.LogError("max radius");
+                proyectile.radius *= 2.5f;
+            }
+            else
+            {
+                if (distance <= 0.25f)
+                {
+                    Debug.LogError("reduced radius minimal");
+                    proyectile.radius = 0.25f;
+                }
+                else
+                {
+                    Debug.LogError("reduced radius scalar");
+                    proyectile.radius = (distance / 2) - .1f;
+                }
+            }
+        }
+        else
+        {
+            if(toPush.GetComponent<EnemyHitbox>() != null)
+            {
+                toPush.GetComponent<EnemyHitbox>().SetCurrentlyPushing(true);
+            }
         }
 
-        TimeManager.SlowTime();
+            TimeManager.SlowTime();
 
         if (bulletTimeTimer != null)
         {
@@ -381,7 +413,10 @@ public class PlayerMovement : MonoBehaviour
 
         bulletTimeCoroutine = StartCoroutine(WaitForNormalTime());
 
-        blackAndWhiteFilter.enabled = true;
+        if(blackAndWhiteFilter != null)
+        {
+            blackAndWhiteFilter.enabled = true;
+        }
 
         if (leftRangeRender && rightRangeRender)
         {
@@ -472,7 +507,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void EndBulletTime()
     {
-        blackAndWhiteFilter.enabled = false;
+        if(blackAndWhiteFilter != null)
+        {
+            blackAndWhiteFilter.enabled = false;
+        }
         bulletTimeTrigger.gameObject.SetActive(true);
         TimeManager.ReturnTime();
         axeHolding = false;
@@ -486,6 +524,11 @@ public class PlayerMovement : MonoBehaviour
         {
             ReleaseAxe();
             throwAxe = false;
+        }
+
+        if(toPush && toPush.GetComponent<EnemyHitbox>() != null)
+        {
+            toPush.GetComponent<EnemyHitbox>().SetCurrentlyPushing(true);
         }
 
         if (leftRangeRender && rightRangeRender)
@@ -575,7 +618,10 @@ public class PlayerMovement : MonoBehaviour
 
         throwAxe = true;
 
-        blackAndWhiteFilter.enabled = false;
+        if(blackAndWhiteFilter != null)
+        {
+            blackAndWhiteFilter.enabled = false;
+        }
 
         if (leftRangeRender && rightRangeRender)
         {

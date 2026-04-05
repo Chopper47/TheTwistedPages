@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
 
     private Vector3 direction = Vector3.zero;
 
+    private bool ignorePlayer = false;
     private bool wasDeflected = false;
     private float initialSize = 0.5f;
 
@@ -47,10 +48,15 @@ public class Projectile : MonoBehaviour
         }
 
         EnemyHealth enemy = other.GetComponent<EnemyHealth>();
-        if (wasDeflected && enemy)
+        if (wasDeflected && enemy && !ignorePlayer)
         {
             enemy.TakeDamage(damage);
             Destroy(gameObject);
         }
+    }
+
+    public void IgnorePlayer()
+    { 
+        ignorePlayer = true;
     }
 }

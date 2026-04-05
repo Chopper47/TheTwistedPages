@@ -7,6 +7,7 @@ public class EnemyHitbox : MonoBehaviour
     [SerializeField] EnemyState states;
     [SerializeField] int dmg;
     [SerializeField] bool pushable = true;
+    [SerializeField] bool currentlyPushing = false;
 
     private bool ignorePlayer = false;
     private void Awake()
@@ -32,6 +33,11 @@ public class EnemyHitbox : MonoBehaviour
         ignorePlayer = newIgnorePlayer;
     }
 
+    public void SetCurrentlyPushing(bool value)
+    {
+        currentlyPushing = value;
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if(ignorePlayer) 
@@ -55,6 +61,7 @@ public class EnemyHitbox : MonoBehaviour
             else
             {
                 Pushed(playerMovement.PushTarget(true, false));
+                currentlyPushing = false;
                 playerMovement.StopBulletTime();
             }
             SetIgnore(true);
@@ -65,7 +72,7 @@ public class EnemyHitbox : MonoBehaviour
             }
         }
 
-        if(player != null && !PlayerMovement.IsInvincible() && !ignorePlayer) 
+        if(player != null && !PlayerMovement.IsInvincible() && !ignorePlayer && !currentlyPushing) 
         {
             CameraShake.Shake(0.5f, 0.5f);
             player.TakeDamage(dmg);
