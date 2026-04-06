@@ -5588,11 +5588,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &182558946 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3200521968596946162, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
-  m_PrefabInstance: {fileID: 583356282}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &196502710
 GameObject:
   m_ObjectHideFlags: 0
@@ -5729,11 +5724,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196502710}
   m_CullTransparentMesh: 1
---- !u!1 &200660737 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4742428703539924120, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
-  m_PrefabInstance: {fileID: 583356282}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &226979087
 GameObject:
   m_ObjectHideFlags: 0
@@ -5917,7 +5907,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 58749b4edf6337949b96762eb5c4ad76, type: 3}
+  m_Resource: {fileID: 8300000, guid: 63a848969d581a14d96070c95c9e4d2e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6215,11 +6205,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374085816}
   m_CullTransparentMesh: 1
---- !u!1 &430047890 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8836701211644670844, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
-  m_PrefabInstance: {fileID: 583356282}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &455117094
 GameObject:
   m_ObjectHideFlags: 0
@@ -13741,7 +13726,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: b5da4b0f485873c4c8a0093a09f921c2, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4bc6d17cabfcf784dbc6359091988f6e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -15122,11 +15107,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5327002227996684137, guid: b584b32e08db8604786de258ed1073a5, type: 3}
   m_PrefabInstance: {fileID: 1029246534}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1103782380 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2364388731655945038, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
-  m_PrefabInstance: {fileID: 583356282}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1138597011
 GameObject:
   m_ObjectHideFlags: 0
@@ -15336,7 +15316,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: fcf461f8bc4921644b4950d2f0819058, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4cc13fe77108ca34298253071bc3c279, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -15737,7 +15717,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 13364d9781df8f64292570d8eac2fb01, type: 3}
+  m_Resource: {fileID: 8300000, guid: df1a09514766cde4e8e26d1beb090659, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -15883,6 +15863,18 @@ PrefabInstance:
       propertyPath: 'stages.Array.data[3]'
       value: 
       objectReference: {fileID: 1890227487}
+    - target: {fileID: 7342510952752631941, guid: 41d091dfa36d9584fa548a4f8b268fbc, type: 3}
+      propertyPath: sounds.Array.data[1].clips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342510952752631941, guid: 41d091dfa36d9584fa548a4f8b268fbc, type: 3}
+      propertyPath: 'sounds.Array.data[1].clips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f420972c1f9efa74bbc251192dbda7a6, type: 3}
+    - target: {fileID: 7342510952752631941, guid: 41d091dfa36d9584fa548a4f8b268fbc, type: 3}
+      propertyPath: 'sounds.Array.data[1].clips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: d2587ff7550d1b24a8efe806e1bf8ff4, type: 3}
     - target: {fileID: 7669411320759863347, guid: 41d091dfa36d9584fa548a4f8b268fbc, type: 3}
       propertyPath: m_Name
       value: MusicManager
@@ -16820,6 +16812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCurrencyAmount: 0
   pauseMenuCurrencyText: {fileID: 0}
+  upgradeMenuCurrencyText: {fileID: 0}
   currencyPopupPrefab: {fileID: 0}
   mainCanvas: {fileID: 0}
 --- !u!4 &1480263885
@@ -16841,11 +16834,6 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 213119516036381737, guid: b584b32e08db8604786de258ed1073a5, type: 3}
   m_PrefabInstance: {fileID: 1029246534}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1525914487 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2261626271210247868, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
-  m_PrefabInstance: {fileID: 583356282}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1540525353
 GameObject:
@@ -17026,7 +17014,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 2392ec12adb317e4cb01082f8ce780f2, type: 3}
+  m_Resource: {fileID: 8300000, guid: ecf87f91f0c4f3c4ca08e6409c985765, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -17248,11 +17236,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557200366}
   m_CullTransparentMesh: 1
---- !u!1 &1561515643 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 947076563355289553, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
-  m_PrefabInstance: {fileID: 583356282}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1594221039 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7342510952752631941, guid: 41d091dfa36d9584fa548a4f8b268fbc, type: 3}
@@ -17312,7 +17295,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: a0a81ffa553494b4781574479961ac3c, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9b3b6c2c630fa874daf5bddb377347d6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -17682,7 +17665,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: b269e0f2b216ad443bab6ae27edb0925, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9c8000413778d164ba5e598670eb8e6f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -17768,11 +17751,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &1704247513 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1858211734962878709, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
-  m_PrefabInstance: {fileID: 583356282}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1709324761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4379755385342618826, guid: ab99b7d1b1770664abb1b156b6da98f5, type: 3}
@@ -18499,7 +18477,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 0189410701029c2408d55f9098c9df13, type: 3}
+  m_Resource: {fileID: 8300000, guid: 6dd042059a42ccf41a025b140f9b2ca5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -18703,7 +18681,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 9499a8b4655d8a04a9d084b654c49bcb, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2a2eedf9a4913fd49bacd1e1d72c0354, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -23782,17 +23760,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 6
   currentHealth: 0
-  lives:
-  - {fileID: 1561515643}
-  - {fileID: 1525914487}
-  - {fileID: 430047890}
-  - {fileID: 200660737}
-  - {fileID: 182558946}
-  - {fileID: 1704247513}
-  - {fileID: 1103782380}
+  lifePrefab: {fileID: 0}
+  livesContainer: {fileID: 0}
   fullLife: {fileID: 21300000, guid: 0d23a2e405809d84792b67b9e982ae5c, type: 3}
   halfLife: {fileID: 21300000, guid: bb0b08c97fca4b741adb10cefda3faca, type: 3}
   emptyLife: {fileID: 21300000, guid: 9816629483ac8694d8f6962927233547, type: 3}
+  extraFullLife: {fileID: 0}
+  extraHalfLife: {fileID: 0}
   invincibilityDuration: 1
   upgradeStatsScriptable: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   inTutorial: 0
