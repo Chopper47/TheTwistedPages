@@ -6,7 +6,7 @@ public class Dummy : MonoBehaviour
     [SerializeField] private float lifetime = 5.0f;
 
     [Header("Explosion")]
-    [SerializeField] private float explosionRadius = 3.0f;
+    [SerializeField] private float explosionRadius = 5.0f;
     [SerializeField] private int damage = 1;
 
     private float timer;

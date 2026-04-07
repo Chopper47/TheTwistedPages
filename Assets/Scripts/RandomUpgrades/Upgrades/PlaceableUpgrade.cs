@@ -17,10 +17,11 @@ public abstract class PlaceableUpgrade : UpgradeBehaviour
         if (IsOnNavMesh(positionToTry, out NavMeshHit hit))
         {
             Vector3 position = hit.position;
+            Quaternion rotation = Quaternion.Inverse(player.transform.rotation);
 
             if (!IsOverlapping(position))
             {
-                Instantiate(prefab, position, Quaternion.identity);
+                Instantiate(prefab, position, rotation);
                 return true;
             }
         }
