@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,7 @@ public class Wolf : CollisionRefresh
     [SerializeField] float launchRange = 4f;
     [SerializeField] int consecutiveStepback = 0;
     [SerializeField] bool howling = false;
+    [SerializeField] bool hasHowled = false;
 
     [Header("Launch variables")]
     [SerializeField] float timeForLaunch = .8f;
@@ -154,18 +156,27 @@ public class Wolf : CollisionRefresh
         return howling;
     }
 
+    public bool HasHowled()
+    {
+        return hasHowled;
+    }
+
     public void Howl()
     {
+        hasHowled = true;
         howling = true;
-        //animations.SetHowling(true);
+        chase.StopChase();
+        animations.TriggerStopWalk();
+        animations.TriggerHowl();
         StartCoroutine(HowlTimer());
     }
 
     IEnumerator HowlTimer()
     {
-        yield return new WaitForSeconds(howlTime);
-        howling = false;
+        yield return new WaitForSeconds(howlTime-0.1f);
         animations.TriggerStopHowl();
+        yield return new WaitForSeconds(0.1f);
+        howling = false;
     }
 
     IEnumerator WaitForStepback()
