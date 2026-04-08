@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float baseMoveSpeed = 10.0f;
     [SerializeField] private float rotationSpeed = 10.0f;
 
+    private float speedMultiplier = 1.0f;
+
     private Vector3 direction;
     private Vector2 moveAmount;
 
@@ -172,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
 
             RotatePlayer(direction);
 
-            controller.Move(direction * baseMoveSpeed * Time.unscaledDeltaTime);
+            controller.Move(direction * baseMoveSpeed * speedMultiplier * Time.unscaledDeltaTime);
 
             animator.SetBool("isRunning", true);
         }
@@ -245,6 +247,20 @@ public class PlayerMovement : MonoBehaviour
             controller.transform.rotation,
             targetRotation,
             Time.unscaledDeltaTime * rotationSpeed);
+    }
+
+    public void ApplySlow(float duration, float multiplier)
+    {
+        StartCoroutine(SlowCoroutine(duration, multiplier));
+    }
+
+    private IEnumerator SlowCoroutine(float duration, float multiplier)
+    {
+        speedMultiplier = multiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        speedMultiplier = 1f;
     }
     #endregion
 
