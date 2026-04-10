@@ -35,7 +35,7 @@ public class MinimapManager : MonoBehaviour
             GameObject iconObject = Instantiate(roomIconPrefab, minimapContainer);
             MinimapRoomIcon icon = iconObject.GetComponent<MinimapRoomIcon>();
 
-            icon.SetRoomColour(room);
+            icon.SetRoomSprite(room);
 
             icons.Add(gridPosition, icon);
         }

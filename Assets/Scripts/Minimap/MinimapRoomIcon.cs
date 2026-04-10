@@ -8,41 +8,43 @@ public class MinimapRoomIcon : MonoBehaviour
     private bool visited = false;
     private RoomInstance roomInstance;
 
-    [Header("Colours")]
-    public Color normalColor = Color.grey;
-    public Color startColor = Color.green;
-    public Color upgradeColor = Color.magenta;
-    public Color healthColor = Color.cyan;
-    public Color bossColor = Color.red;
-    public Color floorChangeColor = Color.yellow;
-    public Color currentRoomColor = Color.white;
+    [Header("Sprites")]
+    public Sprite normalSprite;
+    public Sprite startSprite;
+    public Sprite upgradeSprite;
+    public Sprite healthSprite;
+    public Sprite bossSprite;
+    public Sprite floorChangeSprite;
+
     [SerializeField] private float notVisitedOpacity = 0.3f;
 
-    public void SetRoomColour(RoomInstance room)
+    public void SetRoomSprite(RoomInstance room)
     {
         roomInstance = room;
 
         switch (room.roomType)
         {
-            case RoomType.Start: 
-                iconImage.color = startColor; 
+            case RoomType.Start:
+                iconImage.sprite = startSprite;
                 break;
             case RoomType.Upgrade:
-                iconImage.color = upgradeColor;
+                iconImage.sprite = upgradeSprite;
                 break;
-            case RoomType.Health: 
-                iconImage.color = healthColor; 
+            case RoomType.Health:
+                iconImage.sprite = healthSprite;
                 break;
-            case RoomType.Boss: 
-                iconImage.color = bossColor; 
+            case RoomType.Boss:
+                iconImage.sprite = bossSprite;
                 break;
-            case RoomType.FloorChange: 
-                iconImage.color = floorChangeColor; 
+            case RoomType.FloorChange:
+                iconImage.sprite = floorChangeSprite;
                 break;
-            default: 
-                iconImage.color = normalColor; 
+            default:
+                iconImage.sprite = normalSprite;
                 break;
         }
+
+        iconImage.color = Color.white;
 
         SetOpacity(0f);
     }
@@ -60,7 +62,7 @@ public class MinimapRoomIcon : MonoBehaviour
     {
         if (isCurrent)
         {
-            iconImage.color = currentRoomColor;
+            iconImage.color = Color.white;
             SetOpacity(1.0f);
         }
         else if (visited)
