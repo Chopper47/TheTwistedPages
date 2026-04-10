@@ -77,4 +77,14 @@ public class MinimapRoomIcon : MonoBehaviour
         colour.a = value;
         iconImage.color = colour;
     }
+
+    public void SetVisible(bool visible)
+    {
+        iconImage.enabled = visible;
+    }
+
+    public bool IsVisited()
+    {
+        return visited;
+    }
 }

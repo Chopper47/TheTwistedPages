@@ -56,16 +56,22 @@ public class MinimapManager : MonoBehaviour
 
             icon.transform.localPosition = new Vector3(offset.x * cellSizeX, offset.y * cellSizeY, 0f);
 
-            icon.SetVisited();
+            bool isCurrent = roomPosition == currentRoom;
+            bool isConnected = rooms[currentRoom].connectedRooms.Contains(roomPosition);
 
-            if (roomPosition.x == currentRoom.x && roomPosition.y == currentRoom.y)
+            if (icon.IsVisited() || isConnected || isCurrent)
             {
-                icon.SetAsCurrent(true);
+                icon.SetVisible(true);
             }
             else
             {
-                icon.SetAsCurrent(false);
+                icon.SetVisible(false);
+                continue;
             }
+
+            icon.SetVisited();
+
+            icon.SetAsCurrent(isCurrent);
         }
     }
 }
