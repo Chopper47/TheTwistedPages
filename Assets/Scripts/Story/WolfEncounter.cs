@@ -24,6 +24,7 @@ public class WolfEncounter : MonoBehaviour
     [SerializeField] private GameObject pressShiftCanvas;
     [SerializeField] private TutorialDoor doorToOpen;
 
+    [SerializeField] private float wolfChaseDuration;
     [SerializeField] private bool frozenTime = false;
     [SerializeField] private bool playereCanRoll;
     //[SerializeField] private bool pressedShift = false; 
@@ -113,7 +114,7 @@ public class WolfEncounter : MonoBehaviour
 
     IEnumerator waitToStopWolf()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(wolfChaseDuration);
         //wolfGO.GetComponent<NavMeshAgent>().enabled = false;
         frozenTime = true;
         pressShiftCanvas.SetActive(true);

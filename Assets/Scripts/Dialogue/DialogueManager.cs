@@ -117,10 +117,15 @@ public class DialogueManager : MonoBehaviour
             player.canRoll = true;
             PauseMenu.canShow = true;
 
-            var tempEvent = onDialogueEnd;
-            onDialogueEnd = new UnityEngine.Events.UnityEvent();
+            //var tempEvent = onDialogueEnd;
+            //onDialogueEnd = new UnityEngine.Events.UnityEvent();
 
-            tempEvent?.Invoke();
+            //tempEvent?.Invoke();
+
+            onDialogueEnd?.Invoke();
+            Debug.Log("Listeners count: " + onDialogueEnd.GetPersistentEventCount());
+
+            onDialogueEnd.RemoveAllListeners();
         }
     }
 

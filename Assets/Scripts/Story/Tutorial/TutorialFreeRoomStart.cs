@@ -32,7 +32,7 @@ public class TutorialFreeRoomStart : MonoBehaviour
         }
         PlayerMovement.canMove = true;
         player.canRoll = true;
-        Destroy(gameObject);
+        GetComponent<Collider>().enabled = false;
 
     }
 
