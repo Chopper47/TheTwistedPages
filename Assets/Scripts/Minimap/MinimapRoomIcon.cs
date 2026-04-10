@@ -16,6 +16,14 @@ public class MinimapRoomIcon : MonoBehaviour
     public Sprite bossSprite;
     public Sprite floorChangeSprite;
 
+    [Header("Connections")]
+    [SerializeField] private GameObject northConnection;
+    [SerializeField] private GameObject southConnection;
+    [SerializeField] private GameObject eastConnection;
+    [SerializeField] private GameObject westConnection;
+
+    private bool northActive, southActive, eastActive, westActive;
+
     [SerializeField] private float notVisitedOpacity = 0.3f;
 
     public void SetRoomSprite(RoomInstance room)
@@ -47,6 +55,26 @@ public class MinimapRoomIcon : MonoBehaviour
         iconImage.color = Color.white;
 
         SetOpacity(0f);
+    }
+
+    public void UpdateConnections()
+    {
+        if (roomInstance == null)
+        {
+            return;
+        }
+
+        Vector2Int pos = roomInstance.gridPosition;
+
+        northActive = roomInstance.connectedRooms.Contains(pos + Vector2Int.up);
+        southActive = roomInstance.connectedRooms.Contains(pos + Vector2Int.down);
+        eastActive = roomInstance.connectedRooms.Contains(pos + Vector2Int.right);
+        westActive = roomInstance.connectedRooms.Contains(pos + Vector2Int.left);
+
+        northConnection.SetActive(northActive);
+        southConnection.SetActive(southActive);
+        eastConnection.SetActive(eastActive);
+        westConnection.SetActive(westActive);
     }
 
     public void SetVisited()
@@ -81,6 +109,11 @@ public class MinimapRoomIcon : MonoBehaviour
     public void SetVisible(bool visible)
     {
         iconImage.enabled = visible;
+
+        northConnection.SetActive(visible && northActive);
+        southConnection.SetActive(visible && southActive);
+        eastConnection.SetActive(visible && eastActive);
+        westConnection.SetActive(visible && westActive);
     }
 
     public bool IsVisited()

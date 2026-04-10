@@ -36,6 +36,7 @@ public class MinimapManager : MonoBehaviour
             MinimapRoomIcon icon = iconObject.GetComponent<MinimapRoomIcon>();
 
             icon.SetRoomSprite(room);
+            icon.UpdateConnections();
 
             icons.Add(gridPosition, icon);
         }
