@@ -116,6 +116,9 @@ public class RoomController : MonoBehaviour
             foreach (DoorController door in doors)
             {
                 door.CloseDoor();
+                door.GetComponentInChildren<Animator>().SetTrigger("CloseDoor");
+                door.GetComponentInChildren<Light>().enabled = false;
+
             }
 
             if (musicIndex == 1)

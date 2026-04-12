@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 577389877258489443}
   m_Layer: 0
   m_Name: projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,6 +173,7 @@ MonoBehaviour:
   states: {fileID: 0}
   dmg: 1
   pushable: 1
+  currentlyPushing: 0
 --- !u!54 &577389877258489443
 Rigidbody:
   m_ObjectHideFlags: 0

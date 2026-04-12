@@ -18,6 +18,11 @@ public class Trap : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            return;
+        }
+
         if (damageOnEnter)
         {
             TryApplyDamage(other);
