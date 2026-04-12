@@ -23,7 +23,7 @@ public class LevelGenerator : MonoBehaviour
 
     public void TryGenerateLevel()
     {
-        int maxAttempts = 500;
+        int maxAttempts = 1000;
 
         for (int attempt = 1; attempt <= maxAttempts; attempt++)
         {

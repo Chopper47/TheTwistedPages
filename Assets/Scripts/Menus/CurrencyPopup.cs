@@ -43,14 +43,18 @@ public class CurrencyPopup : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
+        if (elapsedTime < fadeDelay)
+        {
+            return;
+        }
+
+        float activeTime = elapsedTime - fadeDelay;
+
         transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
 
-        if (elapsedTime > fadeDelay)
-        {
-            float fadeTime = lifeTime - fadeDelay;
-            float t = (elapsedTime - fadeDelay) / fadeTime;
-            canvasGroup.alpha = Mathf.Lerp(1.0f, 0f, t);
-        }
+        float fadeTime = lifeTime - fadeDelay;
+        float t = activeTime / fadeTime;
+        canvasGroup.alpha = Mathf.Lerp(1.0f, 0f, t);
 
         if (elapsedTime >= lifeTime)
         {
