@@ -23,7 +23,7 @@ public class LevelGenerator : MonoBehaviour
 
     public void TryGenerateLevel()
     {
-        int maxAttempts = 20;
+        int maxAttempts = 500;
 
         for (int attempt = 1; attempt <= maxAttempts; attempt++)
         {
@@ -126,6 +126,12 @@ public class LevelGenerator : MonoBehaviour
         // Assign the Health and Shop rooms.
         if (!AssignSpecialRooms())
         {
+            return false;
+        }
+
+        if (IsTooLinear())
+        {
+            Debug.Log("Level too linear, regenerating...");
             return false;
         }
 
@@ -313,9 +319,23 @@ public class LevelGenerator : MonoBehaviour
         return farthest;
     }
 
-    private int GetGridDistance(Vector2Int a, Vector2Int b)
+    private bool IsTooLinear()
     {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+        int corridorRooms = 0;
+
+        foreach (RoomInstance room in generatedRooms.Values)
+        {
+            int connections = room.connectedRooms.Count;
+
+            if (connections == 2)
+            {
+                corridorRooms++;
+            }
+        }
+
+        float ratio = (float)corridorRooms / generatedRooms.Count;
+
+        return ratio > 0.6f;
     }
 
     /// <summary>
@@ -363,14 +383,17 @@ public class LevelGenerator : MonoBehaviour
             {
                 bool valid = true;
 
+                Dictionary<Vector2Int, int> distancesFromCandidate = BFS(candidate.gridPosition);
+
                 foreach (RoomInstance selected in selectedUpgradeRooms)
                 {
-                    int distance = GetGridDistance(candidate.gridPosition, selected.gridPosition);
-
-                    if (distance < 3)
+                    if (distancesFromCandidate.TryGetValue(selected.gridPosition, out int distance))
                     {
-                        valid = false;
-                        break;
+                        if (distance < 3)
+                        {
+                            valid = false;
+                            break;
+                        }
                     }
                 }
 
@@ -381,17 +404,20 @@ public class LevelGenerator : MonoBehaviour
 
                 foreach (RoomInstance room in generatedRooms.Values)
                 {
-                    if (room.roomType != RoomType.Boss && room.roomType != RoomType.FloorChange && room.roomType != RoomType.Start)
+                    if (room.roomType != RoomType.Boss &&
+                        room.roomType != RoomType.FloorChange &&
+                        room.roomType != RoomType.Start)
                     {
                         continue;
                     }
 
-                    int distance = GetGridDistance(candidate.gridPosition, room.gridPosition);
-
-                    if (distance < 3)
+                    if (distancesFromCandidate.TryGetValue(room.gridPosition, out int dist))
                     {
-                        valid = false;
-                        break;
+                        if (dist < 3)
+                        {
+                            valid = false;
+                            break;
+                        }
                     }
                 }
 
@@ -482,7 +508,12 @@ public class LevelGenerator : MonoBehaviour
                     continue;
                 }
 
-                // Avoid Boss and FloorChange rooms.
+                // Avoid Upgrade, Boss and FloorChange rooms.
+                if (room.roomType == RoomType.Upgrade || neighbour.roomType == RoomType.Upgrade)
+                {
+                    continue;
+                }
+
                 if (room.roomType == RoomType.Boss || neighbour.roomType == RoomType.Boss)
                 {
                     continue;
