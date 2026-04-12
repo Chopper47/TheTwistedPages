@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 [CreateAssetMenu(menuName = "Effects/LowVision")]
 public class LowVisionEffect : MysteryEffect
 {
-    public float duration = 30.0f;
+    public int durationInRooms = 3;
 
     public float targetIntensity = 1.0f;
     public float targetSmoothness = 1.0f;
@@ -29,6 +29,14 @@ public class LowVisionEffect : MysteryEffect
     private IEnumerator Run(Transform player)
     {
         Camera camera = CameraController.Instance.GetComponentInChildren<Camera>();
+
+        RoomProgressTracker tracker = player.GetComponent<RoomProgressTracker>();
+        if (tracker == null)
+        {
+            yield break;
+        }
+
+        int startRooms = tracker.roomsCleared;
 
         GameObject go = new GameObject("LowVisionVolume");
         Volume volume = go.AddComponent<Volume>();
@@ -60,15 +68,12 @@ public class LowVisionEffect : MysteryEffect
             yield return null;
         }
 
-        float timer = 0f;
-
-        while (timer < duration)
+        while (tracker.roomsCleared < startRooms + durationInRooms)
         {
             Vector2 target = GetScreenCenter(player, camera);
 
             vignette.center.value = Vector2.Lerp(vignette.center.value, target, Time.deltaTime * 6.0f);
 
-            timer += Time.deltaTime;
             yield return null;
         }
 

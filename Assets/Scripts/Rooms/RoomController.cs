@@ -243,6 +243,12 @@ public class RoomController : MonoBehaviour
             }
         }
 
+        RoomProgressTracker tracker = FindFirstObjectByType<RoomProgressTracker>();
+        if (tracker != null)
+        {
+            tracker.RegisterRoomClear();
+        }
+
         if (roomInstance.roomType == RoomType.Boss)
         {
             OnBossRoomCleared();

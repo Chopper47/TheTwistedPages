@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 7002907576181809036}
   - component: {fileID: 7738423248794737938}
   - component: {fileID: -5651913295414236988}
+  - component: {fileID: 7314438289844191152}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -478,15 +479,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535b07da624bb9743bb90d29029b2065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeUpgrade: {fileID: 11400000, guid: 5ffadc54c86cb5145a4ad1e1ab08f22f, type: 2}
+  activeUpgrade: {fileID: 11400000, guid: 8b5cf86c7a83d6946980759cebaab51f, type: 2}
   passiveUpgrade: {fileID: 0}
   isActiveRunning: 0
   seedBasketActive: 0
   seedBasketTimer: 0
-  shieldUses: 0
+  shieldUses: 3
   shieldActive: 0
   moneyBoostRoomsRemaining: 0
-  dashExplosionUses: 0
+  dashExplosionUses: 3
   dashExplosionActive: 0
 --- !u!114 &-5651913295414236988
 MonoBehaviour:
@@ -509,6 +510,19 @@ MonoBehaviour:
   axePrefab: {fileID: 5681774981070429426, guid: a4127f41ae3f6c246a075f1805e43040, type: 3}
   cameraController: {fileID: 0}
   testingCheck: 0
+--- !u!114 &7314438289844191152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656407427300801399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2058460e288459a4b95d15324975a583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomsCleared: 0
 --- !u!1 &5068319731178539301
 GameObject:
   m_ObjectHideFlags: 0
