@@ -44,6 +44,8 @@ public class MysteryObject : MonoBehaviour
 
         effect.Apply(player.gameObject);
 
+        UIManager.Instance.StartCoroutine(UIManager.Instance.ShowEffectMessage(effect.effectMessage, 2.0f));
+
         Debug.Log("Effect applied: " + effect.name);
 
         Destroy(gameObject);

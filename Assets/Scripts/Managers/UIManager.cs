@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +9,7 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Elements")]
     public TextMeshProUGUI nextWaveText;
+    public TextMeshProUGUI effectText;
 
     [Header("Menus")]
     public GameObject pauseMenu;
@@ -27,6 +29,11 @@ public class UIManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        if (effectText != null)
+        {
+            effectText.gameObject.SetActive(false);
         }
     }
 
@@ -85,5 +92,49 @@ public class UIManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(nav.firstSelected);
         }
+    }
+
+    public IEnumerator ShowEffectMessage(string message, float time)
+    {
+        if (effectText == null)
+        {
+            yield break;
+        }
+
+        effectText.gameObject.SetActive(true);
+        effectText.text = message;
+
+        float t = 0f;
+        float fadeTime = 0.5f;
+
+        Color color = effectText.color;
+        color.a = 0f;
+        effectText.color = color;
+
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+
+            color.a = Mathf.Lerp(0f, 1f, t / fadeTime);
+            effectText.color = color;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(time);
+
+        t = 0f;
+
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+
+            color.a = Mathf.Lerp(1.0f, 0f, t / fadeTime);
+            effectText.color = color;
+
+            yield return null;
+        }
+
+        effectText.gameObject.SetActive(false);
     }
 }
