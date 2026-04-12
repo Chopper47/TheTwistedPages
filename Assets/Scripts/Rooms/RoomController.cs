@@ -72,9 +72,6 @@ public class RoomController : MonoBehaviour
 
     public void ActivateRoom()
     {
-        //PlayerFall player = FindFirstObjectByType<PlayerFall>();
-        //player.SetRoomRespawn(respawnPoint);
-
         if (isActive || isCleared)
         {
             return;

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -7,55 +7,95 @@ using UnityEngine.Rendering.Universal;
 public class LowVisionEffect : MysteryEffect
 {
     public float duration = 30.0f;
+
     public float targetIntensity = 1.0f;
     public float targetSmoothness = 1.0f;
+
+    public float transitionTime = 0.5f;
+
+    public float targetPriority = 100.0f;
 
     public override void Apply(GameObject player)
     {
         MonoBehaviour runner = player.GetComponent<MonoBehaviour>();
-
-        Volume volume = FindFirstObjectByType<Volume>();
-
-        if (volume == null)
+        if (!runner)
         {
             return;
         }
 
-        if (!volume.profile.TryGet(out Vignette vignette))
-        {
-            return;
-        }
-
-        runner.StartCoroutine(VignetteRoutine(vignette));
+        runner.StartCoroutine(Run(player.transform));
     }
 
-    private IEnumerator VignetteRoutine(Vignette vignette)
+    private IEnumerator Run(Transform player)
     {
-        float startIntensity = vignette.intensity.value;
-        float startSmoothness = vignette.smoothness.value;
+        Camera camera = CameraController.Instance.GetComponentInChildren<Camera>();
+
+        GameObject go = new GameObject("LowVisionVolume");
+        Volume volume = go.AddComponent<Volume>();
+
+        volume.isGlobal = true;
+        volume.priority = targetPriority;
+        volume.weight = 1.0f;
+
+        volume.profile = CreateInstance<VolumeProfile>();
+
+        var vignette = volume.profile.Add<Vignette>(true);
+
+        Vector2 initialCenter = GetScreenCenter(player, camera);
+
+        vignette.intensity.Override(0f);
+        vignette.smoothness.Override(0.2f);
+        vignette.center.Override(initialCenter);
+
+        float t = 0f;
+
+        while (t < transitionTime)
+        {
+            float lerp = t / transitionTime;
+
+            vignette.intensity.value = Mathf.Lerp(0f, targetIntensity, lerp);
+            vignette.smoothness.value = Mathf.Lerp(0.2f, targetSmoothness, lerp);
+
+            t += Time.deltaTime;
+            yield return null;
+        }
 
         float timer = 0f;
 
-        while (timer < 0.5f)
+        while (timer < duration)
         {
-            vignette.intensity.value = Mathf.Lerp(startIntensity, targetIntensity, timer / 0.5f);
-            vignette.smoothness.value = Mathf.Lerp(startSmoothness, targetSmoothness, timer / 0.5f);
+            Vector2 target = GetScreenCenter(player, camera);
+
+            vignette.center.value = Vector2.Lerp(vignette.center.value, target, Time.deltaTime * 6.0f);
 
             timer += Time.deltaTime;
             yield return null;
         }
 
-        yield return new WaitForSeconds(duration);
+        t = 0f;
 
-        timer = 0f;
+        Vector2 finalCenter = vignette.center.value;
+        Vector2 screenCenter = new Vector2(0.5f, 0.5f);
 
-        while (timer < 0.5f)
+        while (t < transitionTime)
         {
-            vignette.intensity.value = Mathf.Lerp(targetIntensity, 0.45f, timer / 0.5f);
-            vignette.smoothness.value = Mathf.Lerp(targetSmoothness, 0.2f, timer / 0.5f);
+            float lerp = t / transitionTime;
 
-            timer += Time.deltaTime;
+            vignette.intensity.value = Mathf.Lerp(targetIntensity, 0f, lerp);
+            vignette.smoothness.value = Mathf.Lerp(targetSmoothness, 0.2f, lerp);
+            vignette.center.value = Vector2.Lerp(finalCenter, screenCenter, lerp);
+
+            t += Time.deltaTime;
             yield return null;
         }
+
+        Destroy(go);
+    }
+
+    private Vector2 GetScreenCenter(Transform player, Camera cam)
+    {
+        Vector3 screenPos = cam.WorldToScreenPoint(player.position);
+
+        return new Vector2(screenPos.x / Screen.width, screenPos.y / Screen.height);
     }
 }
