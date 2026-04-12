@@ -54,6 +54,12 @@ public class CurrencyManager : MonoBehaviour
     public void RemoveCurrency(int amount)
     {
         currentCurrencyAmount -= amount;
+
+        if (currentCurrencyAmount < 0)
+        {
+            currentCurrencyAmount = 0;
+        }
+
         UpdateUI();
     }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Effects/Money")]
-public class MoneyEffect : MysteryEffect
+[CreateAssetMenu(menuName = "Effects/GetMoney")]
+public class GetMoneyEffect : MysteryEffect
 {
     public int amount;
 

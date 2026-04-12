@@ -44,6 +44,12 @@ public class MysteryObject : MonoBehaviour
 
         effect.Apply(player.gameObject);
 
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        if (health != null && health.currentHealth <= 0)
+        {
+            return;
+        }
+
         UIManager.Instance.StartCoroutine(UIManager.Instance.ShowEffectMessage(effect.effectMessage, 2.0f));
 
         Debug.Log("Effect applied: " + effect.name);
