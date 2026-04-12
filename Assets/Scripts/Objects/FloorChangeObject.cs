@@ -7,8 +7,8 @@ public class FloorChangeObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //FindFirstObjectByType<FloorManager>().GoToNextFloor();
-            SceneManager.LoadScene("Scene_06_BossRoomTest");
+            FindFirstObjectByType<FloorManager>().GoToNextFloor();
+            //SceneManager.LoadScene("Scene_06_BossRoomTest");
         }
     }
 }
