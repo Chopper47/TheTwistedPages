@@ -4,23 +4,11 @@ public class BulletTimeTrigger : MonoBehaviour
 {
     private bool canDodge = false;
 
-    private GameObject latestEnemy;
     private GameObject axeGO;
     private GameObject harmOrigin;
 
     private void OnTriggerEnter(Collider other)
     {
-        EnemyHitbox enemyHb = other.GetComponent<EnemyHitbox>();
-
-        if(enemyHb != null)
-        {
-            if(enemyHb.ShowEnemyState() == 2)
-            {
-                latestEnemy = enemyHb.gameObject;
-                harmOrigin = latestEnemy;
-                canDodge = true;
-            }
-        }
 
         Axe axe = other.GetComponent<Axe>();
 
@@ -48,19 +36,6 @@ public class BulletTimeTrigger : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        EnemyHitbox enemyHb = other.GetComponent<EnemyHitbox>();
-        if (enemyHb != null)
-        {
-            if (enemyHb.ShowEnemyState() != 2 && canDodge && axeGO != null)
-            {
-                harmOrigin = axeGO;
-            }
-            else if(enemyHb.ShowEnemyState() != 2 && canDodge && axeGO == null)
-            {
-                harmOrigin = null;
-                canDodge = false;
-            }
-        }
 
         BossAxe bossAxe = other.GetComponent<BossAxe>();
         if (bossAxe != null)
@@ -79,46 +54,19 @@ public class BulletTimeTrigger : MonoBehaviour
         Axe axe = other.GetComponent<Axe>();
         BossAxe bossAxe = other.GetComponent<BossAxe>();
 
-        if (enemyHb != null)
-        {
-            latestEnemy = null;
-            if (axeGO != null)
-            {
-                harmOrigin = axeGO;
-            }
-            else
-            {
-                canDodge = false;
-                harmOrigin = null;
-            }
-        }
 
         if(axe != null)
         {
             axeGO = null;
-            if(latestEnemy != null)
-            {
-                harmOrigin = latestEnemy;
-            }
-            else
-            {
-                canDodge = false;
-                harmOrigin = null;
-            }
+            canDodge = false;
+            harmOrigin = null;
         }
 
         if (bossAxe != null)
         {
             axeGO = null;
-            if (latestEnemy != null)
-            {
-                harmOrigin = latestEnemy;
-            }
-            else
-            {
-                canDodge = false;
-                harmOrigin = null;
-            }
+            canDodge = false;
+            harmOrigin = null;
         }
     }
 
