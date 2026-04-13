@@ -37,12 +37,22 @@ public class ShieldUpgrade : UpgradeBehaviour
     {
         player.shieldActive = true;
         PlayerMovement.isInvincible = true;
+
+        if (player.shieldVFX != null)
+        {
+            player.shieldVFX.Play();
+        }
     }
 
     private void Deactivate(PlayerUpgrades player)
     {
         player.shieldActive = false;
         PlayerMovement.isInvincible = false;
+
+        if (player.shieldVFX != null)
+        {
+            player.shieldVFX.Stop();
+        }
     }
 
     public bool TryBlockDamage(PlayerUpgrades player)

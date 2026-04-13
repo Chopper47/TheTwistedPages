@@ -19,6 +19,9 @@ public class PlayerUpgrades : MonoBehaviour
     public int dashExplosionUses;
     public bool dashExplosionActive;
 
+    [Header("VFX")]
+    public ParticleSystem shieldVFX;
+
     private void Update()
     {
         if (activeUpgrade != null)
