@@ -93,6 +93,10 @@ public class PlayerMovement : MonoBehaviour
     private AudioManager AM;
     private AudioSource Main;
 
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem walkParticles;
+    [SerializeField] private ParticleSystem dashParticles;
+
     private void OnEnable()
     {
         playerMap.Enable();
@@ -177,10 +181,20 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(direction * baseMoveSpeed * speedMultiplier * Time.unscaledDeltaTime);
 
             animator.SetBool("isRunning", true);
+
+            if (!walkParticles.isPlaying)
+            {
+                walkParticles.Play();
+            }
         }
         else
         {
             animator.SetBool("isRunning", false);
+
+            if (walkParticles.isPlaying)
+            {
+                walkParticles.Stop();
+            }
         }
     }
 
@@ -271,7 +285,6 @@ public class PlayerMovement : MonoBehaviour
         {
             firstDash = false;
             rollCoroutine = StartCoroutine(Roll());
-            //Debug.Log("start rolling");
         }
         else if (!axeHolding && isInBulletTime && !throwAxe)
         {
@@ -299,6 +312,12 @@ public class PlayerMovement : MonoBehaviour
         isInvincible = true;
 
         AM.Play("Dash", Main);
+
+        if (dashParticles != null)
+        {
+            dashParticles.Play();
+        }
+
         destructionCheck.SetActive(true);
 
         moveAmount = moveAction.ReadValue<Vector2>();

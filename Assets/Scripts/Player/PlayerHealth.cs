@@ -31,10 +31,13 @@ public class PlayerHealth : MonoBehaviour
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverMenu;
 
-    [Header("Audio")]
+    [Header("SFX")]
     [SerializeField] private AudioManager AM;
     [SerializeField] private AudioSource Main;
     private MusicManager musicManager;
+
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem healParticles;
 
     [Header("Other")]
     [SerializeField] private GameObject model;
@@ -153,6 +156,8 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(int amount)
     {
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+
+        healParticles.Play();
 
         UpdateHealthUI();
     }

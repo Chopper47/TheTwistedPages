@@ -438,6 +438,8 @@ MonoBehaviour:
   RightRangeGO: {fileID: 2805364282926060331}
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   bulletTimeTimer: {fileID: 0}
+  walkParticles: {fileID: 8027267367611223736}
+  dashParticles: {fileID: 7408010520815221613}
 --- !u!114 &7002907576181809036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535b07da624bb9743bb90d29029b2065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeUpgrade: {fileID: 11400000, guid: 8b5cf86c7a83d6946980759cebaab51f, type: 2}
+  activeUpgrade: {fileID: 0}
   passiveUpgrade: {fileID: 0}
   isActiveRunning: 0
   seedBasketActive: 0
@@ -1024,7 +1026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9035710369814173778, guid: 042149bdaf599b7439ddc72d6f115c38, type: 3}
       propertyPath: m_Name
-      value: HealthPartilcles
+      value: HealthParticles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1098,6 +1100,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4514628710209130534, guid: 88ca1777a8967874794f6a5c0defa270, type: 3}
   m_PrefabInstance: {fileID: 1496912342988213059}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &7408010520815221613 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8216979739143434286, guid: 88ca1777a8967874794f6a5c0defa270, type: 3}
+  m_PrefabInstance: {fileID: 1496912342988213059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5290120105044023210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1158,6 +1165,11 @@ PrefabInstance:
 --- !u!4 &6693250121881634499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1551907555667956073, guid: 44eaad0d2a356884590422bd306ff716, type: 3}
+  m_PrefabInstance: {fileID: 5290120105044023210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8027267367611223736 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2741809363676059922, guid: 44eaad0d2a356884590422bd306ff716, type: 3}
   m_PrefabInstance: {fileID: 5290120105044023210}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7232824078397768239
@@ -2628,6 +2640,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.0000000016866858
       objectReference: {fileID: 0}
+    - target: {fileID: 1256190629119807758, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
+      propertyPath: m_TagString
+      value: Hair
+      objectReference: {fileID: 0}
     - target: {fileID: 1268195699962748551, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.9999999
@@ -3995,6 +4011,10 @@ PrefabInstance:
     - target: {fileID: 7604016442630198782, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.000000016896069
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630912913423809200, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
+      propertyPath: m_TagString
+      value: Jumper
       objectReference: {fileID: 0}
     - target: {fileID: 7844615429331286459, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
       propertyPath: m_LocalScale.x

@@ -2060,6 +2060,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3345a39646e3e4295883872ae71e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &1257270257 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6173711773770400572, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+  m_PrefabInstance: {fileID: 1745502664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1289643764 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1061514838541233228, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
@@ -2415,9 +2420,9 @@ PrefabInstance:
       propertyPath: blackAndWhiteFilter
       value: 
       objectReference: {fileID: 545247596}
-    - target: {fileID: 974560862265915551, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: m_TagString
-      value: Jumper
+    - target: {fileID: 3053782754169609061, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3656407427300801399, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_Name
@@ -2428,21 +2433,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1362583220}
     - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: healParticles
+      value: 
+      objectReference: {fileID: 1257270257}
+    - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: livesContainer
       value: 
       objectReference: {fileID: 6336131}
-    - target: {fileID: 7738423248794737938, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: activeUpgrade
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8368712703027987540, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 58358ce9af7cb7b47b48698a85cd08c2, type: 2}
-    - target: {fileID: 8434896396407460641, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: m_TagString
-      value: Hair
-      objectReference: {fileID: 0}
     - target: {fileID: 8650172336370932488, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2483,10 +2480,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8823883139989992385, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 58358ce9af7cb7b47b48698a85cd08c2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
