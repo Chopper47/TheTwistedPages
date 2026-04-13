@@ -44,9 +44,11 @@ public class Flower : MonoBehaviour
     private EnemyHitbox enemyHb;
     [SerializeField] private Transform shootPoint;
 
-    [Header("Particle references")]
+    [Header("VFX")]
     [SerializeField] private Transform groundParticlePosition;
     [SerializeField] private ParticleSystem groundParticle;
+    [SerializeField] private ParticleSystem emergeParticles;
+    [SerializeField] private ParticleSystem shootParticles;
 
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
@@ -166,7 +168,16 @@ public class Flower : MonoBehaviour
             //groundParticle.transform.localPosition = Vector3.zero;
             burrowAnimation = false;
             animator.SetBool("isComingOut", false);
-            groundParticle.Stop();
+
+            if (groundParticle != null)
+            {
+                groundParticle.Stop();
+            }
+
+            if (emergeParticles != null)
+            {
+                emergeParticles.Play();
+            }
         }
         yield return null;
     }
@@ -274,6 +285,11 @@ public class Flower : MonoBehaviour
         yield return new WaitForSeconds(shootingAnimationDelay);
         shotCount++;
         AM.Play("Shoot", Main);
+
+        if (shootParticles != null)
+        {
+            shootParticles.Play();
+        }
 
         Vector3 straightDir = chase.TargetPosition() - shootPoint.position;
 

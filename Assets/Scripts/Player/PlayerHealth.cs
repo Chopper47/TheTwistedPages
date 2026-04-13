@@ -69,6 +69,8 @@ public class PlayerHealth : MonoBehaviour
     #region Health Management
     public void TakeDamage(int damage)
     {
+        CameraShake.Shake(0.2f, 0.2f);
+
         PlayerUpgrades upgrades = GetComponent<PlayerUpgrades>();
 
         if (upgrades != null && upgrades.activeUpgrade != null)
@@ -104,7 +106,6 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
-        CameraShake.Shake(0.2f, 0.2f);
         if(model) StartCoroutine(DamageFlicker(invincibilityDuration, 0.05f));
         AM.Play("Hurt", Main);
         //StartCoroutine(HitStop(0.1f));
