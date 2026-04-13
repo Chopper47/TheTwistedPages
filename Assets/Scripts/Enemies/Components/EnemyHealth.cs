@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +10,10 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private AudioManager AM;
     public AudioSource Main;
     public string identity;
-    
+
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem deathParticles;
+
     private void Start()
     {
         health = maxHealth;
@@ -44,6 +46,12 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
+        if (deathParticles != null)
+        {
+            ParticleSystem particles = Instantiate(deathParticles, transform.position, Quaternion.identity);
+            particles.Play();
+        }
+
         if (roomController != null)
         {
             roomController.OnEnemyDied();
