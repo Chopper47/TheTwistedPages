@@ -8,6 +8,7 @@ public class UpgradeObject : MonoBehaviour
     private bool playerInRange = false;
     private PlayerUpgrades playerUpgrades;
     private PlayerMovement player;
+    private RandomUpgradeMenu upgradeMenu;
 
     private InputAction interactAction;
 
@@ -15,7 +16,7 @@ public class UpgradeObject : MonoBehaviour
     {
         player = FindFirstObjectByType<PlayerMovement>();
         playerUpgrades = FindFirstObjectByType<PlayerUpgrades>();
-
+        upgradeMenu = FindFirstObjectByType<RandomUpgradeMenu>();
         interactAction = player.inputActions.FindActionMap("Player").FindAction("Interact");
     }
 
@@ -23,7 +24,9 @@ public class UpgradeObject : MonoBehaviour
     {
         if (playerInRange && interactAction.triggered)
         {
-            playerUpgrades.AddUpgrade(upgrade);
+            //playerUpgrades.AddUpgrade(upgrade);
+            upgradeMenu.SetNewUpgrade(upgrade);
+            upgradeMenu.OpenMenu();
             Destroy(gameObject);
         }
     } 
