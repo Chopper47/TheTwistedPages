@@ -260,8 +260,10 @@ MonoBehaviour:
   appleAttackCooldown: 2
   slamRadius: 4
   slamDamage: 1
-  slamDelay: 2
+  slamDelay: 1.5
   slamRotationAngle: 90
+  slamParticles: {fileID: 1276279443287989167}
+  shakeParticles: {fileID: 3003438497375863885}
   AM: {fileID: 0}
   Main: {fileID: 0}
   appleAppearOffset: 1.2
@@ -5082,6 +5084,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 009b3cd7e4e8b7744b6248ef11b530c2, type: 3}
+--- !u!198 &1276279443287989167 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1279264929250349522, guid: 009b3cd7e4e8b7744b6248ef11b530c2, type: 3}
+  m_PrefabInstance: {fileID: 33387532301716093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8154607309026967908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8168511490980973337, guid: 009b3cd7e4e8b7744b6248ef11b530c2, type: 3}
@@ -5144,6 +5151,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba53b4323d3df4c46a88cf26d55c1203, type: 3}
+--- !u!198 &3003438497375863885 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3415448488127562620, guid: ba53b4323d3df4c46a88cf26d55c1203, type: 3}
+  m_PrefabInstance: {fileID: 488718811184187185}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5219560121323648335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5667742120533111422, guid: ba53b4323d3df4c46a88cf26d55c1203, type: 3}

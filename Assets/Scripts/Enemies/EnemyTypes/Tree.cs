@@ -30,12 +30,17 @@ public class Tree : MonoBehaviour
     [SerializeField] private float slamDelay = 1.0f;
     [SerializeField] private float slamRotationAngle = 90.0f;
 
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem slamParticles;
+    [SerializeField] private ParticleSystem shakeParticles;
+
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
     public AudioSource Main;
 
-    [Header("Animations variables")]
+    [Header("Animation variables")]
     [SerializeField] private float appleAppearOffset = 0.5f;
+
     private void Awake()
     {
         appleAttacksLeft = totalAppleAttacks;
@@ -80,6 +85,12 @@ public class Tree : MonoBehaviour
         chaseAgent.StopChase();
 
         yield return new WaitForSeconds(appleAppearOffset);
+
+        if (shakeParticles != null)
+        {
+            shakeParticles.Play();
+        }
+
         AM.Play("Creak",Main);
         for (int i = 0; i < applesPerAttack; i++)
         {
@@ -140,6 +151,11 @@ public class Tree : MonoBehaviour
 
         yield return new WaitForSeconds(slamDelay);
 
+        if (slamParticles != null)
+        {
+            slamParticles.Play();
+        }
+
         Collider[] hits = Physics.OverlapSphere(transform.position, slamRadius);
         foreach (Collider hit in hits)
         {
@@ -151,8 +167,9 @@ public class Tree : MonoBehaviour
             }
         }
 
+        yield return new WaitForSeconds(1f);
+
         enemyHealth.Die();
-        
     }
     #endregion
 }

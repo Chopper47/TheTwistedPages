@@ -13,6 +13,7 @@ public class AppleGrenade : MonoBehaviour
     [Header("VFX")]
     [SerializeField] private SpriteRenderer rangeImage;
     [SerializeField] private Image timerImage;
+    [SerializeField] private ParticleSystem explosionParticles;
 
     private void Start()
     {
@@ -45,6 +46,13 @@ public class AppleGrenade : MonoBehaviour
 
     private void Explode()
     {
+        if (explosionParticles != null)
+        {
+            ParticleSystem explosion = Instantiate(explosionParticles, transform.position, Quaternion.identity);
+            explosion.transform.localScale = Vector3.one * explosionRadius;
+            explosion.Play();
+        }
+
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
 
         foreach (Collider hit in hits)
