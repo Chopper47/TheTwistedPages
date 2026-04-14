@@ -6,24 +6,15 @@ public class RandomUpgradeMenu : MonoBehaviour
 {
     [Header("References")]
     public RandomUpgrade newUpgrade;
-    [SerializeField] private GameObject menu;
     [SerializeField] private PlayerUpgrades playerUpgrades;
     [SerializeField] private Image newUpgradeIcon;
     [SerializeField] private TextMeshProUGUI newUpgradeDescription;
     [SerializeField] private Image currentUpgradeIcon;
     [SerializeField] private TextMeshProUGUI currentUpgradeDescription;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-        menu = transform.GetChild(0).gameObject;
         playerUpgrades = FindFirstObjectByType<PlayerUpgrades>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetNewUpgrade(RandomUpgrade upgradeToAdd)
@@ -43,18 +34,25 @@ public class RandomUpgradeMenu : MonoBehaviour
             //currentUpgradeDescription.text = upgradeToAdd.acctiveUpgrade.description;
         }
     }
-    public void AddUpgrade()
+
+    public void TakeUpgrade()
     {
         playerUpgrades.AddUpgrade(newUpgrade);
         CloseMenu();
     }
 
+    public void LeaveUpgrade()
+    {
+        CloseMenu();
+    }
+
     public void OpenMenu()
     {
-        menu.SetActive(true);
+        UIManager.Instance.OpenBlockingMenu(UIManager.Instance.randomUpgradeMenu);
     }
+
     public void CloseMenu()
-    {   
-        menu.SetActive(false);
+    {
+        UIManager.Instance.CloseBlockingMenu(UIManager.Instance.randomUpgradeMenu);
     }
 }

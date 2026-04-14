@@ -39,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
     public static bool isInvincible = false;
 
     private Vector3 rollDirection;
-    private Coroutine rollCoroutine;
 
     [Header("Bullet Time")]
     [SerializeField] private float bulletTimeDuration = 1.2f;
@@ -284,7 +283,7 @@ public class PlayerMovement : MonoBehaviour
         if (!axeHolding && !isInBulletTime && !throwAxe)
         {
             firstDash = false;
-            rollCoroutine = StartCoroutine(Roll());
+            StartCoroutine(Roll());
         }
         else if (!axeHolding && isInBulletTime && !throwAxe)
         {
@@ -295,7 +294,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 firstDash = false;
-                rollCoroutine = StartCoroutine(Roll());
+                StartCoroutine(Roll());
             }
         }
 

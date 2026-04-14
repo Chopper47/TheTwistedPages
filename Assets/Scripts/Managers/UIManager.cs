@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [Header("Menus")]
     public GameObject pauseMenu;
     public GameObject optionsMenu;
+    public GameObject randomUpgradeMenu;
     public GameObject gameWonMenu;
     public GameObject gameOverMenu;
 
@@ -70,6 +71,42 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void OpenBlockingMenu(GameObject menu)
+    {
+        Time.timeScale = 0;
+
+        PlayerMovement.canMove = false;
+
+        PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
+        if (player != null)
+        {
+            player.canRoll = false;
+        }
+
+        PauseMenu.canShow = false;
+
+        OpenMenu(menu);
+        ShowHUD(false);
+    }
+
+    public void CloseBlockingMenu(GameObject menu)
+    {
+        Time.timeScale = 1;
+
+        PlayerMovement.canMove = true;
+
+        PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
+        if (player != null)
+        {
+            player.canRoll = true;
+        }
+
+        PauseMenu.canShow = true;
+
+        CloseMenu(menu);
+        ShowHUD(true);
+    }
+
     public void ShowHUD(bool show)
     {
         if (HUD)
@@ -115,7 +152,7 @@ public class UIManager : MonoBehaviour
         {
             t += Time.deltaTime;
 
-            color.a = Mathf.Lerp(0f, 1f, t / fadeTime);
+            color.a = Mathf.Lerp(0f, 1.0f, t / fadeTime);
             effectText.color = color;
 
             yield return null;

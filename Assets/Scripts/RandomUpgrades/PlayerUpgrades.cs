@@ -42,11 +42,21 @@ public class PlayerUpgrades : MonoBehaviour
 
         if (newUpgrade.type == UpgradeType.Passive)
         {
+            if (passiveUpgrade != null)
+            {
+                RemoveUpgrade(passiveUpgrade.behaviour);
+            }
+
             passiveUpgrade = newUpgrade;
             newUpgrade.behaviour.OnAcquire(this);
         }
         else
         {
+            if (activeUpgrade != null)
+            {
+                RemoveUpgrade(activeUpgrade.behaviour);
+            }
+
             activeUpgrade = newUpgrade;
 
             newUpgrade.behaviour.OnAcquire(this);
