@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] private GameObject model;
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
@@ -165,19 +166,20 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("You died.");
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
 
         if (gameOverMenu)
         {
-            gameOverMenu.SetActive(true);
+            //gameOverMenu.SetActive(true);
         }
 
         if (musicManager)
         {
             musicManager.SwitchToNewSongNoSave(2);
         }
-
-        Destroy(gameObject);
     }
 
     private IEnumerator TemporaryInvincibility()

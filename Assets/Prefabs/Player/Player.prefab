@@ -503,6 +503,7 @@ MonoBehaviour:
   Main: {fileID: 0}
   healParticles: {fileID: 6173711773770400572}
   model: {fileID: 0}
+  animator: {fileID: 571309779194971223}
 --- !u!114 &7738423248794737938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535b07da624bb9743bb90d29029b2065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeUpgrade: {fileID: 11400000, guid: b9c417243019bc442ad4927617c85abb, type: 2}
+  activeUpgrade: {fileID: 11400000, guid: 8b5cf86c7a83d6946980759cebaab51f, type: 2}
   passiveUpgrade: {fileID: 0}
   isActiveRunning: 0
   seedBasketActive: 0
@@ -1264,6 +1265,10 @@ PrefabInstance:
     - target: {fileID: 4572102053426971897, guid: 12beba75ec352214cb65dad531a71aa3, type: 3}
       propertyPath: m_Name
       value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572102053426971897, guid: 12beba75ec352214cb65dad531a71aa3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5975820493780176003, guid: 12beba75ec352214cb65dad531a71aa3, type: 3}
       propertyPath: playOnAwake
@@ -3362,7 +3367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3216807288031192409, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3257817944265802148, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
       propertyPath: m_LocalScale.y
