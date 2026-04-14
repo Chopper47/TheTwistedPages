@@ -8,6 +8,9 @@ public class PlayerData
     public int currencyAmount;
     public int speedUpgradeLevel;
     public int healthUpgradeLevel;
+    public int dashSpeedUpgradeLevel;
+    public int moneyUpgradeLevel;
+    public int upgradeRoomChanceUpgradeLevel;
     public bool tutorialCompleted;
 
 
@@ -16,6 +19,9 @@ public class PlayerData
         currencyAmount = player.currencyAmount;
         speedUpgradeLevel = player.speedUpgradeLevel;
         healthUpgradeLevel = player.healthUpgradeLevel;
+        dashSpeedUpgradeLevel = player.dashSpeedUpgradeLevel;
+        moneyUpgradeLevel = player.moneyUpgradeLevel;
+        upgradeRoomChanceUpgradeLevel = player.upgradeRoomChanceUpgradeLevel;
         tutorialCompleted = player.tutorialCompleted;
     }
 }
