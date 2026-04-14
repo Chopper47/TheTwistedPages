@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rollCooldown = 1.0f;
     [SerializeField] private GameObject destructionCheck;
 
-    private bool isRolling = false;
+    public bool isRolling = false;
     public bool canRoll = true;
     public static bool isInvincible = false;
 
@@ -801,6 +801,26 @@ public class PlayerMovement : MonoBehaviour
         {
             StopCoroutine(bulletTimeCoroutine);
         }
+    }
+    #endregion
+
+    #region Animation
+    public void PlayPlaceAnimation()
+    {
+        canMove = false;
+        canRoll = false;
+
+        animator.SetTrigger("Place");
+
+        StartCoroutine(UnlockMovementAfterPlace());
+    }
+
+    private IEnumerator UnlockMovementAfterPlace()
+    {
+        yield return new WaitForSeconds(0.6f);
+
+        canMove = true;
+        canRoll = true;
     }
     #endregion
 }

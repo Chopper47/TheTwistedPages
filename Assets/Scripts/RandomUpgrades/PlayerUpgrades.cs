@@ -82,6 +82,14 @@ public class PlayerUpgrades : MonoBehaviour
 
                 if (usedSuccessfully)
                 {
+                    PlayerMovement playerMovement = ReferenceManager.Instance.playerMovement;
+                    if (playerMovement.isRolling)
+                    {
+                        return;
+                    }
+
+                    playerMovement.PlayPlaceAnimation();
+
                     activeUpgrade = null;
                     isActiveRunning = false;
                 }
