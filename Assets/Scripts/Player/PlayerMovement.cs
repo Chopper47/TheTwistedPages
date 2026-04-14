@@ -376,6 +376,8 @@ public class PlayerMovement : MonoBehaviour
 
         bulletTimeTrigger.DeactivateDodge();
 
+        PlayAxeHoldingAnimation();
+
         canTriggerBulletTime = false;
         isInBulletTime = true;
 
@@ -662,8 +664,11 @@ public class PlayerMovement : MonoBehaviour
             ShowCone(false);
         }
     }
+
     public void ReleaseAxe()
     {
+        StopAxeHoldingAnimation();
+
         toPush.transform.parent = null;
         Axe axe = toPush.GetComponent<Axe>();
         BossAxe bossAxe = toPush.GetComponent<BossAxe>();
@@ -831,6 +836,16 @@ public class PlayerMovement : MonoBehaviour
     public void StopThrowingSeedsAnimation()
     {
         animator.SetBool("IsThrowingSeeds", false);
+    }
+
+    public void PlayAxeHoldingAnimation()
+    {
+        animator.SetBool("HasAxe", true);
+    }
+
+    public void StopAxeHoldingAnimation()
+    {
+        animator.SetBool("HasAxe", false);
     }
     #endregion
 }
