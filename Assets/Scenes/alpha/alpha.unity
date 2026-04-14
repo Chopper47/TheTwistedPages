@@ -1652,6 +1652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5243388446721320822, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: gameOverMenu
       value: 
@@ -1660,14 +1664,14 @@ PrefabInstance:
       propertyPath: livesContainer
       value: 
       objectReference: {fileID: 6336131}
-    - target: {fileID: 7738423248794737938, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-      propertyPath: shieldVFX
-      value: 
-      objectReference: {fileID: 1745502665}
+    - target: {fileID: 7229716707334761438, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7738423248794737938, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: activeUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: b9c417243019bc442ad4927617c85abb, type: 2}
+      objectReference: {fileID: 11400000, guid: 8b5cf86c7a83d6946980759cebaab51f, type: 2}
     - target: {fileID: 8650172336370932488, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1713,11 +1717,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
---- !u!198 &1745502665 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 63475103591666308, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
-  m_PrefabInstance: {fileID: 1745502664}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1764185243
 PrefabInstance:
   m_ObjectHideFlags: 0

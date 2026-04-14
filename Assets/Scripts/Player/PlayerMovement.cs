@@ -822,5 +822,15 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
         canRoll = true;
     }
+
+    public void PlayThrowingSeedsAnimation()
+    {
+        animator.SetBool("IsThrowingSeeds", true);
+    }
+
+    public void StopThrowingSeedsAnimation()
+    {
+        animator.SetBool("IsThrowingSeeds", false);
+    }
     #endregion
 }

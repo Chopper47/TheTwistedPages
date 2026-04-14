@@ -7,6 +7,8 @@ public class PlayerUpgrades : MonoBehaviour
 
     public bool isActiveRunning = false;
 
+    private PlayerMovement playerMovement;
+
     [Header("Upgrades")]
     public bool seedBasketActive;
     public float seedBasketTimer;
@@ -20,7 +22,12 @@ public class PlayerUpgrades : MonoBehaviour
     public bool dashExplosionActive;
 
     [Header("VFX")]
-    public ParticleSystem shieldVFX;
+    public GameObject shieldVFX;
+
+    private void Awake()
+    {
+        playerMovement = ReferenceManager.Instance.playerMovement;
+    }
 
     private void Update()
     {
@@ -82,7 +89,6 @@ public class PlayerUpgrades : MonoBehaviour
 
                 if (usedSuccessfully)
                 {
-                    PlayerMovement playerMovement = ReferenceManager.Instance.playerMovement;
                     if (playerMovement.isRolling)
                     {
                         return;
@@ -100,11 +106,21 @@ public class PlayerUpgrades : MonoBehaviour
                 {
                     activeUpgrade.behaviour.OnRemove(this);
                     isActiveRunning = false;
+
+                    if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
+                    {
+                        playerMovement.StopThrowingSeedsAnimation();
+                    }
                 }
                 else
                 {
                     activeUpgrade.behaviour.OnUse(this);
                     isActiveRunning = true;
+
+                    if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
+                    {
+                        playerMovement.PlayThrowingSeedsAnimation();
+                    }
                 }
                 break;
         }
@@ -115,6 +131,11 @@ public class PlayerUpgrades : MonoBehaviour
         if (behaviour == null)
         {
             return;
+        }
+
+        if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
+        {
+            playerMovement.StopThrowingSeedsAnimation();
         }
 
         behaviour.OnRemove(this);

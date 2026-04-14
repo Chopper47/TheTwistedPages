@@ -40,7 +40,7 @@ public class ShieldUpgrade : UpgradeBehaviour
 
         if (player.shieldVFX != null)
         {
-            player.shieldVFX.Play();
+            player.shieldVFX.SetActive(true);
         }
     }
 
@@ -51,7 +51,7 @@ public class ShieldUpgrade : UpgradeBehaviour
 
         if (player.shieldVFX != null)
         {
-            player.shieldVFX.Stop();
+            player.shieldVFX.SetActive(false);
         }
     }
 
