@@ -171,6 +171,10 @@ public class PlayerHealth : MonoBehaviour
             animator.SetTrigger("Die");
         }
 
+        PlayerMovement playerMovement = ReferenceManager.Instance.playerMovement;
+        PlayerMovement.canMove = false;
+        playerMovement.canRoll = false;
+
         if (gameOverMenu)
         {
             //gameOverMenu.SetActive(true);

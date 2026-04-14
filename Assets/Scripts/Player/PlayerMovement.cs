@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -401,8 +402,14 @@ public class PlayerMovement : MonoBehaviour
                 bossAxe.InterruptedThrowAttack();
             }
 
+            Animator axeAnimator = toPush.GetComponent<Animator>();
+            axeAnimator.SetBool("InPlayerHands", true);
+
             toPush.transform.parent = axeHold;
-            toPush.transform.localPosition = Vector3.zero;
+            toPush.transform.localPosition = new Vector3(-0.05f, 0f, 0.3f);
+            Quaternion toPushRotation = Quaternion.identity;
+            toPushRotation = Quaternion.Euler(0, 90.0f, 90.0f);
+            toPush.transform.localRotation = toPushRotation;
 
             rotationCoroutine = StartCoroutine(AxeRotation());
         }
@@ -668,6 +675,8 @@ public class PlayerMovement : MonoBehaviour
     public void ReleaseAxe()
     {
         StopAxeHoldingAnimation();
+        Animator animator = toPush.GetComponent<Animator>();
+        animator.SetBool("InPlayerHands", false);
 
         toPush.transform.parent = null;
         Axe axe = toPush.GetComponent<Axe>();
