@@ -15,6 +15,7 @@ public class Tree : MonoBehaviour
     private EnemyState enemyState;
     private ChaseAgent chaseAgent;
     private EnemyHealth enemyHealth;
+    private DecisionTreeAgent decisionTreeAgent;
     [SerializeField] private TreeAnimations animations; 
 
     [Header("Apple Attack")]
@@ -28,7 +29,6 @@ public class Tree : MonoBehaviour
     [SerializeField] private float slamRadius = 4.0f;
     [SerializeField] private int slamDamage = 1;
     [SerializeField] private float slamDelay = 1.0f;
-    [SerializeField] private float slamRotationAngle = 90.0f;
 
     [Header("VFX")]
     [SerializeField] private ParticleSystem slamParticles;
@@ -43,6 +43,7 @@ public class Tree : MonoBehaviour
 
     private void Awake()
     {
+        decisionTreeAgent = GetComponent<DecisionTreeAgent>();  
         appleAttacksLeft = totalAppleAttacks;
         rigidBody = GetComponent<Rigidbody>();
         enemyState = GetComponent<EnemyState>();
@@ -78,6 +79,7 @@ public class Tree : MonoBehaviour
 
     private IEnumerator PerformAppleAttack()
     {
+        //decisionTreeAgent.SetDecide(false);
         isThrowing = true;
         canThrow = false;
 
@@ -110,9 +112,12 @@ public class Tree : MonoBehaviour
         appleAttacksLeft--;
         animations.ResetShakeTrigger();
         animations.EndShakeTrigger();
-        isThrowing = false;
         canThrow = true;
 
+        yield return new WaitForSeconds(1f);
+
+        isThrowing = false;
+        //decisionTreeAgent.SetDecide(true);
 
         if (appleAttacksLeft <= 0)
         {
@@ -137,6 +142,7 @@ public class Tree : MonoBehaviour
 
     private IEnumerator PerformPhysicalAttack()
     {
+        decisionTreeAgent.SetDecide(false);
         isSlamming = true;
         //AM.Play("Crush", Main);
         chaseAgent.StopChase();
