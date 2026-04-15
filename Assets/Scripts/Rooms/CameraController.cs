@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     public Transform player;
 
     public LevelGenerator levelGenerator;
-    [SerializeField] private RoomController currentRoom;
+    public RoomController currentRoom;
 
     [Header("Camera Follow Settings")]
     public float followSmoothTime = 0.15f;
