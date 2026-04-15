@@ -86,6 +86,11 @@ public class SeedBasketUpgrade : UpgradeBehaviour
 
         Vector3 spawnPosition = playerTransform.position - moveDirection.normalized * spawnOffset;
 
-        Instantiate(rootPrefab, spawnPosition, Quaternion.identity);
+        RoomController room = playerTransform.GetComponentInParent<RoomController>();
+
+        if (room != null)
+        {
+            Instantiate(rootPrefab, spawnPosition, Quaternion.identity, room.transform);
+        }
     }
 }
