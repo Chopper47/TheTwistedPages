@@ -26,6 +26,9 @@ public class MusicManager : MonoBehaviour
             return;
         }
 
+        volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        instance.SetVolumeOfStagers(volume);
+
         instance.stages[currentStage].Play(0f, volume);
     }
 

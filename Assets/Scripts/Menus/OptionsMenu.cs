@@ -12,6 +12,8 @@ public class OptionsMenu : MonoBehaviour
 
     [Header("Sound Menu")]
     public GameObject soundMenu;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider audioVolumeSlider;
 
     [Header("Graphics Menu")]
     public GameObject graphicsMenu;
@@ -58,6 +60,9 @@ public class OptionsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        audioVolumeSlider.value = PlayerPrefs.GetFloat("AudioVolume", 1f);
     }
     public void OpenSound()
     {
@@ -120,10 +125,14 @@ public class OptionsMenu : MonoBehaviour
     }
     public void ChangeVolumeSliderValue(float volume)
     {
-        MusicManager.instance.SetVolumeOfStagers(volume);
+        MusicManager.instance.SetVolumeOfStagers(volume);   
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+
     }
     public void ChangeAudioVolumeSliderValue(float volume)
     {
         AudioManager.Instance.defaultSource.volume = volume;
+        PlayerPrefs.SetFloat("AudioVolume", volume);
+
     }
 }

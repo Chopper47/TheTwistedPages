@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// Script que controla la reproducción de sonidos en el juego.
@@ -39,6 +40,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        int volume = PlayerPrefs.GetInt("AudioVolume", 1);
+        Instance.defaultSource.volume = volume;
+    }
     /// <summary>
     /// Método que reproduce un sonido por su nombre, pudiéndole pasar un Audiosource.
     /// </summary>

@@ -17,12 +17,8 @@ public class PlayerInfo : MonoBehaviour
     [Header("Player Progress")]
     public bool tutorialCompleted;
 
-    [Header("Volume Options")]  
-    public float musicVolume;
-    public float sfxVolume;
+    
 
-    //[Header("Graphics Options")]
-
-    //[Header("Controls Options")]
+    
 
 }

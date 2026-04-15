@@ -16186,6 +16186,7 @@ GameObject:
   - component: {fileID: 1989862959}
   - component: {fileID: 1989862960}
   - component: {fileID: 1989862961}
+  - component: {fileID: 1989862962}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -16239,9 +16240,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolutionDropdown: {fileID: 1106587893}
   soundMenu: {fileID: 134640091}
+  musicVolumeSlider: {fileID: 1361751820}
+  audioVolumeSlider: {fileID: 1975285062}
   graphicsMenu: {fileID: 2019734534}
   controllerMenu: {fileID: 2008228276}
   keyboardMenu: {fileID: 130920669}
+--- !u!114 &1989862962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989862958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b61ae6f6f492624480efb23da047f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextWaveText: {fileID: 0}
+  effectText: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
+  randomUpgradeMenu: {fileID: 0}
+  gameWonMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
+  HUD: {fileID: 0}
 --- !u!1 &2002161101
 GameObject:
   m_ObjectHideFlags: 0
