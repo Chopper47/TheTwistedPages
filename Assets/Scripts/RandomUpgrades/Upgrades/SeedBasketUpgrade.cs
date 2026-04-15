@@ -86,7 +86,7 @@ public class SeedBasketUpgrade : UpgradeBehaviour
 
         Vector3 spawnPosition = playerTransform.position - moveDirection.normalized * spawnOffset;
 
-        RoomController room = playerTransform.GetComponentInParent<RoomController>();
+        RoomController room = CameraController.Instance.currentRoom;
 
         if (room != null)
         {

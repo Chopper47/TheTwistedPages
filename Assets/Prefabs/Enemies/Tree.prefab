@@ -194,10 +194,10 @@ MonoBehaviour:
   maxHealth: 1
   health: 0
   roomController: {fileID: 0}
+  deathParticles: {fileID: 3948745550590886844, guid: ecbe5607b2e2a56478841ff3c017aa59, type: 3}
+  identity: TreeDeath
   AM: {fileID: 0}
   Main: {fileID: 0}
-  identity: TreeDeath
-  deathParticles: {fileID: 3948745550590886844, guid: ecbe5607b2e2a56478841ff3c017aa59, type: 3}
 --- !u!114 &6869174748156683291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
   appleAttackCooldown: 2
   slamRadius: 4
   slamDamage: 1
-  slamDelay: 1.5
+  slamDelay: 1.25
   slamParticles: {fileID: 1276279443287989167}
   shakeParticles: {fileID: 3003438497375863885}
   AM: {fileID: 0}

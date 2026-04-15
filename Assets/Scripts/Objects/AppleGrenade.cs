@@ -12,9 +12,7 @@ public class AppleGrenade : MonoBehaviour
 
     [Header("VFX")]
     [SerializeField] private SpriteRenderer rangeImage;
-    [SerializeField] private Image timerImage;
     [SerializeField] private ParticleSystem explosionParticles;
-    [SerializeField] private Light explosionLight;
     [SerializeField] private Material originalMaterial;
     [SerializeField] private Material flickerMaterial;
     [SerializeField] private MeshRenderer meshRenderer;
@@ -26,27 +24,11 @@ public class AppleGrenade : MonoBehaviour
     {
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         originalMaterial = meshRenderer.material;
-        if(!explosionLight) explosionLight = GetComponentInChildren<Light>();
         float offset = Random.Range(0f, randomDelayOffset);
 
         StartCoroutine(ExplodeAfterDelay(explosionDelay + offset));
         StartCoroutine(Flickering(explosionDelay + offset));
         //StartCoroutine(VisualTimer(explosionDelay + offset));
-        rangeImage.transform.localScale = new Vector3(explosionRadius * 2, explosionRadius * 2, 1);
-        timerImage.transform.localScale = new Vector3(explosionRadius * 2, explosionRadius * 2, 1);
-    }
-
-    private IEnumerator VisualTimer(float timeForExplotion)
-    {
-        rangeImage.gameObject.SetActive(true);
-        timerImage.gameObject.SetActive(true);
-        float time = 0f;
-        while (time < timeForExplotion)
-        {
-            timerImage.fillAmount = Mathf.Lerp(1,0, time/timeForExplotion);
-            time += Time.deltaTime;
-            yield return null;
-        }
     }
 
     private IEnumerator Flickering(float timeForExplotion)
@@ -58,12 +40,13 @@ public class AppleGrenade : MonoBehaviour
         {
             // Interpolate interval (gets faster over time)
             float t = elapsed / explosionDelay;
-            explosionLight.intensity = Mathf.Lerp(0f, 5f, t);
+            Color lightColour = rangeImage.material.color;
+            lightColour.a = Mathf.Lerp(0f, 5f, t);
             float currentInterval = Mathf.Lerp(startFlickeringInterval, endFlickeringInterval, t);
 
             // Swap material
             meshRenderer.material = isGlow ? originalMaterial : flickerMaterial;
-            explosionLight.enabled = isGlow;
+            rangeImage.enabled = !isGlow;
             isGlow = !isGlow;
 
             yield return new WaitForSeconds(currentInterval);
