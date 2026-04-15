@@ -3,24 +3,30 @@ using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [Header("Health")]
     [SerializeField] private int maxHealth;
     public int health;
 
+    private bool isDead = false;
+
     [HideInInspector] public RoomController roomController;
-    [SerializeField] private AudioManager AM;
-    public AudioSource Main;
-    public string identity;
 
     [Header("VFX")]
     [SerializeField] private ParticleSystem deathParticles;
+
+    [Header("SFX")]
+    public string identity;
+    [SerializeField] private AudioManager AM;
+    public AudioSource Main;
 
     private void Start()
     {
         health = maxHealth;
 
         roomController = GetComponentInParent<RoomController>();
-        Main=GetComponent<AudioSource>();
-        AM=FindFirstObjectByType<AudioManager>();
+
+        Main = GetComponent<AudioSource>();
+        AM = FindFirstObjectByType<AudioManager>();
     }
 
     public void TakeDamage(int damage)
@@ -37,6 +43,7 @@ public class EnemyHealth : MonoBehaviour
     public void SetHealth(int healthAmount)
     {
         health = healthAmount;
+
         if (health <= 0)
         {
             Die();
@@ -46,6 +53,13 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
+        if (isDead)
+        {
+            return;
+        }
+
+        isDead = true;
+
         if (deathParticles != null)
         {
             ParticleSystem particles = Instantiate(deathParticles, transform.position, Quaternion.identity);
@@ -64,11 +78,9 @@ public class EnemyHealth : MonoBehaviour
             GetComponent<DecisionTreeAgent>().enabled = false;
             GetComponent<NavMeshAgent>().enabled = false;
         }
-        //gameObject.SetActive(false);
         else
         {
             Destroy(gameObject);
         }
-
     }
 }
