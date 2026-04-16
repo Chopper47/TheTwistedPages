@@ -182,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
             animator.SetBool("isRunning", true);
 
-            if (!walkParticles.isPlaying)
+            if (walkParticles != null && !walkParticles.isPlaying)
             {
                 walkParticles.Play();
             }
@@ -191,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
 
-            if (walkParticles.isPlaying)
+            if (walkParticles != null && walkParticles.isPlaying)
             {
                 walkParticles.Stop();
             }
