@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1979015236998214039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.812, z: 0.75}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -521,12 +521,17 @@ MonoBehaviour:
   isActiveRunning: 0
   seedBasketActive: 0
   seedBasketTimer: 0
-  shieldUses: 3
+  shieldCharges: 0
   shieldActive: 0
   moneyBoostRoomsRemaining: 0
-  dashExplosionUses: 3
+  dashExplosionCharges: 0
   dashExplosionActive: 0
+  hoodRoomsRemaining: 0
+  hoodBlockAvailable: 0
+  magicTrailCharges: 0
+  magicTrailActive: 0
   shieldVFX: {fileID: 7229716707334761438}
+  hoodVisual: {fileID: 5243388446721320822}
 --- !u!114 &-5651913295414236988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +552,7 @@ MonoBehaviour:
     m_Bits: 256
   axePrefab: {fileID: 5681774981070429426, guid: a4127f41ae3f6c246a075f1805e43040, type: 3}
   cameraController: {fileID: 0}
-  testingCheck: 0
+  testingCheck: 1
 --- !u!114 &7314438289844191152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4523,6 +4528,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 571309779194971223}
   m_SourcePrefab: {fileID: 100100000, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
+--- !u!1 &5243388446721320822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3216807288031192409, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
+  m_PrefabInstance: {fileID: 7232824078397768239}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7199741024589571524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
