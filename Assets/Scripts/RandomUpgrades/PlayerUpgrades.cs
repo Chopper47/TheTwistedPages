@@ -21,8 +21,12 @@ public class PlayerUpgrades : MonoBehaviour
     public int dashExplosionUses;
     public bool dashExplosionActive;
 
+    public int hoodRoomsRemaining;
+    public bool hoodBlockAvailable;
+
     [Header("VFX")]
     public GameObject shieldVFX;
+    public GameObject hoodVisual;
 
     private void Awake()
     {
@@ -149,6 +153,58 @@ public class PlayerUpgrades : MonoBehaviour
         if (passiveUpgrade != null && passiveUpgrade.behaviour == behaviour)
         {
             passiveUpgrade = null;
+        }
+    }
+
+    public bool TryBlockDamage()
+    {
+        if (activeUpgrade != null && activeUpgrade.behaviour is ShieldUpgrade shield)
+        {
+            if (shield.TryBlockDamage(this))
+            {
+                return true;
+            }
+        }
+
+        if (passiveUpgrade != null && passiveUpgrade.behaviour is HoodUpgrade)
+        {
+            if (hoodBlockAvailable)
+            {
+                hoodBlockAvailable = false;
+
+                if (hoodVisual != null)
+                {
+                    hoodVisual.SetActive(false);
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void OnEnterNormalRoom()
+    {
+        if (hoodRoomsRemaining <= 0)
+        {
+            return;
+        }
+
+        hoodBlockAvailable = true;
+        hoodRoomsRemaining--;
+
+        if (hoodVisual != null)
+        {
+            hoodVisual.SetActive(true);
+        }
+
+        if (hoodRoomsRemaining <= 0)
+        {
+            if (passiveUpgrade != null && passiveUpgrade.behaviour is HoodUpgrade)
+            {
+                RemoveUpgrade(passiveUpgrade.behaviour);
+            }
         }
     }
 }

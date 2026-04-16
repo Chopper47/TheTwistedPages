@@ -1,16 +1,34 @@
 using UnityEngine;
 
-public class HoodUpgrade : MonoBehaviour
+[CreateAssetMenu(menuName = "Upgrades/Hood")]
+public class HoodUpgrade : UpgradeBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private int maxRooms = 5;
+
+    public override void OnAcquire(PlayerUpgrades player)
     {
-        
+        player.hoodRoomsRemaining = maxRooms;
+        player.hoodBlockAvailable = true;
+
+        if (player.hoodVisual != null)
+        {
+            player.hoodVisual.SetActive(true);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool OnUse(PlayerUpgrades player)
     {
-        
+        return false;
+    }
+
+    public override void OnRemove(PlayerUpgrades player)
+    {
+        player.hoodRoomsRemaining = 0;
+        player.hoodBlockAvailable = false;
+
+        if (player.hoodVisual != null)
+        {
+            player.hoodVisual.SetActive(false);
+        }
     }
 }

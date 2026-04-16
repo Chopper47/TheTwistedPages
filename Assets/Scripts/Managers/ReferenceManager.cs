@@ -8,6 +8,7 @@ public class ReferenceManager : MonoBehaviour
     public Transform player;
     public PlayerMovement playerMovement;
     public PlayerHealth playerHealth;
+    public PlayerUpgrades playerUpgrades;
 
     [Header("Level Generation/Rooms")]
     public LevelGenerator levelGenerator;

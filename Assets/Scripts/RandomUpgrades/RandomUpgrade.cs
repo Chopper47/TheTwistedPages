@@ -9,7 +9,8 @@ public enum UpgradeID
     Heal,
     ExtraLife,
     Dummy,
-    Reroll,
+    Hood,
+    MagicTrail,
     BearTrap
 }
 
@@ -32,8 +33,6 @@ public class RandomUpgrade : ScriptableObject
     public UpgradeID id;
     public UpgradeType type;
     public ActivationType activationType;
-
-    public float duration;
 
     public UpgradeBehaviour behaviour;
 }

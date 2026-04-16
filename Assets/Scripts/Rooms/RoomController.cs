@@ -80,6 +80,13 @@ public class RoomController : MonoBehaviour
         isActive = true;
         enemiesRemaining = 0;
 
+        PlayerUpgrades player = ReferenceManager.Instance.playerUpgrades;
+
+        if (player != null && roomPreset.enemyPrefabs != null && roomPreset.enemyPrefabs.Length > 0)
+        {
+            player.OnEnterNormalRoom();
+        }
+
         gnome = GetComponentInChildren<Gnome>();
         if (gnome != null)
         {

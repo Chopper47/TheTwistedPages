@@ -675,6 +675,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &749494487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5243388446721320822, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+  m_PrefabInstance: {fileID: 1745502664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &771432929 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5019518835232178034, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
@@ -803,6 +808,10 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 879371514}
+    - target: {fileID: 7203878240146051107, guid: eaf580bd911f95a4cadeacb54239365b, type: 3}
+      propertyPath: playerUpgrades
+      value: 
+      objectReference: {fileID: 1304738564}
     - target: {fileID: 8717961186259529469, guid: eaf580bd911f95a4cadeacb54239365b, type: 3}
       propertyPath: HUD
       value: 
@@ -918,6 +927,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1061514838541233228, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
   m_PrefabInstance: {fileID: 6336129}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1304738564 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7738423248794737938, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+  m_PrefabInstance: {fileID: 1745502664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535b07da624bb9743bb90d29029b2065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1335617229 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7427444357845231246, guid: 5ea8859523bc81342af7c06cb78902c3, type: 3}
@@ -1385,6 +1405,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5243388446721320822, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: gameOverMenu
       value: 
@@ -1393,6 +1417,10 @@ PrefabInstance:
       propertyPath: livesContainer
       value: 
       objectReference: {fileID: 6336131}
+    - target: {fileID: 7738423248794737938, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: hoodVisual
+      value: 
+      objectReference: {fileID: 749494487}
     - target: {fileID: 8650172336370932488, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

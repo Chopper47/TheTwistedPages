@@ -74,15 +74,9 @@ public class PlayerHealth : MonoBehaviour
 
         PlayerUpgrades upgrades = GetComponent<PlayerUpgrades>();
 
-        if (upgrades != null && upgrades.activeUpgrade != null)
+        if (upgrades != null && upgrades.TryBlockDamage())
         {
-            if (upgrades.activeUpgrade.behaviour is ShieldUpgrade shield)
-            {
-                if (shield.TryBlockDamage(upgrades))
-                {
-                    return;
-                }
-            }
+            return;
         }
 
         if (PlayerMovement.IsInvincible())
