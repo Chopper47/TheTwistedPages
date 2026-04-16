@@ -14,7 +14,7 @@ public class DashExplosionUpgrade : UpgradeBehaviour
 
     public override void OnAcquire(PlayerUpgrades player)
     {
-        player.dashExplosionUses = maxUses;
+        player.dashExplosionCharges = maxUses;
         player.dashExplosionActive = false;
     }
 
@@ -79,9 +79,9 @@ public class DashExplosionUpgrade : UpgradeBehaviour
             }
         }
 
-        player.dashExplosionUses--;
+        player.dashExplosionCharges--;
 
-        if (player.dashExplosionUses <= 0)
+        if (player.dashExplosionCharges <= 0)
         {
             Deactivate(player);
             player.RemoveUpgrade(this);

@@ -7,7 +7,7 @@ public class ShieldUpgrade : UpgradeBehaviour
 
     public override void OnAcquire(PlayerUpgrades playerUpgrades)
     {
-        playerUpgrades.shieldUses = maxUses;
+        playerUpgrades.shieldCharges = maxUses;
         playerUpgrades.shieldActive = false;
     }
 
@@ -62,11 +62,11 @@ public class ShieldUpgrade : UpgradeBehaviour
             return false;
         }
 
-        player.shieldUses--;
+        player.shieldCharges--;
 
-        Debug.Log("Shield uses: " + player.shieldUses);
+        Debug.Log("Shield uses: " + player.shieldCharges);
 
-        if (player.shieldUses <= 0)
+        if (player.shieldCharges <= 0)
         {
             Deactivate(player);
             player.RemoveUpgrade(this);

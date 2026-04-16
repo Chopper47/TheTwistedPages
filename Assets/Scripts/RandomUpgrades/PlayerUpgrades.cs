@@ -13,16 +13,19 @@ public class PlayerUpgrades : MonoBehaviour
     public bool seedBasketActive;
     public float seedBasketTimer;
 
-    public int shieldUses;
+    public int shieldCharges;
     public bool shieldActive;
 
     public int moneyBoostRoomsRemaining;
 
-    public int dashExplosionUses;
+    public int dashExplosionCharges;
     public bool dashExplosionActive;
 
     public int hoodRoomsRemaining;
     public bool hoodBlockAvailable;
+
+    public int magicTrailCharges;
+    public bool magicTrailActive;
 
     [Header("VFX")]
     public GameObject shieldVFX;
@@ -40,6 +43,11 @@ public class PlayerUpgrades : MonoBehaviour
             if (activeUpgrade.behaviour is SeedBasketUpgrade seedBasket)
             {
                 seedBasket.Tick(this, transform, GetComponent<PlayerMovement>().GetDirection());
+            }
+
+            if (activeUpgrade.behaviour is MagicTrailUpgrade magicTrail)
+            {
+                magicTrail.Tick(this, transform, GetComponent<PlayerMovement>().GetDirection());
             }
         }
     }
