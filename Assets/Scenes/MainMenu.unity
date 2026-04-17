@@ -11868,15 +11868,20 @@ MonoBehaviour:
   currentUpgradeStats: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   healthUpgradeLv: 0
   speedUpgradeLv: 0
-  bulletTimeUpgradeLv: 0
-  pushPowerUpgradeLv: 0
+  roomChanceUpgradeLv: 0
+  currencyUpgradeLv: 0
+  dashTimeUpgradeLv: 0
   costToUpgradeHealth: 3
   costToUpgradeSpeed: 3
-  costToUpgradeBulletTime: 3
-  costToUpgradePushPower: 3
+  costToUpgradeRoomChance: 0
+  costToUpgradeCurrency: 0
+  costToUpgradeDashTime: 0
   hpText: {fileID: 1355265647}
   speedText: {fileID: 661849363}
   bulletTimeText: {fileID: 457803632}
+  roomChanceText: {fileID: 0}
+  currencyText: {fileID: 0}
+  dashTimeText: {fileID: 0}
   currencyManager: {fileID: 1395552626}
 --- !u!114 &1395552626
 MonoBehaviour:
@@ -12813,6 +12818,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538336632}
   m_CullTransparentMesh: 1
+--- !u!1 &1544403023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544403025}
+  - component: {fileID: 1544403024}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1544403024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544403023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b61ae6f6f492624480efb23da047f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextWaveText: {fileID: 0}
+  effectText: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
+  randomUpgradeMenu: {fileID: 0}
+  gameWonMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
+  HUD: {fileID: 0}
+--- !u!4 &1544403025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544403023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1551872930
 GameObject:
   m_ObjectHideFlags: 0
@@ -16186,7 +16243,6 @@ GameObject:
   - component: {fileID: 1989862959}
   - component: {fileID: 1989862960}
   - component: {fileID: 1989862961}
-  - component: {fileID: 1989862962}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -16245,26 +16301,6 @@ MonoBehaviour:
   graphicsMenu: {fileID: 2019734534}
   controllerMenu: {fileID: 2008228276}
   keyboardMenu: {fileID: 130920669}
---- !u!114 &1989862962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989862958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b61ae6f6f492624480efb23da047f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextWaveText: {fileID: 0}
-  effectText: {fileID: 0}
-  pauseMenu: {fileID: 0}
-  optionsMenu: {fileID: 0}
-  randomUpgradeMenu: {fileID: 0}
-  gameWonMenu: {fileID: 0}
-  gameOverMenu: {fileID: 0}
-  HUD: {fileID: 0}
 --- !u!1 &2002161101
 GameObject:
   m_ObjectHideFlags: 0
@@ -22745,3 +22781,4 @@ SceneRoots:
   - {fileID: 1395552627}
   - {fileID: 1423371275}
   - {fileID: 4311102902319506038}
+  - {fileID: 1544403025}

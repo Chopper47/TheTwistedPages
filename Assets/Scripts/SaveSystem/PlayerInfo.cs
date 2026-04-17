@@ -10,9 +10,9 @@ public class PlayerInfo : MonoBehaviour
     public int currencyAmount;
     public int speedUpgradeLevel;
     public int healthUpgradeLevel;
-    public int dashSpeedUpgradeLevel;
+    public int roomChanceUpgradeLevel;
+    public int dashTimeUpgradeLevel;
     public int moneyUpgradeLevel;
-    public int upgradeRoomChanceUpgradeLevel;
 
     [Header("Player Progress")]
     public bool tutorialCompleted;

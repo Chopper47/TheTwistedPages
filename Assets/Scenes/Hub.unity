@@ -159,6 +159,34 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3754734471874215920, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754734471874215920, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754734471874215920, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1478392157}
+    - target: {fileID: 3754734471874215920, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754734471874215920, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeAudioVolumeSliderValue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754734471874215920, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OptionsMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3754734471874215920, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6379406128867271501, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
       propertyPath: m_Name
       value: OptionsMenu
@@ -278,6 +306,14 @@ PrefabInstance:
     - target: {fileID: 8107947549058159109, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802123277281150011, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1478392157}
+    - target: {fileID: 8802123277281150011, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeVolumeSliderValue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -598,15 +634,20 @@ MonoBehaviour:
   currentUpgradeStats: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   healthUpgradeLv: 0
   speedUpgradeLv: 0
-  bulletTimeUpgradeLv: 0
-  pushPowerUpgradeLv: 0
+  roomChanceUpgradeLv: 0
+  currencyUpgradeLv: 0
+  dashTimeUpgradeLv: 0
   costToUpgradeHealth: 3
   costToUpgradeSpeed: 3
-  costToUpgradeBulletTime: 3
-  costToUpgradePushPower: 3
+  costToUpgradeRoomChance: 0
+  costToUpgradeCurrency: 0
+  costToUpgradeDashTime: 0
   hpText: {fileID: 1753461451}
   speedText: {fileID: 1355321969}
   bulletTimeText: {fileID: 0}
+  roomChanceText: {fileID: 0}
+  currencyText: {fileID: 0}
+  dashTimeText: {fileID: 0}
   currencyManager: {fileID: 113566316}
 --- !u!114 &113566316
 MonoBehaviour:
@@ -3329,6 +3370,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 1690118600}
+--- !u!114 &1032732837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3754734471874215920, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+  m_PrefabInstance: {fileID: 32061959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1056113067
 GameObject:
   m_ObjectHideFlags: 0
@@ -4992,6 +5044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolutionDropdown: {fileID: 32061965}
   soundMenu: {fileID: 32061964}
+  musicVolumeSlider: {fileID: 1699513652}
+  audioVolumeSlider: {fileID: 1032732837}
   graphicsMenu: {fileID: 32061960}
   controllerMenu: {fileID: 0}
   keyboardMenu: {fileID: 0}
@@ -6278,6 +6332,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690118600}
   m_CullTransparentMesh: 1
+--- !u!114 &1699513652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8802123277281150011, guid: b983f99c0942d7848b955ba1251ea1bd, type: 3}
+  m_PrefabInstance: {fileID: 32061959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1707360916
 GameObject:
   m_ObjectHideFlags: 0

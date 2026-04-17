@@ -10,21 +10,26 @@ public class UpgradeManager : MonoBehaviour
     [Header("Upgrade Levels")]
     [SerializeField] private int healthUpgradeLv;
     [SerializeField] private int speedUpgradeLv;
-    [SerializeField] private int bulletTimeUpgradeLv;
-    [SerializeField] private int pushPowerUpgradeLv;
+    [SerializeField] private int roomChanceUpgradeLv;
+    [SerializeField] private int currencyUpgradeLv;
+    [SerializeField] private int dashTimeUpgradeLv;
 
 
     [Header("Currency Necessary")]
     [SerializeField] private int costToUpgradeHealth;
     [SerializeField] private int costToUpgradeSpeed;
-    [SerializeField] private int costToUpgradeBulletTime;
-    [SerializeField] private int costToUpgradePushPower;
+    [SerializeField] private int costToUpgradeRoomChance;
+    [SerializeField] private int costToUpgradeCurrency;
+    [SerializeField] private int costToUpgradeDashTime;
 
 
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private TextMeshProUGUI bulletTimeText;
+    [SerializeField] private TextMeshProUGUI roomChanceText;
+    [SerializeField] private TextMeshProUGUI currencyText;
+    [SerializeField] private TextMeshProUGUI dashTimeText;
 
 
     [SerializeField] private CurrencyManager currencyManager;
@@ -41,8 +46,10 @@ public class UpgradeManager : MonoBehaviour
     {
         currentUpgradeStats.health = healthUpgradeLv;
         currentUpgradeStats.speed = speedUpgradeLv;
-        currentUpgradeStats.bulletTime = bulletTimeUpgradeLv;
-        currentUpgradeStats.pushPower = pushPowerUpgradeLv;
+        currentUpgradeStats.roomChance = roomChanceUpgradeLv;
+        currentUpgradeStats.currency = currencyUpgradeLv;
+        currentUpgradeStats.dashTime = dashTimeUpgradeLv;
+
     }
 
     public void UpgradeHealth()
@@ -84,30 +91,57 @@ public class UpgradeManager : MonoBehaviour
         }
 
     }
-    public void UpgradeBulletTime()
+    public void UpgradeRoomChance()
     {
-        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeBulletTime) && bulletTimeUpgradeLv < 5)
+        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeRoomChance) && roomChanceUpgradeLv < 5)
         {
-            bulletTimeUpgradeLv++;
+            roomChanceUpgradeLv++;
             UpdateScriptableObjectStats();
-            currencyManager.RemoveCurrency(costToUpgradeBulletTime);
-            if (bulletTimeText != null) bulletTimeText.text = "Level: " + bulletTimeUpgradeLv;
-
+            currencyManager.RemoveCurrency(costToUpgradeRoomChance);
+            if (SaveManager.instance != null)
+            {
+                SaveManager.instance.player.roomChanceUpgradeLevel = roomChanceUpgradeLv;
+                SaveManager.instance.player.currencyAmount = currencyManager.currentCurrencyAmount;
+                SaveManager.instance.SavePlayerData();
+            }
+            if (roomChanceText != null) roomChanceText.text = "Level: " + roomChanceUpgradeLv;
         }
-
-    }
-    public void UpgradePushPower()
-    {
-        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradePushPower))
-        {
-            pushPowerUpgradeLv++;
-            UpdateScriptableObjectStats();
-            currencyManager.RemoveCurrency(costToUpgradePushPower);
-
-        }
-
     }
 
-    
+    public void UpgradeCurrency()
+    {
+        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeCurrency) && currencyUpgradeLv < 5)
+        {
+            currencyUpgradeLv++;
+            UpdateScriptableObjectStats();
+            currencyManager.RemoveCurrency(costToUpgradeCurrency);
+            if (SaveManager.instance != null)
+            {
+                SaveManager.instance.player.moneyUpgradeLevel = currencyUpgradeLv;
+                SaveManager.instance.player.currencyAmount = currencyManager.currentCurrencyAmount;
+                SaveManager.instance.SavePlayerData();
+            }
+            if (currencyText != null) currencyText.text = "Level: " + currencyUpgradeLv;
+        }
+    }
+
+    public void UpgradeDashTime()
+    {
+        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeDashTime) && dashTimeUpgradeLv < 5)
+        {
+            dashTimeUpgradeLv++;
+            UpdateScriptableObjectStats();
+            currencyManager.RemoveCurrency(costToUpgradeDashTime);
+            if (SaveManager.instance != null)
+            {
+                SaveManager.instance.player.dashTimeUpgradeLevel = dashTimeUpgradeLv;
+                SaveManager.instance.player.currencyAmount = currencyManager.currentCurrencyAmount;
+                SaveManager.instance.SavePlayerData();
+            }
+            if (dashTimeText != null) dashTimeText.text = "Level: " + dashTimeUpgradeLv;
+        }
+    }
+
+
 
 }

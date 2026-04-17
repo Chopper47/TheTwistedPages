@@ -37,9 +37,9 @@ public class SaveManager : MonoBehaviour
         player.currencyAmount = data.currencyAmount;
         player.speedUpgradeLevel = data.speedUpgradeLevel;
         player.healthUpgradeLevel = data.healthUpgradeLevel;
-        player.dashSpeedUpgradeLevel = data.dashSpeedUpgradeLevel;
+        player.dashTimeUpgradeLevel = data.dashTimeUpgradeLevel;
         player.moneyUpgradeLevel = data.moneyUpgradeLevel;
-        player.upgradeRoomChanceUpgradeLevel = data.upgradeRoomChanceUpgradeLevel;
+        player.roomChanceUpgradeLevel = data.roomChanceUpgradeLevel;
         player.tutorialCompleted = data.tutorialCompleted;
 
     }

@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("HubRoom");
+        SceneManager.LoadScene("Hub");
     }
 
     public void GoToBoss()
