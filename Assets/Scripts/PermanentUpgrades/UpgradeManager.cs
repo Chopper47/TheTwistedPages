@@ -26,7 +26,6 @@ public class UpgradeManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI speedText;
-    [SerializeField] private TextMeshProUGUI bulletTimeText;
     [SerializeField] private TextMeshProUGUI roomChanceText;
     [SerializeField] private TextMeshProUGUI currencyText;
     [SerializeField] private TextMeshProUGUI dashTimeText;
@@ -110,7 +109,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void UpgradeCurrency()
     {
-        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeCurrency) && currencyUpgradeLv < 5)
+        if (currencyManager.CheckEnoughCurrencyAmount(costToUpgradeCurrency) && currencyUpgradeLv < 3)
         {
             currencyUpgradeLv++;
             UpdateScriptableObjectStats();
