@@ -202,6 +202,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1416335164611906020, guid: df6d7ca0314223b419b4f8b156f6a471, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416335164611906020, guid: df6d7ca0314223b419b4f8b156f6a471, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -3033667219593020291, guid: a62242e1f197e36429d36f9581ab06d0, type: 3}
     - target: {fileID: 1975710495429750572, guid: df6d7ca0314223b419b4f8b156f6a471, type: 3}
       propertyPath: m_Name
       value: room
@@ -2206,6 +2214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 200291469126630746, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2684697873207394274, guid: c513d1705837ac940967b51ec9f1a0c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.5867386
@@ -2771,7 +2783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2018006941370746537, guid: f18bd186f27eda94f9a78f0586ce83bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
