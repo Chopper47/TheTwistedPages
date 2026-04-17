@@ -263,18 +263,14 @@ public class PlayerMovement : MonoBehaviour
             Time.unscaledDeltaTime * rotationSpeed);
     }
 
-    public void ApplySlow(float duration, float multiplier)
-    {
-        StartCoroutine(SlowCoroutine(duration, multiplier));
-    }
-
-    private IEnumerator SlowCoroutine(float duration, float multiplier)
+    public void SetSlowMultiplier(float multiplier)
     {
         speedMultiplier = multiplier;
 
-        yield return new WaitForSeconds(duration);
-
-        speedMultiplier = 1f;
+        if (animator != null)
+        {
+            animator.speed = multiplier;
+        }
     }
     #endregion
 
@@ -831,7 +827,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator UnlockMovementAfterPlace()
     {
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.8f);
 
         canMove = true;
         canRoll = true;
