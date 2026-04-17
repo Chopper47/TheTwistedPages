@@ -7,15 +7,21 @@ public class RandomUpgradeEffect : MysteryEffect
 
     public override void Apply(GameObject player)
     {
-        PlayerUpgrades playerUpgrades = player.GetComponent<PlayerUpgrades>();
+        RandomUpgradeMenu upgradeMenu = FindFirstObjectByType<RandomUpgradeMenu>();
 
-        RandomUpgrade randomUpgrade = upgradeList.GetRandomUpgrade();
-
-        if (playerUpgrades == null || upgradeList == null || randomUpgrade == null)
+        if (upgradeMenu == null || upgradeList == null)
         {
             return;
         }
 
-        playerUpgrades.AddUpgrade(randomUpgrade);
+        RandomUpgrade randomUpgrade = upgradeList.GetRandomUpgrade();
+
+        if (randomUpgrade == null)
+        {
+            return;
+        }
+
+        upgradeMenu.SetNewUpgrade(randomUpgrade);
+        upgradeMenu.OpenMenu();
     }
 }

@@ -827,7 +827,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator UnlockMovementAfterPlace()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.85f);
 
         canMove = true;
         canRoll = true;
