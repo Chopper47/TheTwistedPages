@@ -12,6 +12,12 @@ public class RebindControlUI : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("rebinds"))
+        {
+            actionReference.action.actionMap.LoadBindingOverridesFromJson(
+                PlayerPrefs.GetString("rebinds")
+            );
+        }
         UpdateBindingDisplay();
     }
 
@@ -27,8 +33,13 @@ public class RebindControlUI : MonoBehaviour
             .OnComplete(operation =>
             {
                 actionReference.action.Enable();
+
+                PlayerPrefs.SetString("rebinds", actionReference.action.actionMap.SaveBindingOverridesAsJson());
+                PlayerPrefs.Save();
+
                 operation.Dispose();
                 UpdateBindingDisplay();
+
             })
             .Start();
     }

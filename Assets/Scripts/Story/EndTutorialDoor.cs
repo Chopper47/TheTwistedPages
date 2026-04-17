@@ -12,7 +12,7 @@ public class EndTutorialDoor : MonoBehaviour
                 SaveManager.instance.player.tutorialCompleted = true;
                 SaveManager.instance.SavePlayerData();
             }
-            SceneManager.LoadScene("alpha");
+            SceneManager.LoadScene("MainGame");
         }
     }
 }

@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
 
     public void GoToMainScene()
     {
-        SceneManager.LoadScene("alpha");
+        SceneManager.LoadScene("MainGame");
     }
 
     public void OptionsMenu()
