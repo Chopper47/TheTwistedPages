@@ -64,6 +64,7 @@ public class Wolf : CollisionRefresh
     Rigidbody rb;
     EnemyHealth enemyHealth;
     EnemyState states;
+    DecisionTreeAgent agent;
     [SerializeField] WolfAnimations animations;
     [SerializeField] ChaseAgent chase;
 
@@ -79,6 +80,7 @@ public class Wolf : CollisionRefresh
         rb = GetComponent<Rigidbody>();
         enemyHealth = GetComponent<EnemyHealth>();
         states = GetComponent<EnemyState>();
+        agent = GetComponent<DecisionTreeAgent>();
         Main=GetComponentInChildren<AudioSource>();
         AM=FindFirstObjectByType<AudioManager>();
         StartCoroutine(Panting());
@@ -163,6 +165,7 @@ public class Wolf : CollisionRefresh
 
     public void Howl()
     {
+        agent.SetDecide(false);
         hasHowled = true;
         howling = true;
         chase.StopChase();
@@ -175,8 +178,9 @@ public class Wolf : CollisionRefresh
     {
         yield return new WaitForSeconds(howlTime-0.1f);
         animations.TriggerStopHowl();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         howling = false;
+        agent.SetDecide(true);
     }
 
     IEnumerator WaitForStepback()
