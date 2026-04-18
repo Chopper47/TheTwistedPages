@@ -15,11 +15,13 @@ public class LevelGenerator : MonoBehaviour
 
     [Header("Upgrade Room")]
     [SerializeField] private RandomUpgradeList upgradeList;
+    [SerializeField] private UpgradeStats permanentUpgradeStats;
 
     [Header("Room Locations")]
     public Dictionary<Vector2Int, RoomInstance> generatedRooms = new Dictionary<Vector2Int, RoomInstance>();
 
     [HideInInspector] public bool isLastFloor = false;
+
 
     public void TryGenerateLevel()
     {
@@ -361,7 +363,15 @@ public class LevelGenerator : MonoBehaviour
         Dictionary<Vector2Int, int> distances = BFS(startingPosition);
 
         // Upgrade room(s) (cannot be generated at a distance less than two depthwise from the starting room).
-        int upgradeRoomCount = Random.Range(1, 3);
+        int upgradeRoomCount;
+        if(Random.value <= 0.5f + (permanentUpgradeStats.roomChance * 0.1f))
+        {
+            upgradeRoomCount = 2;
+        }
+        else
+        {
+            upgradeRoomCount = 1;
+        }
 
         List<RoomInstance> upgradeCandidates = new List<RoomInstance>();
 
