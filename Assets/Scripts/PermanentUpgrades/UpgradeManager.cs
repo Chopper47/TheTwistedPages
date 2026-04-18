@@ -43,10 +43,13 @@ public class UpgradeManager : MonoBehaviour
 
     private void UpdateScriptableObjectStats()
     {
+        Debug.Log("CURRENCY" + currentUpgradeStats.currency);
         currentUpgradeStats.health = healthUpgradeLv;
         currentUpgradeStats.speed = speedUpgradeLv;
         currentUpgradeStats.roomChance = roomChanceUpgradeLv;
         currentUpgradeStats.currency = currencyUpgradeLv;
+        Debug.Log("CURRENCY2" + currentUpgradeStats.currency);
+
         currentUpgradeStats.dashTime = dashTimeUpgradeLv;
 
     }

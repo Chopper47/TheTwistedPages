@@ -8,8 +8,8 @@ public class CurrencyManager : MonoBehaviour
     public static CurrencyManager instance;
 
     public int currentCurrencyAmount = 0;
-
-    private float moneyMultiplier = 1.0f;
+    [SerializeField] private UpgradeStats upgradeStatsScriptableObject;
+    [SerializeField] private float moneyMultiplier = 1.0f;
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI pauseMenuCurrencyText;
@@ -35,6 +35,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void Start()
     {
+        AddMoneyMultiplier(upgradeStatsScriptableObject.currency);
         UpdateUI();
     }
 
