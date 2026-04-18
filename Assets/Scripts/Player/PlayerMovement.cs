@@ -124,7 +124,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        //Upgrade stats from permanent upgrades
         baseMoveSpeed += upgradeStatsScriptable.speed;
+        rollSpeed += upgradeStatsScriptable.dashTime * 5;
+        rollDuration -= upgradeStatsScriptable.dashTime * 3 * 0.01f;
 
         cameraController = FindAnyObjectByType<CameraController>();
         AM = FindFirstObjectByType<AudioManager>();

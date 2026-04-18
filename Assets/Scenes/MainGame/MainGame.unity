@@ -794,7 +794,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
     - target: {fileID: 4270247312707312109, guid: eaf580bd911f95a4cadeacb54239365b, type: 3}
       propertyPath: currencyUpgradeLv
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270247312707312109, guid: eaf580bd911f95a4cadeacb54239365b, type: 3}
+      propertyPath: dashTimeUpgradeLv
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4886736564870195055, guid: eaf580bd911f95a4cadeacb54239365b, type: 3}
       propertyPath: m_Name
@@ -1173,6 +1177,10 @@ PrefabInstance:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 448791744}
+    - target: {fileID: 559870943627579587, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: rollSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 559870943627579587, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: blackAndWhiteFilter
       value: 
