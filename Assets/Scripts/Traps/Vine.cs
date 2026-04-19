@@ -36,7 +36,7 @@ public class VineTrap : Trap
     {
         while (true)
         {
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSecondsRealtime(waitTime);
             animator.SetTrigger("down");
 
             float timer = 0f;
@@ -44,7 +44,7 @@ public class VineTrap : Trap
             
             while (timer < 0.3f)
             {
-                timer += Time.fixedDeltaTime;
+                timer += Time.deltaTime;
                 transform.position = Vector3.Lerp(transform.position, newPos, timer / 0.3f);
                 yield return null;
             }
@@ -61,10 +61,11 @@ public class VineTrap : Trap
             newPos += new Vector3(0, 2f, 0);
             timer = 0f;
             animator.SetTrigger("ground");
+            yield return null;
             animator.SetTrigger("walk");
             while (timer < 0.3f)
             {
-                timer += Time.fixedDeltaTime;
+                timer += Time.deltaTime;
                 transform.position = Vector3.Lerp(transform.position, newPos, timer / 0.3f);
                 yield return null;
             }
@@ -93,13 +94,13 @@ public class VineTrap : Trap
         animator.SetTrigger("walk");
         while (Vector3.Distance(transform.position, target.position) > 2.5f)
         {    
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             yield return null;
         }
         animator.SetTrigger("climb");
         while (Vector3.Distance(transform.position,target.position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             yield return null;
         }   
         transform.position = target.position;
