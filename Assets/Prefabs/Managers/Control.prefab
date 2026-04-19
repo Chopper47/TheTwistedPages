@@ -180,15 +180,19 @@ MonoBehaviour:
   currentUpgradeStats: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   healthUpgradeLv: 0
   speedUpgradeLv: 0
-  bulletTimeUpgradeLv: 0
-  pushPowerUpgradeLv: 0
+  roomChanceUpgradeLv: 0
+  currencyUpgradeLv: 0
+  dashTimeUpgradeLv: 0
   costToUpgradeHealth: 3
   costToUpgradeSpeed: 3
-  costToUpgradeBulletTime: 3
-  costToUpgradePushPower: 3
+  costToUpgradeRoomChance: 0
+  costToUpgradeCurrency: 0
+  costToUpgradeDashTime: 0
   hpText: {fileID: 0}
   speedText: {fileID: 0}
-  bulletTimeText: {fileID: 0}
+  roomChanceText: {fileID: 0}
+  currencyText: {fileID: 0}
+  dashTimeText: {fileID: 0}
   currencyManager: {fileID: 3442854050310315613}
 --- !u!114 &3442854050310315613
 MonoBehaviour:
@@ -203,6 +207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCurrencyAmount: 0
+  upgradeStatsScriptableObject: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
+  moneyMultiplier: 1
   pauseMenuCurrencyText: {fileID: 0}
   upgradeMenuCurrencyText: {fileID: 0}
   currencyPopupPrefab: {fileID: 8264170078410194125, guid: 82ea16efdf2fd2f4d81dca472fe6e1cc, type: 3}
@@ -264,6 +270,7 @@ GameObject:
   - component: {fileID: 7209465877327554051}
   - component: {fileID: 5191771709614047096}
   - component: {fileID: 6318543927295874673}
+  - component: {fileID: 7954645315549456372}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -337,8 +344,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newUpgrade: {fileID: 0}
-  playerUpgrades: {fileID: 0}
+  activeBackground: {fileID: 21300000, guid: b11838da4800c914f9d8356121253674, type: 3}
+  passiveBackground: {fileID: 21300000, guid: abbae75c47ffece4f9a3ab6756f07579, type: 3}
+  newUpgradeBackground: {fileID: 0}
   newUpgradeIcon: {fileID: 0}
+  newUpgradeTitle: {fileID: 0}
+  newUpgradeType: {fileID: 0}
   newUpgradeDescription: {fileID: 0}
+  currentUpgradeContainer: {fileID: 0}
+  currentUpgradeBackground: {fileID: 0}
   currentUpgradeIcon: {fileID: 0}
+  currentUpgradeTitle: {fileID: 0}
+  currentUpgradeType: {fileID: 0}
   currentUpgradeDescription: {fileID: 0}
+--- !u!114 &7954645315549456372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561754152004210184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7fd75b247eea44cbb5616f775cd27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerUpgrades: {fileID: 0}
+  activeIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
