@@ -5718,6 +5718,38 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2384129385540894932, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384129385540894932, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384129385540894932, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384129385540894932, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813462934562436847, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813462934562436847, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813462934562436847, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813462934562436847, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3988109144963417974, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
       propertyPath: m_Name
       value: Control(Boss)
@@ -5816,6 +5848,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8322259913783967062, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949792709867746823, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949792709867746823, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949792709867746823, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949792709867746823, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9142504168397841498, guid: 831ea192ce6bf344ebaf9fd60a6803fb, type: 3}
@@ -15056,15 +15104,19 @@ MonoBehaviour:
   currentUpgradeStats: {fileID: 11400000, guid: 66da6622b3834f847b00dc47e88f722a, type: 2}
   healthUpgradeLv: 0
   speedUpgradeLv: 0
-  bulletTimeUpgradeLv: 0
-  pushPowerUpgradeLv: 0
+  roomChanceUpgradeLv: 0
+  currencyUpgradeLv: 0
+  dashTimeUpgradeLv: 0
   costToUpgradeHealth: 3
   costToUpgradeSpeed: 3
-  costToUpgradeBulletTime: 3
-  costToUpgradePushPower: 3
+  costToUpgradeRoomChance: 0
+  costToUpgradeCurrency: 0
+  costToUpgradeDashTime: 0
   hpText: {fileID: 746289648}
   speedText: {fileID: 996603756}
-  bulletTimeText: {fileID: 0}
+  roomChanceText: {fileID: 0}
+  currencyText: {fileID: 0}
+  dashTimeText: {fileID: 0}
   currencyManager: {fileID: 1480263884}
 --- !u!114 &1480263884
 MonoBehaviour:
@@ -15079,6 +15131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCurrencyAmount: 0
+  upgradeStatsScriptableObject: {fileID: 0}
+  moneyMultiplier: 1
   pauseMenuCurrencyText: {fileID: 0}
   upgradeMenuCurrencyText: {fileID: 0}
   currencyPopupPrefab: {fileID: 0}
@@ -16219,9 +16273,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: f417171f0865be6498dc664f764e188e, type: 3}
+  m_Resource: {fileID: 8300000, guid: 1cd57668ed83ce44398ae2ffe69eeae0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0

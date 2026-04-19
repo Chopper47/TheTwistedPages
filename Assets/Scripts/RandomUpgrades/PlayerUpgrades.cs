@@ -30,10 +30,17 @@ public class PlayerUpgrades : MonoBehaviour
     [Header("VFX")]
     public GameObject shieldVFX;
     public GameObject hoodVisual;
+    [Header("VFX")]
+    public AudioManager AM;
+    public AudioSource Main;
+
+
 
     private void Awake()
     {
         playerMovement = ReferenceManager.Instance.playerMovement;
+        AM = FindAnyObjectByType<AudioManager>();
+        Main = GetComponentInChildren<AudioSource>();
     }
 
     private void Update()

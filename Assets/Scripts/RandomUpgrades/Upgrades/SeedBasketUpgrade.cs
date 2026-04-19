@@ -8,7 +8,7 @@ public class SeedBasketUpgrade : UpgradeBehaviour
     [SerializeField] private float dropInterval = 0.5f;
     [SerializeField] private GameObject rootPrefab;
     [SerializeField] private float spawnOffset = 0.7f;
-
+    [SerializeField] private PlayerUpgrades Ref;
     private float dropTimer;
 
     public override void OnAcquire(PlayerUpgrades player)
@@ -83,7 +83,7 @@ public class SeedBasketUpgrade : UpgradeBehaviour
         {
             return;
         }
-
+        Ref.AM.Play("Root", Ref.Main);
         Vector3 spawnPosition = playerTransform.position - moveDirection.normalized * spawnOffset;
 
         RoomController room = CameraController.Instance.currentRoom;

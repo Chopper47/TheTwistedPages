@@ -339,6 +339,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerUpgrades.activeUpgrade != null && playerUpgrades.activeUpgrade.behaviour is DashExplosionUpgrade dashExplosion)
         {
             dashExplosion.TriggerExplosion(transform.position, playerUpgrades);
+            AM.Play("Pop",Main);
         }
 
         CameraShake.Shake(0.1f, 0.1f, inputDirection);

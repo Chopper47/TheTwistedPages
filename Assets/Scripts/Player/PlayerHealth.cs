@@ -164,7 +164,10 @@ public class PlayerHealth : MonoBehaviour
         {
             animator.SetTrigger("Die");
         }
-
+        if (AM!=null)
+        {
+            AM.Play("GirlDeath", Main);
+        }
         PlayerMovement playerMovement = ReferenceManager.Instance.playerMovement;
         PlayerMovement.canMove = false;
         playerMovement.canRoll = false;

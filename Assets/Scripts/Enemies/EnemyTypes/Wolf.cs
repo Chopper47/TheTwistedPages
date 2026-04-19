@@ -172,6 +172,7 @@ public class Wolf : CollisionRefresh
         animations.TriggerStopWalk();
         animations.TriggerHowl();
         StartCoroutine(HowlTimer());
+        AM.Play("Howl", Main);
     }
 
     IEnumerator HowlTimer()

@@ -773,7 +773,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -935,8 +935,8 @@ MonoBehaviour:
     pitchRange: {x: 0, y: 0}
   - name: Hurt
     clips:
-    - {fileID: 8300000, guid: f420972c1f9efa74bbc251192dbda7a6, type: 3}
-    - {fileID: 8300000, guid: d2587ff7550d1b24a8efe806e1bf8ff4, type: 3}
+    - {fileID: 8300000, guid: 7050f34fd3f2b754f8c9b55d45a1ad83, type: 3}
+    - {fileID: 8300000, guid: a4d0afa1eb6832847a1bf6ffae1b1612, type: 3}
     volume: 1
     pitchRange: {x: 0, y: 0}
   - name: FlowerDeath
@@ -1017,5 +1017,25 @@ MonoBehaviour:
   - name: Select
     clips:
     - {fileID: 8300000, guid: b5835f157ab70704184101d49739cdd2, type: 3}
+    volume: 1
+    pitchRange: {x: 0, y: 0}
+  - name: Howl
+    clips:
+    - {fileID: 8300000, guid: 08c91b7a26507504db3e6e5449853f4b, type: 3}
+    volume: 1
+    pitchRange: {x: 0, y: 0}
+  - name: GirlDeath
+    clips:
+    - {fileID: 8300000, guid: 0772a2042bf8c034da8e0dbca865b887, type: 3}
+    volume: 1
+    pitchRange: {x: 0, y: 0}
+  - name: Pop
+    clips:
+    - {fileID: 8300000, guid: eafeb85f2791c5e42a08d0229c09f77b, type: 3}
+    volume: 1
+    pitchRange: {x: 0, y: 0}
+  - name: Root
+    clips:
+    - {fileID: 8300000, guid: a22b7c8885829734a815923574249686, type: 3}
     volume: 1
     pitchRange: {x: 0, y: 0}
