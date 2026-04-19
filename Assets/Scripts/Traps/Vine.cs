@@ -19,6 +19,7 @@ public class VineTrap : Trap
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
     public AudioSource Main;
+    public Animator animator;
     private void Start()
     {
         transform.position = wallA.position;
@@ -36,11 +37,42 @@ public class VineTrap : Trap
         while (true)
         {
             yield return new WaitForSeconds(waitTime);
+            animator.SetTrigger("down");
 
-            transform.rotation = currentTarget.rotation * Quaternion.Euler(rotationOnFloor);
+            float timer = 0f;
+            Vector3 newPos = new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z);
+            
+            while (timer < 0.3f)
+            {
+                timer += Time.deltaTime;
+                transform.position = Vector3.Lerp(transform.position, newPos, timer / 0.3f);
+                yield return null;
+            }
+            
+            if(currentTarget == wallA)
+            {
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
+
+            newPos += new Vector3(0, 2f, 0);
+            timer = 0f;
+            animator.SetTrigger("ground");
+            animator.SetTrigger("walk");
+            while (timer < 0.3f)
+            {
+                timer += Time.deltaTime;
+                transform.position = Vector3.Lerp(transform.position, newPos, timer / 0.3f);
+                yield return null;
+            }
+            
+            //transform.rotation = currentTarget.rotation * Quaternion.Euler(rotationOnFloor);
             yield return StartCoroutine(MoveToTarget(currentTarget));
 
-            transform.rotation = currentTarget.rotation * Quaternion.Euler(rotationOnWall);
+            //transform.rotation = currentTarget.rotation * Quaternion.Euler(rotationOnWall);
 
             if (currentTarget == wallA)
             {
@@ -56,13 +88,13 @@ public class VineTrap : Trap
     private IEnumerator MoveToTarget(Transform target)
     {
         AM.Play("Vines", Main);
-        while (Vector3.Distance(transform.position, target.position) > 0.05f)
-        {
-            
+        animator.SetTrigger("walk");
+        while (Vector3.Distance(transform.position, target.position) > 0.2f)
+        {    
             transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             yield return null;
         }
-
+        animator.SetTrigger("climb");
         transform.position = target.position;
     }
 }
