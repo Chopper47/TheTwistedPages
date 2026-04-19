@@ -44,7 +44,7 @@ public class VineTrap : Trap
             
             while (timer < 0.3f)
             {
-                timer += Time.deltaTime;
+                timer += Time.fixedDeltaTime;
                 transform.position = Vector3.Lerp(transform.position, newPos, timer / 0.3f);
                 yield return null;
             }
@@ -64,11 +64,13 @@ public class VineTrap : Trap
             animator.SetTrigger("walk");
             while (timer < 0.3f)
             {
-                timer += Time.deltaTime;
+                timer += Time.fixedDeltaTime;
                 transform.position = Vector3.Lerp(transform.position, newPos, timer / 0.3f);
                 yield return null;
             }
-            
+
+            //yield return new WaitForSeconds(0.2f);
+
             //transform.rotation = currentTarget.rotation * Quaternion.Euler(rotationOnFloor);
             yield return StartCoroutine(MoveToTarget(currentTarget));
 
@@ -91,13 +93,13 @@ public class VineTrap : Trap
         animator.SetTrigger("walk");
         while (Vector3.Distance(transform.position, target.position) > 2.5f)
         {    
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
             yield return null;
         }
         animator.SetTrigger("climb");
         while (Vector3.Distance(transform.position,target.position) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.fixedDeltaTime);
             yield return null;
         }   
         transform.position = target.position;
