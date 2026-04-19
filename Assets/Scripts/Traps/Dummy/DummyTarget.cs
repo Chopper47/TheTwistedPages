@@ -51,8 +51,6 @@ public class DummyTarget : MonoBehaviour
                 agent.Chase();
             }
         }
-
-        Destroy(gameObject);
     }
 
     private IEnumerator Flickering(float timeForExplotion)
