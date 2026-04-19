@@ -50,6 +50,12 @@ MonoBehaviour:
   lifetime: 5
   explosionRadius: 5
   damage: 1
+  rangeImage: {fileID: 2058241718151787403}
+  originalMaterial: {fileID: 0}
+  flickerMaterial: {fileID: 2100000, guid: 4c0ec15b2764c0d4199c6d5297e1d82b, type: 2}
+  meshRenderer: {fileID: 3222279123359192225}
+  startFlickeringInterval: 0.5
+  endFlickeringInterval: 0.02
 --- !u!114 &1730147042458654890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,12 +70,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 5
   affectRadius: 15
-  rangeImage: {fileID: 2058241718151787403}
-  originalMaterial: {fileID: 0}
-  flickerMaterial: {fileID: 2100000, guid: c8d150de3c18368438b06379d676d6fe, type: 2}
-  meshRenderer: {fileID: 0}
-  startFlickeringInterval: 0.5
-  endFlickeringInterval: 0.02
 --- !u!1 &5053824985254455369
 GameObject:
   m_ObjectHideFlags: 0
