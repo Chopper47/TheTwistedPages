@@ -89,12 +89,17 @@ public class VineTrap : Trap
     {
         AM.Play("Vines", Main);
         animator.SetTrigger("walk");
-        while (Vector3.Distance(transform.position, target.position) > 0.2f)
+        while (Vector3.Distance(transform.position, target.position) > 2.5f)
         {    
             transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             yield return null;
         }
         animator.SetTrigger("climb");
+        while (Vector3.Distance(transform.position,target.position) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            yield return null;
+        }   
         transform.position = target.position;
     }
 }
