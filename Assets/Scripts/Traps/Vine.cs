@@ -60,18 +60,19 @@ public class VineTrap : Trap
 
             newPos += new Vector3(0, 2f, 0);
             timer = 0f;
-            animator.SetTrigger("ground"); 
-            yield return new WaitUntil(() =>
-            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= .5f);
-            animator.SetTrigger("walk");
+            bool walk = true;
+            animator.SetTrigger("ground");
             while (timer < 0.3f)
             {
                 timer += Time.deltaTime;
                 transform.position = Vector3.Lerp(transform.position, newPos, timer / 0.3f);
+                if(timer > 0.2f && walk)
+                {
+                    animator.SetTrigger("walk");
+                    walk = false;
+                }
                 yield return null;
             }
-
-            
 
             //yield return new WaitForSeconds(0.2f);
 
