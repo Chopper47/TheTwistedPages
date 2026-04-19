@@ -48,10 +48,13 @@ public class BossRoomColumn : MonoBehaviour
         if (gameObject)
         {
             gameObject.SetActive(false);
-            Instantiate(brokenColumnParticles, transform.position, Quaternion.identity);
+            GameObject particles = Instantiate(brokenColumnParticles, transform.position, Quaternion.identity);
+            particles.GetComponent<ParticleSystem>().Play();
             Instantiate(brokenColumn, transform.position, transform.rotation);
             bossRoom.LoseHp();
             lumberjack.ApplyStun(stunDuration);
         }
     }
+
+
 }

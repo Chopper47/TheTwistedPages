@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DestructibleEnviroment : MonoBehaviour
@@ -7,8 +8,11 @@ public class DestructibleEnviroment : MonoBehaviour
     {
         if (other.CompareTag("DestructionCheck") || other.CompareTag("BossHitbox"))
         {
-            Instantiate(destructionParticles, transform.position, Quaternion.identity);
+            GameObject particles = Instantiate(destructionParticles, transform.position, Quaternion.identity);
+            particles.GetComponent<ParticleSystem>().Play();
             Destroy(gameObject);
         }
     }
+
+    
 }
