@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,10 @@ public class UpgradeHUDManager : MonoBehaviour
     [Header("Icons")]
     [SerializeField] private Image activeIcon;
     [SerializeField] private Image passiveIcon;
+    
+    [Header("Counters")]
+    [SerializeField] private TextMeshProUGUI activeCounterText;
+    [SerializeField] private TextMeshProUGUI passiveCounterText;
 
     [Header("Colours")]
     [SerializeField] private Color normalColor = Color.white;
@@ -33,6 +38,18 @@ public class UpgradeHUDManager : MonoBehaviour
             activeIcon.enabled = true;
             activeIcon.sprite = playerUpgrades.activeUpgrade.icon;
 
+            string counter = playerUpgrades.activeUpgrade.behaviour.GetCounterText(playerUpgrades);
+
+            if (!string.IsNullOrEmpty(counter))
+            {
+                activeCounterText.gameObject.SetActive(true);
+                activeCounterText.text = counter;
+            }
+            else
+            {
+                activeCounterText.gameObject.SetActive(false);
+            }
+
             if (playerUpgrades.activeUpgrade.activationType == ActivationType.Toggleable)
             {
                 if (playerUpgrades.isActiveRunning)
@@ -52,16 +69,30 @@ public class UpgradeHUDManager : MonoBehaviour
         else
         {
             activeIcon.enabled = false;
+            activeCounterText.gameObject.SetActive(false);
         }
 
         if (playerUpgrades.passiveUpgrade != null)
         {
             passiveIcon.enabled = true;
             passiveIcon.sprite = playerUpgrades.passiveUpgrade.icon;
+
+            string counter = playerUpgrades.passiveUpgrade.behaviour.GetCounterText(playerUpgrades);
+
+            if (!string.IsNullOrEmpty(counter))
+            {
+                passiveCounterText.gameObject.SetActive(true);
+                passiveCounterText.text = counter;
+            }
+            else
+            {
+                passiveCounterText.gameObject.SetActive(false);
+            }
         }
         else
         {
             passiveIcon.enabled = false;
+            passiveCounterText.gameObject.SetActive(false);
         }
     }
 }

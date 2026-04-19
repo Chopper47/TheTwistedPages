@@ -123,8 +123,8 @@ public class PlayerUpgrades : MonoBehaviour
             case ActivationType.Toggleable:
                 if (isActiveRunning)
                 {
-                    activeUpgrade.behaviour.OnRemove(this);
                     isActiveRunning = false;
+                    activeUpgrade.behaviour.OnUse(this);
 
                     if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
                     {
@@ -133,8 +133,8 @@ public class PlayerUpgrades : MonoBehaviour
                 }
                 else
                 {
-                    activeUpgrade.behaviour.OnUse(this);
                     isActiveRunning = true;
+                    activeUpgrade.behaviour.OnUse(this);
 
                     if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
                     {

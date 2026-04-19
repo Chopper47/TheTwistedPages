@@ -66,4 +66,9 @@ public class MagicTrailUpgrade : UpgradeBehaviour
 
         GameObject vfx = Instantiate(trailVFX, pos, Quaternion.identity);
     }
+
+    public override string GetCounterText(PlayerUpgrades player)
+    {
+        return player.magicTrailCharges.ToString();
+    }
 }

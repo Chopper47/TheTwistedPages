@@ -11,6 +11,7 @@ public class DashExplosionUpgrade : UpgradeBehaviour
     [Header("VFX")]
     [SerializeField] private GameObject particlePrefab;
     [SerializeField] private float particleLifetime = 2.0f;
+
     [Header("SFX")]
     [SerializeField] private AudioManager AM;
     [SerializeField] private AudioSource Main;
@@ -61,7 +62,6 @@ public class DashExplosionUpgrade : UpgradeBehaviour
         if (particlePrefab != null)
         {
             GameObject vfx = Instantiate(particlePrefab, position, Quaternion.identity);
-            
 
             if (particleLifetime > 0)
             {
@@ -91,5 +91,10 @@ public class DashExplosionUpgrade : UpgradeBehaviour
             Deactivate(player);
             player.RemoveUpgrade(this);
         }
+    }
+
+    public override string GetCounterText(PlayerUpgrades player)
+    {
+        return player.dashExplosionCharges.ToString();
     }
 }
