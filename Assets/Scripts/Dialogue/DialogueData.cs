@@ -6,4 +6,5 @@ public class DialogueData : ScriptableObject
     [TextArea] public string[] lines;
     public string characterName;
     public float textDelay;
+    public Sprite dialogueBox;
 }

@@ -10,6 +10,8 @@ public class DialogueManager : MonoBehaviour
 {
     [Header("References")]
     public Image dialoguePanel;
+    public Image lumberjackNamePanel;
+    public Image wolfNamePanel;
     public TextMeshProUGUI textComponent;
     public InputAction interactAction;
     private PlayerMovement player;
@@ -77,8 +79,10 @@ public class DialogueManager : MonoBehaviour
         PauseMenu.canShow = false;
         index = 0;
         active = true;
+        dialoguePanel.sprite = currentDialogue.dialogueBox;
+        EnableCorrectNameplate();   
         dialoguePanel.gameObject.SetActive(true);
-        characterName.text = currentDialogue.characterName;
+        //characterName.text = currentDialogue.characterName;
         typingCoroutine = StartCoroutine(TypeLine());
     }
 
@@ -110,6 +114,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             dialoguePanel.gameObject.SetActive(false);
+            DisableNameplates();
             active = false;
             
 
@@ -129,5 +134,29 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    
+    private void EnableCorrectNameplate()
+    {
+        if(currentDialogue.characterName == "Lumberjack")
+        {
+            lumberjackNamePanel.gameObject.SetActive(true);
+            wolfNamePanel.gameObject.SetActive(false);
+        }
+        else if (currentDialogue.characterName == "Big Bad Wolf")
+        {
+            lumberjackNamePanel.gameObject.SetActive(false);
+            wolfNamePanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            lumberjackNamePanel.gameObject.SetActive(false);
+            wolfNamePanel.gameObject.SetActive(false);
+        }
+    }
+
+    private void DisableNameplates()
+    {
+        lumberjackNamePanel.gameObject.SetActive(false);
+        wolfNamePanel.gameObject.SetActive(false);
+    }
+
 }
