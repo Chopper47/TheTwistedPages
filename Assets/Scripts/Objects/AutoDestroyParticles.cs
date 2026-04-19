@@ -5,16 +5,16 @@ public class AutoDestroyParticle : MonoBehaviour
 {
     public float lifeTime = 5.0f;
 
-    private ParticleSystem particleSystem;
+    private ParticleSystem ps;
 
     private void Awake()
     {
-        particleSystem = GetComponent<ParticleSystem>();
+        ps = GetComponent<ParticleSystem>();
     }
 
     private IEnumerator Start()
     {
-        if (particleSystem == null)
+        if (ps == null)
         {
             Destroy(gameObject, lifeTime);
             yield break;
@@ -22,9 +22,9 @@ public class AutoDestroyParticle : MonoBehaviour
 
         yield return new WaitForSeconds(lifeTime);
 
-        particleSystem.Stop();
+        ps.Stop();
 
-        yield return new WaitWhile(() => particleSystem.IsAlive(true));
+        yield return new WaitWhile(() => ps.IsAlive(true));
 
         Destroy(gameObject);
     }
