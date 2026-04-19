@@ -119,6 +119,44 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &94105173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7738423248794737938, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+  m_PrefabInstance: {fileID: 1023952387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535b07da624bb9743bb90d29029b2065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &94105174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7002907576181809036, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+  m_PrefabInstance: {fileID: 1023952387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63086600796573e45ad4cb80901fb829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &94105175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 559870943627579587, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+  m_PrefabInstance: {fileID: 1023952387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef62aff1ab30804295cc3f425573810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &94105177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8650172336370932488, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+  m_PrefabInstance: {fileID: 1023952387}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &107725961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,6 +1043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 654337788}
   - component: {fileID: 654337787}
+  - component: {fileID: 654337789}
   m_Layer: 0
   m_Name: Control
   m_TagString: Untagged
@@ -1039,6 +1078,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &654337789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654337786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f848949847994354bb195886246e4b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 94105177}
+  playerMovement: {fileID: 94105175}
+  playerHealth: {fileID: 94105174}
+  playerUpgrades: {fileID: 94105173}
+  levelGenerator: {fileID: 0}
+  minimapManager: {fileID: 0}
+  musicManager: {fileID: 0}
 --- !u!1 &756758561
 GameObject:
   m_ObjectHideFlags: 0
