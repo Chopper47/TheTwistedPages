@@ -35,4 +35,10 @@ public class RandomUpgrade : ScriptableObject
     public ActivationType activationType;
 
     public UpgradeBehaviour behaviour;
+
+    [Header("UI")]
+    public string displayName;
+    public string typeAndCharges;
+    [TextArea] public string description;
+    public Sprite icon;
 }
