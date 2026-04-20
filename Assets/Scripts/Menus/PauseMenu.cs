@@ -31,7 +31,12 @@ public class PauseMenu : MonoBehaviour
         AM = FindFirstObjectByType<AudioManager>();
         Main = GetComponentInChildren<AudioSource>();
 
+    }
+
+    private void Start()
+    {
         UIManager.Instance.CloseMenu(pauseMenu);
+
     }
 
     private void OnEnable()
