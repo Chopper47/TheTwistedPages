@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
     {
         textComponent.text = string.Empty;
         player = FindFirstObjectByType<PlayerMovement>();
-        interactAction = player.inputActions.FindActionMap("Player").FindAction("Interact");
+        interactAction = player.inputActions.FindActionMap("Player").FindAction("NextDialogue");
 
         //StartDialogue();
     }
