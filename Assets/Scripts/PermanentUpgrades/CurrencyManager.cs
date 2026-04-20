@@ -35,7 +35,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void Start()
     {
-        AddMoneyMultiplier(upgradeStatsScriptableObject.currency);
+        AddMoneyMultiplier(upgradeStatsScriptableObject.currency + 1);
         UpdateUI();
     }
 
