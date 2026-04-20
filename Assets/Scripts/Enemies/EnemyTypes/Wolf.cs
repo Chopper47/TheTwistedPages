@@ -172,7 +172,7 @@ public class Wolf : CollisionRefresh
         animations.TriggerStopWalk();
         animations.TriggerHowl();
         StartCoroutine(HowlTimer());
-        AM.Play("Howl", Main);
+        AM.Play("Howl", null);
     }
 
     IEnumerator HowlTimer()
@@ -303,7 +303,7 @@ public class Wolf : CollisionRefresh
         
         float time = 0;                                                                                   //Acceleration
         StopCoroutine(Panting());
-        AM.Play("Growl", Main);
+        AM.Play("Growl", null);
         while (time < launchDuration * launchAcceleratePercentage)
         {
             if(states.IsBeingPushed())
@@ -478,7 +478,7 @@ public class Wolf : CollisionRefresh
     {
         while(true) 
         {
-            AM.Play("Pant", Main);
+            AM.Play("Pant", null);
             yield return new WaitForSeconds(5f);
         }
     }

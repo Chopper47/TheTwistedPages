@@ -18,6 +18,9 @@ public class AppleGrenade : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private float startFlickeringInterval = 0.2f;
     [SerializeField] private float endFlickeringInterval = 0.02f;
+    [Header("SFX")]
+    [SerializeField] private AudioManager AM;
+    [SerializeField] private AudioSource Main;
 
 
     private void Start()
@@ -28,7 +31,13 @@ public class AppleGrenade : MonoBehaviour
 
         StartCoroutine(ExplodeAfterDelay(explosionDelay + offset));
         StartCoroutine(Flickering(explosionDelay + offset));
+        
         //StartCoroutine(VisualTimer(explosionDelay + offset));
+    }
+    private void Awake()
+    {
+        AM = FindAnyObjectByType<AudioManager>();
+        Main = GetComponentInChildren<AudioSource>();
     }
 
     private IEnumerator Flickering(float timeForExplotion)
@@ -70,6 +79,7 @@ public class AppleGrenade : MonoBehaviour
             ParticleSystem explosion = Instantiate(explosionParticles, transform.position, Quaternion.identity);
             explosion.transform.localScale = Vector3.one * explosionRadius;
             explosion.Play();
+            AM.Play("ApplePop", null);
         }
 
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);

@@ -310,7 +310,7 @@ public class PlayerMovement : MonoBehaviour
         canRoll = false;
         isInvincible = true;
 
-        AM.Play("Dash", Main);
+        AM.Play("Dash", null);
 
         if (dashParticles != null)
         {
@@ -339,7 +339,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerUpgrades.activeUpgrade != null && playerUpgrades.activeUpgrade.behaviour is DashExplosionUpgrade dashExplosion)
         {
             dashExplosion.TriggerExplosion(transform.position, playerUpgrades);
-            AM.Play("Pop",Main);
+            AM.Play("Pop",null);
         }
 
         CameraShake.Shake(0.1f, 0.1f, inputDirection);

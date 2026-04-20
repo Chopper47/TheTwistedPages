@@ -8,7 +8,8 @@ using UnityEngine.Splines;
 public class BossAxe : MonoBehaviour
 {
     public AudioSource throwSFX;
-    public List<AudioSource> hitSFXs;
+    //public List<AudioSource> hitSFXs;
+    public AudioManager AM;
     private bool playerGrabbed = false;
     private bool thrown = false;
     private bool arrived = false;
@@ -42,6 +43,7 @@ public class BossAxe : MonoBehaviour
                 arrived = true;
             }
         }
+        throwSFX.volume=AM.defaultSource.volume;
     }
 
     public void SetLumberjack(Lumberjack newLumberjack)
@@ -209,7 +211,8 @@ public class BossAxe : MonoBehaviour
         Lumberjack boss = other.GetComponent<Lumberjack>();
         int hit = Random.Range(0, 2);
         throwSFX.Stop();
-        hitSFXs[hit].Play();
+        //hitSFXs[hit].Play();
+        AM.Play("AxeHit",null);
 
         if (boss != null && canGet) 
         {

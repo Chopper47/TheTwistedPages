@@ -52,6 +52,13 @@ public class Tree : MonoBehaviour
         AM = FindFirstObjectByType<AudioManager>();
         Main = GetComponentInChildren<AudioSource>();
     }
+    private void Update()
+    {
+        if (AM==null)
+        {
+            AM = FindFirstObjectByType<AudioManager>();
+        }
+    }
 
     #region Apple Attack
     public bool HasApplesLeft()
@@ -93,7 +100,7 @@ public class Tree : MonoBehaviour
             shakeParticles.Play();
         }
 
-        AM.Play("Creak",Main);
+        AM.Play("Creak",null);
         for (int i = 0; i < applesPerAttack; i++)
         {
             float angle = i * Mathf.PI * 2.0f / applesPerAttack;
@@ -144,7 +151,7 @@ public class Tree : MonoBehaviour
     {
         decisionTreeAgent.SetDecide(false);
         isSlamming = true;
-        //AM.Play("Crush", Main);
+        AM.Play("Crush", null);
         chaseAgent.StopChase();
         rigidBody.linearVelocity = Vector3.zero;
         rigidBody.angularVelocity = Vector3.zero;

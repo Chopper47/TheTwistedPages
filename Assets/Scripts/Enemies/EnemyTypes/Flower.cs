@@ -284,7 +284,7 @@ public class Flower : MonoBehaviour
     {
         yield return new WaitForSeconds(shootingAnimationDelay);
         shotCount++;
-        AM.Play("Shoot", Main);
+        AM.Play("Shoot", null);
 
         if (shootParticles != null)
         {

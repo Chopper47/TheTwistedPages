@@ -109,7 +109,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if(model) StartCoroutine(DamageFlicker(invincibilityDuration, 0.05f));
-        AM.Play("Hurt", Main);
+        AM.Play("Hurt", null);
         //StartCoroutine(HitStop(0.1f));
 
         UpdateHealthUI();
