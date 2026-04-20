@@ -531,7 +531,10 @@ MonoBehaviour:
   magicTrailCharges: 0
   magicTrailActive: 0
   shieldVFX: {fileID: 7229716707334761438}
-  hoodVisual: {fileID: 5243388446721320822}
+  hoodVisualEquipped: {fileID: 0}
+  hoodVisualUnequipped: {fileID: 0}
+  AM: {fileID: 0}
+  Main: {fileID: 0}
 --- !u!114 &-5651913295414236988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,6 +1665,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.0000000041060875
       objectReference: {fileID: 0}
+    - target: {fileID: -7507148076537933513, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a08839ea2deac44487c8e971a5935b5, type: 2}
     - target: {fileID: -7416129280451520178, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.99999994
@@ -4528,11 +4535,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 571309779194971223}
   m_SourcePrefab: {fileID: 100100000, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
---- !u!1 &5243388446721320822 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3216807288031192409, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
-  m_PrefabInstance: {fileID: 7232824078397768239}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7199741024589571524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6df8974f350d9e649a4b786fe1b90fe1, type: 3}
