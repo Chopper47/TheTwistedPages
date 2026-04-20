@@ -10,6 +10,16 @@ public class OptionsMenu : MonoBehaviour
     Resolution? currentResolution;
     FullScreenMode? currentScreenMode;
 
+    [Header("Tabs")]
+    [SerializeField] private RectTransform soundTab;
+    [SerializeField] private RectTransform graphicsTab;
+    [SerializeField] private RectTransform controllerTab;
+    [SerializeField] private RectTransform keyboardTab;
+
+    [SerializeField] private RectTransform bookPage;
+
+    private RectTransform currentActiveTab;
+
     [Header("Sound Menu")]
     public GameObject soundMenu;
     [SerializeField] private Slider musicVolumeSlider;
@@ -63,26 +73,35 @@ public class OptionsMenu : MonoBehaviour
 
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
         audioVolumeSlider.value = PlayerPrefs.GetFloat("AudioVolume", 1f);
+
+        OpenSound();
     }
     public void OpenSound()
     {
         CloseAllOptionMenus();
         soundMenu.SetActive(true);
+        SetActiveTab(soundTab);
     }
+
     public void OpenGraphics()
     {
         CloseAllOptionMenus();
         graphicsMenu.SetActive(true);
+        SetActiveTab(graphicsTab);
     }
+
     public void OpenControllerControls()
     {
         CloseAllOptionMenus();
         controllerMenu.SetActive(true);
+        SetActiveTab(controllerTab);
     }
+
     public void OpenKeyboardControls()
     {
         CloseAllOptionMenus();
         keyboardMenu.SetActive(true);
+        SetActiveTab(keyboardTab);
     }
 
     private void CloseAllOptionMenus()
@@ -92,6 +111,25 @@ public class OptionsMenu : MonoBehaviour
         if (controllerMenu) controllerMenu.SetActive(false);
         if (keyboardMenu) keyboardMenu.SetActive(false);
     }
+
+    private void SetActiveTab(RectTransform activeTab)
+    {
+        if (currentActiveTab == activeTab)
+            return;
+
+        currentActiveTab = activeTab;
+
+        int pageIndex = bookPage.GetSiblingIndex();
+        int behindIndex = Mathf.Max(0, pageIndex - 1);
+
+        soundTab.SetSiblingIndex(behindIndex);
+        graphicsTab.SetSiblingIndex(behindIndex);
+        controllerTab.SetSiblingIndex(behindIndex);
+        keyboardTab.SetSiblingIndex(behindIndex);
+
+        activeTab.SetAsLastSibling();
+    }
+
     public void SetResolution(int resolutionIndex)
     {
         Debug.Log("Setting resolution" + resolutionIndex);
