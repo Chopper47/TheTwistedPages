@@ -169,7 +169,7 @@ public class Wolf : CollisionRefresh
         hasHowled = true;
         howling = true;
         chase.StopChase();
-        animations.TriggerStopWalk();
+        animations.StopWalk();
         animations.TriggerHowl();
         StartCoroutine(HowlTimer());
         AM.Play("Howl", null);
@@ -309,7 +309,7 @@ public class Wolf : CollisionRefresh
             if(states.IsBeingPushed())
             {
                 //animations.SetAttacking(false);
-                animations.TriggerStopWalk();
+                animations.StopWalk();
                 animations.TriggerStopAttack();
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
@@ -327,7 +327,7 @@ public class Wolf : CollisionRefresh
             if (states.IsBeingPushed())
             {
                 //animations.SetAttacking(false);
-                animations.TriggerStopWalk();
+                animations.StopWalk();
                 animations.TriggerStopAttack();
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
@@ -345,7 +345,7 @@ public class Wolf : CollisionRefresh
             if (states.IsBeingPushed())
             {
                 //animations.SetAttacking(false);
-                animations.TriggerStopWalk();
+                animations.StopWalk();
                 animations.TriggerStopAttack();
                 StopLaunch();
                 StopCoroutine(launchCoroutine);
@@ -358,7 +358,7 @@ public class Wolf : CollisionRefresh
         consecutiveStepback = 0;
 
         //animations.SetAttacking(false);
-        animations.TriggerStopWalk();
+        animations.StopWalk();
         animations.TriggerStopAttack();
 
         StopLaunch();
