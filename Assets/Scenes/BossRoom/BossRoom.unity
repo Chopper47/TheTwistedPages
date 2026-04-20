@@ -12424,6 +12424,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PostProcess
       objectReference: {fileID: 0}
+    - target: {fileID: 5773239601453712953, guid: 1d387612771d30e44b936fff0f5679f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15353,11 +15357,11 @@ MonoBehaviour:
   costToUpgradeRoomChance: 0
   costToUpgradeCurrency: 0
   costToUpgradeDashTime: 0
-  hpText: {fileID: 746289648}
-  speedText: {fileID: 996603756}
-  roomChanceText: {fileID: 0}
-  currencyText: {fileID: 0}
-  dashTimeText: {fileID: 0}
+  healthNotches: {fileID: 0}
+  speedNotches: {fileID: 0}
+  roomChanceNotches: {fileID: 0}
+  currencyNotches: {fileID: 0}
+  dashTimeNotches: {fileID: 0}
   currencyManager: {fileID: 1480263884}
 --- !u!114 &1480263884
 MonoBehaviour:
