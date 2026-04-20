@@ -232,6 +232,7 @@ public class ChaseAgent : MonoBehaviour
             if(agent.isOnNavMesh)
             {
                 agent.isStopped = true;
+                agent.ResetPath();
             }
         }
     }

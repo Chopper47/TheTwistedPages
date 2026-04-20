@@ -15,19 +15,14 @@ public class WolfAnimations : MonoBehaviour
         if (animator == null) animator = GetComponent<Animator>();
     }
 
-    public void TriggerWalk()
+    public void SetWalk()
     {
-        animator.SetTrigger("walk");
+        animator.SetBool("walk", true);
     }
 
-    public void ResetTriggerWalk()
+    public void StopWalk()
     {
-        animator.ResetTrigger("walk");
-    }
-
-    public void TriggerStopWalk()
-    {
-        animator.SetTrigger("stopWalk");
+        animator.SetBool("walk", false);
     }
 
     public void TriggerAttack()

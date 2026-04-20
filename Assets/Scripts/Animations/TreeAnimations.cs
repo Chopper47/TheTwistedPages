@@ -26,19 +26,14 @@ public class TreeAnimations : MonoBehaviour
         animator.SetTrigger("stopShake");
     }
 
-    public void WalkTrigger()
+    public void SetWalk()
     {
-        animator.SetTrigger("walk");
-    }
-    
-    public void ResetWalkTrigger()
-    {
-        animator.ResetTrigger("walk");
+        animator.SetBool("walk", true);
     }
 
-    public void StopWalkTrigger()
+    public void StopWalk()
     {
-        animator.SetTrigger("stopWalking");
+        animator.SetBool("walk", false);
     }
 
     public void DropTrigger()
