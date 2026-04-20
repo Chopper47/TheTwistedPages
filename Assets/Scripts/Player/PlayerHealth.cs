@@ -174,6 +174,10 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
+        UIManager.inputLocked = true;
+        UIManager.Instance.ShowHUD(false);
+        PauseMenu.canShow = false;
+
         if (animator != null)
         {
             animator.SetTrigger("Die");
@@ -205,8 +209,6 @@ public class PlayerHealth : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2.0f);
-
-        UIManager.Instance.ShowHUD(false);
 
         yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut(1.5f));
 
