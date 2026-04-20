@@ -46,8 +46,16 @@ public class CurrencyManager : MonoBehaviour
 
     public void AddCurrency(int amount)
     {
+        Debug.Log($"[AddCurrency] amount recibido: {amount}");
+
         int finalAmount = Mathf.RoundToInt(amount * moneyMultiplier);
+
+        Debug.Log($"[AddCurrency] multiplier: {moneyMultiplier} | final: {finalAmount}");
+
         currentCurrencyAmount += finalAmount;
+
+        Debug.Log($"[AddCurrency] TOTAL ahora: {currentCurrencyAmount}");
+
         ShowPopup(finalAmount);
         UpdateUI();
     }
@@ -66,7 +74,9 @@ public class CurrencyManager : MonoBehaviour
 
     public void AddMoneyMultiplier(float multiplier)
     {
+        Debug.Log($"ANTES: {moneyMultiplier} | Multiplicando por: {multiplier}");
         moneyMultiplier *= multiplier;
+        Debug.Log($"DESPUÉS: {moneyMultiplier}");
     }
 
     public void RemoveMoneyMultiplier(float multiplier)
