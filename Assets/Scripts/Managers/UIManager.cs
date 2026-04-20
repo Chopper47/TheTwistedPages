@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     [Header("HUD")]
     public GameObject HUD;
 
+    public static bool inputLocked = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -55,6 +57,11 @@ public class UIManager : MonoBehaviour
 
     public void OpenMenu(GameObject menu)
     {
+        if (inputLocked)
+        {
+            return;
+        }
+
         if (menu)
         {
             menu.SetActive(true);
@@ -73,6 +80,11 @@ public class UIManager : MonoBehaviour
 
     public void OpenBlockingMenu(GameObject menu)
     {
+        if (inputLocked)
+        {
+            return;
+        }
+
         Time.timeScale = 0;
 
         PlayerMovement.canMove = false;
