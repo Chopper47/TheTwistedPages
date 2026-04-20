@@ -71,8 +71,10 @@ public class OptionsMenu : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
-        audioVolumeSlider.value = PlayerPrefs.GetFloat("AudioVolume", 1f);
+        ChangeVolumeSliderValue(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
+        ChangeAudioVolumeSliderValue(PlayerPrefs.GetFloat("AudioVolume", 0.5f));
+        //musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        //audioVolumeSlider.value = PlayerPrefs.GetFloat("AudioVolume", 0.5f);
 
         OpenSound();
     }
@@ -85,6 +87,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void OpenGraphics()
     {
+        Debug.Log("OPENING GRAPHICS");  
         CloseAllOptionMenus();
         graphicsMenu.SetActive(true);
         SetActiveTab(graphicsTab);
@@ -164,12 +167,14 @@ public class OptionsMenu : MonoBehaviour
     public void ChangeVolumeSliderValue(float volume)
     {
         MusicManager.instance.SetVolumeOfStagers(volume);   
+        musicVolumeSlider.value = volume;
         PlayerPrefs.SetFloat("MusicVolume", volume);
 
     }
     public void ChangeAudioVolumeSliderValue(float volume)
     {
         AudioManager.Instance.defaultSource.volume = volume;
+        audioVolumeSlider.value = volume;
         PlayerPrefs.SetFloat("AudioVolume", volume);
 
     }
