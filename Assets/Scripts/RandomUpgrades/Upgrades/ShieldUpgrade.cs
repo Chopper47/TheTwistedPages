@@ -77,6 +77,11 @@ public class ShieldUpgrade : UpgradeBehaviour
 
     public override string GetCounterText(PlayerUpgrades player)
     {
+        if (!player.shieldActive)
+        {
+            return "";
+        }
+
         return player.shieldCharges.ToString();
     }
 }

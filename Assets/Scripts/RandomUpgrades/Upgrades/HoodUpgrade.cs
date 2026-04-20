@@ -10,9 +10,14 @@ public class HoodUpgrade : UpgradeBehaviour
         player.hoodRoomsRemaining = maxRooms;
         player.hoodBlockAvailable = true;
 
-        if (player.hoodVisual != null)
+        if (player.hoodVisualEquipped != null)
         {
-            player.hoodVisual.SetActive(true);
+            player.hoodVisualEquipped.SetActive(true);
+        }
+
+        if (player.hoodVisualUnequipped != null)
+        {
+            player.hoodVisualUnequipped.SetActive(false);
         }
     }
 
@@ -26,9 +31,10 @@ public class HoodUpgrade : UpgradeBehaviour
         player.hoodRoomsRemaining = 0;
         player.hoodBlockAvailable = false;
 
-        if (player.hoodVisual != null)
+        if (player.hoodVisualEquipped != null)
         {
-            player.hoodVisual.SetActive(false);
+            player.hoodVisualEquipped.SetActive(false);
+            player.hoodVisualUnequipped.SetActive(false);
         }
     }
 }

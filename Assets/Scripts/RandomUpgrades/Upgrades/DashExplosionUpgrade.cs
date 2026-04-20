@@ -95,6 +95,11 @@ public class DashExplosionUpgrade : UpgradeBehaviour
 
     public override string GetCounterText(PlayerUpgrades player)
     {
+        if (!player.dashExplosionActive)
+        {
+            return "";
+        }
+
         return player.dashExplosionCharges.ToString();
     }
 }

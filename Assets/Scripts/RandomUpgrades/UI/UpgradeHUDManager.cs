@@ -6,6 +6,10 @@ public class UpgradeHUDManager : MonoBehaviour
 {
     private PlayerUpgrades playerUpgrades;
 
+    [Header("Backgrounds")]
+    [SerializeField] private Image activeBackground;
+    [SerializeField] private Image passiveBackground;
+
     [Header("Icons")]
     [SerializeField] private Image activeIcon;
     [SerializeField] private Image passiveIcon;
@@ -55,15 +59,18 @@ public class UpgradeHUDManager : MonoBehaviour
                 if (playerUpgrades.isActiveRunning)
                 {
                     activeIcon.color = normalColor;
+                    activeBackground.color = normalColor;
                 }
                 else
                 {
                     activeIcon.color = disabledColor;
+                    activeBackground.color = disabledColor;
                 }
             }
             else
             {
                 activeIcon.color = normalColor;
+                activeBackground.color = normalColor;
             }
         }
         else

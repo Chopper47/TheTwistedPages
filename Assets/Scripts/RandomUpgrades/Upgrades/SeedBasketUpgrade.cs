@@ -98,6 +98,11 @@ public class SeedBasketUpgrade : UpgradeBehaviour
 
     public override string GetCounterText(PlayerUpgrades player)
     {
-        return player.seedBasketTimer.ToString();
+        if (!player.seedBasketActive)
+        {
+            return "";
+        }
+
+        return player.seedBasketTimer.ToString("F1");
     }
 }

@@ -29,12 +29,13 @@ public class PlayerUpgrades : MonoBehaviour
 
     [Header("VFX")]
     public GameObject shieldVFX;
-    public GameObject hoodVisual;
-    [Header("VFX")]
+
+    public GameObject hoodVisualEquipped;
+    public GameObject hoodVisualUnequipped;
+
+    [Header("SFX")]
     public AudioManager AM;
     public AudioSource Main;
-
-
 
     private void Awake()
     {
@@ -187,9 +188,14 @@ public class PlayerUpgrades : MonoBehaviour
             {
                 hoodBlockAvailable = false;
 
-                if (hoodVisual != null)
+                if (hoodVisualEquipped != null)
                 {
-                    hoodVisual.SetActive(false);
+                    hoodVisualEquipped.SetActive(false);
+                }
+
+                if (hoodVisualUnequipped != null)
+                {
+                    hoodVisualUnequipped.SetActive(true);
                 }
 
                 return true;
@@ -209,9 +215,14 @@ public class PlayerUpgrades : MonoBehaviour
         hoodBlockAvailable = true;
         hoodRoomsRemaining--;
 
-        if (hoodVisual != null)
+        if (hoodVisualEquipped != null)
         {
-            hoodVisual.SetActive(true);
+            hoodVisualEquipped.SetActive(true);
+        }
+
+        if (hoodVisualUnequipped != null)
+        {
+            hoodVisualUnequipped.SetActive(true);
         }
 
         if (hoodRoomsRemaining <= 0)

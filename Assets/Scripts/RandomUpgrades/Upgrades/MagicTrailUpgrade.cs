@@ -33,7 +33,9 @@ public class MagicTrailUpgrade : UpgradeBehaviour
     public void Tick(PlayerUpgrades player, Transform playerTransform, Vector3 moveDir)
     {
         if (!player.magicTrailActive)
+        {
             return;
+        }
 
         if (player.magicTrailCharges <= 0)
         {
@@ -44,7 +46,9 @@ public class MagicTrailUpgrade : UpgradeBehaviour
 
         PlayerMovement playerMovement = ReferenceManager.Instance.playerMovement;
         if (!playerMovement.isRolling)
+        {
             return;
+        }
 
         timer -= Time.deltaTime;
 
@@ -57,18 +61,23 @@ public class MagicTrailUpgrade : UpgradeBehaviour
 
     private void Spawn(Transform playerTransform)
     {
-        Vector3 pos = playerTransform.position;
+        Vector3 position = playerTransform.position;
 
-        if (Physics.Raycast(pos + Vector3.up, Vector3.down, out RaycastHit hit, 2f))
+        if (Physics.Raycast(position + Vector3.up, Vector3.down, out RaycastHit hit, 2f))
         {
-            pos = hit.point;
+            position = hit.point;
         }
 
-        GameObject vfx = Instantiate(trailVFX, pos, Quaternion.identity);
+        GameObject vfx = Instantiate(trailVFX, position, Quaternion.identity);
     }
 
     public override string GetCounterText(PlayerUpgrades player)
     {
+        if (!player.magicTrailActive)
+        {
+            return "";
+        }
+
         return player.magicTrailCharges.ToString();
     }
 }
