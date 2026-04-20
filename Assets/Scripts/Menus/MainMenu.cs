@@ -12,13 +12,22 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        mainMenu.SetActive(true);
-        optionsMenu.SetActive(false);
-        creditsMenu.SetActive(false);
-        upgradesMenu.SetActive(false);
-        controlsMenu.SetActive(false);
+        if(mainMenu) 
+            mainMenu.SetActive(true);
 
-        UIManager.Instance.OpenMenu(mainMenu);
+        if (optionsMenu)
+            optionsMenu.SetActive(false);
+
+        if (creditsMenu)
+            creditsMenu.SetActive(false);
+
+        if (upgradesMenu) 
+            upgradesMenu.SetActive(false);
+
+        if (controlsMenu)
+            controlsMenu.SetActive(false);
+
+        if(UIManager.Instance) UIManager.Instance.OpenMenu(mainMenu);
     }
 
     public void StartGame()
@@ -69,5 +78,10 @@ public class MainMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void GoToMainMenuScene()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
