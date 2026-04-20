@@ -4,11 +4,17 @@ public class WolfAnimations : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
+    [Header("Particle Systems")]
+    [SerializeField] private ParticleSystem walk_FR;
+    [SerializeField] private ParticleSystem walk_FL;
+    [SerializeField] private ParticleSystem walk_BR;
+    [SerializeField] private ParticleSystem walk_BL;
+
     private void Start()
     {
-        if(animator == null) animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponent<Animator>();
     }
- 
+
     public void TriggerWalk()
     {
         animator.SetTrigger("walk");
@@ -54,5 +60,25 @@ public class WolfAnimations : MonoBehaviour
     public void TriggerStopHowl()
     {
         animator.SetTrigger("stopHowl");
+    }
+
+    public void Play_FrontRight()
+    {
+        walk_FR.Play();
+    }
+
+    public void Play_FrontLeft()
+    {
+        walk_FL.Play();
+    }
+
+    public void Play_BackRight()
+    {
+        walk_BR.Play();
+    }
+
+    public void Play_BackLeft()
+    {
+        walk_BL.Play();
     }
 }
