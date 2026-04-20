@@ -44,7 +44,7 @@ public class HubStartGameInteractable : MonoBehaviour
 
     IEnumerator Fade()
     {
-        StartCoroutine(RoomTransitionFade.Instance.FadeOut());
+        StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration));
         yield return new WaitForSeconds(0.5f);
         StartGame();
     }

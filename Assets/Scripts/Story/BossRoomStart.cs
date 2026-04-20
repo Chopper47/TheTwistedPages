@@ -67,7 +67,7 @@ public class BossRoomStart : MonoBehaviour
 
         RoomTransitionFade.Instance.fadeDuration = 4f;
         CameraShake.Stop();
-        yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut());
+        yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration));
         bossGO.SetActive(false);
         endScreen.SetActive(true);
 

@@ -87,7 +87,7 @@ public class FloorManager : MonoBehaviour
 
         if (!isFirstFloor)
         {
-            yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut());
+            yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration));
         }
         else
         {
@@ -107,7 +107,7 @@ public class FloorManager : MonoBehaviour
 
         MovePlayerToStartRoom();
 
-        yield return StartCoroutine(RoomTransitionFade.Instance.FadeIn());
+        yield return StartCoroutine(RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration));
 
         isFirstFloor = false;
 

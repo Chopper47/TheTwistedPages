@@ -48,7 +48,7 @@ public class HubBedInteraction : MonoBehaviour
         PlayerMovement.canMove = false;
         player.canRoll = false;
         PauseMenu.canShow = false;
-        StartCoroutine(RoomTransitionFade.Instance.FadeOut());
+        StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration));
         yield return new WaitForSeconds(1f);
         upgradeMenu.SetActive(true);
         //StartCoroutine(RoomTransitionFade.Instance.FadeIn());
@@ -61,7 +61,7 @@ public class HubBedInteraction : MonoBehaviour
         player.canRoll = true;
         PauseMenu.canShow = true;
         upgradeMenu.SetActive(false);
-        StartCoroutine(RoomTransitionFade.Instance.FadeIn());
+        StartCoroutine(RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration));
     }
     
 }

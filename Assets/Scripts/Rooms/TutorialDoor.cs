@@ -40,12 +40,12 @@ public class TutorialDoor : MonoBehaviour
 
         PlayerMovement.canMove = false;
         player.GetComponent<PlayerMovement>().canRoll = false;
-        yield return RoomTransitionFade.Instance.FadeOut();
+        yield return RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration);
         player.transform.position = nextDoor.transform.position;
         
         yield return new WaitForSeconds(0.4f);
         
-        yield return RoomTransitionFade.Instance.FadeIn();
+        yield return RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration);
     }
 
     public void CloseDoor()

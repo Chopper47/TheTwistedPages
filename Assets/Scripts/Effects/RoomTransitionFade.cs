@@ -19,16 +19,15 @@ public class RoomTransitionFade : MonoBehaviour
         fadeImage = GetComponentInChildren<Image>();
     }
 
-    public IEnumerator FadeOut()
+    public IEnumerator FadeOut(float duration)
     {
-
         float timer = 0f;
         Color colour = fadeImage.color;
 
-        while (timer < fadeDuration)
+        while (timer < duration)
         {
             timer += Time.deltaTime;
-            colour.a = timer / fadeDuration;
+            colour.a = timer / duration;
             fadeImage.color = colour;
             yield return null;
         }
@@ -37,18 +36,15 @@ public class RoomTransitionFade : MonoBehaviour
         fadeImage.color = colour;
     }
 
-    public IEnumerator FadeIn()
+    public IEnumerator FadeIn(float duration)
     {
-        float timer = fadeDuration;
+        float timer = duration;
         Color colour = fadeImage.color;
-
-        Debug.Log(Instance); 
-        Debug.Log(fadeImage);
 
         while (timer > 0)
         {
             timer -= Time.deltaTime;
-            colour.a = timer / fadeDuration;
+            colour.a = timer / duration;
             fadeImage.color = colour;
             yield return null;
         }

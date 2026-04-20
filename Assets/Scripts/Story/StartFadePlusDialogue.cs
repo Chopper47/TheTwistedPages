@@ -26,7 +26,7 @@ public class StartFadePlusDialogue : MonoBehaviour
 
             else
             {
-                StartCoroutine(RoomTransitionFade.Instance.FadeIn());
+                StartCoroutine(RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration));
                 this.enabled = false;
             }
         }
@@ -68,7 +68,7 @@ public class StartFadePlusDialogue : MonoBehaviour
 
     IEnumerator StartFirstFadeIn()
     {
-        yield return StartCoroutine(RoomTransitionFade.Instance.FadeIn());
+        yield return StartCoroutine(RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration));
         DialogueManager.instance.currentDialogue = secondDialogue;
         DialogueManager.instance.StartDialogue();
         RoomTransitionFade.Instance.fadeDuration = 0.4f;

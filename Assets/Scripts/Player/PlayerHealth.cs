@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     private int extraHealth = 0;
 
+    private bool isDead = false;
+
     [Header("UI")]
     [SerializeField] private GameObject lifePrefab;
     [SerializeField] private Transform livesContainer;
@@ -70,6 +72,11 @@ public class PlayerHealth : MonoBehaviour
     #region Health Management
     public void TakeDamage(int damage)
     {
+        if (isDead)
+        {
+            return;
+        }
+
         CameraShake.Shake(0.2f, 0.2f);
 
         PlayerUpgrades upgrades = GetComponent<PlayerUpgrades>();
@@ -160,27 +167,50 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        StartCoroutine(DieCoroutine());
+    }
+
+    private IEnumerator DieCoroutine()
+    {
+        isDead = true;
+
         if (animator != null)
         {
             animator.SetTrigger("Die");
         }
-        if (AM!=null)
+
+        if (AM != null)
         {
             AM.Play("GirlDeath", Main);
         }
+
         PlayerMovement playerMovement = ReferenceManager.Instance.playerMovement;
         PlayerMovement.canMove = false;
         playerMovement.canRoll = false;
 
-        if (gameOverMenu)
+        Collider[] hits = Physics.OverlapSphere(transform.position, 100.0f);
+        foreach (Collider hit in hits)
         {
-            //gameOverMenu.SetActive(true);
+            ChaseAgent agent = hit.GetComponent<ChaseAgent>();
+            if (agent != null)
+            {
+                agent.SetTarget(null);
+                agent.Stay();
+            }
         }
 
         if (musicManager)
         {
             musicManager.SwitchToNewSongNoSave(2);
         }
+
+        yield return new WaitForSeconds(2.0f);
+
+        UIManager.Instance.ShowHUD(false);
+
+        yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut(1.5f));
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScene");
     }
 
     private IEnumerator TemporaryInvincibility()

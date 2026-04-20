@@ -20,7 +20,7 @@ public class RoomTransition : MonoBehaviour
     /// </summary>
     public IEnumerator TryMoveToAdjacentRoom(RoomController currentRoom, DoorDirection direction)
     {
-        yield return RoomTransitionFade.Instance.FadeOut();
+        yield return RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration);
 
         RoomInstance currentInstance = currentRoom.roomInstance;
         
@@ -57,7 +57,7 @@ public class RoomTransition : MonoBehaviour
 
         CameraController.Instance.MoveToRoom(nextRoomController, finalPlayerPos);
 
-        yield return RoomTransitionFade.Instance.FadeIn();
+        yield return RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration);
     }
 
     /// <summary>
