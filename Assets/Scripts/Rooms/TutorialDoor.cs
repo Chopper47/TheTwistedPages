@@ -23,17 +23,7 @@ public class TutorialDoor : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            if(isClosed)
-            {
-                OpenDoor();
-            }
-            else
-            {
-                CloseDoor();
-            }
-        }
+        
     }
     IEnumerator MoveToNextRoom()
     {

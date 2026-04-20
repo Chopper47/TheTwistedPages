@@ -7,7 +7,7 @@ public class PlayerUpgrades : MonoBehaviour
 
     public bool isActiveRunning = false;
 
-    private PlayerMovement playerMovement;
+    [SerializeField] private PlayerMovement playerMovement;
 
     [Header("Upgrades")]
     public bool seedBasketActive;
@@ -39,7 +39,7 @@ public class PlayerUpgrades : MonoBehaviour
 
     private void Awake()
     {
-        playerMovement = ReferenceManager.Instance.playerMovement;
+        if(!playerMovement) playerMovement = ReferenceManager.Instance.playerMovement;
         AM = FindAnyObjectByType<AudioManager>();
         Main = GetComponentInChildren<AudioSource>();
     }

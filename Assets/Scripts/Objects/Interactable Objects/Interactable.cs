@@ -6,11 +6,11 @@ public class Interactable : MonoBehaviour
 {
     [SerializeField] private InputActionReference interactAction;
     [SerializeField] private float range;
-    private TextMeshProUGUI promptUI;
+    [SerializeField] private TextMeshProUGUI promptUI;
 
     private void Start()
     {
-        promptUI = ReferenceManager.Instance.interactText;
+        if(!promptUI) promptUI = ReferenceManager.Instance.interactText;
     }
     private void OnTriggerEnter(Collider other)
     {
