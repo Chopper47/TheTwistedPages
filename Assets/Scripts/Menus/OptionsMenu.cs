@@ -1,15 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;   // or TMP
+using UnityEngine.UI;
 using TMPro;
-using System.Collections.Generic;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public TMP_Dropdown resolutionDropdown;
-    Resolution[] resolutions;
-    Resolution? currentResolution;
-    FullScreenMode? currentScreenMode;
-
     [Header("Tabs")]
     [SerializeField] private RectTransform soundTab;
     [SerializeField] private RectTransform graphicsTab;
@@ -34,50 +28,150 @@ public class OptionsMenu : MonoBehaviour
     [Header("Keyboard Menu")]
     public GameObject keyboardMenu;
 
-    void Awake()
+    [Header("Display Mode Selector")]
+    [SerializeField] private TMP_Text displayModeText;
+
+    private int currentScreenModeIndex = 0;
+
+    private FullScreenMode[] screenModes = new FullScreenMode[]
     {
-        // Load resolution values with defaults
+        FullScreenMode.Windowed,
+        FullScreenMode.FullScreenWindow,
+        FullScreenMode.ExclusiveFullScreen
+    };
+
+    private string[] screenModeNames = new string[]
+    {
+        "Windowed",
+        "Borderless",
+        "Fullscreen"
+    };
+
+    [Header("Resolution Selector")]
+    [SerializeField] private TMP_Text resolutionText;
+
+    private Resolution[] resolutions;
+    private int currentResolutionIndex = 0;
+
+    private void Awake()
+    {
         int width = PlayerPrefs.GetInt("resWidth", 1920);
         int height = PlayerPrefs.GetInt("resHeight", 1080);
-        int modeIndex = PlayerPrefs.GetInt("ScreenMode", 0);
 
-        // Apply fullscreen mode
-        SetScreenDisplayMode(modeIndex);
+        currentScreenModeIndex = PlayerPrefs.GetInt("ScreenMode", 0);
 
-        // Apply resolution using the current fullscreen mode
-        Screen.SetResolution(width, height, Screen.fullScreenMode);
+        ApplyScreenMode(false);
+
+        Screen.SetResolution(width, height, screenModes[currentScreenModeIndex]);
     }
+
     private void Start()
     {
         resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-
-        int currentResolutionIndex = 0;
-        List<string> options = new List<string>();
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
-
             if (resolutions[i].width == Screen.width &&
                 resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
+                break;
             }
         }
 
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        UpdateResolutionText();
 
         ChangeVolumeSliderValue(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
         ChangeAudioVolumeSliderValue(PlayerPrefs.GetFloat("AudioVolume", 0.5f));
-        //musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
-        //audioVolumeSlider.value = PlayerPrefs.GetFloat("AudioVolume", 0.5f);
 
         OpenSound();
     }
+
+    public void NextScreenMode()
+    {
+        currentScreenModeIndex++;
+
+        if (currentScreenModeIndex >= screenModes.Length)
+        {
+            currentScreenModeIndex = 0;
+        }
+
+        ApplyScreenMode();
+    }
+
+    public void PreviousScreenMode()
+    {
+        currentScreenModeIndex--;
+
+        if (currentScreenModeIndex < 0)
+        {
+            currentScreenModeIndex = screenModes.Length - 1;
+        }
+
+        ApplyScreenMode();
+    }
+
+    private void ApplyScreenMode(bool save = true)
+    {
+        Screen.fullScreenMode = screenModes[currentScreenModeIndex];
+
+        if (save)
+        {
+            PlayerPrefs.SetInt("ScreenMode", currentScreenModeIndex);
+            PlayerPrefs.Save();
+        }
+
+        UpdateDisplayModeText();
+    }
+
+    private void UpdateDisplayModeText()
+    {
+        displayModeText.text = screenModeNames[currentScreenModeIndex];
+    }
+
+    public void NextResolution()
+    {
+        currentResolutionIndex++;
+
+        if (currentResolutionIndex >= resolutions.Length)
+        {
+            currentResolutionIndex = 0;
+        }
+
+        ApplyResolution();
+    }
+
+    public void PreviousResolution()
+    {
+        currentResolutionIndex--;
+
+        if (currentResolutionIndex < 0)
+        {
+            currentResolutionIndex = resolutions.Length - 1;
+        }
+
+        ApplyResolution();
+    }
+
+    private void ApplyResolution()
+    {
+        Resolution res = resolutions[currentResolutionIndex];
+
+        Screen.SetResolution(res.width, res.height, Screen.fullScreenMode);
+
+        PlayerPrefs.SetInt("resWidth", res.width);
+        PlayerPrefs.SetInt("resHeight", res.height);
+        PlayerPrefs.Save();
+
+        UpdateResolutionText();
+    }
+
+    private void UpdateResolutionText()
+    {
+        Resolution res = resolutions[currentResolutionIndex];
+        resolutionText.text = res.width + " x " + res.height;
+    }
+
     public void OpenSound()
     {
         CloseAllOptionMenus();
@@ -87,7 +181,6 @@ public class OptionsMenu : MonoBehaviour
 
     public void OpenGraphics()
     {
-        Debug.Log("OPENING GRAPHICS");  
         CloseAllOptionMenus();
         graphicsMenu.SetActive(true);
         SetActiveTab(graphicsTab);
@@ -109,7 +202,7 @@ public class OptionsMenu : MonoBehaviour
 
     private void CloseAllOptionMenus()
     {
-        if(soundMenu)soundMenu.SetActive(false);
+        if (soundMenu) soundMenu.SetActive(false);
         if (graphicsMenu) graphicsMenu.SetActive(false);
         if (controllerMenu) controllerMenu.SetActive(false);
         if (keyboardMenu) keyboardMenu.SetActive(false);
@@ -118,7 +211,9 @@ public class OptionsMenu : MonoBehaviour
     private void SetActiveTab(RectTransform activeTab)
     {
         if (currentActiveTab == activeTab)
+        {
             return;
+        }
 
         currentActiveTab = activeTab;
 
@@ -133,49 +228,17 @@ public class OptionsMenu : MonoBehaviour
         activeTab.SetAsLastSibling();
     }
 
-    public void SetResolution(int resolutionIndex)
-    {
-        Debug.Log("Setting resolution" + resolutionIndex);
-        currentResolution = resolutions[resolutionIndex];
-        PlayerPrefs.SetInt("resWidth", currentResolution.Value.width);
-        PlayerPrefs.SetInt("resHeight", currentResolution.Value.height);
-        PlayerPrefs.Save();
-
-        Screen.SetResolution(currentResolution.Value.width, currentResolution.Value.height, Screen.fullScreenMode);
-    }
-
-    public void SetScreenDisplayMode(int mode)
-    {
-        switch (mode)
-        {
-            case 0:
-                Screen.fullScreenMode = FullScreenMode.Windowed;
-                break;
-
-            case 1:
-                Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                break;
-
-            case 2:
-                Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                break;
-        }
-
-        PlayerPrefs.SetInt("ScreenMode", mode);
-        PlayerPrefs.Save();
-    }
     public void ChangeVolumeSliderValue(float volume)
     {
-        MusicManager.instance.SetVolumeOfStagers(volume);   
+        MusicManager.instance.SetVolumeOfStagers(volume);
         musicVolumeSlider.value = volume;
         PlayerPrefs.SetFloat("MusicVolume", volume);
-
     }
+
     public void ChangeAudioVolumeSliderValue(float volume)
     {
         AudioManager.Instance.defaultSource.volume = volume;
         audioVolumeSlider.value = volume;
         PlayerPrefs.SetFloat("AudioVolume", volume);
-
     }
 }

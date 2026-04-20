@@ -39,11 +39,30 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
-        healthNotches.SetLevel(healthUpgradeLv);
-        speedNotches.SetLevel(speedUpgradeLv);
-        roomChanceNotches.SetLevel(roomChanceUpgradeLv);
-        currencyNotches.SetLevel(currencyUpgradeLv);
-        dashTimeNotches.SetLevel(dashTimeUpgradeLv);
+        if (healthNotches != null)
+        {
+            healthNotches.SetLevel(healthUpgradeLv);
+        }
+
+        if (speedNotches != null)
+        {
+            speedNotches.SetLevel(speedUpgradeLv);
+        }
+
+        if (roomChanceNotches != null)
+        {
+            roomChanceNotches.SetLevel(roomChanceUpgradeLv);
+        }
+
+        if (currencyNotches != null)
+        {
+            currencyNotches.SetLevel(currencyUpgradeLv);
+        }
+
+        if (dashTimeNotches != null)
+        {
+            dashTimeNotches.SetLevel(dashTimeUpgradeLv);
+        }
     }
 
     private void UpdateScriptableObjectStats()
