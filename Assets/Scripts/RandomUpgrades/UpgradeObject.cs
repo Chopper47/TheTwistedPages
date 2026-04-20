@@ -25,6 +25,7 @@ public class UpgradeObject : MonoBehaviour
         if (playerInRange && interactAction.triggered)
         {
             //playerUpgrades.AddUpgrade(upgrade);
+            ReferenceManager.Instance.interactText.gameObject.SetActive(false);
             upgradeMenu.SetNewUpgrade(upgrade);
             upgradeMenu.OpenMenu();
             Destroy(gameObject);

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ReferenceManager : MonoBehaviour
@@ -15,6 +16,9 @@ public class ReferenceManager : MonoBehaviour
 
     [Header("Minimap")]
     public MinimapManager minimapManager;
+
+    [Header("UI")]
+    public TextMeshProUGUI interactText;
 
     [Header("Music")]
     public MusicManager musicManager;

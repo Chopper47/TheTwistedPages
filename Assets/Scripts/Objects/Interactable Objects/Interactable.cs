@@ -1,15 +1,24 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interactable : MonoBehaviour
 {
+    [SerializeField] private InputActionReference interactAction;
     [SerializeField] private float range;
-    [SerializeField] private GameObject promptUI;
+    private TextMeshProUGUI promptUI;
 
+    private void Start()
+    {
+        promptUI = ReferenceManager.Instance.interactText;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
-            promptUI.SetActive(true);
+            string binding = interactAction.action.GetBindingDisplayString(1);
+            promptUI.text = "Press " + binding + " to Interact";
+            promptUI.gameObject.SetActive(true);
         }
     }
 
@@ -17,7 +26,7 @@ public class Interactable : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            promptUI.SetActive(false);
+            promptUI.gameObject.SetActive(false);
         }
     }
 

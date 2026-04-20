@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class HubBedInteraction : MonoBehaviour
     [SerializeField] private PlayerMovement player;
     [SerializeField] private GameObject upgradeMenu;
     private InputAction interactAction;
+    private TextMeshProUGUI interactText;
     private bool inMenu;
 
     private void Start()
@@ -21,7 +23,7 @@ public class HubBedInteraction : MonoBehaviour
     {
         if (playerInRange && interactAction.triggered && !inMenu)
         {
-            Debug.Log("Interaction");
+            if(interactText)interactText.gameObject.SetActive(false);
             inMenu = true;
             StartCoroutine(Fade());
         }

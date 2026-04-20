@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67094a2ed3977a4409a91a8667eef7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactAction: {fileID: 1221484978253704571, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   range: 0
-  promptUI: {fileID: 3190225648173500111}
 --- !u!1001 &7214069558947079714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5213043398348841197, guid: 1a1ddf94a804d6e43a05e1a1e1d24eaf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6987205625361665969, guid: 1a1ddf94a804d6e43a05e1a1e1d24eaf, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -295,11 +295,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a1ddf94a804d6e43a05e1a1e1d24eaf, type: 3}
---- !u!1 &3190225648173500111 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5213043398348841197, guid: 1a1ddf94a804d6e43a05e1a1e1d24eaf, type: 3}
-  m_PrefabInstance: {fileID: 7214069558947079714}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8474906654802137903 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1261408915114734861, guid: 1a1ddf94a804d6e43a05e1a1e1d24eaf, type: 3}
