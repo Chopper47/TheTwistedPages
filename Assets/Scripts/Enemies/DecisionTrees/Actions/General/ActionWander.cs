@@ -17,7 +17,7 @@ public class ActionWander : IAction
     [SerializeField] private float maxPauseTime = 3.0f;
 
     [Header("Repath Settings")]
-    [SerializeField] private float repathDelay = 0.5f;
+    private float repathDelay = 1.5f;
 
     private NavMeshAgent agent;
     private float repathTimer;
@@ -58,7 +58,7 @@ public class ActionWander : IAction
 
         repathTimer += Time.deltaTime;
 
-        if (!agent.pathPending && agent.remainingDistance < 6.0f && repathTimer >= repathDelay)
+        if (!agent.pathPending && agent.remainingDistance < agent.stoppingDistance + 0.2f && repathTimer >= repathDelay)
         {
             if (Random.value < pauseChance)
             {
@@ -72,7 +72,7 @@ public class ActionWander : IAction
             repathTimer = 0f;
         }
 
-        if (!agent.pathPending && agent.remainingDistance > 0.5f && agent.velocity.sqrMagnitude < 0.1f)
+        if (!agent.pathPending && agent.remainingDistance > 0.5f && agent.velocity.sqrMagnitude < 0.1f && repathTimer >= repathDelay)
         {
             PickNewDestination(false);
         }
