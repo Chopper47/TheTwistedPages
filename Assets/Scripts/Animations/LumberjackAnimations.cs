@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class LumberjackAnimations : MonoBehaviour
 {
@@ -9,9 +7,12 @@ public class LumberjackAnimations : MonoBehaviour
     [SerializeField] private GameObject visualAxe;
     private int swipeVariation = 0;
 
+    [Header("Particle Systems")]
+    [SerializeField] private ParticleSystem AOE_Effect;
+    [SerializeField] private ParticleSystem Straight_Effect;
     private void Awake()
     {
-        if(boss == null)
+        if (boss == null)
         {
             boss = FindAnyObjectByType<Lumberjack>();
         }
@@ -81,7 +82,7 @@ public class LumberjackAnimations : MonoBehaviour
     {
         animator.ResetTrigger("jump");
     }
-    
+
     public void FallingTrigger()
     {
         animator.SetTrigger("fall");
@@ -94,7 +95,7 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void StartSwipeAttackTrigger()
     {
-        if(swipeVariation == 0)
+        if (swipeVariation == 0)
         {
             swipeVariation = 1;
         }
@@ -170,7 +171,7 @@ public class LumberjackAnimations : MonoBehaviour
         visualAxe.SetActive(false);
     }
 
-    public void EnableVisualAxe() 
+    public void EnableVisualAxe()
     {
         if (boss.hasAxe)
         {
@@ -218,5 +219,15 @@ public class LumberjackAnimations : MonoBehaviour
     public void DeathTrigger()
     {
         animator.SetTrigger("death");
+    }
+
+    public void ExplosionParticle()
+    {
+        AOE_Effect.Play();
+    }
+
+    public void StraightParticle()
+    {
+        Straight_Effect.Play();
     }
 }

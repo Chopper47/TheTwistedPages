@@ -274,10 +274,10 @@ MonoBehaviour:
   maxHealth: 6
   health: 0
   roomController: {fileID: 0}
+  deathParticles: {fileID: 0}
+  identity: 
   AM: {fileID: 0}
   Main: {fileID: 0}
-  identity: 
-  deathParticles: {fileID: 0}
 --- !u!114 &6496424540935143022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6467,6 +6467,8 @@ MonoBehaviour:
   animator: {fileID: 91314234103529520}
   boss: {fileID: 6496424540935143022}
   visualAxe: {fileID: 4059792216683253862}
+  AOE_Effect: {fileID: 0}
+  Straight_Effect: {fileID: 0}
 --- !u!1 &6094997325699973339
 GameObject:
   m_ObjectHideFlags: 0
