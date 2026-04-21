@@ -51,11 +51,11 @@ public class VineTrap : Trap
             
             if(currentTarget == wallA)
             {
-                transform.rotation = Quaternion.Euler(0, 90, 0);
+                transform.rotation = Quaternion.Euler(0, -90, 0);
             }
             else
             {
-                transform.rotation = Quaternion.Euler(0, -90, 0);
+                transform.rotation = Quaternion.Euler(0, 90, 0);
             }
 
             newPos += new Vector3(0, 2f, 0);
