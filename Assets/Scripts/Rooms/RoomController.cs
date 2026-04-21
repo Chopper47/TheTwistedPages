@@ -23,7 +23,6 @@ public class RoomController : MonoBehaviour
     private int treeIndex = 1;
 
     [Header("References")]
-    private GameObject gameWonMenu;
     private MinimapManager minimapManager;
 
     [Header("Waves")]
@@ -54,14 +53,7 @@ public class RoomController : MonoBehaviour
 
         if (UIManager.Instance)
         {
-            gameWonMenu = UIManager.Instance.gameWonMenu;
             nextWaveText = UIManager.Instance.nextWaveText;
-
-        }
-
-        if (gameWonMenu != null)
-        {
-            gameWonMenu.SetActive(false);
         }
 
         if (nextWaveText != null)
@@ -284,6 +276,5 @@ public class RoomController : MonoBehaviour
     private void OnBossRoomCleared()
     {
         Debug.Log("Congratulations!");
-        gameWonMenu.SetActive(true);
     }
 }

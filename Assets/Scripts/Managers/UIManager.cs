@@ -15,8 +15,6 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject optionsMenu;
     public GameObject randomUpgradeMenu;
-    public GameObject gameWonMenu;
-    public GameObject gameOverMenu;
 
     [Header("HUD")]
     public GameObject HUD;
