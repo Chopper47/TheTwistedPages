@@ -36,4 +36,19 @@ public static class SaveSystem
             return null;
         }
     }
+
+    public static void ResetData()
+    {
+        string path = Application.persistentDataPath + "/player.playerInfo";
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("Save data reset.");
+        }
+        else
+        {
+            Debug.LogWarning("No save file to delete.");
+        }
+    }
 }

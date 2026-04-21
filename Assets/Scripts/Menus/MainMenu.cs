@@ -33,6 +33,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        //SaveManager.instance.SavePlayerData();
         if (SaveManager.instance != null)
         {
             SaveManager.instance.LoadPlayerData();
