@@ -7,6 +7,7 @@ public class HubStartGameInteractable : MonoBehaviour
 {
     private bool playerInRange = false;
     [SerializeField] private PlayerMovement player;
+    [SerializeField] private GameObject interactText;
     private InputAction interactAction;
 
     private void Start()
@@ -20,7 +21,7 @@ public class HubStartGameInteractable : MonoBehaviour
     {
         if (playerInRange && interactAction.triggered)
         {
-            Debug.Log("Interaction");
+            interactText.SetActive(false);
             StartCoroutine(Fade());
 
         }

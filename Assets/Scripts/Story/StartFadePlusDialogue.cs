@@ -9,6 +9,7 @@ public class StartFadePlusDialogue : MonoBehaviour
 
     [SerializeField] private DialogueData firstDialogue;
     [SerializeField] private DialogueData secondDialogue;
+    [SerializeField] private GameObject upgradeMenu;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Camera upgradeRoomCamera;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,6 +42,8 @@ public class StartFadePlusDialogue : MonoBehaviour
             StartCoroutine(DelayedStart());
             
         }
+        upgradeMenu.SetActive(false);
+
 
     }
 

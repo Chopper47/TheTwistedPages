@@ -12,12 +12,12 @@ public class CurrencyManager : MonoBehaviour
     [SerializeField] private float moneyMultiplier = 1.0f;
 
     [Header("UI References")]
-    [SerializeField] private TextMeshProUGUI pauseMenuCurrencyText;
+    public TextMeshProUGUI pauseMenuCurrencyText;
     [SerializeField] private TextMeshProUGUI upgradeMenuCurrencyText;
 
     [Header("Popup Settings")]
     [SerializeField] private CurrencyPopup currencyPopupPrefab;
-    [SerializeField] private Canvas mainCanvas;
+    public Canvas mainCanvas;
 
     private void Awake()
     {
@@ -35,6 +35,11 @@ public class CurrencyManager : MonoBehaviour
 
     private void Start()
     {
+        if (SaveManager.instance)
+        {
+            SaveManager.instance.LoadPlayerData();
+            currentCurrencyAmount = SaveManager.instance.player.currencyAmount;
+        }
         AddMoneyMultiplier(upgradeStatsScriptableObject.currency + 1);
         UpdateUI();
     }
@@ -48,6 +53,12 @@ public class CurrencyManager : MonoBehaviour
     {
         int finalAmount = Mathf.RoundToInt(amount * moneyMultiplier);
         currentCurrencyAmount += finalAmount;
+        if (SaveManager.instance)
+        {
+            SaveManager.instance.player.currencyAmount = currentCurrencyAmount;
+            SaveManager.instance.SavePlayerData();
+        }
+
         ShowPopup(finalAmount);
         UpdateUI();
     }
@@ -59,6 +70,12 @@ public class CurrencyManager : MonoBehaviour
         if (currentCurrencyAmount < 0)
         {
             currentCurrencyAmount = 0;
+        }
+
+        if (SaveManager.instance)
+        {
+            SaveManager.instance.player.currencyAmount = currentCurrencyAmount;
+            SaveManager.instance.SavePlayerData();
         }
 
         UpdateUI();
@@ -93,7 +110,7 @@ public class CurrencyManager : MonoBehaviour
         popup.Setup(amount);
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         if (pauseMenuCurrencyText != null)
         {

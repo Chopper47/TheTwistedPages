@@ -30,6 +30,14 @@ public class MainMenu : MonoBehaviour
         if(UIManager.Instance) UIManager.Instance.OpenMenu(mainMenu);
     }
 
+
+    private void Start()
+    {
+        if (SaveManager.instance != null)
+        {
+            SaveManager.instance.LoadPlayerData();
+        }
+    }
     public void StartGame()
     {
         SceneManager.LoadScene("Hub");

@@ -126,6 +126,6 @@ public class PauseMenu : MonoBehaviour
             SaveManager.instance.SavePlayerData();
         }
         Time.timeScale = 1;
-        SceneManager.LoadScene("main_menu");
+        SceneManager.LoadScene("MainMenu");
     }
 }

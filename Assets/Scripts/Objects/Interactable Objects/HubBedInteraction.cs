@@ -33,7 +33,7 @@ public class HubBedInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !inMenu)
         {
             playerInRange = true;
         }
