@@ -42,13 +42,16 @@ public class UIManager : MonoBehaviour
 
     public void SwitchMenu(GameObject from, GameObject to)
     {
+        Debug.Log("Switching menu from " + (from ? from.name : "null") + " to " + (to ? to.name : "null"));
         if (from)
         {
+            Debug.Log("Switching from " + from.name + " to " + (to ? to.name : "null"));
             from.SetActive(false);
         }
 
         if (to)
         {
+            Debug.Log("Switching to " + to.name);
             to.SetActive(true);
         }
 

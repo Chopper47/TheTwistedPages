@@ -105,7 +105,13 @@ public class PauseMenu : MonoBehaviour
 
     public void OptionsMenu()
     {
+        Debug.Log("CALLED");
         UIManager.Instance.SwitchMenu(pauseMenu, optionsMenu);
+    }
+
+    public void CloseOptionsMenu()
+    {
+        UIManager.Instance.SwitchMenu(optionsMenu, pauseMenu);
     }
 
     public void BackToPause()

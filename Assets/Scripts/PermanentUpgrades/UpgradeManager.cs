@@ -38,6 +38,10 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] private CurrencyManager currencyManager;
 
+    [Header("Camera References")]
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera upgradeRoomCamera;
+
     private void Awake()
     {
         currencyManager = gameObject.GetComponent<CurrencyManager>();

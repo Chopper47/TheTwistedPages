@@ -9,12 +9,16 @@ public class StartFadePlusDialogue : MonoBehaviour
 
     [SerializeField] private DialogueData firstDialogue;
     [SerializeField] private DialogueData secondDialogue;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera upgradeRoomCamera;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = FindFirstObjectByType<PlayerMovement>();
+        mainCamera.enabled = true;
+        upgradeRoomCamera.enabled = false;
 
-        if(SaveManager.instance != null)
+        if (SaveManager.instance != null)
         {
             if (!SaveManager.instance.player.tutorialCompleted)
             {

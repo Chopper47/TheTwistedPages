@@ -8,6 +8,8 @@ public class HubBedInteraction : MonoBehaviour
     private bool playerInRange = false;
     [SerializeField] private PlayerMovement player;
     [SerializeField] private GameObject upgradeMenu;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera upgradeRoomCamera;
     private InputAction interactAction;
     private TextMeshProUGUI interactText;
     private bool inMenu;
@@ -50,8 +52,11 @@ public class HubBedInteraction : MonoBehaviour
         PlayerMovement.canMove = false;
         player.canRoll = false;
         PauseMenu.canShow = false;
-        StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration));
-        yield return new WaitForSeconds(1f);
+        //StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration));
+        yield return (StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration)));
+        StartCoroutine(RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration));
+        mainCamera.enabled = false;
+        upgradeRoomCamera.enabled = true;
         upgradeMenu.SetActive(true);
         //StartCoroutine(RoomTransitionFade.Instance.FadeIn());
 
@@ -63,7 +68,16 @@ public class HubBedInteraction : MonoBehaviour
         player.canRoll = true;
         PauseMenu.canShow = true;
         upgradeMenu.SetActive(false);
-        StartCoroutine(RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration));
+        StartCoroutine(ReturnToGameCoroutine());
     }
-    
+    IEnumerator ReturnToGameCoroutine()
+    {
+
+        yield return (StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration)));
+        //yield return new WaitForSeconds(StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration)););
+        StartCoroutine(RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration));
+        mainCamera.enabled = true;
+        upgradeRoomCamera.enabled = false;
+    }
+
 }
