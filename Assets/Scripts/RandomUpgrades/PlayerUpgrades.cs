@@ -132,7 +132,7 @@ public class PlayerUpgrades : MonoBehaviour
                     if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
                     {
                         playerMovement.StopThrowingSeedsAnimation();
-                        seedBasketVisual.SetActive(true);
+                        seedBasketVisual.SetActive(false);
                     }
                 }
                 else
@@ -143,7 +143,7 @@ public class PlayerUpgrades : MonoBehaviour
                     if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
                     {
                         playerMovement.PlayThrowingSeedsAnimation();
-                        seedBasketVisual.SetActive(false);
+                        seedBasketVisual.SetActive(true);
                     }
                 }
                 break;
@@ -162,6 +162,7 @@ public class PlayerUpgrades : MonoBehaviour
             if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
             {
                 playerMovement.StopThrowingSeedsAnimation();
+                seedBasketVisual.SetActive(false);
             }
         }
 
