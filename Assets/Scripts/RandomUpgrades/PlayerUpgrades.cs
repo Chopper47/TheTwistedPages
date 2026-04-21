@@ -33,6 +33,8 @@ public class PlayerUpgrades : MonoBehaviour
     public GameObject hoodVisualEquipped;
     public GameObject hoodVisualUnequipped;
 
+    public GameObject seedBasketVisual;
+
     [Header("SFX")]
     public AudioManager AM;
     public AudioSource Main;
@@ -130,6 +132,7 @@ public class PlayerUpgrades : MonoBehaviour
                     if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
                     {
                         playerMovement.StopThrowingSeedsAnimation();
+                        seedBasketVisual.SetActive(true);
                     }
                 }
                 else
@@ -140,6 +143,7 @@ public class PlayerUpgrades : MonoBehaviour
                     if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
                     {
                         playerMovement.PlayThrowingSeedsAnimation();
+                        seedBasketVisual.SetActive(false);
                     }
                 }
                 break;
