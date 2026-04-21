@@ -1,5 +1,7 @@
 using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossRoomStart : MonoBehaviour
 {
@@ -69,7 +71,9 @@ public class BossRoomStart : MonoBehaviour
         CameraShake.Stop();
         yield return StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration));
         bossGO.SetActive(false);
-        endScreen.SetActive(true);
+        //endScreen.SetActive(true);
+        SceneManager.LoadScene("WinScene");
+
 
     }
 
