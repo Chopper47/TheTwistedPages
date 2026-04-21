@@ -36,7 +36,6 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         UIManager.Instance.CloseMenu(pauseMenu);
-
     }
 
     private void OnEnable()

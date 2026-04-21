@@ -95,6 +95,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void UpgradeHealth()
     {
+        Debug.Log("UPGRAADING HP");
         if (healthUpgradeLv < 4 && currencyManager.CheckEnoughCurrencyAmount(costToUpgradeHealth[healthUpgradeLv]))
         {
             currencyManager.RemoveCurrency(costToUpgradeHealth[healthUpgradeLv]);

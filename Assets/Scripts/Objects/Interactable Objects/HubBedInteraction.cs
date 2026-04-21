@@ -76,6 +76,7 @@ public class HubBedInteraction : MonoBehaviour
         yield return (StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration)));
         //yield return new WaitForSeconds(StartCoroutine(RoomTransitionFade.Instance.FadeOut(RoomTransitionFade.Instance.fadeDuration)););
         StartCoroutine(RoomTransitionFade.Instance.FadeIn(RoomTransitionFade.Instance.fadeDuration));
+        inMenu = false;
         mainCamera.enabled = true;
         upgradeRoomCamera.enabled = false;
     }

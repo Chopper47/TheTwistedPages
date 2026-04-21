@@ -1909,7 +1909,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 481.685, y: -62.5}
-  m_SizeDelta: {x: 36.63, y: 125}
+  m_SizeDelta: {x: 0, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &228521169
 MonoBehaviour:
@@ -2446,7 +2446,6 @@ GameObject:
   m_Component:
   - component: {fileID: 331644394}
   - component: {fileID: 331644393}
-  - component: {fileID: 331644392}
   - component: {fileID: 331644391}
   m_Layer: 0
   m_Name: UpgradeMenuCamera
@@ -2499,14 +2498,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &331644392
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331644390}
-  m_Enabled: 1
 --- !u!20 &331644393
 Camera:
   m_ObjectHideFlags: 0
@@ -4866,19 +4857,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 794699668}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 113566315}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: UpgradeDashTime
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &794699668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5750,19 +5729,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 884851560}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 113566315}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: UpgradeRoomChance
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &884851560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6585,6 +6552,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7738423248794737938, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 52282710}
     - target: {fileID: 8650172336370932488, guid: cec225dafad30aa49b9b40bbf4612215, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.73
@@ -8816,19 +8787,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1291060469}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 113566315}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: UpgradeHealth
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1291060469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9851,7 +9810,7 @@ MonoBehaviour:
   player: {fileID: 52282710}
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   isPaused: 0
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 1540127821}
   optionsMenu: {fileID: 32061963}
   AM: {fileID: 2104557729}
   Main: {fileID: 0}
@@ -9869,7 +9828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextWaveText: {fileID: 0}
   effectText: {fileID: 0}
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 1540127821}
   optionsMenu: {fileID: 32061963}
   randomUpgradeMenu: {fileID: 0}
   HUD: {fileID: 0}
@@ -11163,19 +11122,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1627778467}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 113566315}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: UpgradeCurrency
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1627778467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12041,7 +11988,7 @@ GameObject:
   - component: {fileID: 1755285446}
   m_Layer: 5
   m_Name: UpgradesMenu
-  m_TagString: Untagged
+  m_TagString: UpgradeMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12299,19 +12246,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1788155785}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 113566315}
-        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
-        m_MethodName: UpgradeSpeed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1788155785
 MonoBehaviour:
   m_ObjectHideFlags: 0
