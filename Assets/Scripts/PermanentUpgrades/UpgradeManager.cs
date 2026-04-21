@@ -310,7 +310,23 @@ public class UpgradeManager : MonoBehaviour
     {
         if (scene.name == "Hub")
         {
+            if (SaveManager.instance)
+            {
+                SaveManager.instance.LoadPlayerData();
+                currencyManager.currentCurrencyAmount = SaveManager.instance.player.currencyAmount;
+                currencyManager.UpdateUI();
+                healthUpgradeLv = SaveManager.instance.player.healthUpgradeLevel;
+                speedUpgradeLv = SaveManager.instance.player.speedUpgradeLevel;
+                roomChanceUpgradeLv = SaveManager.instance.player.roomChanceUpgradeLevel;
+                currencyUpgradeLv = SaveManager.instance.player.moneyUpgradeLevel;
+                dashTimeUpgradeLv = SaveManager.instance.player.dashTimeUpgradeLevel;
+                UpdateScriptableObjectStats();
+            }
+
             upgradeMenuUI = GameObject.FindGameObjectWithTag("UpgradeMenu");
+            currencyManager.pauseMenuCurrencyText = GameObject.Find("FlowerAmount").GetComponent<TextMeshProUGUI>();
+            currencyManager.upgradeMenuCurrencyText = GameObject.Find("FlowerAmountMenu").GetComponent<TextMeshProUGUI>();
+
 
             healthUpgradeCostText = GameObject.Find("FlowerAmountHealth").GetComponent<TextMeshProUGUI>();
             speedUpgradeCostText = GameObject.Find("FlowerAmountSpeed").GetComponent<TextMeshProUGUI>();

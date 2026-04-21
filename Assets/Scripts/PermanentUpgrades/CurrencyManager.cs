@@ -13,7 +13,7 @@ public class CurrencyManager : MonoBehaviour
 
     [Header("UI References")]
     public TextMeshProUGUI pauseMenuCurrencyText;
-    [SerializeField] private TextMeshProUGUI upgradeMenuCurrencyText;
+    public TextMeshProUGUI upgradeMenuCurrencyText;
 
     [Header("Popup Settings")]
     [SerializeField] private CurrencyPopup currencyPopupPrefab;
