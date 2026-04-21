@@ -326,6 +326,8 @@ public class UpgradeManager : MonoBehaviour
             upgradeMenuUI = GameObject.FindGameObjectWithTag("UpgradeMenu");
             currencyManager.pauseMenuCurrencyText = GameObject.Find("FlowerAmount").GetComponent<TextMeshProUGUI>();
             currencyManager.upgradeMenuCurrencyText = GameObject.Find("FlowerAmountMenu").GetComponent<TextMeshProUGUI>();
+            currencyManager.UpdateUI();
+
 
 
             healthUpgradeCostText = GameObject.Find("FlowerAmountHealth").GetComponent<TextMeshProUGUI>();
