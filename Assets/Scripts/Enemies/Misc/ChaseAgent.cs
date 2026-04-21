@@ -258,4 +258,9 @@ public class ChaseAgent : MonoBehaviour
         
         Gizmos.DrawLine(transform.position, transform.position + chaseDir * 2f);
     }
+
+    public void SetChaseSpeed()
+    {
+        agent.speed = speed;
+    }
 }
