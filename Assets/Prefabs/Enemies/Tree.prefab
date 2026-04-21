@@ -2757,8 +2757,7 @@ MonoBehaviour:
   pauseChance: 0.15
   minPauseTime: 1
   maxPauseTime: 3
-  repathDelay: 2
-  OnWander:
+  wanderEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8714676772881723854}
@@ -2773,7 +2772,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnPause:
+  pauseEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8714676772881723854}

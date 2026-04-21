@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class ActionWander : IAction
 {
@@ -23,6 +24,10 @@ public class ActionWander : IAction
     private float repathTimer;
     private bool isPaused;
     private float pauseTimer;
+
+    [Header("Particle events")]
+    [SerializeField] private UnityEvent wanderEvent;
+    [SerializeField] private UnityEvent pauseEvent;
 
     private void Awake()
     {
@@ -140,6 +145,8 @@ public class ActionWander : IAction
             agent.speed = Random.Range(minSpeed, maxSpeed);
             agent.SetDestination(hit.position);
 
+            wanderEvent?.Invoke();
+
             return;
         }
     }
@@ -149,5 +156,6 @@ public class ActionWander : IAction
         isPaused = true;
         pauseTimer = Random.Range(minPauseTime, maxPauseTime);
         agent.ResetPath();
+        pauseEvent?.Invoke();
     }
 }
