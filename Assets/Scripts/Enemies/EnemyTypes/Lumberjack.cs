@@ -21,6 +21,8 @@ public class Lumberjack : MonoBehaviour
     [SerializeField] BossAxe bossAxe;
     //public List<AudioSource> audioSources;
     [SerializeField] private AudioManager AM;
+    public MusicManager MM;
+    public bool phaseSwitch=false;
 
     [Header("Movement Speeds")]
     [SerializeField] private float pursueSpeed = 3.5f;
@@ -105,6 +107,14 @@ public class Lumberjack : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
         bossAxe.gameObject.SetActive(false);
         bossAxe.SetLumberjack(this);
+    }
+    private void Update()
+    {
+        if (enemyHealth.health==3&&phaseSwitch==false)
+        {
+            MM.SwitchToNewSong(4, false);
+            phaseSwitch = true;
+        }
     }
 
     public LumberjackAnimations GetAnimations()

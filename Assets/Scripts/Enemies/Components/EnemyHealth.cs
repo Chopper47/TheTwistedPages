@@ -18,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     public string identity;
     [SerializeField] private AudioManager AM;
     public AudioSource Main;
+    
 
     private void Start()
     {
@@ -43,7 +44,7 @@ public class EnemyHealth : MonoBehaviour
     public void SetHealth(int healthAmount)
     {
         health = healthAmount;
-
+        
         if (health <= 0)
         {
             Die();
