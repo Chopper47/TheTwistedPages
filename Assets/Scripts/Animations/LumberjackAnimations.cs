@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LumberjackAnimations : MonoBehaviour
@@ -8,8 +9,10 @@ public class LumberjackAnimations : MonoBehaviour
     private int swipeVariation = 0;
 
     [Header("Particle Systems")]
-    [SerializeField] private ParticleSystem AOE_Effect;
-    [SerializeField] private ParticleSystem Straight_Effect;
+    [SerializeField] private GameObject AOE_Effect;
+    [SerializeField] private Transform AOE_Effect_SpawnPoint;
+    [SerializeField] private GameObject Straight_Effect;
+    [SerializeField] private Transform Straight_Effect_SpawnPoint;
     private void Awake()
     {
         if (boss == null)
@@ -173,6 +176,7 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void EnableVisualAxe()
     {
+        if (!boss) return;
         if (boss.hasAxe)
         {
             visualAxe.SetActive(true);
@@ -223,11 +227,19 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void ExplosionParticle()
     {
-        AOE_Effect.Play();
+        GameObject instance = Instantiate(AOE_Effect, AOE_Effect_SpawnPoint.position, AOE_Effect_SpawnPoint.rotation);
+        StartCoroutine(DestroyParticle(instance, 1.5f));
     }
 
     public void StraightParticle()
     {
-        Straight_Effect.Play();
+        GameObject instance = Instantiate(Straight_Effect, Straight_Effect_SpawnPoint.position, Straight_Effect_SpawnPoint.rotation);
+        StartCoroutine(DestroyParticle(instance, 1f));
+    }
+
+    IEnumerator DestroyParticle(GameObject particle, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(particle);
     }
 }
