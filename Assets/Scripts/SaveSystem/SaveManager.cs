@@ -44,5 +44,10 @@ public class SaveManager : MonoBehaviour
 
     }
 
-    
+    public void ResetData()
+    {
+        SaveSystem.ResetData();
+    }
+
+
 }
