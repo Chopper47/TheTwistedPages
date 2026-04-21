@@ -176,6 +176,7 @@ public class LumberjackAnimations : MonoBehaviour
 
     public void EnableVisualAxe()
     {
+        if (!boss) return;
         if (boss.hasAxe)
         {
             visualAxe.SetActive(true);
