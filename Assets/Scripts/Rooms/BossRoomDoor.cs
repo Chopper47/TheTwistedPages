@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BossRoomDoor : MonoBehaviour
 {
@@ -7,7 +6,8 @@ public class BossRoomDoor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("BossRoom");
+            FindFirstObjectByType<FloorManager>().GoToNextFloor();
+            //SceneManager.LoadScene("Scene_06_BossRoomTest");
         }
     }
 }
