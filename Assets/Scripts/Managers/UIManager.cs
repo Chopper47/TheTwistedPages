@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        Debug.Log("INSTANCE:" + Instance);
+
         if (effectText != null)
         {
             effectText.gameObject.SetActive(false);
