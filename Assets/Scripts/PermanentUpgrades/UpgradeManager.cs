@@ -308,6 +308,7 @@ public class UpgradeManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        //Gets all references when entering each scene, and loads the player data to update the stats and currency amount. Also updates the UI with the new values.
         if (scene.name == "Hub")
         {
             if (SaveManager.instance)
