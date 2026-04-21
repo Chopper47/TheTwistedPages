@@ -153,9 +153,12 @@ public class PlayerUpgrades : MonoBehaviour
             return;
         }
 
-        if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
+        if (activeUpgrade != null)
         {
-            playerMovement.StopThrowingSeedsAnimation();
+            if (activeUpgrade.behaviour is SeedBasketUpgrade seedbasket)
+            {
+                playerMovement.StopThrowingSeedsAnimation();
+            }
         }
 
         behaviour.OnRemove(this);
