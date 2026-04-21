@@ -326,7 +326,8 @@ public class UpgradeManager : MonoBehaviour
             }
 
             upgradeMenuUI = GameObject.FindGameObjectWithTag("UpgradeMenu");
-            currencyManager.pauseMenuCurrencyText = GameObject.Find("FlowerAmount").GetComponent<TextMeshProUGUI>();
+            GameObject pauseMenuCurrencyText = GameObject.Find("FlowerAmount");
+            if (pauseMenuCurrencyText) currencyManager.pauseMenuCurrencyText = pauseMenuCurrencyText.GetComponent<TextMeshProUGUI>();
             currencyManager.upgradeMenuCurrencyText = GameObject.Find("FlowerAmountMenu").GetComponent<TextMeshProUGUI>();
             currencyManager.UpdateUI();
 
@@ -388,7 +389,11 @@ public class UpgradeManager : MonoBehaviour
             }
 
             currencyManager.mainCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-            currencyManager.pauseMenuCurrencyText = GameObject.Find("FlowerAmount").GetComponent<TextMeshProUGUI>();
+
+            GameObject pauseMenuCurrencyText = GameObject.Find("FlowerAmount");
+            if(pauseMenuCurrencyText) currencyManager.pauseMenuCurrencyText = pauseMenuCurrencyText.GetComponent<TextMeshProUGUI>();
+
+
         }
     }
 }
